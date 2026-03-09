@@ -20,13 +20,31 @@ export default function CookieConsent() {
     });
 
     useEffect(() => {
+        // Best-effort detection for EEA, UK, Switzerland
+        // We use timezone as a proxy for client-side detection
+        const isEEA = () => {
+            const eeaTimezones = [
+                'Europe/London', 'Europe/Dublin', 'Europe/Paris', 'Europe/Berlin',
+                'Europe/Rome', 'Europe/Madrid', 'Europe/Brussels', 'Europe/Amsterdam',
+                'Europe/Vienna', 'Europe/Zurich', 'Europe/Stockholm', 'Europe/Oslo',
+                'Europe/Helsinki', 'Europe/Copenhagen', 'Europe/Warsaw', 'Europe/Prague',
+                'Europe/Budapest', 'Europe/Lisbon', 'Europe/Athens'
+            ];
+            try {
+                const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                return eeaTimezones.some(e => tz === e || tz.startsWith('Europe/'));
+            } catch (e) {
+                return true; // Default to showing if detection fails
+            }
+        };
+
         const savedConsent = localStorage.getItem("cookie-consent");
         if (!savedConsent) {
-            // Delay showing for better UX/performance
-            const timer = setTimeout(() => setIsVisible(true), 1500);
-            return () => clearTimeout(timer);
+            if (isEEA()) {
+                const timer = setTimeout(() => setIsVisible(true), 1500);
+                return () => clearTimeout(timer);
+            }
         } else {
-            // Apply existing consent to Google Consent Mode
             try {
                 const parsed = JSON.parse(savedConsent);
                 updateGoogleConsent(parsed);
@@ -70,7 +88,11 @@ export default function CookieConsent() {
         <>
             {/* Main Banner */}
             {!showSettings && (
-                <div className="fixed bottom-0 left-0 right-0 z-[100] p-4 md:p-6 animate-in fade-in slide-in-from-bottom-10 duration-700">
+                <div
+                    role="region"
+                    aria-label="Cookie Consent"
+                    className="fixed bottom-0 left-0 right-0 z-[100] p-4 md:p-6 animate-in fade-in slide-in-from-bottom-10 duration-700"
+                >
                     <div className="container mx-auto">
                         <div className="bg-white rounded-[2rem] border border-slate-200 shadow-[0_20px_50px_rgba(0,0,0,0.1)] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 backdrop-blur-xl bg-white/95">
                             <div className="flex items-start gap-4">
@@ -83,8 +105,8 @@ export default function CookieConsent() {
                                         Cookie Settings
                                     </h3>
                                     <p className="text-sm text-slate-600 leading-relaxed max-w-2xl">
-                                        We use cookies to enhance your experience, serve personalized ads, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. Read our{" "}
-                                        <Link href="/privacy" className="text-primary-600 hover:underline font-medium">Privacy Policy</Link> and{" "}
+                                        We use cookies to enhance your experience, serve personalized ads, and analyze our traffic. By clicking "Consent", you agree to our use of cookies. Read our{" "}
+                                        <Link href="/privacy-policy" className="text-primary-600 hover:underline font-medium">Privacy Policy</Link> and{" "}
                                         <Link href="/cookie-policy" className="text-primary-600 hover:underline font-medium">Cookie Policy</Link>.
                                     </p>
                                 </div>
@@ -93,22 +115,25 @@ export default function CookieConsent() {
                             <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
                                 <button
                                     onClick={() => setShowSettings(true)}
+                                    aria-label="Manage detailed cookie options"
                                     className="flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold text-slate-600 hover:bg-slate-50 rounded-xl transition-all w-full sm:w-auto border border-slate-100"
                                 >
                                     <Settings className="w-4 h-4" />
-                                    Manage
+                                    Manage Options
                                 </button>
                                 <button
                                     onClick={handleDeclineAll}
+                                    aria-label="Do not consent to cookies"
                                     className="px-6 py-3 text-sm font-bold text-slate-900 hover:bg-slate-100 rounded-xl transition-all w-full sm:w-auto"
                                 >
-                                    Decline
+                                    Do Not Consent
                                 </button>
                                 <button
                                     onClick={handleAcceptAll}
+                                    aria-label="Consent to all cookies"
                                     className="px-8 py-3 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-slate-800 transition-all shadow-lg w-full sm:w-auto"
                                 >
-                                    Accept All
+                                    Consent
                                 </button>
                             </div>
                         </div>
@@ -196,7 +221,7 @@ export default function CookieConsent() {
                                 <div className="text-center">
                                     <p className="text-[10px] text-slate-400">
                                         By clicking save, you agree to our
-                                        <Link href="/privacy" className="mx-1 text-slate-600 hover:underline">Privacy Policy</Link>
+                                        <Link href="/privacy-policy" className="mx-1 text-slate-600 hover:underline">Privacy Policy</Link>
                                         and
                                         <Link href="/contact" className="mx-1 text-slate-600 hover:underline">Contact Us</Link>
                                     </p>

@@ -1,0 +1,18 @@
+# Google AdSense ads.txt
+# Website: TakeThe Tools (https://takethetools.com)
+# Last Updated: March 9, 2026
+
+# Google AdSense Relationship: DIRECT
+# Format: field 1, field 2, field 3, field 4
+# field 1: Domain name of the advertising system (always google.com for AdSense)
+# field 2: Publisher's account ID (pub-ID)
+# field 3: Type of relationship (DIRECT indicates the publisher directly controls the account)
+# field 4: Certification authority ID (f08c47fec0942fa0 is the unique ID for Google)
+
+google.com, pub-2006415668111484, DIRECT, f08c47fec0942fa0
+
+# Optional: Additional Ad Networks (Future Proofing)
+# Example for future integration with other SSPs/Exchanges:
+# openx.com, [PUBLISHER_ID], DIRECT, [TAG_ID]
+# appnexus.com, [PUBLISHER_ID], DIRECT, [TAG_ID]
+# rubiconproject.com, [PUBLISHER_ID], DIRECT, [TAG_ID]
