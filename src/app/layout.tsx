@@ -5,7 +5,6 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AdPlaceholder from "@/components/common/AdPlaceholder";
-import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -83,7 +82,6 @@ export default function RootLayout({
         </div>
         <main className="flex-grow">{children}</main>
         <Footer />
-        <Analytics />
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2006415668111484"
