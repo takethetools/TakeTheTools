@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AdPlaceholder from "@/components/common/AdPlaceholder";
+import CookieConsent from "@/components/common/CookieConsent";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -76,12 +77,43 @@ export default function RootLayout({
         className={`${inter.variable} ${outfit.variable} antialiased bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans`}
         suppressHydrationWarning
       >
+        <Script
+          id="google-consent-mode"
+          strategy="beforeInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            
+            // Default consent mode to 'denied' for compliance
+            gtag('consent', 'default', {
+              'ad_storage': 'denied',
+              'ad_user_data': 'denied',
+              'ad_personalization': 'denied',
+              'analytics_storage': 'denied',
+              'wait_for_update': 500
+            });
+            
+            // Check for previous consent
+            const consent = localStorage.getItem('cookie-consent');
+            if (consent) {
+              const parsed = JSON.parse(consent);
+              gtag('consent', 'default', {
+                'ad_storage': parsed.marketing ? 'granted' : 'denied',
+                'ad_user_data': parsed.marketing ? 'granted' : 'denied',
+                'ad_personalization': parsed.marketing ? 'granted' : 'denied',
+                'analytics_storage': parsed.analytics ? 'granted' : 'denied'
+              });
+            }
+          `}
+        </Script>
         <Header />
         <div className="pt-[72px] md:pt-[88px]">
           <AdPlaceholder type="top-banner" />
         </div>
         <main className="flex-grow">{children}</main>
         <Footer />
+        <CookieConsent />
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2006415668111484"
