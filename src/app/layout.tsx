@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AdPlaceholder from "@/components/common/AdPlaceholder";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -59,6 +60,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  verification: {
+    google: "R5hXPJ6P5ccuvameesuglIvAJ0PGxB-g2LFxLzEr5vw",
+  },
 };
 
 export default function RootLayout({
@@ -78,6 +82,7 @@ export default function RootLayout({
         </div>
         <main className="flex-grow">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
