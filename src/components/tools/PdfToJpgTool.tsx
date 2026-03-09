@@ -29,10 +29,9 @@ export default function PdfToJpgTool() {
 
     try {
     // Import PDF.js dynamically
-    // @ts-ignore
-    const pdfjs = await import("pdfjs-dist/build/pdf");
-    // @ts-ignore
-    await import("pdfjs-dist/build/pdf.worker.entry");
+    const pdfjs = await import("pdfjs-dist");
+    // Set worker source to CDN to avoid build issues
+    pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
 
       const arrayBuffer = await file.arrayBuffer();
       const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
