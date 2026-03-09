@@ -85,7 +85,7 @@ export default function CookieConsent() {
                                     <p className="text-sm text-slate-600 leading-relaxed max-w-2xl">
                                         We use cookies to enhance your experience, serve personalized ads, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. Read our{" "}
                                         <Link href="/privacy" className="text-primary-600 hover:underline font-medium">Privacy Policy</Link> and{" "}
-                                        <Link href="/terms" className="text-primary-600 hover:underline font-medium">Cookie Policy</Link>.
+                                        <Link href="/cookie-policy" className="text-primary-600 hover:underline font-medium">Cookie Policy</Link>.
                                     </p>
                                 </div>
                             </div>

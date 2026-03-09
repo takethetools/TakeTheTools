@@ -3,7 +3,7 @@ import { Zap, Github, Twitter, Mail } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  
+
   const categories = [
     { name: "Image Tools", href: "/categories/image-tools" },
     { name: "PDF Tools", href: "/categories/pdf-tools" },
@@ -26,9 +26,9 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-2 group">
-              <img 
-                src="/logo.png" 
-                alt="TakeThe Tools Logo" 
+              <img
+                src="/logo.png"
+                alt="TakeThe Tools Logo"
                 className="h-14 md:h-16 w-auto object-contain brightness-0 invert"
               />
             </Link>
@@ -71,9 +71,9 @@ export default function Footer() {
             <h3 className="text-white font-bold mb-6">Stay Updated</h3>
             <p className="text-sm text-slate-400 mb-4">Get notified when we release new tools.</p>
             <form className="flex gap-2">
-              <input 
-                type="email" 
-                placeholder="Email address" 
+              <input
+                type="email"
+                placeholder="Email address"
                 className="bg-slate-800 border-none rounded-lg px-4 py-2 text-sm w-full focus:ring-2 focus:ring-primary-500 outline-none"
               />
               <button className="bg-primary-600 text-white p-2 rounded-lg hover:bg-primary-700 transition-colors">
@@ -88,6 +88,7 @@ export default function Footer() {
           <div className="flex gap-8">
             <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/cookie-policy" className="hover:text-white transition-colors">Cookie Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
             <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
           </div>
