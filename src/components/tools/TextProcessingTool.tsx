@@ -1,0 +1,101 @@
+"use client";
+
+import { useState } from "react";
+import { Type, Copy, Check, Zap, RefreshCw, Trash2, List, Scissors } from "lucide-react";
+
+interface TextProcessingToolProps {
+  mode: "reverse" | "remove-duplicates" | "sort-lines" | "remove-whitespace";
+}
+
+export default function TextProcessingTool({ mode }: TextProcessingToolProps) {
+  const [input, setInput] = useState("");
+  const [output, setOutput] = useState("");
+  const [isCopied, setIsCopied] = useState(false);
+
+  const processText = () => {
+    if (mode === "reverse") {
+      setOutput(input.split("").reverse().join(""));
+    } else if (mode === "remove-duplicates") {
+      const lines = input.split("\n");
+      const uniqueLines = Array.from(new Set(lines));
+      setOutput(uniqueLines.join("\n"));
+    } else if (mode === "sort-lines") {
+      const lines = input.split("\n");
+      setOutput(lines.sort().join("\n"));
+    } else if (mode === "remove-whitespace") {
+      setOutput(input.replace(/\s+/g, " ").trim());
+    }
+  };
+
+  const copyResult = () => {
+    navigator.clipboard.writeText(output);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
+
+  const titles: Record<string, string> = {
+    "reverse": "Text Reverser",
+    "remove-duplicates": "Remove Duplicate Lines",
+    "sort-lines": "Alphabetical Line Sorter",
+    "remove-whitespace": "Remove Whitespace"
+  };
+
+  const icons: Record<string, React.ReactNode> = {
+    "reverse": <RefreshCw className="w-6 h-6" />,
+    "remove-duplicates": <Trash2 className="w-6 h-6" />,
+    "sort-lines": <List className="w-6 h-6" />,
+    "remove-whitespace": <Scissors className="w-6 h-6" />
+  };
+
+  return (
+    <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-8">
+      <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600">
+            {icons[mode]}
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-slate-900">{titles[mode]}</h3>
+            <p className="text-sm text-slate-500">Quickly {mode.replace(/-/g, " ")} your text</p>
+          </div>
+        </div>
+        
+        <button 
+          onClick={processText}
+          className="px-8 py-3 bg-primary-600 text-white rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-primary-500/20"
+        >
+          <Zap className="w-4 h-4" /> Process
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2">Source Text</label>
+          <textarea 
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="w-full h-80 bg-slate-50 border border-slate-100 rounded-2xl p-6 font-mono text-sm text-slate-600 focus:outline-none"
+            placeholder="Enter or paste your text here..."
+          />
+        </div>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between px-2">
+            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Result</label>
+            {output && (
+              <button onClick={copyResult} className="text-primary-600 text-xs font-bold flex items-center gap-1">
+                {isCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                Copy
+              </button>
+            )}
+          </div>
+          <textarea 
+            value={output}
+            readOnly
+            className="w-full h-80 bg-slate-100 border-none rounded-2xl p-6 font-mono text-sm text-slate-700 focus:outline-none"
+            placeholder="Result will appear here..."
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
