@@ -6,7 +6,7 @@ import CryptoJS from "crypto-js";
 import { cn } from "@/lib/utils";
 
 interface HashGeneratorToolProps {
-  algorithm?: "MD5" | "SHA-256" | "SHA-512";
+  algorithm?: "MD5" | "SHA-1" | "SHA-256" | "SHA-512";
 }
 
 export default function HashGeneratorTool({ algorithm = "SHA-256" }: HashGeneratorToolProps) {
@@ -16,9 +16,9 @@ export default function HashGeneratorTool({ algorithm = "SHA-256" }: HashGenerat
 
   const generateHash = async () => {
     if (!input) return;
-    
-    // For SHA-256/512 we use crypto.subtle
-    if (algorithm === "SHA-256" || algorithm === "SHA-512") {
+
+    // For SHA algorithms we use crypto.subtle
+    if (algorithm === "SHA-256" || algorithm === "SHA-512" || algorithm === "SHA-1") {
       const msgUint8 = new TextEncoder().encode(input);
       const hashBuffer = await crypto.subtle.digest(algorithm, msgUint8);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -50,7 +50,7 @@ export default function HashGeneratorTool({ algorithm = "SHA-256" }: HashGenerat
       <div className="space-y-6">
         <div className="space-y-2">
           <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2">Input String</label>
-          <textarea 
+          <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             className="w-full h-32 bg-slate-50 border border-slate-100 rounded-2xl p-6 font-mono text-sm text-slate-600 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
@@ -58,7 +58,7 @@ export default function HashGeneratorTool({ algorithm = "SHA-256" }: HashGenerat
           />
         </div>
 
-        <button 
+        <button
           onClick={generateHash}
           className="w-full py-4 bg-primary-600 text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary-500/20"
         >
@@ -69,14 +69,14 @@ export default function HashGeneratorTool({ algorithm = "SHA-256" }: HashGenerat
         {hash && (
           <div className="space-y-2">
             <div className="flex items-center justify-between px-2">
-               <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Resulting Hash</label>
-               <button onClick={copyResult} className="text-primary-600 text-xs font-bold flex items-center gap-1">
-                 {isCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                 {isCopied ? "Copied" : "Copy"}
-               </button>
+              <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Resulting Hash</label>
+              <button onClick={copyResult} className="text-primary-600 text-xs font-bold flex items-center gap-1">
+                {isCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                {isCopied ? "Copied" : "Copy"}
+              </button>
             </div>
             <div className="w-full p-6 bg-slate-900 rounded-2xl font-mono text-sm text-blue-100 break-all border border-slate-800">
-               {hash}
+              {hash}
             </div>
           </div>
         )}

@@ -28,6 +28,16 @@ export default function MathTool({ mode }: MathToolProps) {
                     currentLcm = lcm(currentLcm, nums[i]);
                 }
                 setResult(`GCD: ${currentGcd}\nLCM: ${currentLcm}`);
+            } else if (mode === "percentage") {
+                const nums = inputs.split(/[,\s]+/).map(Number).filter(n => !isNaN(n));
+                if (nums.length >= 2) {
+                    const percent = nums[0];
+                    const total = nums[1];
+                    const resultVal = (percent / 100) * total;
+                    setResult(`${percent}% of ${total} is ${resultVal.toFixed(4)}`);
+                } else {
+                    setResult("Please enter two numbers (percent, total)");
+                }
             } else if (mode === "prime") {
                 const n = parseInt(inputs);
                 if (isNaN(n)) return;

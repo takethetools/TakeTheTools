@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Type, Copy, Check, Zap, ArrowRightLeft, Radio, RefreshCw } from "lucide-react";
 
 interface TextConverterToolProps {
-  mode: "morse" | "binary" | "slug" | "upside-down" | "leetspeak" | "rot13" | "atbash";
+  mode: "morse" | "binary" | "slug" | "upside-down" | "leetspeak" | "rot13" | "atbash" | "ascii-to-text" | "text-to-ascii";
 }
 
 export default function TextConverterTool({ mode }: TextConverterToolProps) {
@@ -51,6 +51,13 @@ export default function TextConverterTool({ mode }: TextConverterToolProps) {
         '!': '¡', ' ': ' '
       };
       return input.toLowerCase().split('').map(c => charMap[c] || c).reverse().join('');
+    } else if (mode === "text-to-ascii") {
+      return input.split('').map(c => c.charCodeAt(0)).join(' ');
+    } else if (mode === "ascii-to-text") {
+      return input.split(/[\s,]+/).map(code => {
+        const num = parseInt(code.trim());
+        return isNaN(num) ? "" : String.fromCharCode(num);
+      }).join('');
     }
     return "";
   };
