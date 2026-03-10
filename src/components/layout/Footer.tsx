@@ -11,6 +11,9 @@ export default function Footer() {
     { name: "Developer Tools", href: "/categories/developer-tools" },
     { name: "Text Tools", href: "/categories/text-tools" },
     { name: "File Converters", href: "/categories/file-converter-tools" },
+    { name: "Math & Calculators", href: "/categories/math-calculators" },
+    { name: "Marketing & Social", href: "/categories/marketing-tools" },
+    { name: "Security & Privacy", href: "/categories/security-privacy" },
   ];
 
   const popularTools = [

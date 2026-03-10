@@ -38,14 +38,19 @@ export default function GoogleAdSense({ publisherId }: GoogleAdSenseProps) {
         };
     }, []);
 
-    if (!hasConsent) return null;
+    useEffect(() => {
+        if (hasConsent) {
+            const script = document.createElement("script");
+            script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${publisherId}`;
+            script.async = true;
+            script.crossOrigin = "anonymous";
+            document.head.appendChild(script);
 
-    return (
-        <Script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${publisherId}`}
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
-        />
-    );
+            return () => {
+                document.head.removeChild(script);
+            };
+        }
+    }, [hasConsent, publisherId]);
+
+    return null;
 }
