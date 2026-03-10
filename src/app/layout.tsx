@@ -4,9 +4,9 @@ import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import AdPlaceholder from "@/components/common/AdPlaceholder";
 import CookieConsent from "@/components/common/CookieConsent";
 import GoogleAdSense from "@/components/common/GoogleAdSense";
+import React from "react";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -133,9 +133,6 @@ export default function RootLayout({
           `}
         </Script>
         <Header />
-        <div className="pt-[72px] md:pt-[88px] container mx-auto px-4">
-          <AdPlaceholder type="top-banner" />
-        </div>
         <main className="flex-grow">{children}</main>
         <Footer />
         <CookieConsent />

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getSortedPostsData } from "@/lib/blog";
 import { ChevronRight, Calendar, Tag, Clock } from "lucide-react";
-import AdPlaceholder from "@/components/common/AdPlaceholder";
+import React from "react";
 
 export const metadata = {
   title: "Blog - TakeThe Tools Insights",
@@ -79,10 +79,6 @@ export default function BlogPage() {
             </div>
           )}
 
-          {/* Inline Ad */}
-          <div className="mb-16">
-            <AdPlaceholder type="horizontal" />
-          </div>
 
           {/* Post Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

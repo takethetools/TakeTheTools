@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Zap, Search, Image as ImageIcon, FileText, Code, Type, Video, ArrowRight, Star, Calculator, Target, Shield, LayoutGrid } from "lucide-react";
 import { CATEGORIES, TOOLS } from "@/lib/tools";
-import AdPlaceholder from "@/components/common/AdPlaceholder";
+import React from "react";
 
 const categoryIcons: Record<string, any> = {
   image: ImageIcon,
@@ -73,10 +73,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mid-content Ad */}
-      <section className="container mx-auto px-4">
-        <AdPlaceholder type="horizontal" />
-      </section>
 
       {/* Popular Tools Section */}
       <section className="bg-slate-50 py-20 border-y border-slate-200">
@@ -110,10 +106,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AdSense Placeholder */}
-      <section className="container mx-auto px-4">
-        <AdPlaceholder type="horizontal" />
-      </section>
     </div>
   );
 }

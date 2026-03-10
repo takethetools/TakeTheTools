@@ -2,7 +2,7 @@ import { ToolCategory, CATEGORIES, TOOLS } from "@/lib/tools";
 import Link from "next/link";
 import { ArrowRight, ChevronRight, Home } from "lucide-react";
 import { Metadata } from "next";
-import AdPlaceholder from "@/components/common/AdPlaceholder";
+import React from "react";
 
 export async function generateMetadata({ params }: { params: Promise<{ categorySlug: string }> }): Promise<Metadata> {
   const { categorySlug } = await params;
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ categoryS
 export default async function CategoryPage({ params }: { params: Promise<{ categorySlug: string }> }) {
   const { categorySlug } = await params;
   const category = CATEGORIES.find(c => c.slug === categorySlug);
-  
+
   if (!category) {
     return <div className="container mx-auto px-4 py-32 text-center">Category not found</div>;
   }
@@ -53,8 +53,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categoryTools.map((tool) => (
-            <Link 
-              key={tool.id} 
+            <Link
+              key={tool.id}
               href={`/tools/${tool.slug}`}
               className="group p-6 bg-white rounded-2xl border border-slate-100 hover:border-primary-200 hover:shadow-xl hover:shadow-primary-100/20 transition-all"
             >
@@ -70,7 +70,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
               </div>
             </Link>
           ))}
-          
+
           {categoryTools.length === 0 && (
             <div className="col-span-full py-20 text-center bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200">
               <p className="text-slate-500">More tools for {category.name} are coming soon!</p>
@@ -78,17 +78,16 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           )}
         </div>
 
-        <AdPlaceholder type="horizontal" className="mt-16" />
 
         {/* SEO Content Section */}
         <div className="mt-24 prose prose-slate max-w-none">
           <h2 className="text-2xl font-bold mb-6">About {category.name}</h2>
           <p className="text-slate-600 mb-4">
-            Our {category.name} collection is designed to provide you with high-performance, easy-to-use solutions for your daily digital tasks. 
+            Our {category.name} collection is designed to provide you with high-performance, easy-to-use solutions for your daily digital tasks.
             Whether you are a developer, designer, or just looking to quickly edit a file, our tools are optimized for speed and accuracy.
           </p>
           <p className="text-slate-600">
-            We support users globally from the US, UK, Canada, Europe, and Australia, ensuring that our servers are optimized for fast response times regardless of your location. 
+            We support users globally from the US, UK, Canada, Europe, and Australia, ensuring that our servers are optimized for fast response times regardless of your location.
             All tools are free to use and do not require any registration or software installation.
           </p>
         </div>

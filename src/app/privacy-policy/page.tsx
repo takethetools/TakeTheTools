@@ -1,6 +1,5 @@
 import { Shield, Lock, Eye, FileText } from "lucide-react";
 import { Metadata } from "next";
-import AdPlaceholder from "@/components/common/AdPlaceholder";
 
 export const metadata: Metadata = {
   title: "Privacy Policy - TakeThe Tools",
@@ -37,7 +36,6 @@ export default function PrivacyPage() {
   return (
     <div className="pt-10 pb-20">
       <div className="container mx-auto px-4 max-w-4xl">
-        <AdPlaceholder type="horizontal" className="mb-12" />
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-display font-bold text-slate-900 mb-6 tracking-tight">
             Privacy <span className="text-primary-600">Policy</span>

@@ -1,6 +1,5 @@
 import { Cookie, Shield, Eye, ShieldCheck, Info } from "lucide-react";
 import { Metadata } from "next";
-import AdPlaceholder from "@/components/common/AdPlaceholder";
 
 export const metadata: Metadata = {
     title: "Cookie Policy - TakeThe Tools",
@@ -32,7 +31,6 @@ export default function CookiePolicyPage() {
     return (
         <div className="pt-10 pb-20">
             <div className="container mx-auto px-4 max-w-4xl">
-                <AdPlaceholder type="horizontal" className="mb-12" />
 
                 <div className="text-center mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 rounded-full text-primary-600 font-medium text-sm mb-6 border border-primary-100">

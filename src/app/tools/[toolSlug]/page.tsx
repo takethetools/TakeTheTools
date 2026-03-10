@@ -2,7 +2,7 @@ import { getToolBySlug, TOOLS } from "@/lib/tools";
 import { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, Home, Share2, HelpCircle, ArrowRight, CheckCircle2 } from "lucide-react";
-import AdPlaceholder from "@/components/common/AdPlaceholder";
+import React from "react";
 import { getToolAboutContent } from "@/lib/tool-content";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import WebPToPngTool from "@/components/tools/WebPToPngTool";
@@ -417,7 +417,6 @@ export default async function ToolPage({ params }: Props) {
               })()}
             </div>
 
-            <AdPlaceholder type="horizontal" className="mb-12" />
 
             {/* Extended About Content Section */}
             {aboutContent && (
@@ -455,7 +454,6 @@ export default async function ToolPage({ params }: Props) {
               </div>
             </div>
 
-            <AdPlaceholder type="horizontal" className="mb-16" />
 
             {/* FAQ Section */}
             <div className="mb-16">
@@ -476,7 +474,6 @@ export default async function ToolPage({ params }: Props) {
 
           {/* Sidebar Area */}
           <div className="lg:col-span-1 space-y-8">
-            <AdPlaceholder type="sidebar" />
 
             <div className="bg-slate-900 text-white rounded-3xl p-8">
               <h3 className="text-xl font-bold mb-6">Related Tools</h3>
@@ -500,9 +497,6 @@ export default async function ToolPage({ params }: Props) {
               </Link>
             </div>
 
-            <div className="sticky top-32">
-              <AdPlaceholder type="sidebar" />
-            </div>
           </div>
         </div>
       </div>

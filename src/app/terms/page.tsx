@@ -1,6 +1,5 @@
 import { Gavel, CheckCircle, Scale, AlertCircle } from "lucide-react";
 import { Metadata } from "next";
-import AdPlaceholder from "@/components/common/AdPlaceholder";
 
 export const metadata: Metadata = {
   title: "Terms of Service - TakeThe Tools",
@@ -37,7 +36,6 @@ export default function TermsPage() {
   return (
     <div className="pt-10 pb-20">
       <div className="container mx-auto px-4 max-w-4xl">
-        <AdPlaceholder type="horizontal" className="mb-12" />
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-display font-bold text-slate-900 mb-6 tracking-tight">
             Terms of <span className="text-primary-600">Service</span>
@@ -68,7 +66,7 @@ export default function TermsPage() {
           <p className="text-slate-600 mb-6">
             User is solely responsible for the content of the files they process through TakeThe Tools. You represent and warrant that you own or have the necessary licenses to the content you upload and that its use does not violate any third-party rights.
           </p>
-          
+
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-6">Prohibited Activities</h2>
           <ul className="list-disc pl-6 text-slate-600 space-y-4">
             <li>Attempting to bypass platform security measures or re-engineer the client-side logic.</li>

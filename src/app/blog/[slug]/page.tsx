@@ -3,7 +3,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, Calendar, User, Tag, ArrowRight } from "lucide-react";
-import AdPlaceholder from "@/components/common/AdPlaceholder";
+import React from "react";
 
 export async function generateStaticParams() {
   const posts = getSortedPostsData();
@@ -102,13 +102,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 </div>
               )}
 
-              <AdPlaceholder type="horizontal" className="mb-12" />
 
               <div className="prose prose-slate prose-lg max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary-600 prose-img:rounded-3xl prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded-md prose-code:text-primary-700 prose-pre:bg-slate-900">
                 <MDXRemote source={post.content} />
               </div>
 
-              <AdPlaceholder type="horizontal" className="mt-12" />
             </article>
 
             {/* Tool CTA */}
@@ -140,8 +138,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
           {/* Sidebar Area */}
           <div className="lg:col-span-1 space-y-8">
-            <AdPlaceholder type="sidebar" />
-            <AdPlaceholder type="sidebar" className="sticky top-32" />
           </div>
         </div>
       </div>
