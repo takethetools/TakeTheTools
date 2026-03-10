@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, Calendar, User, Tag, ArrowRight } from "lucide-react";
 import React from "react";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
 
 export async function generateStaticParams() {
   const posts = getSortedPostsData();
@@ -89,6 +90,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 <p className="text-xl text-slate-500 leading-relaxed">
                   {post.description}
                 </p>
+                <div className="mt-8 flex justify-center">
+                  <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+                </div>
               </header>
 
               {/* Cover Image */}
@@ -138,6 +142,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
           {/* Sidebar Area */}
           <div className="lg:col-span-1 space-y-8">
+            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+            <ManualAdUnit adSlot="3171595105" adFormat="rectangle" />
           </div>
         </div>
       </div>

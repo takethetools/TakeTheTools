@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Github, Twitter, Mail } from "lucide-react";
 import NewsletterForm from "./NewsletterForm";
+import ManualAdUnit from "../common/ManualAdUnit";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -76,6 +77,10 @@ export default function Footer() {
             <p className="text-sm text-slate-400 mb-4">Get notified when we release new tools.</p>
             <NewsletterForm />
           </div>
+        </div>
+
+        <div className="py-8 border-t border-slate-800 flex justify-center">
+          <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
         </div>
 
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">

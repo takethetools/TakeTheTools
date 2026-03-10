@@ -12,6 +12,8 @@ This guide explores the technical science of **APP1 Markers**, the logic of "GPS
 ### The Problem of the "Metadata Leak"
 Imagine a senior security analyst managing a "Public Transparency Report." They upload a high-resolution photo of a new server facility. Unknown to them, the photo's **EXIF Metadata** contains the exact GPS coordinates of the building, the serial number of the camera used, and the internal username of the person who took the photo. Without a "High-Fidelity Scrubbing Strategy," this information is "Publicly Indexed," leading to massive "Physical Security Risks," "Targeted Phishing Attacks," and a total failure of the organization's technical trust. Our tool provides the professional-grade logic needed to ensure your assets are sharp, standardized, and production-ready.
 
+<ManualAdUnit adFormat="horizontal" className="my-8" />
+
 ---
 
 ## 1. The Mathematical Foundation: Understanding the EXIF Structure
@@ -55,6 +57,8 @@ Did you know that many EXIF blocks contain a tiny, low-resolution **Thumbnail** 
 
 #### 3.2 IPTC and XMP Synchronization
 Beyond EXIF, images often contain **IPTC** (Industry Standard for News) and **XMP** (Adobe's XML-based metadata). Our generator treats these as part of the "Total Data Scrub," creating a "Lean and Clean" file that is 100% compliant with the highest global privacy standards.
+
+<ManualAdUnit adFormat="rectangle" className="my-10" />
 
 ---
 

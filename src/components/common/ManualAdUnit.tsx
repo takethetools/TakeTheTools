@@ -29,24 +29,31 @@ export default function ManualAdUnit({
 
             // Wait for adsbygoogle script to be available
             const adsbygoogle = (window as any).adsbygoogle;
+
+            // Safety check: only push if the script is loaded and we have a ref
             if (adsbygoogle && adRef.current) {
                 try {
+                    // Push ad and mark as pushed
                     adsbygoogle.push({});
                     pushed.current = true;
                 } catch (e) {
-                    // Silently ignore - ad blocker or script not ready
+                    // In development, AdSense often fails on localhost/null origins
+                    if (process.env.NODE_ENV === 'development') {
+                        // console.warn("AdSense push skipped/failed in development", e);
+                    }
                 }
             }
         };
 
-        // Try immediately
+        // Trigger push as soon as possible
         tryPush();
 
-        // If not pushed yet, retry after script likely loads
-        if (!pushed.current) {
-            const timer = setTimeout(tryPush, 2000);
-            return () => clearTimeout(timer);
-        }
+        // Also try on window load if it hasn't happened yet
+        window.addEventListener('load', tryPush);
+
+        return () => {
+            window.removeEventListener('load', tryPush);
+        };
     }, []);
 
     return (

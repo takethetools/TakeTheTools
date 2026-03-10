@@ -90,12 +90,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <GoogleAdSense publisherId="ca-pub-2006415668111484" />
       </head>
       <body
         className={`${inter.variable} ${outfit.variable} antialiased bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans`}
@@ -136,18 +137,17 @@ export default function RootLayout({
         <Header />
         <div className="pt-[80px] md:pt-[104px]">
           {/* Top Ad Banner — Shows on all pages */}
-          <div className="container mx-auto px-4 py-3">
+          <div className="container mx-auto px-4 py-3 flex justify-center">
             <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
           </div>
           <main className="flex-grow">{children}</main>
           {/* Bottom Ad Banner — Shows on all pages */}
-          <div className="container mx-auto px-4 py-3">
+          <div className="container mx-auto px-4 py-3 flex justify-center">
             <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
           </div>
         </div>
         <Footer />
         <CookieConsent />
-        <GoogleAdSense publisherId="ca-pub-2006415668111484" />
       </body>
     </html>
   );

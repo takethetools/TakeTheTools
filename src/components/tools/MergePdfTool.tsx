@@ -45,7 +45,7 @@ export default function MergePdfTool() {
     setIsProcessing(true);
     try {
       const mergedPdf = await PDFDocument.create();
-      
+
       for (const pdfFile of files) {
         const arrayBuffer = await pdfFile.file.arrayBuffer();
         const pdf = await PDFDocument.load(arrayBuffer);
@@ -58,7 +58,7 @@ export default function MergePdfTool() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const blob = new Blob([mergedPdfBytes as any], { type: "application/pdf" });
       setResultUrl(URL.createObjectURL(blob));
-      
+
       confetti({
         particleCount: 100,
         spread: 70,
@@ -81,8 +81,8 @@ export default function MergePdfTool() {
   return (
     <div className="space-y-8">
       {files.length === 0 ? (
-        <FileUpload 
-          onFilesSelected={onFilesSelected} 
+        <FileUpload
+          onFilesSelected={onFilesSelected}
           accept={{ "application/pdf": [".pdf"] }}
         />
       ) : (
@@ -104,15 +104,15 @@ export default function MergePdfTool() {
               <div key={f.id} className="px-8 py-4 border-b border-slate-50 flex items-center justify-between group hover:bg-slate-50/50 transition-colors">
                 <div className="flex items-center gap-4">
                   <div className="flex flex-col gap-1">
-                    <button 
-                      onClick={() => moveFile(i, "up")} 
+                    <button
+                      onClick={() => moveFile(i, "up")}
                       disabled={i === 0}
                       className="p-1 hover:bg-slate-200 rounded disabled:opacity-30"
                     >
                       <ArrowUp className="w-3 h-3" />
                     </button>
-                    <button 
-                      onClick={() => moveFile(i, "down")} 
+                    <button
+                      onClick={() => moveFile(i, "down")}
                       disabled={i === files.length - 1}
                       className="p-1 hover:bg-slate-200 rounded disabled:opacity-30"
                     >
@@ -141,20 +141,36 @@ export default function MergePdfTool() {
               Files will be merged from top to bottom
             </div>
             <div className="flex gap-4 w-full md:w-auto">
-              <label htmlFor="file-upload-input" className="cursor-pointer px-6 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 font-bold hover:bg-slate-50 transition-all flex items-center gap-2 flex-grow justify-center">
+              <input
+                type="file"
+                id="file-upload-input-more"
+                className="hidden"
+                accept=".pdf"
+                multiple
+                onChange={(e) => {
+                  if (e.target.files) {
+                    onFilesSelected(Array.from(e.target.files));
+                    e.target.value = ""; // Reset to allow same file selection
+                  }
+                }}
+              />
+              <label
+                htmlFor="file-upload-input-more"
+                className="cursor-pointer px-6 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 font-bold hover:bg-slate-50 transition-all flex items-center gap-2 flex-grow justify-center"
+              >
                 Add More
               </label>
-              
+
               {resultUrl ? (
-                <a 
-                  href={resultUrl} 
+                <a
+                  href={resultUrl}
                   download="merged_document.pdf"
                   className="px-8 py-3 bg-green-600 text-white rounded-xl font-bold shadow-lg hover:bg-green-700 transition-all flex items-center gap-2 flex-grow justify-center"
                 >
                   <Download className="w-5 h-5" /> Download Merged PDF
                 </a>
               ) : (
-                <button 
+                <button
                   onClick={mergePdfs}
                   disabled={isProcessing || files.length < 2}
                   className={cn(

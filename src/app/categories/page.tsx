@@ -3,6 +3,7 @@ import { CATEGORIES, TOOLS } from "@/lib/tools";
 import { ArrowRight, Box, Image as ImageIcon, FileText, Code, Type, LayoutGrid, Calculator, Target, Shield } from "lucide-react";
 import { Metadata } from "next";
 import React from "react";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
 
 export const metadata: Metadata = {
   title: "Tool Categories - TakeThe Tools",
@@ -35,6 +36,11 @@ export default function CategoriesPage() {
             Explore our curated collection of online tools, optimized for speed, security, and ease of use.
             All tools process files locally on your device.
           </p>
+        </div>
+
+        {/* Top Ad */}
+        <div className="mb-12 flex justify-center">
+          <ManualAdUnit adSlot="3171595105" adFormat="auto" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -78,6 +84,11 @@ export default function CategoriesPage() {
           })}
         </div>
 
+        {/* Mid Ad */}
+        <div className="mt-16 mb-16 flex justify-center">
+          <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+        </div>
+
 
         {/* Popular Tools Section */}
         <div className="mt-32">
@@ -104,6 +115,11 @@ export default function CategoriesPage() {
               </Link>
             ))}
           </div>
+        </div>
+
+        {/* Bottom Ad */}
+        <div className="mt-16 flex justify-center">
+          <ManualAdUnit adSlot="3171595105" adFormat="auto" />
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getSortedPostsData } from "@/lib/blog";
 import { ChevronRight, Calendar, Tag, Clock } from "lucide-react";
 import React from "react";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
 
 export const metadata = {
   title: "Blog - TakeThe Tools Insights",
@@ -43,6 +44,11 @@ export default function BlogPage() {
             </p>
           </div>
 
+          {/* Top Ad */}
+          <div className="mb-12 flex justify-center">
+            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+          </div>
+
           {/* Featured Post */}
           {posts.length > 0 && (
             <div className="mb-16">
@@ -78,6 +84,11 @@ export default function BlogPage() {
               </Link>
             </div>
           )}
+
+          {/* Mid Ad */}
+          <div className="mb-16 flex justify-center">
+            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+          </div>
 
 
           {/* Post Grid */}
@@ -129,6 +140,11 @@ export default function BlogPage() {
               <p className="text-lg font-medium">No blog posts yet. Check back soon!</p>
             </div>
           )}
+        </div>
+
+        {/* Bottom Ad */}
+        <div className="mt-20 max-w-6xl mx-auto flex justify-center">
+          <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
         </div>
       </div>
     </div>

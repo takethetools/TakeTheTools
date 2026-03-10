@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronRight, Home } from "lucide-react";
 import { Metadata } from "next";
 import React from "react";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
 
 export async function generateMetadata({ params }: { params: Promise<{ categorySlug: string }> }): Promise<Metadata> {
   const { categorySlug } = await params;
@@ -51,6 +52,11 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           </p>
         </div>
 
+        {/* Header Ad */}
+        <div className="mb-12 flex justify-center">
+          <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categoryTools.map((tool) => (
             <Link
@@ -76,6 +82,11 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
               <p className="text-slate-500">More tools for {category.name} are coming soon!</p>
             </div>
           )}
+        </div>
+
+        {/* Footer Ad */}
+        <div className="mt-16 flex justify-center">
+          <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
         </div>
 
 

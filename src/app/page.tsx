@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Zap, Search, Image as ImageIcon, FileText, Code, Type, Video, ArrowRight, Star, Calculator, Target, Shield, LayoutGrid } from "lucide-react";
+import { Zap, Search, ImageIcon, FileText, Code, Type, Video, ArrowRight, Star, Calculator, Target, Shield, LayoutGrid } from "lucide-react";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
 import { CATEGORIES, TOOLS } from "@/lib/tools";
 import React from "react";
 
@@ -36,6 +37,11 @@ export default function Home() {
 
         {/* Home Search Component */}
         <HomeSearch />
+
+        {/* Hero Ad */}
+        <div className="mt-12 max-w-4xl mx-auto flex justify-center">
+          <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+        </div>
       </section>
 
       {/* Categories Grid */}
@@ -71,6 +77,11 @@ export default function Home() {
             );
           })}
         </div>
+
+        {/* Mid-Page Ad */}
+        <div className="mt-16 flex justify-center">
+          <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+        </div>
       </section>
 
 
@@ -103,6 +114,11 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </div>
+
+        {/* Bottom Feed Ad */}
+        <div className="mt-16 flex justify-center">
+          <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
         </div>
       </section>
 

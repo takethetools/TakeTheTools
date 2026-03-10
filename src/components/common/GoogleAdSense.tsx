@@ -11,7 +11,7 @@ export default function GoogleAdSense({ publisherId }: GoogleAdSenseProps) {
         <Script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${publisherId}`}
-            crossOrigin="anonymous"
+            data-ad-client={publisherId}
             strategy="afterInteractive"
         />
     );
