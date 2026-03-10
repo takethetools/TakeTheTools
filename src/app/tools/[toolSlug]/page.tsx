@@ -1,4 +1,5 @@
 import { getToolBySlug, TOOLS } from "@/lib/tools";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
 import { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, Home, Share2, HelpCircle, ArrowRight, CheckCircle2 } from "lucide-react";
@@ -417,6 +418,9 @@ export default async function ToolPage({ params }: Props) {
               })()}
             </div>
 
+            {/* Ad Unit — After Tool */}
+            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" className="mb-12" />
+
 
             {/* Extended About Content Section */}
             {aboutContent && (
@@ -435,6 +439,9 @@ export default async function ToolPage({ params }: Props) {
                 </div>
               </div>
             )}
+
+            {/* Ad Unit — Between Content Sections */}
+            <ManualAdUnit adSlot="3171595105" adFormat="auto" className="mb-12" />
 
             {/* Instructions Section */}
             <div className="mb-16">
@@ -474,6 +481,9 @@ export default async function ToolPage({ params }: Props) {
 
           {/* Sidebar Area */}
           <div className="lg:col-span-1 space-y-8">
+
+            {/* Sidebar Ad Unit */}
+            <ManualAdUnit adSlot="3171595105" adFormat="rectangle" />
 
             <div className="bg-slate-900 text-white rounded-3xl p-8">
               <h3 className="text-xl font-bold mb-6">Related Tools</h3>

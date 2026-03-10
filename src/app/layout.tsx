@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/common/CookieConsent";
 import GoogleAdSense from "@/components/common/GoogleAdSense";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
 import React from "react";
 
 const inter = Inter({
@@ -134,7 +135,15 @@ export default function RootLayout({
         </Script>
         <Header />
         <div className="pt-[80px] md:pt-[104px]">
+          {/* Top Ad Banner — Shows on all pages */}
+          <div className="container mx-auto px-4 py-3">
+            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+          </div>
           <main className="flex-grow">{children}</main>
+          {/* Bottom Ad Banner — Shows on all pages */}
+          <div className="container mx-auto px-4 py-3">
+            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+          </div>
         </div>
         <Footer />
         <CookieConsent />
