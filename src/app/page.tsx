@@ -101,7 +101,7 @@ export default function Home() {
                 </div>
                 <p className="text-slate-500 text-sm mb-4 line-clamp-2">{tool.description}</p>
                 <div className="flex justify-between items-center text-xs">
-                  <span className="px-2 py-1 bg-slate-100 rounded text-slate-500 uppercase font-bold tracking-wider">{tool.category}</span>
+                  <span className="px-2 py-1 bg-slate-100 rounded text-slate-600 uppercase font-bold tracking-wider">{tool.category}</span>
                   <span className="text-primary-600 font-bold">Use Tool →</span>
                 </div>
               </Link>

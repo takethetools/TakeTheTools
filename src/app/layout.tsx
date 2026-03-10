@@ -75,7 +75,7 @@ const jsonLd = {
   "@type": "Organization",
   "name": "TakeThe Tools",
   "url": "https://takethetools.com",
-  "logo": "https://takethetools.com/logo.png",
+  "logo": "https://takethetools.com/logo.webp",
   "sameAs": [
     "https://twitter.com/takethetools"
   ]
@@ -90,6 +90,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -91,7 +91,7 @@ export default function AdPlaceholder({ type = "horizontal", className, slot = "
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
-        <span className={cn("text-slate-400 font-medium", type === "top-banner" ? "text-sm" : "text-base text-center px-4")}>
+        <span className={cn("text-slate-600 font-medium", type === "top-banner" ? "text-sm" : "text-base text-center px-4")}>
           Support us by enabling marketing cookies
         </span>
       </div>

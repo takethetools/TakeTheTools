@@ -42,8 +42,10 @@ export default function Header() {
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
           <img
-            src="/logo.png"
+            src="/logo.webp"
             alt="TakeThe Tools Logo"
+            width={200}
+            height={64}
             className="h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105"
           />
         </Link>
