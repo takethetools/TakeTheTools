@@ -68,6 +68,7 @@ export default function CookieConsent() {
     const saveAndClose = (newConsent: ConsentType) => {
         localStorage.setItem("cookie-consent", JSON.stringify(newConsent));
         updateGoogleConsent(newConsent);
+        window.dispatchEvent(new CustomEvent("cookie-consent-updated"));
         setIsVisible(false);
         setShowSettings(false);
     };

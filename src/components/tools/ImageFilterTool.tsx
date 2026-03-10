@@ -5,7 +5,7 @@ import { Upload, Download, RotateCw, FlipVertical, Palette, Loader2 } from "luci
 import { cn } from "@/lib/utils";
 
 interface ImageFilterToolProps {
-  filterType?: "grayscale" | "invert" | "rotate" | "flip" | "sepia";
+  filterType?: "grayscale" | "invert" | "rotate" | "flip" | "sepia" | "blur" | "vintage" | "contrast" | "brightness" | "saturate";
 }
 
 export default function ImageFilterTool({ filterType }: ImageFilterToolProps) {
@@ -48,9 +48,20 @@ export default function ImageFilterTool({ filterType }: ImageFilterToolProps) {
       } else {
         canvas.width = img.width;
         canvas.height = img.height;
-        ctx.filter = filterType === "grayscale" ? "grayscale(100%)" : 
-                    filterType === "invert" ? "invert(100%)" : 
-                    filterType === "sepia" ? "sepia(100%)" : "none";
+
+        let filterStr = "none";
+        switch (filterType) {
+          case "grayscale": filterStr = "grayscale(100%)"; break;
+          case "invert": filterStr = "invert(100%)"; break;
+          case "sepia": filterStr = "sepia(100%)"; break;
+          case "blur": filterStr = "blur(10px)"; break;
+          case "vintage": filterStr = "sepia(50%) contrast(120%) brightness(90%)"; break;
+          case "contrast": filterStr = "contrast(150%)"; break;
+          case "brightness": filterStr = "brightness(150%)"; break;
+          case "saturate": filterStr = "saturate(200%)"; break;
+        }
+
+        ctx.filter = filterStr;
         ctx.drawImage(img, 0, 0);
       }
 
@@ -70,26 +81,26 @@ export default function ImageFilterTool({ filterType }: ImageFilterToolProps) {
       ) : (
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-             <div className="space-y-2">
-               <span className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2">Original</span>
-               <div className="aspect-video bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center">
-                 <img src={image} className="max-h-full object-contain" alt="Original" />
-               </div>
-             </div>
-             <div className="space-y-2">
-               <span className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2">Result</span>
-               <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center group relative">
-                 {processed ? (
-                   <img src={processed} className="max-h-full object-contain" alt="Processed" />
-                 ) : (
-                   <p className="text-slate-400 italic">Click process to see result</p>
-                 )}
-               </div>
-             </div>
+            <div className="space-y-2">
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2">Original</span>
+              <div className="aspect-video bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                <img src={image} className="max-h-full object-contain" alt="Original" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2">Result</span>
+              <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center group relative">
+                {processed ? (
+                  <img src={processed} className="max-h-full object-contain" alt="Processed" />
+                ) : (
+                  <p className="text-slate-400 italic">Click process to see result</p>
+                )}
+              </div>
+            </div>
           </div>
 
           <div className="flex gap-4">
-            <button 
+            <button
               onClick={applyEffect}
               className="flex-grow py-4 bg-primary-600 text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary-500/20"
             >
@@ -102,7 +113,7 @@ export default function ImageFilterTool({ filterType }: ImageFilterToolProps) {
                 Download
               </a>
             )}
-            <button onClick={() => {setImage(null); setProcessed(null);}} className="px-6 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold">Clear</button>
+            <button onClick={() => { setImage(null); setProcessed(null); }} className="px-6 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold">Clear</button>
           </div>
         </div>
       )}

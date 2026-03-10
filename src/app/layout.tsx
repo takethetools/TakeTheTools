@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AdPlaceholder from "@/components/common/AdPlaceholder";
 import CookieConsent from "@/components/common/CookieConsent";
+import GoogleAdSense from "@/components/common/GoogleAdSense";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -69,6 +70,17 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "TakeThe Tools",
+  "url": "https://takethetools.com",
+  "logo": "https://takethetools.com/logo.png",
+  "sameAs": [
+    "https://twitter.com/takethetools"
+  ]
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -76,6 +88,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${inter.variable} ${outfit.variable} antialiased bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans`}
         suppressHydrationWarning
@@ -89,40 +108,37 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             
             // Default consent mode to 'denied' for compliance
-            gtag('consent', 'default', {
-              'ad_storage': 'denied',
-              'ad_user_data': 'denied',
-              'ad_personalization': 'denied',
-              'analytics_storage': 'denied',
-              'wait_for_update': 500
-            });
-            
-            // Check for previous consent
-            const consent = localStorage.getItem('cookie-consent');
-            if (consent) {
-              const parsed = JSON.parse(consent);
+            if (!localStorage.getItem('cookie-consent')) {
               gtag('consent', 'default', {
-                'ad_storage': parsed.marketing ? 'granted' : 'denied',
-                'ad_user_data': parsed.marketing ? 'granted' : 'denied',
-                'ad_personalization': parsed.marketing ? 'granted' : 'denied',
-                'analytics_storage': parsed.analytics ? 'granted' : 'denied'
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'analytics_storage': 'denied',
+                'wait_for_update': 500
               });
+            } else {
+              try {
+                const parsed = JSON.parse(localStorage.getItem('cookie-consent'));
+                gtag('consent', 'default', {
+                  'ad_storage': parsed.marketing ? 'granted' : 'denied',
+                  'ad_user_data': parsed.marketing ? 'granted' : 'denied',
+                  'ad_personalization': parsed.marketing ? 'granted' : 'denied',
+                  'analytics_storage': parsed.analytics ? 'granted' : 'denied'
+                });
+              } catch (e) {
+                console.error("Error parsing consent", e);
+              }
             }
           `}
         </Script>
         <Header />
-        <div className="pt-[72px] md:pt-[88px]">
+        <div className="pt-[72px] md:pt-[88px] container mx-auto px-4">
           <AdPlaceholder type="top-banner" />
         </div>
         <main className="flex-grow">{children}</main>
         <Footer />
         <CookieConsent />
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2006415668111484"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        <GoogleAdSense publisherId="ca-pub-2006415668111484" />
       </body>
     </html>
   );

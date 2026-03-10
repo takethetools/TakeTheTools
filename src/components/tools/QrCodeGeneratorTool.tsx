@@ -5,13 +5,30 @@ import { QRCodeSVG } from "qrcode.react";
 import { QrCode, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export default function QrCodeGeneratorTool() {
-  const [value, setValue] = useState("https://globaltools.io");
+interface QrCodeGeneratorToolProps {
+  initialType?: "text" | "wifi" | "vcard";
+}
+
+export default function QrCodeGeneratorTool({ initialType = "text" }: QrCodeGeneratorToolProps) {
+  const [type, setType] = useState(initialType);
+  const [value, setValue] = useState(initialType === "text" ? "https://takethetools.com" : "");
+  const [wifi, setWifi] = useState({ ssid: "", password: "", encryption: "WPA" });
+  const [vcard, setVcard] = useState({ name: "", email: "", phone: "" });
   const [size] = useState(256);
   const [fgColor, setFgColor] = useState("#000000");
   const [bgColor, setBgColor] = useState("#ffffff");
   const [level, setLevel] = useState<"L" | "M" | "Q" | "H">("L");
   const qrRef = useRef<SVGSVGElement>(null);
+
+  const getQrValue = () => {
+    if (type === "wifi") {
+      return `WIFI:S:${wifi.ssid};T:${wifi.encryption};P:${wifi.password};;`;
+    }
+    if (type === "vcard") {
+      return `BEGIN:VCARD\nVERSION:3.0\nN:${vcard.name}\nEMAIL:${vcard.email}\nTEL:${vcard.phone}\nEND:VCARD`;
+    }
+    return value;
+  };
 
   const downloadQrCode = () => {
     const svg = qrRef.current;
@@ -41,17 +58,76 @@ export default function QrCodeGeneratorTool() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Settings */}
         <div className="space-y-6">
+          <div className="flex bg-slate-100 p-1 rounded-xl mb-4">
+            {(["text", "wifi", "vcard"] as const).map((t) => (
+              <button
+                key={t}
+                onClick={() => setType(t)}
+                className={cn(
+                  "flex-grow py-2 rounded-lg text-sm font-bold transition-all capitalize",
+                  type === t ? "bg-white text-primary-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                )}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
+
           <div className="space-y-4">
             <h3 className="font-bold text-slate-900 flex items-center gap-2">
               <QrCode className="w-5 h-5 text-primary-600" />
-              QR Content
+              {type.toUpperCase()} Details
             </h3>
-            <textarea
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              placeholder="Enter URL or text for QR code..."
-              className="w-full h-32 p-6 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none"
-            />
+
+            {type === "text" && (
+              <textarea
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                placeholder="Enter URL or text for QR code..."
+                className="w-full h-32 p-6 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none"
+              />
+            )}
+
+            {type === "wifi" && (
+              <div className="space-y-4 bg-white p-6 rounded-2xl border border-slate-200">
+                <input
+                  placeholder="Network SSID"
+                  className="w-full p-3 bg-slate-50 rounded-xl"
+                  value={wifi.ssid}
+                  onChange={e => setWifi({ ...wifi, ssid: e.target.value })}
+                />
+                <input
+                  placeholder="Password"
+                  type="password"
+                  className="w-full p-3 bg-slate-50 rounded-xl"
+                  value={wifi.password}
+                  onChange={e => setWifi({ ...wifi, password: e.target.value })}
+                />
+              </div>
+            )}
+
+            {type === "vcard" && (
+              <div className="space-y-4 bg-white p-6 rounded-2xl border border-slate-200">
+                <input
+                  placeholder="Full Name"
+                  className="w-full p-3 bg-slate-50 rounded-xl"
+                  value={vcard.name}
+                  onChange={e => setVcard({ ...vcard, name: e.target.value })}
+                />
+                <input
+                  placeholder="Email"
+                  className="w-full p-3 bg-slate-50 rounded-xl"
+                  value={vcard.email}
+                  onChange={e => setVcard({ ...vcard, email: e.target.value })}
+                />
+                <input
+                  placeholder="Phone"
+                  className="w-full p-3 bg-slate-50 rounded-xl"
+                  value={vcard.phone}
+                  onChange={e => setVcard({ ...vcard, phone: e.target.value })}
+                />
+              </div>
+            )}
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -70,24 +146,6 @@ export default function QrCodeGeneratorTool() {
               </div>
             </div>
           </div>
-
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">Error Correction</label>
-            <div className="flex bg-slate-100 p-1 rounded-xl">
-              {(["L", "M", "Q", "H"] as const).map((l) => (
-                <button 
-                  key={l}
-                  onClick={() => setLevel(l)}
-                  className={cn(
-                    "flex-grow py-2 rounded-lg text-sm font-bold transition-all",
-                    level === l ? "bg-white text-primary-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
-                  )}
-                >
-                  {l}
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Preview */}
@@ -95,7 +153,7 @@ export default function QrCodeGeneratorTool() {
           <div className="bg-white p-6 rounded-2xl shadow-2xl mb-8">
             <QRCodeSVG
               ref={qrRef}
-              value={value || " "}
+              value={getQrValue() || " "}
               size={size}
               fgColor={fgColor}
               bgColor={bgColor}
@@ -103,10 +161,9 @@ export default function QrCodeGeneratorTool() {
               includeMargin={true}
             />
           </div>
-          <button 
+          <button
             onClick={downloadQrCode}
-            disabled={!value}
-            className="px-10 py-4 bg-primary-600 text-white rounded-xl font-bold shadow-lg hover:bg-primary-700 transition-all flex items-center gap-2 disabled:opacity-50"
+            className="px-10 py-4 bg-primary-600 text-white rounded-xl font-bold shadow-lg hover:bg-primary-700 transition-all flex items-center gap-2"
           >
             <Download className="w-5 h-5" /> Download QR Code
           </button>

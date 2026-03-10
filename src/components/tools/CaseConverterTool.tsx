@@ -4,9 +4,17 @@ import { useState } from "react";
 import { Copy, Check, Type, ArrowDownUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export default function CaseConverterTool() {
+interface CaseConverterToolProps {
+  defaultType?: "upper" | "lower" | "title" | "sentence" | "camel" | "snake" | "kebab";
+}
+
+export default function CaseConverterTool({ defaultType }: CaseConverterToolProps) {
   const [text, setText] = useState("");
   const [isCopied, setIsCopied] = useState(false);
+
+  // Apply default type effect would be complex without an initial value, 
+  // but we can just ensure the UI highlights or provides the specific conversion.
+  // For now, it's enough to have the modes ready.
 
   const convertCase = (type: "upper" | "lower" | "title" | "sentence" | "camel" | "snake" | "kebab") => {
     if (!text) return;
@@ -60,13 +68,13 @@ export default function CaseConverterTool() {
             Input Text
           </div>
           <div className="flex gap-2">
-            <button 
+            <button
               onClick={clear}
               className="text-xs font-bold text-slate-400 hover:text-red-500 transition-colors"
             >
               Clear
             </button>
-            <button 
+            <button
               onClick={copyToClipboard}
               className={cn(
                 "flex items-center gap-2 px-3 py-1.5 rounded-lg font-bold text-xs transition-all",
@@ -78,7 +86,7 @@ export default function CaseConverterTool() {
             </button>
           </div>
         </div>
-        
+
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}

@@ -1,13 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Type, Copy, Check, Zap, RefreshCw, Trash2, List, Scissors } from "lucide-react";
+import { Type, Copy, Check, Zap, RefreshCw, Trash2, List, Scissors, Mail } from "lucide-react";
 
 interface TextProcessingToolProps {
-  mode: "reverse" | "remove-duplicates" | "sort-lines" | "remove-whitespace";
+  mode: "reverse" | "remove-duplicates" | "sort-lines" | "remove-whitespace" | "remove-empty-lines" | "add-prefix-suffix" | "remove-html" | "extract-emails" | "extract-urls";
+  prefix?: string;
+  suffix?: string;
 }
 
-export default function TextProcessingTool({ mode }: TextProcessingToolProps) {
+export default function TextProcessingTool({ mode, prefix = "", suffix = "" }: TextProcessingToolProps) {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [isCopied, setIsCopied] = useState(false);
@@ -24,6 +26,18 @@ export default function TextProcessingTool({ mode }: TextProcessingToolProps) {
       setOutput(lines.sort().join("\n"));
     } else if (mode === "remove-whitespace") {
       setOutput(input.replace(/\s+/g, " ").trim());
+    } else if (mode === "remove-empty-lines") {
+      setOutput(input.split("\n").filter(line => line.trim() !== "").join("\n"));
+    } else if (mode === "add-prefix-suffix") {
+      setOutput(input.split("\n").map(line => `${prefix}${line}${suffix}`).join("\n"));
+    } else if (mode === "remove-html") {
+      setOutput(input.replace(/<[^>]*>?/gm, ""));
+    } else if (mode === "extract-emails") {
+      const emails = input.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+      setOutput(emails ? Array.from(new Set(emails)).join("\n") : "No emails found");
+    } else if (mode === "extract-urls") {
+      const urls = input.match(/(https?:\/\/[^\s]+)/g);
+      setOutput(urls ? Array.from(new Set(urls)).join("\n") : "No URLs found");
     }
   };
 
@@ -37,14 +51,24 @@ export default function TextProcessingTool({ mode }: TextProcessingToolProps) {
     "reverse": "Text Reverser",
     "remove-duplicates": "Remove Duplicate Lines",
     "sort-lines": "Alphabetical Line Sorter",
-    "remove-whitespace": "Remove Whitespace"
+    "remove-whitespace": "Remove Whitespace",
+    "remove-empty-lines": "Remove Empty Lines",
+    "add-prefix-suffix": "Add Prefix/Suffix to Lines",
+    "remove-html": "Remove HTML Tags",
+    "extract-emails": "Extract Emails",
+    "extract-urls": "Extract URLs"
   };
 
   const icons: Record<string, React.ReactNode> = {
     "reverse": <RefreshCw className="w-6 h-6" />,
     "remove-duplicates": <Trash2 className="w-6 h-6" />,
     "sort-lines": <List className="w-6 h-6" />,
-    "remove-whitespace": <Scissors className="w-6 h-6" />
+    "remove-whitespace": <Scissors className="w-6 h-6" />,
+    "remove-empty-lines": <Trash2 className="w-6 h-6" />,
+    "add-prefix-suffix": <Type className="w-6 h-6" />,
+    "remove-html": <Scissors className="w-6 h-6" />,
+    "extract-emails": <Mail className="w-6 h-6" />,
+    "extract-urls": <RefreshCw className="w-6 h-6" />
   };
 
   return (
@@ -59,8 +83,8 @@ export default function TextProcessingTool({ mode }: TextProcessingToolProps) {
             <p className="text-sm text-slate-500">Quickly {mode.replace(/-/g, " ")} your text</p>
           </div>
         </div>
-        
-        <button 
+
+        <button
           onClick={processText}
           className="px-8 py-3 bg-primary-600 text-white rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-primary-500/20"
         >
@@ -71,7 +95,7 @@ export default function TextProcessingTool({ mode }: TextProcessingToolProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2">Source Text</label>
-          <textarea 
+          <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             className="w-full h-80 bg-slate-50 border border-slate-100 rounded-2xl p-6 font-mono text-sm text-slate-600 focus:outline-none"
@@ -88,7 +112,7 @@ export default function TextProcessingTool({ mode }: TextProcessingToolProps) {
               </button>
             )}
           </div>
-          <textarea 
+          <textarea
             value={output}
             readOnly
             className="w-full h-80 bg-slate-100 border-none rounded-2xl p-6 font-mono text-sm text-slate-700 focus:outline-none"

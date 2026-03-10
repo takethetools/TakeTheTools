@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Zap, Github, Twitter, Mail } from "lucide-react";
+import { Github, Twitter, Mail } from "lucide-react";
+import NewsletterForm from "./NewsletterForm";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -36,9 +37,9 @@ export default function Footer() {
               Providing high-performance, free online tools for professionals and enthusiasts worldwide. Fast, secure, and always free.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors"><Twitter className="w-4 h-4" /></a>
-              <a href="#" className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors"><Github className="w-4 h-4" /></a>
-              <a href="#" className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors"><Mail className="w-4 h-4" /></a>
+              <a href="#" aria-label="Follow us on Twitter" className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors"><Twitter className="w-4 h-4" /></a>
+              <a href="#" aria-label="Check our Github" className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors"><Github className="w-4 h-4" /></a>
+              <a href="#" aria-label="Contact us via Email" className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors"><Mail className="w-4 h-4" /></a>
             </div>
           </div>
 
@@ -70,16 +71,7 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-bold mb-6">Stay Updated</h3>
             <p className="text-sm text-slate-400 mb-4">Get notified when we release new tools.</p>
-            <form className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Email address"
-                className="bg-slate-800 border-none rounded-lg px-4 py-2 text-sm w-full focus:ring-2 focus:ring-primary-500 outline-none"
-              />
-              <button className="bg-primary-600 text-white p-2 rounded-lg hover:bg-primary-700 transition-colors">
-                <Zap className="w-4 h-4 fill-current" />
-              </button>
-            </form>
+            <NewsletterForm />
           </div>
         </div>
 

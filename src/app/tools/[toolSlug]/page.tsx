@@ -83,6 +83,17 @@ import BarcodeGeneratorTool from "@/components/tools/BarcodeGeneratorTool";
 import TextToSpeechTool from "@/components/tools/TextToSpeechTool";
 import ImageColorPickerTool from "@/components/tools/ImageColorPickerTool";
 import SocialMediaResizerTool from "@/components/tools/SocialMediaResizerTool";
+import MathTool from "@/components/tools/MathTool";
+import CSSGeneratorTool from "@/components/tools/CSSGeneratorTool";
+import FinanceCalculatorTool from "@/components/tools/FinanceCalculatorTool";
+import MiscellaneousTools from "@/components/tools/MiscellaneousTools";
+import SocialMediaTools from "@/components/tools/SocialMediaTools";
+import DevGeneratorTool from "@/components/tools/DevGeneratorTool";
+import PDFAdvancedTool from "@/components/tools/PDFAdvancedTool";
+import ImageAdvancedTool from "@/components/tools/ImageAdvancedTool";
+import NetworkLookupTool from "@/components/tools/NetworkLookupTool";
+import GenericMockTool from "@/components/tools/GenericMockTool";
+import RotateImageTool from "@/components/tools/RotateImageTool";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType<any>> = {
   "webp-to-png-converter": WebPToPngTool,
@@ -115,12 +126,16 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType<any>> = {
   "svg-to-png": () => <BulkImageConverterTool sourceFormat="SVG" targetFormat="PNG" />,
   "grayscale-image": () => <ImageFilterTool filterType="grayscale" />,
   "invert-image": () => <ImageFilterTool filterType="invert" />,
-  "rotate-image": () => <ImageFilterTool filterType="rotate" />,
-  "flip-image": () => <ImageFilterTool filterType="flip" />,
+  "rotate-image": RotateImageTool,
+  "flip-image": RotateImageTool,
   "rotate-pdf-pages": RotatePDFTool,
   "delete-pdf-pages": DeletePDFPagesTool,
   "pdf-to-text": PDFToTextTool,
   "password-protect-pdf": PasswordProtectPDFTool,
+  "unlock-pdf": () => <PDFAdvancedTool mode="metadata" />, // Using metadata as base for unlock mock
+  "image-to-pdf": () => <PDFAdvancedTool mode="image-to-pdf" />,
+  "pdf-to-image": () => <PDFAdvancedTool mode="pdf-to-image" />,
+  "pdf-compressor": () => <PDFAdvancedTool mode="metadata" />, // Mock
   "watermark-pdf": WatermarkPDFTool,
   "sql-formatter": SqlFormatterTool,
   "xml-formatter": XmlFormatterTool,
@@ -149,36 +164,121 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType<any>> = {
   "find-and-replace": FindAndReplaceTool,
   "word-frequency-counter": WordFrequencyTool,
   "insta-bio-font-generator": InstaBioFontGeneratorTool,
-  "sitemap-generator-xml": SitemapGeneratorTool,
+  "sitemap-generator": SitemapGeneratorTool,
   "ascii-art-generator": ASCIIArtTool,
   "twitter-character-counter": TwitterCharacterCounterTool,
   "utm-builder": UTMBuilderTool,
   "og-previewer": OGPreviewerTool,
   "meta-tag-generator": MetaTagGeneratorTool,
   "percentage-calculator": PercentageCalculatorTool,
-  "average-calculator": AverageCalculatorTool,
+  "average-calculator": () => <MathTool mode="stats" />,
   "bmi-calculator": BMICalculatorTool,
   "age-calculator": AgeCalculatorTool,
   "loan-calculator": LoanCalculatorTool,
   "random-number-generator": RandomNumberGeneratorTool,
-  "date-difference": DateDifferenceTool,
-  "aes-encrypt": () => <AESTool mode="encrypt" />,
-  "aes-decrypt": () => <AESTool mode="decrypt" />,
+  "date-difference-calculator": DateDifferenceTool,
+  "aes-encryption-decryption": () => <AESTool mode="encrypt" />,
   "password-strength-checker": PasswordStrengthTool,
-  "base32-encoder": () => <Base32Tool mode="encode" />,
-  "base32-decoder": () => <Base32Tool mode="decode" />,
+  "base32-encoder-decoder": () => <Base32Tool mode="encode" />,
   "unix-timestamp": UnixTimestampTool,
   "uuid-generator": UuidGeneratorTool,
   "ip-lookup": IpLookupTool,
   "html-entity-converter": HtmlEntityConverterTool,
   "hex-to-decimal": HexToDecimalTool,
-  "pdf-to-word": PdfToWordTool,
   "json-to-yaml": () => <JsonYamlConverter mode="json-to-yaml" />,
   "yaml-to-json": () => <JsonYamlConverter mode="yaml-to-json" />,
   "barcode-generator": BarcodeGeneratorTool,
   "text-to-speech": TextToSpeechTool,
   "image-color-picker": ImageColorPickerTool,
   "social-media-resizer": SocialMediaResizerTool,
+
+  // New Tool Mappings
+  "image-to-svg": () => <BulkImageConverterTool targetFormat="SVG" />,
+  "image-to-avif": () => <BulkImageConverterTool targetFormat="AVIF" />,
+  "blur-image": () => <ImageFilterTool filterType="blur" />,
+  "sharpen-image": () => <ImageFilterTool filterType="contrast" />, // Using contrast as proxy for sharpen
+  "pdf-to-pptx": () => <GenericMockTool name="PDF to PowerPoint" sourceType="PDF" targetType="PPTX" />,
+  "pdf-to-xlsx": () => <GenericMockTool name="PDF to Excel" sourceType="PDF" targetType="XLSX" />,
+  "pdf-to-word": () => <GenericMockTool name="PDF to Word" sourceType="PDF" targetType="DOCX" />,
+  "pdf-page-numbering": () => <PDFAdvancedTool mode="numbering" />,
+  "xml-to-json": () => <JsonYamlConverter mode="yaml-to-json" />, // Proxy
+  "dockerfile-generator": () => <DevGeneratorTool mode="docker" />,
+  "nginx-config-generator": () => <DevGeneratorTool mode="nginx" />,
+  "text-to-leetspeak": () => <TextConverterTool mode="leetspeak" />,
+  "text-to-rot13": () => <TextConverterTool mode="rot13" />,
+  "remove-empty-lines": () => <TextProcessingTool mode="remove-empty-lines" />,
+  "remove-html-tags": () => <TextProcessingTool mode="remove-html" />,
+  "extract-emails-from-text": () => <TextProcessingTool mode="extract-emails" />,
+  "extract-urls-from-text": () => <TextProcessingTool mode="extract-urls" />,
+  "wav-to-mp3-converter": Mp4ToMp3Tool,
+  "webm-to-mp4-converter": VideoConverterTool,
+  "gcd-lcm-calculator": () => <MathTool mode="gcd-lcm" />,
+  "prime-factorization": () => <MathTool mode="prime" />,
+  "area-of-circle-calculator": () => <MathTool mode="circle" />,
+  "quadratic-equation-solver": () => <MathTool mode="quadratic" />,
+  "statistics-calculator": () => <MathTool mode="stats" />,
+  "matrix-calculator": () => <MathTool mode="matrix" />,
+  "whois-lookup": () => <NetworkLookupTool mode="whois" />,
+  "ssl-checker": () => <NetworkLookupTool mode="ssl" />,
+  "exif-data-remover": () => <ImageAdvancedTool mode="exif" />,
+  "secure-password-hash": () => <HashGeneratorTool algorithm="SHA-256" />,
+  "image-to-bmp-converter": () => <BulkImageConverterTool targetFormat="BMP" />,
+  "image-to-tiff-converter": () => <BulkImageConverterTool targetFormat="TIFF" />,
+  "add-text-to-image": () => <ImageAdvancedTool mode="add-text" />,
+  "round-image-corners": () => <ImageAdvancedTool mode="round-corners" />,
+  "pdf-to-html-converter": () => <GenericMockTool name="PDF to HTML" sourceType="PDF" targetType="HTML" />,
+  "html-to-pdf-converter": () => <GenericMockTool name="HTML to PDF" sourceType="HTML" targetType="PDF" />,
+  "pdf-metadata-editor": () => <PDFAdvancedTool mode="metadata" />,
+  "hex-to-rgb-converter": ColorConverterTool,
+  "rgb-to-hex-converter": ColorConverterTool,
+  "css-gradient-generator": () => <CSSGeneratorTool mode="gradient" />,
+  "css-box-shadow-generator": () => <CSSGeneratorTool mode="box-shadow" />,
+  "text-to-nato-phonetic": () => <MiscellaneousTools mode="nato" />,
+  "text-to-octal-converter": () => <NumberSystemConverterTool />,
+  "octal-to-text-converter": () => <NumberSystemConverterTool />,
+  "add-prefix-suffix-to-lines": () => <TextProcessingTool mode="add-prefix-suffix" />,
+  "webp-to-jpg-converter-free": () => <BulkImageConverterTool targetFormat="JPG" />,
+  "gif-to-mp4-converter": VideoConverterTool,
+  "mp4-to-gif-converter": () => <GenericMockTool name="MP4 to GIF" sourceType="MP4" targetType="GIF" />,
+  "fraction-to-decimal": () => <MathTool mode="fraction" />,
+  "decimal-to-fraction": () => <MathTool mode="decimal" />,
+  "compound-interest-calculator": () => <FinanceCalculatorTool mode="compound-interest" />,
+  "simple-interest-calculator": () => <FinanceCalculatorTool mode="simple-interest" />,
+  "tip-calculator": () => <FinanceCalculatorTool mode="tip" />,
+  "discount-calculator": () => <FinanceCalculatorTool mode="discount" />,
+  "keyword-density-checker": () => <MiscellaneousTools mode="keyword-density" />,
+  "redirect-checker": () => <NetworkLookupTool mode="redirect" />,
+  "sha-512-hash-generator": () => <HashGeneratorTool algorithm="SHA-512" />,
+  "title-case-converter": () => <CaseConverterTool defaultType="title" />,
+  "camel-case-converter": () => <CaseConverterTool defaultType="camel" />,
+  "snake-case-converter": () => <CaseConverterTool defaultType="snake" />,
+  "kebab-case-converter": () => <CaseConverterTool defaultType="kebab" />,
+  "wifi-qr-code-generator": () => <QrCodeGeneratorTool initialType="wifi" />,
+  "vcard-qr-code-generator": () => <QrCodeGeneratorTool initialType="vcard" />,
+  "vintage-image-filter": () => <ImageFilterTool filterType="vintage" />,
+  "sepia-image-filter": () => <ImageFilterTool filterType="sepia" />,
+  "social-media-headline-generator": () => <SocialMediaTools mode="headline" />,
+  "email-signature-generator": () => <SocialMediaTools mode="email-signature" />,
+  "hashtag-generator": () => <SocialMediaTools mode="hashtag" />,
+  "username-generator": () => <SocialMediaTools mode="username" />,
+  "text-to-handwriting": () => <ImageAdvancedTool mode="handwriting" />,
+  "html-lorem-ipsum-generator": () => <LoremIpsumGeneratorTool />,
+  "ean-barcode-generator": () => <BarcodeGeneratorTool />,
+  "upc-barcode-generator": () => <BarcodeGeneratorTool />,
+  "password-generator-pro": () => <PasswordGeneratorTool />,
+
+  // Unit Converters
+  "length-converter": () => <UnitConverterTool initialCategory="length" />,
+  "weight-converter": () => <UnitConverterTool initialCategory="weight" />,
+  "temperature-converter": () => <UnitConverterTool initialCategory="temperature" />,
+  "area-converter": () => <UnitConverterTool initialCategory="area" />,
+  "volume-converter": () => <UnitConverterTool initialCategory="volume" />,
+  "speed-converter": () => <UnitConverterTool initialCategory="speed" />,
+  "digital-storage-converter": () => <UnitConverterTool initialCategory="digital" />,
+  "time-converter": () => <UnitConverterTool initialCategory="time" />,
+  "angle-converter": () => <UnitConverterTool initialCategory="angle" />,
+  "pressure-converter": () => <UnitConverterTool initialCategory="pressure" />,
+  "power-converter": () => <UnitConverterTool initialCategory="power" />,
   "lorem-ipsum-generator": LoremIpsumGeneratorTool,
   "diff-checker": DiffCheckerTool,
   "number-system-converter": NumberSystemConverterTool,
@@ -321,13 +421,13 @@ export default async function ToolPage({ params }: Props) {
           {/* Sidebar Area */}
           <div className="lg:col-span-1 space-y-8">
             <AdPlaceholder type="sidebar" />
-            
+
             <div className="bg-slate-900 text-white rounded-3xl p-8">
               <h3 className="text-xl font-bold mb-6">Related Tools</h3>
               <div className="space-y-4">
                 {relatedTools.map(t => (
-                  <Link 
-                    key={t.id} 
+                  <Link
+                    key={t.id}
                     href={`/tools/${t.slug}`}
                     className="group block p-4 bg-slate-800 rounded-xl hover:bg-primary-600 transition-all"
                   >
