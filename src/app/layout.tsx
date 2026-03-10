@@ -133,7 +133,9 @@ export default function RootLayout({
           `}
         </Script>
         <Header />
-        <main className="flex-grow">{children}</main>
+        <div className="pt-[72px] md:pt-[88px]">
+          <main className="flex-grow">{children}</main>
+        </div>
         <Footer />
         <CookieConsent />
         <GoogleAdSense publisherId="ca-pub-2006415668111484" />
