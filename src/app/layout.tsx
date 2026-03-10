@@ -5,7 +5,6 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/common/CookieConsent";
-import GoogleAdSense from "@/components/common/GoogleAdSense";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 import React from "react";
 
@@ -96,12 +95,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <GoogleAdSense publisherId="ca-pub-2006415668111484" />
-      </head>
-      <body
-        className={`${inter.variable} ${outfit.variable} antialiased bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans`}
-        suppressHydrationWarning
-      >
         <Script
           id="google-consent-mode"
           strategy="beforeInteractive"
@@ -134,7 +127,18 @@ export default function RootLayout({
             }
           `}
         </Script>
+      </head>
+      <body
+        className={`${inter.variable} ${outfit.variable} antialiased bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans`}
+        suppressHydrationWarning
+      >
         <Header />
+        <Script
+          id="adsbygoogle-init"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2006415668111484"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
         <div className="pt-[80px] md:pt-[104px]">
           {/* Top Ad Banner — Shows on all pages */}
           <div className="container mx-auto px-4 py-3 flex justify-center">

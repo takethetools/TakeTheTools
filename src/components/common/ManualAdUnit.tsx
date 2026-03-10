@@ -21,39 +21,17 @@ export default function ManualAdUnit({
     const pushed = useRef(false);
 
     useEffect(() => {
-        // Don't push if already pushed for this instance
         if (pushed.current) return;
 
-        const tryPush = () => {
-            if (typeof window === "undefined") return;
-
-            // Wait for adsbygoogle script to be available
-            const adsbygoogle = (window as any).adsbygoogle;
-
-            // Safety check: only push if the script is loaded and we have a ref
-            if (adsbygoogle && adRef.current) {
-                try {
-                    // Push ad and mark as pushed
-                    adsbygoogle.push({});
-                    pushed.current = true;
-                } catch (e) {
-                    // In development, AdSense often fails on localhost/null origins
-                    if (process.env.NODE_ENV === 'development') {
-                        // console.warn("AdSense push skipped/failed in development", e);
-                    }
-                }
+        try {
+            (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+            (window as any).adsbygoogle.push({});
+            pushed.current = true;
+        } catch (err) {
+            if (process.env.NODE_ENV === 'development') {
+                // Keep console clean on localhost
             }
-        };
-
-        // Trigger push as soon as possible
-        tryPush();
-
-        // Also try on window load if it hasn't happened yet
-        window.addEventListener('load', tryPush);
-
-        return () => {
-            window.removeEventListener('load', tryPush);
-        };
+        }
     }, []);
 
     return (
