@@ -7,7 +7,6 @@ import React from "react";
 import { getToolAboutContent } from "@/lib/tool-content";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import ToolRenderer from "@/components/tools/ToolRenderer";
-export const runtime = 'edge';
 
 interface Props {
   params: Promise<{ toolSlug: string }>;
