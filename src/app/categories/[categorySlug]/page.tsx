@@ -4,6 +4,7 @@ import { ArrowRight, ChevronRight, Home } from "lucide-react";
 import { Metadata } from "next";
 import React from "react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
+export const runtime = 'edge';
 
 export async function generateMetadata({ params }: { params: Promise<{ categorySlug: string }> }): Promise<Metadata> {
   const { categorySlug } = await params;
