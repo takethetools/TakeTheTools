@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Github, Twitter, Mail } from "lucide-react";
 import NewsletterForm from "./NewsletterForm";
 import ManualAdUnit from "../common/ManualAdUnit";
@@ -31,9 +32,11 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-2 group">
-              <img
-                src="/logo.png"
+              <Image
+                src="/logo.webp"
                 alt="TakeThe Tools Logo"
+                width={200}
+                height={64}
                 className="h-14 md:h-16 w-auto object-contain brightness-0 invert"
               />
             </Link>

@@ -8,9 +8,13 @@ import { getToolAboutContent } from "@/lib/tool-content";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import ToolRenderer from "@/components/tools/ToolRenderer";
 
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
 interface Props {
   params: Promise<{ toolSlug: string }>;
 }
+
 
 export async function generateStaticParams() {
   return TOOLS.map((tool) => ({

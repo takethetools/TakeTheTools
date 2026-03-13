@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -41,11 +42,12 @@ export default function Header() {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <img
+          <Image
             src="/logo.webp"
             alt="TakeThe Tools Logo"
             width={200}
             height={64}
+            priority
             className="h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105"
           />
         </Link>

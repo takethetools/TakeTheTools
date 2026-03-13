@@ -4,7 +4,6 @@ import { ArrowRight, ChevronRight, Home } from "lucide-react";
 import { Metadata } from "next";
 import React from "react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
-export const runtime = 'edge';
 
 export async function generateMetadata({ params }: { params: Promise<{ categorySlug: string }> }): Promise<Metadata> {
   const { categorySlug } = await params;
@@ -18,6 +17,15 @@ export async function generateMetadata({ params }: { params: Promise<{ categoryS
       canonical: `https://takethetools.com/categories/${categorySlug}`,
     },
   };
+}
+
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return CATEGORIES.map((category) => ({
+    categorySlug: category.slug,
+  }));
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ categorySlug: string }> }) {

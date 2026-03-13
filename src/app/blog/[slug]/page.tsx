@@ -6,6 +6,9 @@ import { ChevronLeft, Calendar, User, Tag, ArrowRight } from "lucide-react";
 import React from "react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const posts = getSortedPostsData();
   return posts.map((post) => ({
