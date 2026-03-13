@@ -1,12 +1,15 @@
 {
-  "name": "tool",
+  "name": "takethetools",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:cf": "opennextjs-cloudflare build",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview"
   },
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.15",
@@ -35,6 +38,7 @@
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.17.1",
     "@tailwindcss/postcss": "^4",
     "@types/crypto-js": "^4.2.2",
     "@types/jsbarcode": "^3.11.4",
@@ -44,6 +48,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.73.0"
   }
 }
