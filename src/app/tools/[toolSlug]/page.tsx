@@ -12,6 +12,12 @@ interface Props {
   params: Promise<{ toolSlug: string }>;
 }
 
+export async function generateStaticParams() {
+  return TOOLS.map((tool) => ({
+    toolSlug: tool.slug,
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { toolSlug } = await params;
   const tool = getToolBySlug(toolSlug);
