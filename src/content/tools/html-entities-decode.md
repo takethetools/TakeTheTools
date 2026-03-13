@@ -33,8 +33,8 @@ How does our tool handle the 2,000+ characters in the HTML5 spec?
 
 ### 2.1 The "Dangerous" Five
 There are five characters that are encoded by default for safety in almost every system:
-1. `&lt;` (<)
-2. `&gt;` (>)
+1. `&lt;` ( < )
+2. `&gt;` ( > )
 3. `&amp;` (&)
 4. `&quot;` (")
 5. `&apos;` (')
