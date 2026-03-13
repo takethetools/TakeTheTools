@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ChevronLeft, Calendar, User, Tag, ArrowRight } from "lucide-react";
 import React from "react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
-export const runtime = 'edge';
 
 export async function generateStaticParams() {
   const posts = getSortedPostsData();
