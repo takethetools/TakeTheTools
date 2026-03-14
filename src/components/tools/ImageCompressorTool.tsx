@@ -46,25 +46,25 @@ export default function ImageCompressorTool() {
           canvas.width = img.width;
           canvas.height = img.height;
           const ctx = canvas.getContext("2d");
-          
+
           if (!ctx) {
             resolve({ ...processedFile, status: "error", error: "Canvas context failed" });
             return;
           }
 
           ctx.drawImage(img, 0, 0);
-          
+
           // Determine mime type based on original or default to jpeg for better compression
           const mimeType = processedFile.file.type === "image/png" ? "image/jpeg" : processedFile.file.type;
-          
+
           canvas.toBlob((blob) => {
             if (blob) {
               const resultUrl = URL.createObjectURL(blob);
-              resolve({ 
-                ...processedFile, 
-                status: "completed", 
-                resultUrl, 
-                compressedSize: blob.size 
+              resolve({
+                ...processedFile,
+                status: "completed",
+                resultUrl,
+                compressedSize: blob.size
               });
             } else {
               resolve({ ...processedFile, status: "error", error: "Compression failed" });
@@ -75,7 +75,7 @@ export default function ImageCompressorTool() {
           resolve({ ...processedFile, status: "error", error: "Failed to load image" });
         };
       };
-      
+
       reader.onerror = () => {
         resolve({ ...processedFile, status: "error", error: "Failed to read file" });
       };
@@ -92,7 +92,7 @@ export default function ImageCompressorTool() {
       if (updatedFiles[i].status !== "completed") {
         updatedFiles[i] = { ...updatedFiles[i], status: "processing" };
         setFiles([...updatedFiles]);
-        
+
         const result = await compressFile(updatedFiles[i]);
         updatedFiles[i] = result;
         setFiles([...updatedFiles]);
@@ -145,8 +145,8 @@ export default function ImageCompressorTool() {
   return (
     <div className="space-y-8">
       {files.length === 0 ? (
-        <FileUpload 
-          onFilesSelected={onFilesSelected} 
+        <FileUpload
+          onFilesSelected={onFilesSelected}
           accept={{ "image/*": [".jpg", ".jpeg", ".png", ".webp"] }}
         />
       ) : (
@@ -157,25 +157,45 @@ export default function ImageCompressorTool() {
               <h3 className="font-bold text-slate-900">Compression Queue ({files.length} files)</h3>
               <p className="text-sm text-slate-500">Fast client-side compression</p>
             </div>
-            
+
             <div className="flex items-center gap-4 bg-white px-4 py-2 rounded-xl border border-slate-200">
               <Sliders className="w-4 h-4 text-slate-400" />
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Quality</span>
-              <input 
-                type="range" 
-                min="0.1" 
-                max="0.9" 
-                step="0.05" 
-                value={quality} 
+              <input
+                type="range"
+                min="0.1"
+                max="0.9"
+                step="0.05"
+                value={quality}
                 onChange={(e) => setQuality(parseFloat(e.target.value))}
                 className="w-24 md:w-32 accent-primary-600"
               />
               <span className="text-sm font-bold text-primary-600 w-10 text-center">{Math.round(quality * 100)}%</span>
             </div>
 
-            <button onClick={reset} className="p-2 hover:bg-slate-200 rounded-lg text-slate-500 transition-colors">
-              <RefreshCw className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={async () => {
+                  try {
+                    const response = await fetch("https://picsum.photos/800/600");
+                    const blob = await response.blob();
+                    const file = new File([blob], "example-image.jpg", { type: "image/jpeg" });
+                    onFilesSelected([file]);
+                  } catch (e) {
+                    console.error("Failed to load example image", e);
+                  }
+                }}
+                className="text-xs font-bold text-primary-500 hover:text-primary-600 transition-colors uppercase tracking-wider"
+              >
+                Example
+              </button>
+              <button
+                onClick={reset}
+                className="text-xs font-bold text-slate-400 hover:text-red-500 transition-colors flex items-center gap-1 uppercase tracking-wider"
+              >
+                <RefreshCw className="w-3 h-3" /> Clear
+              </button>
+            </div>
           </div>
 
           {/* List */}
@@ -205,17 +225,17 @@ export default function ImageCompressorTool() {
                 <div className="flex items-center gap-4">
                   {f.status === "processing" && <Loader2 className="w-5 h-5 text-primary-600 animate-spin" />}
                   {f.status === "completed" && <Check className="w-5 h-5 text-green-500" />}
-                  
+
                   {f.status === "completed" && f.resultUrl && (
-                    <a 
-                      href={f.resultUrl} 
+                    <a
+                      href={f.resultUrl}
                       download={`${f.file.name.replace(/\.[^/.]+$/, "")}_compressed.${f.file.type.split("/")[1] || "jpg"}`}
                       className="p-2 bg-primary-100 text-primary-600 rounded-lg hover:bg-primary-600 hover:text-white transition-all shadow-sm"
                     >
                       <Download className="w-4 h-4" />
                     </a>
                   )}
-                  
+
                   {f.status === "idle" && (
                     <button onClick={() => removeFile(i)} className="p-2 text-slate-300 hover:text-red-500 transition-colors">
                       <X className="w-5 h-5" />
@@ -229,23 +249,23 @@ export default function ImageCompressorTool() {
           {/* Actions */}
           <div className="px-8 py-6 bg-slate-50 flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="text-sm text-slate-500">
-               Total Saving: {files.some(f => f.compressedSize) ? 
-                 `${calculateSaving(
-                   files.reduce((acc, curr) => acc + curr.originalSize, 0),
-                   files.reduce((acc, curr) => acc + (curr.compressedSize || curr.originalSize), 0)
-                 )}%` : "0%"}
+              Total Saving: {files.some(f => f.compressedSize) ?
+                `${calculateSaving(
+                  files.reduce((acc, curr) => acc + curr.originalSize, 0),
+                  files.reduce((acc, curr) => acc + (curr.compressedSize || curr.originalSize), 0)
+                )}%` : "0%"}
             </div>
             <div className="flex gap-4 w-full md:w-auto">
               <label htmlFor="file-upload-input" className="cursor-pointer px-6 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 font-bold hover:bg-slate-50 transition-all flex items-center gap-2 flex-grow justify-center">
                 Add More
               </label>
-              
+
               {files.some(f => f.status === "completed") ? (
                 <button onClick={downloadAll} className="px-8 py-3 bg-green-600 text-white rounded-xl font-bold shadow-lg hover:bg-green-700 transition-all flex items-center gap-2 flex-grow justify-center">
                   <Download className="w-5 h-5" /> Download All
                 </button>
               ) : (
-                <button 
+                <button
                   onClick={handleConvert}
                   disabled={isProcessing}
                   className={cn(

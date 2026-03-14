@@ -1,5 +1,5 @@
 ---
-title: "How to Convert PDF to JPG: The Ultimate Masterclass on Document Rasterization"
+title: "Document Extraction: High-Fidelity PDF to JPG Rasterization"
 description: "The most comprehensive guide to converting PDF pages to the high-quality JPG format. Explore the technical science of rendering, DPI optimization, and professional social media delivery."
 date: "2024-04-09"
 category: "PDF Tools"

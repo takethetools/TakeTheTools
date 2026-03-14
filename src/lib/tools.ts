@@ -12,6 +12,8 @@ export interface Tool {
   faqs: { question: string; answer: string }[];
   metaTitle: string;
   metaDescription: string;
+  longDescription?: string;
+  exampleInput?: string;
 }
 
 export const CATEGORIES: { id: ToolCategory; name: string; slug: string; description: string }[] = [
@@ -85,7 +87,8 @@ export const TOOLS: Tool[] = [
       { question: "Will my image quality drop?", answer: "No, we ensure high-quality conversion to preserve the details of your original image." }
     ],
     metaTitle: "WebP to PNG Converter - Free Online High-Quality Conversion",
-    metaDescription: "Convert WebP images to PNG online instantly. High-quality, free, and secure conversion for US, UK, Canada, Europe."
+    metaDescription: "Convert WebP images to PNG online instantly. High-quality, free, and secure conversion for US, UK, Canada, Europe.",
+    longDescription: "Convert WebP images to PNG files quickly and easily. This tool preserves high quality and transparency, making it perfect for designers and developers who need standard image formats."
   },
   {
     id: "png-to-jpg-converter",
@@ -103,7 +106,8 @@ export const TOOLS: Tool[] = [
       { question: "Why convert PNG to JPG?", answer: "JPG files are usually smaller in size, making them better for web use where transparency isn't needed." }
     ],
     metaTitle: "PNG to JPG Converter - Free & Fast Image Conversion",
-    metaDescription: "Quickly convert PNG files to JPG format online. No software installation required. Secure and fast."
+    metaDescription: "Quickly convert PNG files to JPG format online. No software installation required. Secure and fast.",
+    longDescription: "Change your PNG images into JPG files in seconds. It's a great way to reduce file sizes for faster website loading when you don't need transparent backgrounds."
   },
   {
     id: "image-compressor",
@@ -122,7 +126,8 @@ export const TOOLS: Tool[] = [
       { question: "How much can I compress?", answer: "Typically 50-80% reduction is possible without noticeable quality loss at 60-70% quality settings." }
     ],
     metaTitle: "Image Compressor - Reduce Image File Size Online Free",
-    metaDescription: "Compress images online instantly. Fast, secure, and preserves quality. Best for US, UK, Canada."
+    metaDescription: "Compress images online instantly. Fast, secure, and preserves quality. Best for US, UK, Canada.",
+    longDescription: "Shrink your images without losing quality. This tool makes photo files smaller so they're easier to share, upload, and save on storage space."
   },
   {
     id: "image-resizer",
@@ -139,26 +144,28 @@ export const TOOLS: Tool[] = [
     faqs: [
       { question: "Can I resize multiple images?", answer: "Yes, you can upload and resize multiple images at once." }
     ],
-    metaTitle: "Image Resizer - Change Image Dimensions Online Free",
-    metaDescription: "Resize images to any dimension online for free. Maintain aspect ratio and high quality."
+    metaTitle: "Image Resizer - Resize Images Online for Free",
+    metaDescription: "Change image dimensions instantly. Resize PNG, JPG, and WebP for social media or web design.",
+    longDescription: "Resize your images to any width or height you need. We maintain the original proportions so your photos never look stretched or blurry."
   },
   {
-    id: "favicon-generator",
-    name: "Favicon Generator",
-    slug: "favicon-generator",
-    description: "Generate professional favicons from images or text for your website.",
+    id: "image-cropper",
+    name: "Image Cropper",
+    slug: "image-cropper",
+    description: "Crop your images to the perfect aspect ratio online for free.",
     category: "image",
-    iconName: "Globe",
+    iconName: "Crop",
     instructions: [
-      "Upload your logo image (PNG, JPG).",
-      "Preview the favicon in different sizes.",
-      "Download the complete favicon package."
+      "Upload your image to the editor.",
+      "Select a preset aspect ratio or draw manually.",
+      "Apply the crop and download your framed image."
     ],
     faqs: [
-      { question: "What formats are included?", answer: "We provide .ico, .png, and webmanifest files." }
+      { question: "Are preset ratios supported?", answer: "Yes, including 16:9, 4:3, and 1:1 square for social media." }
     ],
-    metaTitle: "Favicon Generator - Create Website Icons Online Free",
-    metaDescription: "Convert images to professional favicons online. Support for multiple sizes and modern browser formats."
+    metaTitle: "Image Cropper - Crop Photos Online to Specific Ratios",
+    metaDescription: "The easiest way to crop images online. Fast, secure, and supports all major aspect ratios.",
+    longDescription: "Easily trim your images and pick the perfect focus. Use our presets for social media or draw your own crop area to get exactly what you need."
   },
   {
     id: "image-to-webp",
@@ -176,7 +183,8 @@ export const TOOLS: Tool[] = [
       { question: "Why use WebP?", answer: "WebP provides superior lossless and lossy compression for images on the web." }
     ],
     metaTitle: "Image to WebP Converter - Optimize Images for Web",
-    metaDescription: "Convert PNG and JPG to WebP online for free. Reduce file size while maintaining high quality."
+    metaDescription: "Convert PNG and JPG to WebP online for free. Reduce file size while maintaining high quality.",
+    longDescription: "Turn your PNG or JPG images into modern WebP files. It's the best way to keep your images looking sharp while making them much smaller for the web."
   },
   {
     id: "jpg-to-webp",
@@ -188,7 +196,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Select JPG files.", "Adjust quality.", "Download WebP."],
     faqs: [{ question: "Why convert?", answer: "WebP files are smaller." }],
     metaTitle: "JPG to WebP Converter - Optimize JPG to WebP",
-    metaDescription: "Convert JPG to WebP online for free."
+    metaDescription: "Convert JPG to WebP online for free.",
+    longDescription: "Convert JPG photos to WebP to save space. WebP files are much smaller but look just as good, helping your website load faster and perform better.",
+    exampleInput: "Upload your JPG image."
   },
   {
     id: "png-to-webp",
@@ -200,7 +210,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Select PNG files.", "Adjust quality.", "Download WebP."],
     faqs: [{ question: "Why convert?", answer: "WebP files are smaller." }],
     metaTitle: "PNG to WebP Converter - Optimize PNG to WebP",
-    metaDescription: "Convert PNG to WebP online for free."
+    metaDescription: "Convert PNG to WebP online for free.",
+    longDescription: "Change your PNG files to WebP while keeping them transparent. You get the same clear look but with a much smaller file size that's optimized for the web.",
+    exampleInput: "Upload your PNG image."
   },
   {
     id: "bmp-to-jpg",
@@ -212,7 +224,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload BMP.", "Download JPG."],
     faqs: [{ question: "Is it free?", answer: "Yes." }],
     metaTitle: "BMP to JPG Converter - Free Online Tool",
-    metaDescription: "Convert BMP to JPG online for free."
+    metaDescription: "Convert BMP to JPG online for free.",
+    longDescription: "Convert bulky BMP files into common JPG images. BMPs can be huge because they aren't compressed; our tool makes them smaller and easier to share.",
+    exampleInput: "Upload your BMP image."
   },
   {
     id: "ico-to-png",
@@ -224,7 +238,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload ICO.", "Download PNG."],
     faqs: [{ question: "Why convert?", answer: "PNG is more widely supported." }],
     metaTitle: "ICO to PNG Converter - Free Online Tool",
-    metaDescription: "Convert ICO to PNG online for free."
+    metaDescription: "Convert ICO to PNG online for free.",
+    longDescription: "Turn favicon or system icons (ICO) into clear PNG images. This is perfect for reusing icons in your documents, presentations, or website designs.",
+    exampleInput: "Upload your ICO file."
   },
   {
     id: "tiff-to-png",
@@ -236,7 +252,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload TIFF.", "Download PNG."],
     faqs: [{ question: "Does it support layers?", answer: "Yes, it flattens them to PNG." }],
     metaTitle: "TIFF to PNG Converter - Free Online Tool",
-    metaDescription: "Convert TIFF to PNG online for free."
+    metaDescription: "Convert TIFF to PNG online for free.",
+    longDescription: "Convert large TIFF files into high-quality PNGs. You'll keep the crisp details of the original photo but in a format that works everywhere online.",
+    exampleInput: "Upload your TIFF image."
   },
   {
     id: "heic-to-jpg",
@@ -248,7 +266,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload HEIC.", "Download JPG."],
     faqs: [{ question: "Why convert?", answer: "Widely supported format." }],
     metaTitle: "HEIC to JPG Converter - Free Online Tool",
-    metaDescription: "Convert HEIC to JPG online for free."
+    metaDescription: "Convert HEIC to JPG online for free.",
+    longDescription: "Change iPhone HEIC photos into standard JPG files. Now you can easily open, share, and edit your mobile photos on any computer or app.",
+    exampleInput: "Upload your iPhone photo."
   },
   {
     id: "svg-to-png",
@@ -260,7 +280,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload SVG.", "Select size.", "Download PNG."],
     faqs: [{ question: "Is it high quality?", answer: "Yes." }],
     metaTitle: "SVG to PNG Converter - Free Online Tool",
-    metaDescription: "Convert SVG to PNG online for free."
+    metaDescription: "Convert SVG to PNG online for free.",
+    longDescription: "Turn your SVG vector graphics into high-quality PNG images. Just pick your size and get a crisp, transparent image ready for any use.",
+    exampleInput: "Upload your SVG file."
   },
   {
     id: "grayscale-image",
@@ -272,7 +294,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Click convert.", "Download."],
     faqs: [{ question: "Is it reversible?", answer: "Download the result, original is safe." }],
     metaTitle: "Grayscale Image - Black and White Filter Online",
-    metaDescription: "Convert images to grayscale online for free."
+    metaDescription: "Convert images to grayscale online for free.",
+    longDescription: "Turn any color photo into a classic black and white image. It's a simple way to give your pictures a clean, professional, or artistic look."
   },
   {
     id: "invert-image",
@@ -284,7 +307,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Click invert.", "Download."],
     faqs: [{ question: "What does it do?", answer: "Reverses pixel colors." }],
     metaTitle: "Invert Image - Flip Colors Online",
-    metaDescription: "Invert image colors online for free."
+    metaDescription: "Invert image colors online for free.",
+    longDescription: "Flip the colors of your image instantly. It's a fun and easy way to create unique visual effects or see the 'negative' of your photos."
   },
   {
     id: "rotate-image",
@@ -296,7 +320,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Select degree.", "Download."],
     faqs: [{ question: "Is it lossy?", answer: "No." }],
     metaTitle: "Rotate Image - Flip and Spin Online",
-    metaDescription: "Rotate images online for free."
+    metaDescription: "Rotate images online for free.",
+    longDescription: "Turn your pictures 90, 180, or 270 degrees. Fix photos taken at the wrong angle or spin them around to get the perfect orientation."
   },
   {
     id: "flip-image",
@@ -308,45 +333,48 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Select direction.", "Download."],
     faqs: [{ question: "Is it free?", answer: "Yes." }],
     metaTitle: "Flip Image - Mirror Images Online",
-    metaDescription: "Flip images horizontally or vertically online for free."
+    metaDescription: "Flip images horizontally or vertically online for free.",
+    longDescription: "Mirror your images horizontally or vertically. It's the easiest way to flip a photo's perspective or fix the orientation of a selfie."
   },
   // PDF Tools
   {
     id: "merge-pdf",
     name: "Merge PDF",
     slug: "merge-pdf",
-    description: "Combine multiple PDF files into one document in seconds.",
+    description: "Combine multiple PDF files into a single document online for free.",
     category: "pdf",
-    iconName: "Combine",
+    iconName: "FileStack",
     isPopular: true,
     instructions: [
-      "Select two or more PDF files.",
-      "Arrange the sequence of files.",
-      "Click Merge and Download."
+      "Upload all the PDF files you want to combine.",
+      "Drag to reorder the files as needed.",
+      "Click Merge and download your unified PDF."
     ],
     faqs: [
-      { question: "Is there a limit to how many PDFs I can merge?", answer: "We support merging up to 20 PDFs at a time for free." }
+      { question: "Is there a file limit?", answer: "We support merging up to 50 PDFs at once." }
     ],
-    metaTitle: "Merge PDF Online - Combine PDF Files for Free",
-    metaDescription: "Fastest way to merge PDF files online. Secure, easy to use, and completely free."
+    metaTitle: "Merge PDF - Combine PDF Files Online Free",
+    metaDescription: "The easiest way to merge PDF documents. Combine files into one instantly and securely.",
+    longDescription: "Join multiple PDF files into one clean document. It's perfect for organizing reports, receipts, or project files. Your files stay safe because everything happens right in your browser."
   },
   {
     id: "split-pdf",
     name: "Split PDF",
     slug: "split-pdf",
-    description: "Separate pages of a PDF document into individual files easily.",
+    description: "Extract specific pages or split your PDF into individual files.",
     category: "pdf",
     iconName: "Scissors",
     instructions: [
-      "Select the PDF file you wish to split.",
-      "Review the number of pages detected.",
-      "Click Split PDF and download individual pages."
+      "Upload your PDF document.",
+      "Choose to split by range or extract all pages.",
+      "Download your new PDF files."
     ],
     faqs: [
-      { question: "Is there a page limit?", answer: "No, we can split PDFs of any size directly in your browser." }
+      { question: "Can I extract just one page?", answer: "Yes, you can select any specific page range." }
     ],
-    metaTitle: "Split PDF Online - Separate PDF Pages for Free",
-    metaDescription: "Easily split PDF documents into individual pages online. High quality, secure, and free PDF tool."
+    metaTitle: "Split PDF - Extract Pages from PDF Online",
+    metaDescription: "Fast and secure tool to split PDF files. Extract any page or range instantly.",
+    longDescription: "Take apart your PDF and save just the pages you need. You can extract single pages or split a large file into smaller, easier-to-read parts."
   },
   {
     id: "jpg-to-pdf",
@@ -364,7 +392,8 @@ export const TOOLS: Tool[] = [
       { question: "Is my privacy protected?", answer: "Yes, images are processed in your browser and never uploaded to our servers." }
     ],
     metaTitle: "JPG to PDF - Convert Images to PDF Online Free",
-    metaDescription: "Easily convert JPG, PNG, and other images to PDF online. Fast, secure, and no installation needed."
+    metaDescription: "Easily convert JPG, PNG, and other images to PDF online. Fast, secure, and no installation needed.",
+    longDescription: "Turn your JPG or PNG photos into a high-quality PDF document. It's a great way to combine pictures into a single file for sharing or printing."
   },
   {
     id: "pdf-to-jpg",
@@ -382,7 +411,9 @@ export const TOOLS: Tool[] = [
       { question: "Can I convert protected PDFs?", answer: "No, you must have the password or the PDF must be unprotected." }
     ],
     metaTitle: "PDF to JPG - Convert PDF Pages to Images Online",
-    metaDescription: "Extract pages from your PDF as high-quality JPG images. Free, fast, and secure online tool."
+    metaDescription: "Extract pages from your PDF as high-quality JPG images. Free, fast, and secure online tool.",
+    longDescription: "Change each page of your PDF into an image file. This is useful if you want to use a PDF page in a presentation, on social media, or in an email.",
+    exampleInput: "Upload your PDF document."
   },
   {
     id: "pdf-to-text",
@@ -394,7 +425,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload PDF.", "Extract text.", "Copy or download."],
     faqs: [{ question: "Does it support OCR?", answer: "Yes, for scanned documents." }],
     metaTitle: "PDF to Text - Extract Text Online",
-    metaDescription: "Convert PDF to text online for free."
+    metaDescription: "Convert PDF to text online for free.",
+    longDescription: "Pull the text out of your PDF so you can edit it. It's much faster than typing everything out by hand and works great for research and reports.",
+    exampleInput: "Upload your PDF document."
   },
   {
     id: "rotate-pdf",
@@ -406,7 +439,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload PDF.", "Select rotation.", "Download."],
     faqs: [{ question: "Can I rotate 1 page?", answer: "Yes." }],
     metaTitle: "Rotate PDF - Spin PDF Pages Online",
-    metaDescription: "Rotate PDF pages online for free."
+    metaDescription: "Rotate PDF pages online for free.",
+    longDescription: "Fix the direction of your PDF pages. If you have an upside-down scan or need to flip a page horizontally, this tool fixes it in one click.",
+    exampleInput: "Select PDF and rotation angle."
   },
   {
     id: "delete-pdf-pages",
@@ -418,7 +453,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload PDF.", "Select pages to remove.", "Download."],
     faqs: [{ question: "Is it secure?", answer: "Yes." }],
     metaTitle: "Delete PDF Pages - Remove Pages Online",
-    metaDescription: "Delete pages from PDF online for free."
+    metaDescription: "Delete pages from PDF online for free.",
+    longDescription: "Remove pages you don't need from your PDF. Clean up your documents by getting rid of blank pages, old covers, or sensitive parts before sharing.",
+    exampleInput: "Select pages to remove (e.g., 2, 5-8)."
   },
   {
     id: "password-protect-pdf",
@@ -430,7 +467,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload PDF.", "Enter password.", "Download."],
     faqs: [{ question: "Is it encrypted?", answer: "Yes." }],
     metaTitle: "Password Protect PDF - Secure PDF Online",
-    metaDescription: "Add password to PDF online for free."
+    metaDescription: "Add password to PDF online for free.",
+    longDescription: "Lock your PDF with a password so only you and the people you trust can open it. It's the best way to keep private files and contracts safe.",
+    exampleInput: "Enter your secure password."
   },
   {
     id: "watermark-pdf",
@@ -442,7 +481,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload PDF.", "Set watermark.", "Download."],
     faqs: [{ question: "Can I use images?", answer: "Yes." }],
     metaTitle: "Watermark PDF - Add Branding Online",
-    metaDescription: "Add watermark to PDF online for free."
+    metaDescription: "Add watermark to PDF online for free.",
+    longDescription: "Add your logo or a 'Confidential' stamp to your PDF. It's an easy way to protect your work and make your documents look professional.",
+    exampleInput: "Type watermark text or upload logo."
   },
   {
     id: "pdf-to-word",
@@ -454,7 +495,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload PDF.", "Convert.", "Download .docx."],
     faqs: [{ question: "Is it editable?", answer: "Yes." }],
     metaTitle: "PDF to Word Converter - Edit PDF Online",
-    metaDescription: "Convert PDF to Word online for free."
+    metaDescription: "Convert PDF to Word online for free.",
+    longDescription: "Turn your PDF into a Word document that you can actually edit. We keep your layout and fonts the same so you don't have to reformat anything.",
+    exampleInput: "Upload your PDF document."
   },
   // Developer Tools
   {
@@ -475,7 +518,9 @@ export const TOOLS: Tool[] = [
       { question: "Can it handle large JSON files?", answer: "Yes, our tool is optimized to handle large JSON documents directly in your browser." }
     ],
     metaTitle: "JSON Formatter and Validator - Beautify & Debug JSON Online",
-    metaDescription: "The best online tool to format, validate, and minify JSON. Clean, fast, and secure developer tool."
+    metaDescription: "The best online tool to format, validate, and minify JSON. Clean, fast, and secure developer tool.",
+    longDescription: "Clean up messy JSON code and check for errors instantly. This tool makes complex data easy to read, debug, and share with your team.",
+    exampleInput: '{"name":"TakeTheTools","type":"Platform","features":["Fast","Secure","Free"],"stats":{"users":50000,"status":"Operational"}}'
   },
   {
     id: "base64-encoder-and-decoder",
@@ -493,7 +538,9 @@ export const TOOLS: Tool[] = [
       { question: "Is this secure?", answer: "Yes, the conversion happens entirely on your machine." }
     ],
     metaTitle: "Base64 Encoder and Decoder - Online Base64 Tool",
-    metaDescription: "Free online Base64 encoder and decoder. Fast, secure, and easy to use."
+    metaDescription: "Free online Base64 encoder and decoder. Fast, secure, and easy to use.",
+    longDescription: "Convert text and files to Base64 or back again. It's a simple way to handle data for web development, email attachments, and secure coding.",
+    exampleInput: "Takethetools is awesome!"
   },
   {
     id: "jwt-decoder",
@@ -511,7 +558,9 @@ export const TOOLS: Tool[] = [
       { question: "Do you store my tokens?", answer: "No, we never store or send your tokens. All decoding is done client-side." }
     ],
     metaTitle: "JWT Decoder - Decode JSON Web Tokens Online for Free",
-    metaDescription: "Instantly decode JWT tokens online. View header and payload information securely."
+    metaDescription: "Instantly decode JWT tokens online. View header and payload information securely.",
+    longDescription: "Peek inside any JSON Web Token (JWT) to see what's hidden in the header and payload. It's the fastest way to audit sessions and debug authentication without needing any keys.",
+    exampleInput: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
   },
   {
     id: "regex-tester",
@@ -530,7 +579,9 @@ export const TOOLS: Tool[] = [
       { question: "Does it support all regex features?", answer: "It supports standard JavaScript regular expressions." }
     ],
     metaTitle: "Online Regex Tester - Test Regular Expressions Instantly",
-    metaDescription: "Fast and easy online regex tester with real-time matching and capture groups."
+    metaDescription: "Fast and easy online regex tester with real-time matching and capture groups.",
+    longDescription: "Test your regular expressions in real-time and see exactly what they match. It's the perfect way to build and verify your patterns before you put them into your code.",
+    exampleInput: "/^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$/i"
   },
   {
     id: "sql-formatter",
@@ -548,7 +599,9 @@ export const TOOLS: Tool[] = [
       { question: "What SQL dialects are supported?", answer: "Standard SQL, MySQL, PostgreSQL, and more." }
     ],
     metaTitle: "SQL Formatter - Beautify SQL Queries Online Free",
-    metaDescription: "Clean and format your SQL code online. Support for multiple dialects and easy reading."
+    metaDescription: "Clean and format your SQL code online. Support for multiple dialects and easy reading.",
+    longDescription: "Turn messy SQL queries into clean, readable code. This tool handles indenting and capitalizing so you can understand complex database scripts at a glance.",
+    exampleInput: "SELECT * FROM users WHERE id = 1"
   },
   {
     id: "xml-formatter",
@@ -566,7 +619,9 @@ export const TOOLS: Tool[] = [
       { question: "Does it validate XML?", answer: "Yes, it highlights syntax errors during formatting." }
     ],
     metaTitle: "XML Formatter - Beautify and Indent XML Online",
-    metaDescription: "Fast and secure online XML formatter. Improve readability of your XML data instantly."
+    metaDescription: "Fast and secure online XML formatter. Improve readability of your XML data instantly.",
+    longDescription: "Format messy XML data into a clean, easy-to-read tree structure. This tool is perfect for debugging data feeds, sitemaps, and legacy system files.",
+    exampleInput: "<note><to>User</to><from>Admin</from><body>Hello!</body></note>"
   },
   {
     id: "html-formatter",
@@ -584,7 +639,9 @@ export const TOOLS: Tool[] = [
       { question: "Does it handle minified HTML?", answer: "Yes, it can expand and indent minified HTML code." }
     ],
     metaTitle: "HTML Formatter - Beautify HTML Markup Online Free",
-    metaDescription: "Improve the structure of your HTML code. Online beautifier for clean and readable markup."
+    metaDescription: "Improve the structure of your HTML code. Online beautifier for clean and readable markup.",
+    longDescription: "Turn messy HTML into clean, organized code. This tool fixes messy indenting and spacing so your website's markup is easy for anyone to read.",
+    exampleInput: "<div><h1>Title</h1><p>Body copy here...</p></div>"
   },
   {
     id: "css-formatter",
@@ -596,7 +653,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste CSS.", "Select indentation.", "Format."],
     faqs: [{ question: "Does it support SCSS?", answer: "Yes, basic SCSS formatting is supported." }],
     metaTitle: "CSS Formatter - Beautify CSS Online",
-    metaDescription: "Format CSS code online for free."
+    metaDescription: "Format CSS code online for free.",
+    longDescription: "Clean up your CSS files and make them easy to read. This tool adds proper spacing and indentation so you can find and fix styles faster.",
+    exampleInput: ".container { display: flex; justify-content: center; }"
   },
   {
     id: "js-formatter",
@@ -608,7 +667,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste code.", "Format.", "Copy."],
     faqs: [{ question: "Is it secure?", answer: "Yes, processing is client-side." }],
     metaTitle: "JS Formatter - Beautify JavaScript Online",
-    metaDescription: "Format JavaScript code online for free."
+    metaDescription: "Format JavaScript code online for free.",
+    longDescription: "Turn minified or messy JavaScript into clean, readable code. It's the best way to understand how a script works and find bugs quickly.",
+    exampleInput: "const hello=()=>{console.log('world')};"
   },
   {
     id: "url-encoder",
@@ -620,7 +681,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Encode.", "Copy URL."],
     faqs: [{ question: "Why encode?", answer: "To make strings safe for URLs." }],
     metaTitle: "URL Encoder - Online URL Encoding Tool",
-    metaDescription: "Encode URLs online for free."
+    metaDescription: "Encode URLs online for free.",
+    longDescription: "Make any text safe to use in a web link. This tool converts special characters into a format that browsers and servers can understand without breaking your URLs.",
+    exampleInput: "Hello World! & Welcome"
   },
   {
     id: "url-decoder",
@@ -632,7 +695,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter URL.", "Decode.", "Copy."],
     faqs: [{ question: "Does it handle special characters?", answer: "Yes." }],
     metaTitle: "URL Decoder - Online URL Decoding Tool",
-    metaDescription: "Decode URLs online for free."
+    metaDescription: "Decode URLs online for free.",
+    longDescription: "Turn messy, encoded web links back into readable text. It's the easiest way to see what's actually inside a long URL or tracking link.",
+    exampleInput: "Hello%20World%21%20%26%20Welcome"
   },
   {
     id: "md5-hash-generator",
@@ -644,7 +709,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Generate hash.", "Copy."],
     faqs: [{ question: "Is MD5 secure?", answer: "Not for passwords, use SHA-256." }],
     metaTitle: "MD5 Generator - Online Hash Tool",
-    metaDescription: "Generate MD5 hashes online for free."
+    metaDescription: "Generate MD5 hashes online for free.",
+    longDescription: "Create a unique fingerprint (MD5 hash) for any text instantly. It's a classic way to check if data has been changed or to create unique IDs for non-secure tasks.",
+    exampleInput: "Takethetools2024"
   },
   {
     id: "sha-256-hash-generator",
@@ -656,7 +723,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Generate.", "Copy."],
     faqs: [{ question: "Is SHA-256 secure?", answer: "Yes, widely used for security." }],
     metaTitle: "SHA-256 Generator - Online Secure Hash",
-    metaDescription: "Generate SHA-256 hashes online for free."
+    metaDescription: "Generate SHA-256 hashes online for free.",
+    longDescription: "Generate a secure, one-way fingerprint for your data. This is the gold standard for verifying that your files and messages haven't been tampered with.",
+    exampleInput: "Secure Message Payload"
   },
   {
     id: "crontab-generator",
@@ -728,7 +797,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Set rules.", "Download robots.txt."],
     faqs: [{ question: "Why need it?", answer: "To guide search engine crawlers." }],
     metaTitle: "Robots.txt Generator - SEO Tool Online",
-    metaDescription: "Generate robots.txt online for free."
+    metaDescription: "Generate robots.txt online for free.",
+    longDescription: "Create a robots.txt file to tell search engines which parts of your site they should visit. It's a must-have for simple, effective SEO.",
+    exampleInput: "Disallow: /admin\nAllow: /"
   },
   {
     id: "sitemap-generator",
@@ -740,7 +811,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter URLs.", "Generate XML."],
     faqs: [{ question: "What is its limit?", answer: "50,000 URLs." }],
     metaTitle: "Sitemap Generator - XML Tools Online",
-    metaDescription: "Generate sitemap.xml online for free."
+    metaDescription: "Generate sitemap.xml online for free.",
+    longDescription: "Make a map of your website (XML sitemap) so Google and Bing can find all your pages. It's one of the best ways to get your site indexed and ranked faster.",
+    exampleInput: "https://takethettools.com/sitemap-list"
   },
   // Text Tools
   {
@@ -760,7 +833,9 @@ export const TOOLS: Tool[] = [
       { question: "Is there a text length limit?", answer: "No, you can paste large manuscripts for analysis." }
     ],
     metaTitle: "Word Counter - Count Words & Characters Online Free",
-    metaDescription: "Accurate word and character counter. Includes reading time and line count statistics."
+    metaDescription: "Accurate word and character counter. Includes reading time and line count statistics.",
+    longDescription: "Get an instant count of words, characters, and sentences in your text. It's perfect for checking content lengths for essays, social media, or articles.",
+    exampleInput: "The quick brown fox jumps over the lazy dog. TakeTheTools provides the ultimate precision for your digital workflow."
   },
   {
     id: "qr-code-generator",
@@ -778,7 +853,9 @@ export const TOOLS: Tool[] = [
       { question: "Can I use these QR codes commercially?", answer: "Yes, our generated QR codes have no restrictions." }
     ],
     metaTitle: "QR Code Generator - Create Custom QR Codes Online",
-    metaDescription: "Free online QR code generator. High quality, custom colors, and instant download."
+    metaDescription: "Free online QR code generator. High quality, custom colors, and instant download.",
+    longDescription: "Create custom QR codes for your links or text in seconds. You can even pick your own colors and download the code as a clean image for printing.",
+    exampleInput: "https://takethettools.com"
   },
   {
     id: "password-generator",
@@ -796,7 +873,9 @@ export const TOOLS: Tool[] = [
       { question: "Are these passwords truly random?", answer: "Yes, we use cryptographically secure random number generators in the browser." }
     ],
     metaTitle: "Secure Password Generator - Create Strong Passwords Online",
-    metaDescription: "Generate strong and random passwords instantly. Protect your online accounts with secure passwords."
+    metaDescription: "Generate strong and random passwords instantly. Protect your online accounts with secure passwords.",
+    longDescription: "Create strong, random passwords that are impossible to guess. You can choose how long and complex you want them to be to keep your accounts safe.",
+    exampleInput: "Length: 20, Symbols: Mix"
   },
   {
     id: "case-converter",
@@ -814,7 +893,9 @@ export const TOOLS: Tool[] = [
       { question: "What cases are supported?", answer: "Uppercase, lowercase, Sentence case, Title Case, camelCase, snake_case, and kebab-case." }
     ],
     metaTitle: "Case Converter Online - UPPERCASE, lowercase, Title Case",
-    metaDescription: "Easily convert text to any case online. Free, fast, and secure text transformation tool."
+    metaDescription: "Easily convert text to any case online. Free, fast, and secure text transformation tool.",
+    longDescription: "Instantly change your text to UPPERCASE, lowercase, or Title Case. It's the fastest way to fix formatting for titles, emails, and code.",
+    exampleInput: "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"
   },
   {
     id: "lorem-ipsum-generator",
@@ -832,7 +913,29 @@ export const TOOLS: Tool[] = [
       { question: "Is this text random?", answer: "It follows the standard Lorem Ipsum distribution for natural look." }
     ],
     metaTitle: "Lorem Ipsum Generator - Free Placeholder Text Online",
-    metaDescription: "Generate professional placeholder text for your website or design projects."
+    metaDescription: "Generate professional placeholder text for your website or design projects.",
+    longDescription: "Get professional-looking filler text for your website or design mockups. Just choose how many words or paragraphs you need and copy them instantly.",
+    exampleInput: "5"
+  },
+  {
+    id: "favicon-generator",
+    name: "Favicon Generator",
+    slug: "favicon-generator",
+    description: "Create professional favicon.ico and PNG icons from any image for your website.",
+    category: "image",
+    iconName: "Star",
+    instructions: [
+      "Upload your image (PNG, JPG, SVG).",
+      "Preview the generated favicons.",
+      "Download the complete favicon package."
+    ],
+    faqs: [
+      { question: "What image formats are supported?", answer: "PNG, JPG, and SVG are fully supported for input." }
+    ],
+    metaTitle: "Favicon Generator - Create Icons from Images Online",
+    metaDescription: "Generate professional favicon.ico and PNG icons from any image for your website.",
+    longDescription: "Turn your logo into a professional favicon package for your website. We'll give you all the sizes and formats you need for browsers and mobile phones.",
+    exampleInput: "Upload your logo image."
   },
   {
     id: "diff-checker",
@@ -850,7 +953,8 @@ export const TOOLS: Tool[] = [
       { question: "Is my text saved?", answer: "No, comparisons are done entirely in your browser memory." }
     ],
     metaTitle: "Diff Checker - Compare Text and Find Differences Online",
-    metaDescription: "Quickly find differences between two text files. Side-by-side comparison with highlighting."
+    metaDescription: "Quickly find differences between two text files. Side-by-side comparison with highlighting.",
+    longDescription: "Compare two pieces of text side-by-side to see exactly what changed. We highlight every difference so you can spot even the smallest edits instantly."
   },
   {
     id: "number-system-converter",
@@ -868,7 +972,9 @@ export const TOOLS: Tool[] = [
       { question: "What range is supported?", answer: "We support large integers and fractional precision." }
     ],
     metaTitle: "Number System Converter - Binary, Hex, Decimal Online",
-    metaDescription: "Instantly convert between different number systems. Accurate and fast conversion tool."
+    metaDescription: "Instantly convert between different number systems. Accurate and fast conversion tool.",
+    longDescription: "Convert numbers between Binary, Decimal, Hex, and Octal. It's an essential tool for students and engineers working with computer data and machine code.",
+    exampleInput: "255"
   },
   {
     id: "text-reverser",
@@ -880,7 +986,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Click reverse."],
     faqs: [{ question: "Can it reverse words only?", answer: "Yes." }],
     metaTitle: "Text Reverser - Flip Text Online",
-    metaDescription: "Reverse text online for free."
+    metaDescription: "Reverse text online for free.",
+    longDescription: "Flip your text backwards or reverse each word in a sentence. It's a simple way to create mirror text, solve puzzles, or have some fun with your content.",
+    exampleInput: "Antigravity is amazing"
   },
   {
     id: "remove-duplicate-lines",
@@ -892,7 +1000,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste list.", "Click remove duplicates."],
     faqs: [{ question: "Does it preserve order?", answer: "Yes." }],
     metaTitle: "Remove Duplicate Lines - Clean Lists Online",
-    metaDescription: "Remove duplicates from text online for free."
+    metaDescription: "Remove duplicates from text online for free.",
+    longDescription: "Clean up your lists by removing every repeated line instantly. It's the fastest way to organize email lists, data sets, or any long document without losing your original order.",
+    exampleInput: "apple\norange\napple\nbanana\norange"
   },
   {
     id: "morse-code-converter",
@@ -904,7 +1014,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Convert to Morse."],
     faqs: [{ question: "Is it international?", answer: "Yes, supports standard Morse." }],
     metaTitle: "Morse Code Converter - Translate Online",
-    metaDescription: "Convert text to Morse code online for free."
+    metaDescription: "Convert text to Morse code online for free.",
+    longDescription: "Translate text into Morse code dots and dashes, or turn Morse back into readable English. It's a fun and easy way to learn the classic language of telegraphy.",
+    exampleInput: "Hello World"
   },
   {
     id: "slug-generator",
@@ -916,7 +1028,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Copy slug."],
     faqs: [{ question: "What is a slug?", answer: "A URL-friendly version of a string." }],
     metaTitle: "Slug Generator - URL Friendly Text Online",
-    metaDescription: "Generate slugs online for free."
+    metaDescription: "Generate slugs online for free.",
+    longDescription: "Turn any title into a clean, SEO-friendly web link. Our tool removes special characters and adds hyphens so your URLs are easy for both people and search engines to read.",
+    exampleInput: "How to Build a Modern Web App"
   },
   {
     id: "binary-to-text",
@@ -928,7 +1042,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter binary.", "Decode."],
     faqs: [{ question: "What encoding is used?", answer: "UTF-8." }],
     metaTitle: "Binary to Text - Decode Online",
-    metaDescription: "Convert binary to text online for free."
+    metaDescription: "Convert binary to text online for free.",
+    longDescription: "Turn binary code (0s and 1s) back into readable English text. This is a must-have tool for students and developers who need to understand raw computer data instantly.",
+    exampleInput: "01001000 01100101 01101100 01101100 01101111"
   },
   {
     id: "percentage-calculator",
@@ -940,7 +1056,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter numbers.", "Get result."],
     faqs: [{ question: "Is it precise?", answer: "Yes." }],
     metaTitle: "Percentage Calculator - Online Math Tool",
-    metaDescription: "Calculate percentages online for free."
+    metaDescription: "Calculate percentages online for free.",
+    longDescription: "Calculate percentages, discounts, and growth rates in seconds. Whether you're figuring out a sale price or tracking business stats, our tool gives you the exact answer every time.",
+    exampleInput: "What is 20% of 500?"
   },
   {
     id: "average-calculator",
@@ -952,7 +1070,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter numbers.", "Get stats."],
     faqs: [{ question: "Can I use commas?", answer: "Yes, or spaces." }],
     metaTitle: "Average Calculator - Mean Median Mode Online",
-    metaDescription: "Calculate averages online for free."
+    metaDescription: "Calculate averages online for free.",
+    longDescription: "Find the middle ground of any group of numbers. We'll show you the mean, median, and mode instantly, so you can understand your data's overall trend at a glance.",
+    exampleInput: "10, 20, 30, 40, 50"
   },
   {
     id: "bmi-calculator",
@@ -964,7 +1084,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter weight.", "Enter height.", "Get BMI."],
     faqs: [{ question: "Is it a diagnosis?", answer: "No, follow a doctor's advice." }],
     metaTitle: "BMI Calculator - Health Tool Online",
-    metaDescription: "Calculate BMI online for free."
+    metaDescription: "Calculate BMI online for free.",
+    longDescription: "Check your Body Mass Index (BMI) to get a general idea of your health. Just enter your height and weight to see where you stand on the standard fitness scale.",
+    exampleInput: "Weight: 70kg, Height: 175cm"
   },
   {
     id: "age-calculator",
@@ -976,7 +1098,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Select birthdate.", "Get age."],
     faqs: [{ question: "Is it accurate?", answer: "Yes, including leap years." }],
     metaTitle: "Age Calculator - Date Math Online",
-    metaDescription: "Calculate age online for free."
+    metaDescription: "Calculate age online for free.",
+    longDescription: "Find out exactly how old you are down to the day. This tool calculates your age in years, months, and days, perfectly accounting for leap years and different month lengths.",
+    exampleInput: "May 15, 1995"
   },
   {
     id: "loan-calculator",
@@ -988,7 +1112,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter amount.", "Enter rate.", "See monthly payment."],
     faqs: [{ question: "Is it fixed rate?", answer: "Yes." }],
     metaTitle: "Loan Calculator - Finance Tool Online",
-    metaDescription: "Calculate loan payments online for free."
+    metaDescription: "Calculate loan payments online for free.",
+    longDescription: "Estimate your monthly loan or mortgage payments and see the total interest you'll pay over time. It's the best way to plan your budget and make smart financial decisions.",
+    exampleInput: "$250,000 at 4.5% for 30 years"
   },
   {
     id: "insta-bio-font-generator",
@@ -1000,7 +1126,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Copy fancy version."],
     faqs: [{ question: "Do they work on mobile?", answer: "Yes." }],
     metaTitle: "Insta Bio Font Generator - Fancy Text Online",
-    metaDescription: "Generate cool fonts for Instagram online for free."
+    metaDescription: "Generate cool fonts for Instagram online for free.",
+    longDescription: "Generate fancy, eye-catching fonts for your Instagram bio and social posts. Just type your text and pick a style to make your profile stand out instantly."
   },
   {
     id: "twitter-character-counter",
@@ -1012,7 +1139,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste tweet.", "Check count."],
     faqs: [{ question: "What is the limit?", answer: "280 characters." }],
     metaTitle: "Twitter Character Counter - Online Tweet Tool",
-    metaDescription: "Count tweet characters online for free."
+    metaDescription: "Count tweet characters online for free.",
+    longDescription: "Check if your tweet fits the character limit before you post. We count every character and space so you know exactly how much room you have left."
   },
   {
     id: "utm-builder",
@@ -1024,7 +1152,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter URL.", "Enter source/medium.", "Copy URL."],
     faqs: [{ question: "Why use UTM?", answer: "To track campaign performance." }],
     metaTitle: "UTM Builder - Marketing Campaign Tool",
-    metaDescription: "Create UTM links online for free."
+    metaDescription: "Create UTM links online for free.",
+    longDescription: "Create custom tracking links for your marketing campaigns in seconds. This tool adds the right tags to your URLs so you can see exactly where your visitors are coming from."
   },
   {
     id: "meta-tag-generator",
@@ -1036,7 +1165,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter title.", "Enter description.", "Copy tags."],
     faqs: [{ question: "Where to paste?", answer: "In the <head> section." }],
     metaTitle: "Meta Tag Generator - SEO Tool Online",
-    metaDescription: "Generate HTML meta tags online for free."
+    metaDescription: "Generate HTML meta tags online for free.",
+    longDescription: "Create the perfect SEO meta tags for your website. Just enter your title and description, and we'll give you the code to help your pages rank better on Google."
   },
   {
     id: "og-previewer",
@@ -1048,7 +1178,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter URL or tags.", "View preview."],
     faqs: [{ question: "Does it support Facebook?", answer: "Yes, and Twitter/LinkedIn." }],
     metaTitle: "OG Previewer - Social Share Tool",
-    metaDescription: "Preview Open Graph tags online for free."
+    metaDescription: "Preview Open Graph tags online for free.",
+    longDescription: "See exactly how your website will look when shared on Facebook, Twitter, and LinkedIn. It's the best way to make sure your social posts always look professional."
   },
   {
     id: "aes-encrypt",
@@ -1060,7 +1191,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Enter key.", "Encrypt."],
     faqs: [{ question: "Is it secure?", answer: "Yes, uses military-grade encryption." }],
     metaTitle: "AES Encrypt - Secure Text Online",
-    metaDescription: "Encrypt text with AES online for free."
+    metaDescription: "Encrypt text with AES online for free.",
+    longDescription: "Lock your private text with military-grade AES encryption. It's the most secure way to protect sensitive messages and data before sharing or storing them."
   },
   {
     id: "aes-decrypt",
@@ -1072,7 +1204,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter cipher.", "Enter key.", "Decrypt."],
     faqs: [{ question: "Where is the key stored?", answer: "Nowhere, it stays in your browser." }],
     metaTitle: "AES Decrypt - Unlock Text Online",
-    metaDescription: "Decrypt AES text online for free."
+    metaDescription: "Decrypt AES text online for free.",
+    longDescription: "Unlock AES-encrypted messages using your private key. This tool works entirely in your browser, so your keys and secret text are always kept safe and private."
   },
   {
     id: "password-strength-checker",
@@ -1084,7 +1217,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter password.", "See score."],
     faqs: [{ question: "Is it safe?", answer: "Yes, passwords never leave your machine." }],
     metaTitle: "Password Strength Checker - Security Tool",
-    metaDescription: "Check password security online for free."
+    metaDescription: "Check password security online for free.",
+    longDescription: "Check how strong your password really is. We'll analyze your characters and give you a score, along with tips on how to make your accounts even more secure.",
+    exampleInput: "MyS3cur3P@ssw0rd!"
   },
   {
     id: "base32-encoder",
@@ -1120,7 +1255,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Select range.", "Generate."],
     faqs: [{ question: "Is it cryptographically secure?", answer: "Yes, uses crypto.getRandomValues()." }],
     metaTitle: "Random Number Generator - Math Tool Online",
-    metaDescription: "Generate random numbers online for free."
+    metaDescription: "Generate random numbers online for free.",
+    longDescription: "Pick a truly random number within any range you choose. It's perfect for giveaways, research projects, or any time you need a fair and unbiased result.",
+    exampleInput: "Range: 1 to 1,000"
   },
   {
     id: "date-difference",
@@ -1132,7 +1269,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Select start date.", "Select end date.", "View diff."],
     faqs: [{ question: "Does it count working days?", answer: "Optionally, yes." }],
     metaTitle: "Date Difference - Time Calc Online",
-    metaDescription: "Calculate date intervals online for free."
+    metaDescription: "Calculate date intervals online for free.",
+    longDescription: "Calculate exactly how much time is between two dates. We'll give you the breakdown in years, months, and days, so you can track project deadlines or special milestones.",
+    exampleInput: "Jan 1, 2024 to Dec 31, 2024"
   },
   {
     id: "unix-timestamp",
@@ -1168,7 +1307,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Select style.", "Copy art."],
     faqs: [{ question: "Can I use it in code?", answer: "Yes." }],
     metaTitle: "ASCII Art Generator - Text Art Online",
-    metaDescription: "Create ASCII art online for free."
+    metaDescription: "Create ASCII art online for free.",
+    longDescription: "Turn your text into cool block letters and creative art using standard characters. It's a great way to add personal style to your code comments or terminal headers.",
+    exampleInput: "TO THE TOOLS"
   },
   {
     id: "upside-down-text",
@@ -1180,7 +1321,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Copy flipped text."],
     faqs: [{ question: "How does it work?", answer: "Uses Unicode character mapping." }],
     metaTitle: "Upside Down Text - Flip Text Online",
-    metaDescription: "Flip text upside down online for free."
+    metaDescription: "Flip text upside down online for free.",
+    longDescription: "Flip your text upside down instantly. It's a fun way to create unique social media posts, secret messages, or just see your words from a new perspective.",
+    exampleInput: "This is upside down"
   },
   {
     id: "remove-whitespace",
@@ -1192,7 +1335,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste text.", "Select options.", "Clean text."],
     faqs: [{ question: "Can it minify?", answer: "Yes." }],
     metaTitle: "Remove Whitespace - Clean Text Online",
-    metaDescription: "Clean extra spaces from text online for free."
+    metaDescription: "Clean extra spaces from text online for free.",
+    longDescription: "Clean up messy text by removing extra spaces, tabs, and empty lines. It's the easiest way to make your documents and code look sharp and professional.",
+    exampleInput: "The    quick   brown    fox"
   },
   {
     id: "find-and-replace",
@@ -1204,7 +1349,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste text.", "Enter find.", "Enter replace.", "Process."],
     faqs: [{ question: "Is it regex supported?", answer: "Yes." }],
     metaTitle: "Find and Replace - Text Editor Online",
-    metaDescription: "Replace text online for free."
+    metaDescription: "Replace text online for free.",
+    longDescription: "Search for words or phrases in your text and replace them with something else instantly. This tool handles bulk edits for you, saving you a lot of time and effort.",
+    exampleInput: "The apple is red. The other apple is also red.\nFind: apple\nReplace: orange"
   },
   {
     id: "word-frequency-counter",
@@ -1216,7 +1363,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste text.", "Analyze.", "View breakdown."],
     faqs: [{ question: "Does it exclude common words?", answer: "Optionally, yes (stop words)." }],
     metaTitle: "Word Frequency Counter - Text Analysis Online",
-    metaDescription: "Analyze word usage online for free."
+    metaDescription: "Analyze word usage online for free.",
+    longDescription: "See which words you use most often in your writing. This tool helps you spot overused phrases and improve your overall writing style or SEO ranking.",
+    exampleInput: "The cat sat on the mat. The cat was happy."
   },
   // File Converter Tools
   {
@@ -1253,7 +1402,9 @@ export const TOOLS: Tool[] = [
       { question: "Is the conversion safe?", answer: "Yes, all video processing happens in your browser and never leaves your device." }
     ],
     metaTitle: "Online Video Converter - Convert AVI, MOV to MP4 Free",
-    metaDescription: "The best online tool to convert AVI and MOV to MP4. Fast, secure, and preserves video quality."
+    metaDescription: "The best online tool to convert AVI and MOV to MP4. Fast, secure, and preserves video quality.",
+    longDescription: "Change AVI and MOV videos into high-quality MP4 files that work on every device. We keep your video looking sharp while making the file size easier to share.",
+    exampleInput: "Upload your AVI or MOV file."
   },
   {
     id: "unit-converter",
@@ -1271,7 +1422,9 @@ export const TOOLS: Tool[] = [
       { question: "Are the values accurate?", answer: "Yes, we use standard conversion constants for high precision." }
     ],
     metaTitle: "Unit Converter - Length, Weight, Temp Online Free",
-    metaDescription: "The easiest way to convert between different units online. Fast and accurate results."
+    metaDescription: "The easiest way to convert between different units online. Fast and accurate results.",
+    longDescription: "Swap between metric and imperial measurements instantly. Whether you're converting feet to meters or pounds to kilograms, our tool gives you the exact value every time.",
+    exampleInput: "50 miles to kilometers"
   },
   {
     id: "color-converter",
@@ -1289,7 +1442,9 @@ export const TOOLS: Tool[] = [
       { question: "Does it support alpha transparency?", answer: "Yes, we support RGBA and HSLA conversions." }
     ],
     metaTitle: "Color Converter - HEX, RGB, HSL Online Tool",
-    metaDescription: "Easily convert color codes between different formats. Professional color tool for designers."
+    metaDescription: "Easily convert color codes between different formats. Professional color tool for designers.",
+    longDescription: "Convert colors between HEX, RGB, and HSL formats in seconds. Just pick a color or enter a code to get the perfect format for your design or CSS styles.",
+    exampleInput: "#FF5733"
   },
   {
     id: "ip-lookup",
@@ -1301,7 +1456,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter an IP address.", "Click Lookup.", "View geolocation and ISP data."],
     faqs: [{ question: "Is this data precise?", answer: "It provides city-level accuracy for most IPs." }],
     metaTitle: "IP Lookup - Find IP Geolocation Online",
-    metaDescription: "Free online IP lookup tool. Get location and provider info for any IP."
+    metaDescription: "Free online IP lookup tool. Get location and provider info for any IP.",
+    longDescription: "See where an IP address is located and which company provides its internet. It's the fastest way to check your own IP or understand where website visitors are coming from.",
+    exampleInput: "8.8.8.8"
   },
   {
     id: "html-entity-converter",
@@ -1313,7 +1470,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste your text.", "Choose encode/decode.", "Copy result."],
     faqs: [{ question: "What entities are supported?", answer: "All standard HTML5 entities." }],
     metaTitle: "HTML Entity Converter - Encode/Decode Entities Online",
-    metaDescription: "Convert characters to HTML entities and back online for free."
+    metaDescription: "Convert characters to HTML entities and back online for free.",
+    longDescription: "Make your code safe for the web by converting special characters into HTML entities. This tool prevents display errors and keeps your website code walking smoothly.",
+    exampleInput: "<h1>Hello & Welcome</h1>"
   },
   {
     id: "hex-to-decimal",
@@ -1325,7 +1484,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter a hex value.", "Get decimal result."],
     faqs: [{ question: "Does it handle large numbers?", answer: "Yes, including fractional parts." }],
     metaTitle: "Hex to Decimal Converter - Math Tools Online",
-    metaDescription: "Convert hex to decimal online for free."
+    metaDescription: "Convert hex to decimal online for free.",
+    longDescription: "Easily convert between Hexadecimal and Decimal numbers. It's an essential tool for programmers and designers working with memory addresses or digital color codes.",
+    exampleInput: "FF00"
   },
   {
     id: "barcode-generator",
@@ -1337,7 +1498,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter data.", "Select format.", "Download."],
     faqs: [{ question: "Is it free?", answer: "Yes." }],
     metaTitle: "Barcode Generator - Online Label Tool",
-    metaDescription: "Create barcodes online for free."
+    metaDescription: "Create barcodes online for free.",
+    longDescription: "Create professional barcodes for your products or inventory in seconds. Choose from different styles and download a crisp, scannable image ready for printing.",
+    exampleInput: "ITEM-12345"
   },
   {
     id: "text-to-speech",
@@ -1349,7 +1512,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste text.", "Click Listen."],
     faqs: [{ question: "Supported languages?", answer: "All system voices." }],
     metaTitle: "Text to Speech - Online Voice Tool",
-    metaDescription: "Listen to text online for free."
+    metaDescription: "Listen to text online for free.",
+    longDescription: "Turn any written text into a natural-sounding voice. This tool is perfect for listening to articles, checking your own writing, or making content more accessible for everyone.",
+    exampleInput: "Hello, welcome to Takethetools!"
   },
   {
     id: "image-color-picker",
@@ -1361,7 +1526,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Click to pick color."],
     faqs: [{ question: "Format?", answer: "HEX and RGB." }],
     metaTitle: "Image Color Picker - HEX Code Finder",
-    metaDescription: "Find image colors online for free."
+    metaDescription: "Find image colors online for free.",
+    longDescription: "Find the exact color code for any part of your image. Just upload a photo and click on a color to get its HEX or RGB code instantly—it's the easiest way to match colors for your designs.",
   },
   {
     id: "social-media-resizer",
@@ -1373,7 +1539,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Select platform.", "Resize."],
     faqs: [{ question: "Are dimensions up to date?", answer: "Yes." }],
     metaTitle: "Social Media Resizer - Image Tools Online",
-    metaDescription: "Resize images for social media online for free."
+    metaDescription: "Resize images for social media online for free.",
+    longDescription: "Ready-to-use sizes for all your social media posts. Pick your platform, upload your image, and we'll make sure it fits perfectly on Instagram, Twitter, LinkedIn, and more.",
   },
   // New Batch 1
   {
@@ -1386,7 +1553,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Select tracing options.", "Download SVG."],
     faqs: [{ question: "Is it a true vector?", answer: "Yes, we trace the pixels into paths." }],
     metaTitle: "Image to SVG Converter - Vectorize Images Online",
-    metaDescription: "Convert PNG and JPG to SVG vectors online for free."
+    metaDescription: "Convert PNG and JPG to SVG vectors online for free.",
+    longDescription: "Turn your photos and logos into sharp vector graphics (SVG). Since vectors can be scaled to any size without getting blurry, this is perfect for logos, icons, and web designs.",
   },
   {
     id: "image-to-avif",
@@ -1398,7 +1566,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Select images.", "Adjust quality.", "Download AVIF."],
     faqs: [{ question: "Why use AVIF?", answer: "Better compression than WebP and JPG." }],
     metaTitle: "Image to AVIF Converter - Next-Gen Image Optimization",
-    metaDescription: "Convert JPG and PNG to AVIF online for free."
+    metaDescription: "Convert JPG and PNG to AVIF online for free.",
+    longDescription: "Convert your images to the super-efficient AVIF format. You'll get the same high quality as a JPG or PNG but with a much smaller file size, making your website load faster than ever.",
   },
   {
     id: "blur-image",
@@ -1410,7 +1579,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Adjust blur amount.", "Download."],
     faqs: [{ question: "Can I blur parts?", answer: "This tool blurs the whole image." }],
     metaTitle: "Blur Image Online - Easy Photo Blurring Tool",
-    metaDescription: "Apply blur effects to photos online for free."
+    metaDescription: "Apply blur effects to photos online for free.",
+    longDescription: "Easily blur any image to hide sensitive details or create a clean background for your text. It's a simple way to protect your privacy or make your designs look more professional.",
   },
   {
     id: "sharpen-image",
@@ -1422,7 +1592,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Increase sharpness.", "Download."],
     faqs: [{ question: "Will it fix very blurry photos?", answer: "It improves clarity but can't fix extreme motion blur." }],
     metaTitle: "Sharpen Image Online - Enhance Photo Clarity",
-    metaDescription: "Sharpen blurry images online for free."
+    metaDescription: "Sharpen blurry images online for free.",
+    longDescription: "Make slightly blurry photos look crisp and clear. This tool enhances the details in your images, giving them a sharper, more professional finish in just one click.",
   },
   {
     id: "unlock-pdf",
@@ -1434,7 +1605,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload locked PDF.", "Enter password.", "Download unlocked version."],
     faqs: [{ question: "Can I unlock without password?", answer: "No, you must know the password to remove encryption." }],
     metaTitle: "Unlock PDF Online - Remove PDF Passwords",
-    metaDescription: "Easily remove passwords from PDF files online for free."
+    metaDescription: "Easily remove passwords from PDF files online for free.",
+    longDescription: "Remove passwords and printing limits from your PDF files. If you have the password but want to get rid of it for easier sharing, this tool makes it happen instantly.",
   },
   {
     id: "pdf-to-pptx",
@@ -1446,7 +1618,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload PDF.", "Select conversion mode.", "Download PPTX."],
     faqs: [{ question: "Are layouts preserved?", answer: "We try our best to keep text and images in place." }],
     metaTitle: "PDF to PowerPoint Converter - PDF to PPTX Online",
-    metaDescription: "Convert PDF to editable PowerPoint slides online for free."
+    metaDescription: "Convert PDF to editable PowerPoint slides online for free.",
+    longDescription: "Turn your PDF into a PowerPoint presentation that you can actually edit. We keep your images and text in place so you can start presenting right away.",
   },
   {
     id: "pdf-to-xlsx",
@@ -1458,7 +1631,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload PDF.", "Wait for table detection.", "Download XLSX."],
     faqs: [{ question: "Does it work with scanned PDFs?", answer: "Yes, with our advanced OCR technology." }],
     metaTitle: "PDF to Excel Converter - PDF to XLSX Online",
-    metaDescription: "Convert PDF tables to Excel spreadsheets online for free."
+    metaDescription: "Convert PDF tables to Excel spreadsheets online for free.",
+    longDescription: "Pull tables and data out of your PDFs and put them into a clean Excel spreadsheet. It saves you hours of manual typing and makes analyzing your data a breeze.",
   },
   {
     id: "pdf-page-numbering",
@@ -1470,7 +1644,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload PDF.", "Select position and font.", "Download numbered PDF."],
     faqs: [{ question: "Can I skip the first page?", answer: "Yes." }],
     metaTitle: "Add PDF Page Numbers Online - Easy Numbering Tool",
-    metaDescription: "Insert page numbers into PDF files online for free."
+    metaDescription: "Insert page numbers into PDF files online for free.",
+    longDescription: "Add page numbers to your PDF exactly where you want them. It's the easiest way to organize long reports, essays, or ebooks before you share or print them.",
   },
   {
     id: "json-to-yaml",
@@ -1482,7 +1657,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste JSON.", "Get YAML."],
     faqs: [{ question: "Why YAML?", answer: "It's more human-readable." }],
     metaTitle: "JSON to YAML Converter - Online DevOps Tool",
-    metaDescription: "Convert JSON to YAML online for free."
+    metaDescription: "Convert JSON to YAML online for free.",
+    longDescription: "Turn messy JSON data into clean, easy-to-read YAML. It's perfect for developers who need to create configuration files that are simple for humans to understand.",
+    exampleInput: '{"name": "App", "version": "1.0", "ports": [80, 443]}'
   },
   {
     id: "yaml-to-json",
@@ -1494,7 +1671,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste YAML.", "Get JSON."],
     faqs: [{ question: "Is it secure?", answer: "Yes, all processing is client-side." }],
     metaTitle: "YAML to JSON Converter - Online DevOps Tool",
-    metaDescription: "Convert YAML to JSON online for free."
+    metaDescription: "Convert YAML to JSON online for free.",
+    longDescription: "Convert YAML configuration files back into JSON instantly. It's the best way to make your data compatible with modern apps and web services.",
+    exampleInput: "name: App\nversion: 1.0\nports: [80, 443]"
   },
   {
     id: "xml-to-json",
@@ -1506,7 +1685,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste XML.", "Get JSON."],
     faqs: [{ question: "Does it handle attributes?", answer: "Yes." }],
     metaTitle: "XML to JSON Converter - Online Data Tool",
-    metaDescription: "Convert XML to JSON online for free."
+    metaDescription: "Convert XML to JSON online for free.",
+    longDescription: "Turn old-school XML data into modern JSON objects. It's a must-have for developers who need to clean up data from older systems and use it in new web apps.",
+    exampleInput: "<root><item id='1'>Apple</item><item id='2'>Orange</item></root>"
   },
   {
     id: "dockerfile-generator",
@@ -1518,7 +1699,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Select runtime (Node, Python, Go).", "Configure ports.", "Copy Dockerfile."],
     faqs: [{ question: "Are they production ready?", answer: "They follow best practices but should be reviewed." }],
     metaTitle: "Dockerfile Generator - Online DevOps Tool",
-    metaDescription: "Generate Dockerfiles online for free."
+    metaDescription: "Generate Dockerfiles online for free.",
+    longDescription: "Create a Dockerfile for your project in seconds. Just pick your tech stack and we'll give you a professional, ready-to-use file to get your app running in a container.",
+    exampleInput: "Node.js, Port 3000, Alpine base"
   },
   {
     id: "nginx-config-generator",
@@ -1530,7 +1713,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter domain.", "Set proxy/root.", "Download config."],
     faqs: [{ question: "Does it support SSL?", answer: "Yes, with Let's Encrypt options." }],
     metaTitle: "Nginx Config Generator - Online Server Tool",
-    metaDescription: "Generate Nginx configurations online for free."
+    metaDescription: "Generate Nginx configurations online for free.",
+    longDescription: "Generate a perfectly formatted Nginx configuration for your website. We handle the tricky parts like redirects and security settings so you can deploy with confidence.",
+    exampleInput: "example.com, Proxy to localhost:8080"
   },
   {
     id: "text-to-leetspeak",
@@ -1542,7 +1727,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Get leet code."],
     faqs: [{ question: "Is it customizable?", answer: "Yes, multiple levels." }],
     metaTitle: "Leetspeak Generator - 1337 Speak Online",
-    metaDescription: "Convert text to leetspeak online for free."
+    metaDescription: "Convert text to leetspeak online for free.",
+    longDescription: "Turn your text into classic 1337 (leet) speak. It's a fun way to create unique usernames, headers, or messages that look like they're straight out of early internet culture.",
+    exampleInput: "Password"
   },
   {
     id: "text-to-rot13",
@@ -1554,7 +1741,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Shift by 13."],
     faqs: [{ question: "Is it secure?", answer: "No, it's just for fun or basic masking." }],
     metaTitle: "ROT13 Encoder - Online Text Cipher",
-    metaDescription: "Encode text with ROT13 online for free."
+    metaDescription: "Encode text with ROT13 online for free.",
+    longDescription: "Quickly hide your text by shifting the letters, and shift them back whenever you want. It's a simple, classic way to mask spoilers or secret messages.",
+    exampleInput: "Secret Message"
   },
   {
     id: "remove-empty-lines",
@@ -1566,7 +1755,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste text.", "Click Remove."],
     faqs: [{ question: "Does it remove whitespace lines?", answer: "Yes, optionally." }],
     metaTitle: "Remove Empty Lines - Text Cleaner Online",
-    metaDescription: "Remove blank lines from text online for free."
+    metaDescription: "Remove blank lines from text online for free.",
+    longDescription: "Clean up messy documents by removing every empty line instantly. It's the fastest way to make your lists, notes, and code look sharp and organized.",
+    exampleInput: "Line 1\n\nLine 2\n\n\nLine 3"
   },
   {
     id: "wav-to-mp3-converter",
@@ -1578,7 +1769,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload WAV.", "Pick bitrate.", "Download MP3."],
     faqs: [{ question: "Is it high quality?", answer: "Yes, up to 320kbps." }],
     metaTitle: "WAV to MP3 Converter - Free Online Audio Tool",
-    metaDescription: "Convert WAV to MP3 online for free."
+    metaDescription: "Convert WAV to MP3 online for free.",
+    longDescription: "Turn high-quality WAV files into small, shareable MP3s. You'll save a ton of space while keeping your audio sounding great for any device."
   },
   {
     id: "webm-to-mp4-converter",
@@ -1590,7 +1782,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload WebM.", "Convert.", "Download MP4."],
     faqs: [{ question: "Why convert?", answer: "MP4 has better device support." }],
     metaTitle: "WebM to MP4 Converter - Free Online Video Tool",
-    metaDescription: "Convert WebM to MP4 online for free."
+    metaDescription: "Convert WebM to MP4 online for free.",
+    longDescription: "Convert WebM videos to the standard MP4 format so they play on every phone, tablet, and computer without any issues."
   },
   {
     id: "gcd-lcm-calculator",
@@ -1602,7 +1795,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter numbers.", "Calculate."],
     faqs: [{ question: "How many numbers?", answer: "Up to 10." }],
     metaTitle: "GCD & LCM Calculator - Online Math Tool",
-    metaDescription: "Find GCD and LCM online for free."
+    metaDescription: "Find GCD and LCM online for free.",
+    longDescription: "Quickly find the Greatest Common Divisor and Least Common Multiple of any group of numbers. It's the perfect tool for simplifying fractions and solving math problems in a snap.",
+    exampleInput: "24, 36, 48"
   },
   {
     id: "prime-factorization",
@@ -1614,7 +1809,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter number.", "Factorize."],
     faqs: [{ question: "Limit?", answer: "Up to 999,999,999." }],
     metaTitle: "Prime Factorization - Math Tool Online",
-    metaDescription: "Find prime factors online for free."
+    metaDescription: "Find prime factors online for free.",
+    longDescription: "Break any number down into its smallest prime parts. This is a must-have tool for students and math enthusiasts working on complex equations or cryptography.",
+    exampleInput: "123456"
   },
   {
     id: "area-of-circle-calculator",
@@ -1626,7 +1823,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter radius.", "Get area."],
     faqs: [{ question: "What is PI?", answer: "We use 3.14159..." }],
     metaTitle: "Area of Circle Calculator - Online Geometry Tool",
-    metaDescription: "Calculate circle area online for free."
+    metaDescription: "Calculate circle area online for free.",
+    longDescription: "Instantly find the area and circumference of any circle. Just enter the radius or diameter and we'll give you the exact measurement—perfect for school projects or design work.",
+    exampleInput: "Radius: 5cm"
   },
   {
     id: "whois-lookup",
@@ -1638,7 +1837,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter domain.", "Fetch data."],
     faqs: [{ question: "Is it private?", answer: "Depends on domain privacy settings." }],
     metaTitle: "Whois Lookup - Domain Registration Info",
-    metaDescription: "Check domain info online for free."
+    metaDescription: "Check domain info online for free.",
+    longDescription: "Look up who owns a domain name and see when it was registered. It's the easiest way to check if a website is trustworthy or to see if a domain you like is available.",
+    exampleInput: "google.com"
   },
   {
     id: "ssl-checker",
@@ -1650,7 +1851,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter URL.", "Verify SSL."],
     faqs: [{ question: "What does it check?", answer: "Expiry, issuer, and protocol." }],
     metaTitle: "SSL Checker - Verify Website Security",
-    metaDescription: "Check SSL certificates online for free."
+    metaDescription: "Check SSL certificates online for free.",
+    longDescription: "Verify any website's SSL certificate in seconds. We'll show you if the security is valid, when it expires, and who issued it, so you can make sure your site stays safe.",
+    exampleInput: "https://takethettools.com"
   },
   {
     id: "exif-data-remover",
@@ -1662,7 +1865,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload photo.", "Click Scrub.", "Download clean image."],
     faqs: [{ question: "What is removed?", answer: "GPS, Camera model, Date, etc." }],
     metaTitle: "EXIF Data Remover - Protect Your Privacy Online",
-    metaDescription: "Scrub metadata from images online for free."
+    metaDescription: "Scrub metadata from images online for free.",
+    longDescription: "Scrub hidden personal data from your photos before you share them online. We remove GPS locations, camera info, and timestamps so your privacy stays protected.",
+    exampleInput: "Upload your JPEG or PNG file."
   },
   {
     id: "secure-password-hash",
@@ -1674,7 +1879,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter password.", "Select algo (Bcrypt/Argon2).", "Generate."],
     faqs: [{ question: "Is it reversible?", answer: "No, hashes are one-way." }],
     metaTitle: "Secure Password Hasher - Online Crypto Tool",
-    metaDescription: "Generate password hashes online for free."
+    metaDescription: "Generate password hashes online for free.",
+    longDescription: "Create secure, one-way hashes for your passwords using professional algorithms like Bcrypt. It's the best way to keep login credentials safe and unhackable in your own apps.",
+    exampleInput: "p@ssw0rd123 (using Bcrypt)"
   },
   // New Batch 2
   {
@@ -1687,7 +1894,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Convert.", "Download BMP."],
     faqs: [{ question: "Why BMP?", answer: "It's an uncompressed, high-fidelity format." }],
     metaTitle: "Image to BMP Converter - High-Res Bitmap Tool",
-    metaDescription: "Convert images to BMP online for free."
+    metaDescription: "Convert images to BMP online for free.",
+    longDescription: "Turn your photos into high-quality BMP images. This format doesn't compress your data, so you get absolute clarity and perfect detail in every pixel."
   },
   {
     id: "image-to-tiff-converter",
@@ -1699,7 +1907,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Convert.", "Download TIFF."],
     faqs: [{ question: "Is it lossless?", answer: "Yes, TIFF supports lossless compression." }],
     metaTitle: "Image to TIFF Converter - Professional Photo Tool",
-    metaDescription: "Convert images to TIFF online for free."
+    metaDescription: "Convert images to TIFF online for free.",
+    longDescription: "Convert your photos to the professional TIFF format. It's the gold standard for high-quality printing and graphic design where every detail matters."
   },
   {
     id: "add-text-to-image",
@@ -1711,7 +1920,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Type text.", "Place and Download."],
     faqs: [{ question: "Can I choose fonts?", answer: "Yes, multiple modern fonts are available." }],
     metaTitle: "Add Text to Image Online - Photo Caption Tool",
-    metaDescription: "Overlay text on images online for free."
+    metaDescription: "Overlay text on images online for free.",
+    longDescription: "Add labels, captions, or watermarks to your images in seconds. Just type your message and pick a font to create professional-looking social posts and branded photos."
   },
   {
     id: "round-image-corners",
@@ -1723,7 +1933,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload image.", "Set corner radius.", "Download."],
     faqs: [{ question: "Does it support transparency?", answer: "Yes, results are in PNG format." }],
     metaTitle: "Round Image Corners Online - Photo Styling Tool",
-    metaDescription: "Create rounded corner images online for free."
+    metaDescription: "Create rounded corner images online for free.",
+    longDescription: "Give your photos a modern look by rounding their corners. It's a simple, stylish way to make images stand out on your website or social media profiles."
   },
   {
     id: "pdf-to-html-converter",
@@ -1735,7 +1946,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload PDF.", "Wait for conversion.", "Download HTML zip."],
     faqs: [{ question: "Are links preserved?", answer: "Yes, internal and external links are kept." }],
     metaTitle: "PDF to HTML Converter - PDF to Web Tool",
-    metaDescription: "Convert PDF files to HTML online for free."
+    metaDescription: "Convert PDF files to HTML online for free.",
+    longDescription: "Turn your PDF into a web-ready HTML page. It's the easiest way to make your reports and documents searchable and readable directly in any browser.",
   },
   {
     id: "html-to-pdf-converter",
@@ -1747,7 +1959,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload HTML or paste code.", "Generate PDF.", "Download."],
     faqs: [{ question: "Does it support CSS?", answer: "Yes, most modern CSS features are supported." }],
     metaTitle: "HTML to PDF Converter - Web to PDF Tool",
-    metaDescription: "Convert HTML to PDF online for free."
+    metaDescription: "Convert HTML to PDF online for free.",
+    longDescription: "Turn any HTML code into a clean, professional PDF. It's perfect for creating invoices, reports, or archiving web pages exactly as they look online.",
   },
   {
     id: "pdf-metadata-editor",
@@ -1759,7 +1972,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload PDF.", "Edit fields.", "Save and Download."],
     faqs: [{ question: "Is it permanent?", answer: "Yes, the new info is saved into the file." }],
     metaTitle: "PDF Metadata Editor - Change PDF Info Online",
-    metaDescription: "Edit PDF properties online for free."
+    metaDescription: "Edit PDF properties online for free.",
+    longDescription: "Update the title, author, and keywords hidden inside your PDF. It's a great way to keep your professional documents organized and easier to find in search results.",
   },
   {
     id: "hex-to-rgb-converter",
@@ -1771,7 +1985,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter HEX code.", "Copy RGB result."],
     faqs: [{ question: "Does it handle shorthand?", answer: "Yes, e.g., #fff works." }],
     metaTitle: "Hex to RGB Converter - Web Design Tool",
-    metaDescription: "Convert Hex to RGB online for free."
+    metaDescription: "Convert Hex to RGB online for free.",
+    longDescription: "Convert web color codes (HEX) into RGB or RGBA values. It's an essential tool for designers and developers who need the perfect color format for their CSS styles."
   },
   {
     id: "rgb-to-hex-converter",
@@ -1783,7 +1998,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter R, G, B values.", "Copy HEX result."],
     faqs: [{ question: "Is the # included?", answer: "Yes." }],
     metaTitle: "RGB to Hex Converter - Web Design Tool",
-    metaDescription: "Convert RGB to Hex online for free."
+    metaDescription: "Convert RGB to Hex online for free.",
+    longDescription: "Turn RGB color values into standard HEX codes for the web. This tool makes it easy to grab the exact color code you need for your next website project."
   },
   {
     id: "css-gradient-generator",
@@ -1795,7 +2011,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Pick colors.", "Adjust angle.", "Copy CSS code."],
     faqs: [{ question: "Does it support multi-stop?", answer: "Yes." }],
     metaTitle: "CSS Gradient Generator - Beautiful Backgrounds Tool",
-    metaDescription: "Create CSS gradients online for free."
+    metaDescription: "Create CSS gradients online for free.",
+    longDescription: "Craft stunning visual depth for your web projects with our interactive CSS Gradient Generator. Designed for UI designers and front-end developers, this tool allows for precise control over linear and radial gradients with multiple color stops. We provide production-ready CSS code that includes cross-browser prefixes, ensuring your background effects look perfect in every user environment.",
+    exampleInput: "Linear gradient from #4facfe to #00f2fe at 45deg"
   },
   {
     id: "css-box-shadow-generator",
@@ -1807,7 +2025,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Adjust offsets/blur.", "Pick shadow color.", "Copy CSS."],
     faqs: [{ question: "Does it support inset?", answer: "Yes." }],
     metaTitle: "CSS Box Shadow Generator - UI Design Tool",
-    metaDescription: "Generate CSS box shadows online for free."
+    metaDescription: "Generate CSS box shadows online for free.",
+    longDescription: "Add professional-looking shadows to your web elements in seconds. Adjust the blur, spread, and color to give your design more depth and a premium feel.",
+    exampleInput: "Soft shadow: 0 4px 6px rgba(0,0,0,0.1)"
   },
   {
     id: "text-to-nato-phonetic",
@@ -1819,7 +2039,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Get alpha, bravo, charlie..."],
     faqs: [{ question: "What is it for?", answer: "Clear communication over radio or phone." }],
     metaTitle: "NATO Phonetic Translator - Alpha Bravo Charlie...",
-    metaDescription: "Convert text to NATO phonetic online for free."
+    metaDescription: "Convert text to NATO phonetic online for free.",
+    longDescription: "Translate any text into the standard NATO phonetic alphabet (Alpha, Bravo, Charlie...). It's the best way to communicate spells or codes clearly over the phone or radio.",
+    exampleInput: "TAKETHETOOLS"
   },
   {
     id: "text-to-octal-converter",
@@ -1831,7 +2053,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Get octal sequence."],
     faqs: [{ question: "What encoding?", answer: "UTF-8." }],
     metaTitle: "Text to Octal Converter - Online Text Tool",
-    metaDescription: "Convert text to octal online for free."
+    metaDescription: "Convert text to octal online for free.",
+    longDescription: "Convert your text into Octal (base-8) values. It's a useful tool for students and developers working with legacy systems or exploring how data is stored in different formats.",
+    exampleInput: "Hello World"
   },
   {
     id: "octal-to-text-converter",
@@ -1843,7 +2067,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter octal.", "Get text."],
     faqs: [{ question: "Is it reversible?", answer: "Yes." }],
     metaTitle: "Octal to Text Converter - Online Text Tool",
-    metaDescription: "Convert octal to text online for free."
+    metaDescription: "Convert octal to text online for free.",
+    longDescription: "Decode Octal values back into readable English text instantly. This is a must-have for anyone auditing old logs or studying the basics of early computer data.",
+    exampleInput: "110 145 154 154 157"
   },
   {
     id: "add-prefix-suffix-to-lines",
@@ -1855,7 +2081,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste lines.", "Enter prefix/suffix.", "Click Add."],
     faqs: [{ question: "Can I use both?", answer: "Yes." }],
     metaTitle: "Add Prefix/Suffix to Lines - Bulk Text Editor",
-    metaDescription: "Modify every line of text online for free."
+    metaDescription: "Modify every line of text online for free.",
+    longDescription: "Add custom text to the beginning or end of every line in your list. It's the fastest way to format large lists for SQL, marketing emails, or coding projects.",
+    exampleInput: "List of items + '-2024' suffix"
   },
   {
     id: "webp-to-jpg-converter",
@@ -1867,7 +2095,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload WebP.", "Convert.", "Download JPG."],
     faqs: [{ question: "Is there a size limit?", answer: "Up to 50MB per file." }],
     metaTitle: "WebP to JPG Converter - Free & Fast Image Tool",
-    metaDescription: "Convert WebP to JPG online for free."
+    metaDescription: "Convert WebP to JPG online for free.",
+    longDescription: "Convert modern WebP images into standard JPG files. This ensures your photos look great and work perfectly on every device and in any software.",
+    exampleInput: "Upload your WebP image."
   },
   {
     id: "gif-to-mp4-converter",
@@ -1879,7 +2109,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload GIF.", "Convert.", "Download MP4."],
     faqs: [{ question: "Will it loop?", answer: "Yes, MP4s can be set to loop." }],
     metaTitle: "GIF to MP4 Converter - Animated GIF to Video",
-    metaDescription: "Convert GIF to MP4 online for free."
+    metaDescription: "Convert GIF to MP4 online for free.",
+    longDescription: "Turn your animated GIFs into high-quality MP4 videos. MP4s load much faster and work better on all social media platforms and websites.",
+    exampleInput: "Upload your animated GIF."
   },
   {
     id: "mp4-to-gif-converter",
@@ -1891,7 +2123,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload MP4.", "Select duration.", "Download GIF."],
     faqs: [{ question: "Is it high quality?", answer: "Yes, with optimized color palettes." }],
     metaTitle: "MP4 to GIF Converter - Video to Animated GIF",
-    metaDescription: "Convert MP4 to GIF online for free."
+    metaDescription: "Convert MP4 to GIF online for free.",
+    longDescription: "Create your own animated GIFs from any MP4 video. It's the easiest way to make custom reactions, tutorials, and shareable social media content.",
+    exampleInput: "Upload your MP4 video clip."
   },
   {
     id: "fraction-to-decimal-converter",
@@ -1903,7 +2137,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter numerator.", "Enter denominator.", "Get decimal."],
     faqs: [{ question: "Does it handle mixed numbers?", answer: "Yes." }],
     metaTitle: "Fraction to Decimal Converter - Math Tool Online",
-    metaDescription: "Convert fractions to decimals online for free."
+    metaDescription: "Convert fractions to decimals online for free.",
+    longDescription: "Convert simple or mixed fractions into their decimal equivalents in seconds. It's perfect for recipes, homework, or any project where you need a more readable number.",
+    exampleInput: "3/4"
   },
   {
     id: "decimal-to-fraction-converter",
@@ -1915,7 +2151,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter decimal.", "Get fraction."],
     faqs: [{ question: "Is it simplified?", answer: "Yes, we reduce it to lowest terms." }],
     metaTitle: "Decimal to Fraction Converter - Math Tool Online",
-    metaDescription: "Convert decimals to fractions online for free."
+    metaDescription: "Convert decimals to fractions online for free.",
+    longDescription: "Turn decimal numbers back into clean, simplified fractions. We'll find the lowest terms for you, so your results are always easy to understand and use.",
+    exampleInput: "0.875"
   },
   {
     id: "compound-interest-calculator",
@@ -1927,7 +2165,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter principal.", "Set rate and time.", "See total balance."],
     faqs: [{ question: "Supports monthly additions?", answer: "Yes." }],
     metaTitle: "Compound Interest Calculator - Savings Growth Tool",
-    metaDescription: "Calculate compound interest online for free."
+    metaDescription: "Calculate compound interest online for free.",
+    longDescription: "See how your savings can grow over time. This tool calculates your total balance with compound interest, showing you exactly how small investments can turn into big results.",
+    exampleInput: "$10,000 at 7% for 20 years"
   },
   {
     id: "simple-interest-calculator",
@@ -1939,7 +2179,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter principal, rate, time.", "Calculate."],
     faqs: [{ question: "Whats the formula?", answer: "I = P * R * T" }],
     metaTitle: "Simple Interest Calculator - Basic Finance Tool",
-    metaDescription: "Calculate simple interest online for free."
+    metaDescription: "Calculate simple interest online for free.",
+    longDescription: "Check exactly how much interest you'll pay or earn on short-term loans and deposits. It's a simple, straightforward way to manage your basic finances.",
+    exampleInput: "$5,000 at 5% for 3 years"
   },
   {
     id: "tip-calculator",
@@ -1951,7 +2193,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter bill total.", "Select tip %.", "Split between N people."],
     faqs: [{ question: "Includes tax?", answer: "You can enter pre-tax or post-tax total." }],
     metaTitle: "Tip Calculator - Split Bill Tool Online",
-    metaDescription: "Calculate tips and split bills online for free."
+    metaDescription: "Calculate tips and split bills online for free.",
+    longDescription: "Split the bill and calculate tips with zero stress. Just enter the total and number of people to see exactly what everyone owes, including the tip.",
+    exampleInput: "$85.50 split between 4 people with 18% tip"
   },
   {
     id: "discount-calculator",
@@ -1963,7 +2207,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter original price.", "Enter discount %.", "Get sale price."],
     faqs: [{ question: "Can I add tax?", answer: "Yes, optional tax field available." }],
     metaTitle: "Discount Calculator - Shopping Savings Tool",
-    metaDescription: "Calculate sales discounts online for free."
+    metaDescription: "Calculate sales discounts online for free.",
+    longDescription: "Find out exactly how much you're saving during a sale. We'll show you the final price after the discount and tax, so you can shop smarter and stick to your budget.",
+    exampleInput: "25% off $149.99"
   },
   {
     id: "keyword-density-checker-tool",
@@ -1975,7 +2221,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste text or URL.", "Analyze density."],
     faqs: [{ question: "Is it accurate?", answer: "Yes, it counts 1, 2, and 3-word phrases." }],
     metaTitle: "Keyword Density Checker - SEO Content Tool",
-    metaDescription: "Analyze keyword usage online for free."
+    metaDescription: "Analyze keyword usage online for free.",
+    longDescription: "Check how often specific words appear in your writing. This tool helps you optimize your content for SEO by making sure your main keywords are used just the right amount."
   },
   {
     id: "redirect-checker-tool",
@@ -1987,7 +2234,8 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter URL.", "Trace path."],
     faqs: [{ question: "Does it show status codes?", answer: "Yes, for every step." }],
     metaTitle: "Redirect Checker - Trace URL Hops Online",
-    metaDescription: "Check redirect chains online for free."
+    metaDescription: "Check redirect chains online for free.",
+    longDescription: "Trace exactly where a URL goes. Whether it's a short link or a full redirect, we'll show you every step of the path and the final destination."
   },
   // New Batch 3: Specialized Converters & SEO Boosters
   {
@@ -2000,7 +2248,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter angle.", "Select units.", "Convert."],
     faqs: [{ question: "What is a radian?", answer: "The standard unit of angular measure." }],
     metaTitle: "Angle Converter - Degrees to Radians Online",
-    metaDescription: "Convert angles online for free."
+    metaDescription: "Convert angles online for free.",
+    longDescription: "Swap between degrees, radians, and more instantly. It's a vital tool for anyone working on math, physics, or game development projects.",
+    exampleInput: "180 degrees"
   },
   {
     id: "area-converter-tool",
@@ -2012,7 +2262,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter area.", "Select units.", "Convert."],
     faqs: [{ question: "How big is an acre?", answer: "43,560 square feet." }],
     metaTitle: "Area Converter - Acres to Square Meters",
-    metaDescription: "Convert area units online for free."
+    metaDescription: "Convert area units online for free.",
+    longDescription: "Convert any measurement of area, from square feet to hectares. It's the easiest way to compare land sizes and surface areas across different units.",
+    exampleInput: "5 hectares"
   },
   {
     id: "byte-converter-tool",
@@ -2024,7 +2276,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter value.", "Select unit.", "Convert."],
     faqs: [{ question: "Is it 1000 or 1024?", answer: "We use 1024 for binary units." }],
     metaTitle: "Byte Converter - MB to GB Online",
-    metaDescription: "Convert digital storage units online for free."
+    metaDescription: "Convert digital storage units online for free.",
+    longDescription: "Easily switch between MB, GB, TB, and more. This tool helps you understand exactly how much digital space your files and databases are using.",
+    exampleInput: "2048 MB"
   },
   {
     id: "energy-converter-tool",
@@ -2036,7 +2290,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter energy.", "Select units.", "Convert."],
     faqs: [{ question: "1 Calorie is how many Joules?", answer: "4.184 Joules." }],
     metaTitle: "Energy Converter - Joules to Calories Online",
-    metaDescription: "Convert energy units online for free."
+    metaDescription: "Convert energy units online for free.",
+    longDescription: "Convert between Calories, Joules, and more in a snap. It's the perfect way to understand energy use in everything from electronics to nutrition.",
+    exampleInput: "5000 Joules"
   },
   {
     id: "force-converter-tool",
@@ -2048,7 +2304,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter force.", "Select units.", "Convert."],
     faqs: [{ question: "What is a Newton?", answer: "SI unit of force." }],
     metaTitle: "Force Converter - Newtons to Pound-force",
-    metaDescription: "Convert force units online for free."
+    metaDescription: "Convert force units online for free.",
+    longDescription: "Translate force measurements between Newtons and other units instantly. This is a must-have for engineers and students working on physics and structural projects.",
+    exampleInput: "100 Newtons"
   },
   {
     id: "fuel-consumption-converter-tool",
@@ -2060,7 +2318,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter consumption.", "Select units.", "Convert."],
     faqs: [{ question: "What is L/100km?", answer: "Metric efficiency unit." }],
     metaTitle: "Fuel Consumption Converter - MPG to L/100km",
-    metaDescription: "Convert fuel efficiency online for free."
+    metaDescription: "Convert fuel efficiency online for free.",
+    longDescription: "See how much gas your car is really using. Convert between MPG and L/100km instantly to compare vehicle efficiency and plan your travel costs.",
+    exampleInput: "30 MPG"
   },
   {
     id: "length-converter-tool",
@@ -2072,7 +2332,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter length.", "Select units.", "Convert."],
     faqs: [{ question: "1 mile is how many km?", answer: "1.609 km." }],
     metaTitle: "Length Converter - Metric to Imperial Online",
-    metaDescription: "Convert length units online for free."
+    metaDescription: "Convert length units online for free.",
+    longDescription: "Convert between meters, feet, inches, and miles in a flash. It's the perfect tool for DIY projects, travel planning, or any time you need to switch measurement systems.",
+    exampleInput: "150 centimeters"
   },
   {
     id: "power-converter-tool",
@@ -2084,7 +2346,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter power.", "Select units.", "Convert."],
     faqs: [{ question: "1 HP is how many Watts?", answer: "745.7 Watts." }],
     metaTitle: "Power Converter - Watts to Horsepower Online",
-    metaDescription: "Convert power units online for free."
+    metaDescription: "Convert power units online for free.",
+    longDescription: "Easily switch between Watts, Horsepower, and BTUs. This tool helps you understand and compare power output for cars, appliances, and industrial equipment.",
+    exampleInput: "250 Horsepower"
   },
   {
     id: "pressure-converter-tool",
@@ -2096,7 +2360,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter pressure.", "Select units.", "Convert."],
     faqs: [{ question: "What is 1 bar in PSI?", answer: "14.5038 PSI." }],
     metaTitle: "Pressure Converter - PSI to Bar Online",
-    metaDescription: "Convert pressure units online for free."
+    metaDescription: "Convert pressure units online for free.",
+    longDescription: "Convert pressure measurements between PSI, Bar, and more instantly. It's a vital tool for mechanics, scuba divers, and anyone working with pressurized systems.",
+    exampleInput: "32 PSI"
   },
   {
     id: "speed-converter-tool",
@@ -2108,7 +2374,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter speed.", "Select units.", "Convert."],
     faqs: [{ question: "What is Mach 1?", answer: "The speed of sound." }],
     metaTitle: "Speed Converter - km/h to mph Online",
-    metaDescription: "Convert speed units online for free."
+    metaDescription: "Convert speed units online for free.",
+    longDescription: "Swap between km/h, mph, and even the speed of sound (Mach). It's the fastest way to understand velocity whether you're driving, flying, or studying physics.",
+    exampleInput: "120 km/h"
   },
   {
     id: "temperature-converter-tool",
@@ -2120,7 +2388,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter temp.", "Select units.", "Convert."],
     faqs: [{ question: "Absolute zero?", answer: "-273.15 °C." }],
     metaTitle: "Temperature Converter - Celsius to Fahrenheit",
-    metaDescription: "Convert temperature online for free."
+    metaDescription: "Convert temperature online for free.",
+    longDescription: "Instantly convert between Celsius, Fahrenheit, and Kelvin. It's the easiest way to check world weather or get exact readings for your science experiments.",
+    exampleInput: "98.6 Fahrenheit"
   },
   {
     id: "time-converter-tool",
@@ -2132,7 +2402,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter time.", "Select units.", "Convert."],
     faqs: [{ question: "Seconds in a day?", answer: "86,400." }],
     metaTitle: "Time Converter - Hours to Seconds Online",
-    metaDescription: "Convert time units online for free."
+    metaDescription: "Convert time units online for free.",
+    longDescription: "Convert between seconds, minutes, hours, and days in a snap. It's the best way to track durations, plan project timelines, or see how much time has passed.",
+    exampleInput: "3.5 days"
   },
   {
     id: "torque-converter-tool",
@@ -2144,7 +2416,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter torque.", "Select units.", "Convert."],
     faqs: [{ question: "What is torque?", answer: "Rotational force." }],
     metaTitle: "Torque Converter - Nm to lb-ft Online",
-    metaDescription: "Convert torque units online for free."
+    metaDescription: "Convert torque units online for free.",
+    longDescription: "Convert torque measurements between Newton-meters and Pound-feet. This is a must-have tool for mechanics and engineers who need exact force specs for machinery and cars.",
+    exampleInput: "450 Newton-meters"
   },
   {
     id: "volume-converter-tool",
@@ -2156,7 +2430,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter volume.", "Select units.", "Convert."],
     faqs: [{ question: "1 gallon is how many liters?", answer: "3.785 liters (US)." }],
     metaTitle: "Volume Converter - Liters to Gallons Online",
-    metaDescription: "Convert volume units online for free."
+    metaDescription: "Convert volume units online for free.",
+    longDescription: "Easily switch between liters, gallons, and cubic meters. It's perfect for scaling recipes, measuring pool capacity, or handling industrial volume calculations.",
+    exampleInput: "15 Gallons (US)"
   },
   {
     id: "weight-converter-tool",
@@ -2168,7 +2444,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter weight.", "Select units.", "Convert."],
     faqs: [{ question: "1 kg is how many lbs?", answer: "2.20462 lbs." }],
     metaTitle: "Weight Converter - kg to lbs Online",
-    metaDescription: "Convert weight units online for free."
+    metaDescription: "Convert weight units online for free.",
+    longDescription: "Convert between kilograms, pounds, and ounces instantly. This tool helps you check luggage limits, track your fitness progress, or get exact weights for shipping.",
+    exampleInput: "185 Pounds"
   },
   {
     id: "data-transfer-rate-converter-tool",
@@ -2180,7 +2458,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter rate.", "Select units.", "Convert."],
     faqs: [{ question: "Mbps vs MBps?", answer: "Mbps is bits, MBps is bytes (8x more)." }],
     metaTitle: "Data Transfer Rate Converter - Mbps to MBps",
-    metaDescription: "Convert data rates online for free."
+    metaDescription: "Convert data rates online for free.",
+    longDescription: "Understand your internet speed by converting between Mbps and MBps. It's the best way to see exactly how fast your downloads and uploads really are.",
+    exampleInput: "100 Mbps"
   },
   {
     id: "digital-storage-converter-tool",
@@ -2192,7 +2472,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter size.", "Select units.", "Convert."],
     faqs: [{ question: "How many bits in a byte?", answer: "8." }],
     metaTitle: "Digital Storage Converter - MB to GB online",
-    metaDescription: "Convert storage units online for free."
+    metaDescription: "Convert storage units online for free.",
+    longDescription: "Instantly see how much space your data takes up. Convert between bytes, Gigabytes, and Terabytes to manage your storage and database growth with ease.",
+    exampleInput: "500 GB"
   },
   {
     id: "binary-to-hex-tool",
@@ -2204,7 +2486,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter binary.", "Convert."],
     faqs: [{ question: "What is hex?", answer: "Base-16 number system." }],
     metaTitle: "Binary to Hex Converter - Developer Tool",
-    metaDescription: "Convert binary to hex online for free."
+    metaDescription: "Convert binary to hex online for free.",
+    longDescription: "Turn raw binary code into compact Hexadecimal. It's a must-have tool for developers and students who need to read and understand computer memory addresses clearly.",
+    exampleInput: "01001000 01100101 01101100 01101100 01101111"
   },
   {
     id: "hex-to-binary-tool",
@@ -2216,7 +2500,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter hex.", "Convert."],
     faqs: [{ question: "Is it reversible?", answer: "Yes." }],
     metaTitle: "Hex to Binary Converter - Developer Tool",
-    metaDescription: "Convert hex to binary online for free."
+    metaDescription: "Convert hex to binary online for free.",
+    longDescription: "Convert Hexadecimal codes back into binary bits. This utility helps developers see the exact patterns behind their code, making it easier to debug and optimize.",
+    exampleInput: "48 65 6c 6c 6f"
   },
   {
     id: "binary-to-octal-tool",
@@ -2228,7 +2514,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter binary.", "Convert."],
     faqs: [{ question: "What is octal?", answer: "Base-8 number system." }],
     metaTitle: "Binary to Octal Converter - Developer Tool",
-    metaDescription: "Convert binary to octal online for free."
+    metaDescription: "Convert binary to octal online for free.",
+    longDescription: "Easily translate binary bits into Octal (base-8). This tool is perfect for computer science students and developers working with legacy systems and file permissions.",
+    exampleInput: "110101101"
   },
   {
     id: "octal-to-binary-tool",
@@ -2240,7 +2528,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter octal.", "Convert."],
     faqs: [{ question: "Is it reversible?", answer: "Yes." }],
     metaTitle: "Octal to Binary Converter - Developer Tool",
-    metaDescription: "Convert octal to binary online for free."
+    metaDescription: "Convert octal to binary online for free.",
+    longDescription: "Turn Octal values back into full binary bitstreams. It's an essential resource for anyone auditing Unix permissions or working with older data formats.",
+    exampleInput: "755"
   },
   {
     id: "hex-to-text-tool",
@@ -2252,7 +2542,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter hex.", "Convert."],
     faqs: [{ question: "What encoding?", answer: "UTF-8." }],
     metaTitle: "Hex to Text Converter - Developer Tool",
-    metaDescription: "Convert hex to text online for free."
+    metaDescription: "Convert hex to text online for free.",
+    longDescription: "Turn Hexadecimal code back into readable English text. Use this tool to recover information from data dumps, logs, and network packets instantly.",
+    exampleInput: "54 61 6b 65 54 68 65 54 6f 6f 6c 73"
   },
   {
     id: "text-to-hex-tool",
@@ -2264,7 +2556,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Convert."],
     faqs: [{ question: "Why use hex?", answer: "For debugging or data representation." }],
     metaTitle: "Text to Hex Converter - Developer Tool",
-    metaDescription: "Convert text to hex online for free."
+    metaDescription: "Convert text to hex online for free.",
+    longDescription: "Convert your text into compact Hexadecimal strings. It's the perfect way to represent your data for debugging, web protocols, and technical audits.",
+    exampleInput: "TakeTheTools"
   },
   {
     id: "binary-to-decimal-tool",
@@ -2276,7 +2570,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter binary.", "Convert."],
     faqs: [{ question: "Example?", answer: "1010 in binary is 10 in decimal." }],
     metaTitle: "Binary to Decimal Converter - Math Tool",
-    metaDescription: "Convert binary to decimal online for free."
+    metaDescription: "Convert binary to decimal online for free.",
+    longDescription: "Instantly turn binary code into standard decimal numbers. It's the easiest way to understand raw bitstreams and machine language data.",
+    exampleInput: "11010101"
   },
   {
     id: "decimal-to-binary-tool",
@@ -2288,7 +2584,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter decimal.", "Convert."],
     faqs: [{ question: "Is it reversible?", answer: "Yes." }],
     metaTitle: "Decimal to Binary Converter - Math Tool",
-    metaDescription: "Convert decimal to binary online for free."
+    metaDescription: "Convert decimal to binary online for free.",
+    longDescription: "Convert standard numbers into binary bits. Perfect for anyone studying digital logic, configuring networks, or exploring how computers store information.",
+    exampleInput: "255"
   },
   {
     id: "html-entities-encode-tool",
@@ -2300,7 +2598,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Encode."],
     faqs: [{ question: "Example?", answer: "& becomes &amp;." }],
     metaTitle: "HTML Entities Encoder - Web Dev Tool",
-    metaDescription: "Encode HTML entities online for free."
+    metaDescription: "Encode HTML entities online for free.",
+    longDescription: "Make your text safe for the web by converting special characters into HTML entities. This tool prevents display errors and keeps your website code secure from vulnerabilities.",
+    exampleInput: "<div>Some & text</div>"
   },
   {
     id: "html-entities-decode-tool",
@@ -2312,7 +2612,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter entities.", "Decode."],
     faqs: [{ question: "Is it secure?", answer: "Yes." }],
     metaTitle: "HTML Entities Decoder - Web Dev Tool",
-    metaDescription: "Decode HTML entities online for free."
+    metaDescription: "Decode HTML entities online for free.",
+    longDescription: "Turn encoded HTML entities back into readable characters. This is the fastest way to audit web content and debug data coming from different sources.",
+    exampleInput: "&lt;div&gt;Some &amp; text&lt;/div&gt;"
   },
   {
     id: "markdown-to-html-tool",
@@ -2324,7 +2626,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste Markdown.", "Convert."],
     faqs: [{ question: "Supports GFM?", answer: "Yes." }],
     metaTitle: "Markdown to HTML Converter - Web Dev Tool",
-    metaDescription: "Convert Markdown to HTML online for free."
+    metaDescription: "Convert Markdown to HTML online for free.",
+    longDescription: "Convert simple Markdown into clean, professional HTML markup. It's the best way to turn your notes and blog posts into web-ready content with zero coding.",
+    exampleInput: "# Hello World\nThis is **bold** text."
   },
   {
     id: "html-to-markdown-tool",
@@ -2336,7 +2640,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Paste HTML.", "Convert."],
     faqs: [{ question: "Clean output?", answer: "Yes, optimized for readability." }],
     metaTitle: "HTML to Markdown Converter - Web Dev Tool",
-    metaDescription: "Convert HTML to Markdown online for free."
+    metaDescription: "Convert HTML to Markdown online for free.",
+    longDescription: "Turn complex HTML code back into simple Markdown text. This tool makes it easy to migrate your blog posts and web pages to a faster, cleaner format.",
+    exampleInput: "<h1>Hello World</h1><p>This is <b>bold</b> text.</p>"
   },
   {
     id: "ascii-to-text-tool",
@@ -2348,7 +2654,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter ASCII codes.", "Convert."],
     faqs: [{ question: "Separator?", answer: "Space or comma." }],
     metaTitle: "ASCII to Text Converter - Online Text Tool",
-    metaDescription: "Convert ASCII to text online for free."
+    metaDescription: "Convert ASCII to text online for free.",
+    longDescription: "Convert numeric ASCII codes back into readable English text. It's an essential tool for programmers who need to reveal the hidden characters in their data.",
+    exampleInput: "72 101 108 108 111"
   },
   {
     id: "text-to-ascii-tool",
@@ -2360,7 +2668,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Convert."],
     faqs: [{ question: "Is it reversible?", answer: "Yes." }],
     metaTitle: "Text to ASCII Converter - Online Text Tool",
-    metaDescription: "Convert text to ASCII online for free."
+    metaDescription: "Convert text to ASCII online for free.",
+    longDescription: "See the exact numeric codes for every character in your text. This tool provides a clear view of the ASCII data that powers digital communication and coding.",
+    exampleInput: "Hello"
   },
   {
     id: "sha1-hash-generator",
@@ -2372,7 +2682,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Generate."],
     faqs: [{ question: "Is SHA-1 secure?", answer: "Not for high-security uses." }],
     metaTitle: "SHA-1 Hash Generator - Online Hash Tool",
-    metaDescription: "Generate SHA-1 hashes online for free."
+    metaDescription: "Generate SHA-1 hashes online for free.",
+    longDescription: "Generate a reliable SHA-1 hash for any piece of text. Use it to verify data integrity and ensure your files haven't been changed without your knowledge.",
+    exampleInput: "Commit Message Content"
   },
   {
     id: "sha-512-hash-generator",
@@ -2384,7 +2696,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Generate."],
     faqs: [{ question: "Is it stronger than SHA-256?", answer: "Yes." }],
     metaTitle: "SHA-512 Hash Generator - Online Secure Hash",
-    metaDescription: "Generate SHA-512 hashes online for free."
+    metaDescription: "Generate SHA-512 hashes online for free.",
+    longDescription: "Create the strongest 512-bit signatures for your most sensitive data. This professional tool gives you military-grade protection to keep your information secure and private.",
+    exampleInput: "Top Secret Document Hash"
   },
   // Final Batch to 200+
   {
@@ -2397,7 +2711,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Convert."],
     faqs: [{ question: "What is title case?", answer: "Capitalizing the first letter of each word." }],
     metaTitle: "Title Case Converter - Capitalize Text Online",
-    metaDescription: "Convert text to title case online for free."
+    metaDescription: "Convert text to title case online for free.",
+    longDescription: "Instantly capitalize every word in your headlines and document titles. It's the easiest way to make your blog posts and reports look professional and consistent.",
+    exampleInput: "the quick brown fox jumps over the lazy dog"
   },
   {
     id: "case-converter-camel",
@@ -2409,7 +2725,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Convert."],
     faqs: [{ question: "Where is it used?", answer: "In JavaScript and Java variables." }],
     metaTitle: "camelCase Converter - Coding Utility Online",
-    metaDescription: "Convert text to camelCase online for free."
+    metaDescription: "Convert text to camelCase online for free.",
+    longDescription: "Turn any phrase into camelCase, the standard format for coding variables. It's a must-have tool for developers who want to keep their code clean and professional.",
+    exampleInput: "user profile data"
   },
   {
     id: "case-converter-snake",
@@ -2421,7 +2739,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Convert."],
     faqs: [{ question: "What is snake_case?", answer: "Words separated by underscores." }],
     metaTitle: "snake_case Converter - Python & SQL Utility",
-    metaDescription: "Convert text to snake_case online for free."
+    metaDescription: "Convert text to snake_case online for free.",
+    longDescription: "Convert your text into snake_case, the perfect format for naming database columns and Python variables. It ensures your code follows clear, professional standards.",
+    exampleInput: "User Profile Data"
   },
   {
     id: "case-converter-kebab",
@@ -2433,7 +2753,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Convert."],
     faqs: [{ question: "Why kebab-case?", answer: "Ideal for SEO-friendly URLs." }],
     metaTitle: "kebab-case Converter - URL Slug Utility",
-    metaDescription: "Convert text to kebab-case online for free."
+    metaDescription: "Convert text to kebab-case online for free.",
+    longDescription: "Generate clean kebab-case slugs for your website links and CSS classes. It's the best way to create links that are both human-readable and search-engine friendly.",
+    exampleInput: "How to Build a Modern Web App"
   },
   {
     id: "qr-code-wifi",
@@ -2445,7 +2767,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter SSID.", "Enter Password.", "Download QR."],
     faqs: [{ question: "Is it secure?", answer: "Yes, data stays in the QR code." }],
     metaTitle: "WiFi QR Code Generator - Share WiFi Password",
-    metaDescription: "Generate WiFi QR codes online for free."
+    metaDescription: "Generate WiFi QR codes online for free.",
+    longDescription: "Create a QR code that lets your guests join your WiFi network instantly. Just enter your network name and password to make sharing your internet easier than ever.",
+    exampleInput: "SSID: Home_Network, Pass: guest123"
   },
   {
     id: "qr-code-vcard",
@@ -2457,7 +2781,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter contact info.", "Generate QR.", "Download."],
     faqs: [{ question: "What is a vCard?", answer: "A standard for electronic business cards." }],
     metaTitle: "vCard QR Code Generator - Digital Business Card",
-    metaDescription: "Create vCard QR codes online for free."
+    metaDescription: "Create vCard QR codes online for free.",
+    longDescription: "Turn your contact info into a digital business card QR code. It's the most modern way to share your details and let people save your contact info with a single scan.",
+    exampleInput: "John Doe, john@example.com"
   },
   {
     id: "image-filter-vintage",
@@ -2469,7 +2795,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload photo.", "Apply filter.", "Download."],
     faqs: [{ question: "What effect?", answer: "Adds warmth and slight grain." }],
     metaTitle: "Vintage Image Filter - Retro Photo Effect",
-    metaDescription: "Apply vintage filters to photos online for free."
+    metaDescription: "Apply vintage filters to photos online for free.",
+    longDescription: "Give your photos a classic, nostalgic look with one click. This filter adds warmth and a subtle grain to make your digital shots look like timeless analog photography.",
+    exampleInput: "Upload your photo."
   },
   {
     id: "image-filter-sepia",
@@ -2481,7 +2809,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Upload photo.", "Apply sepia.", "Download."],
     faqs: [{ question: "Is it reversible?", answer: "Yes, before downloading." }],
     metaTitle: "Sepia Image Filter - Classic Photo Tones",
-    metaDescription: "Apply sepia filters to photos online for free."
+    metaDescription: "Apply sepia filters to photos online for free.",
+    longDescription: "Turn your photos into elegant, historical-looking masterpieces. This filter applies rich, warm brown tones to create a sophisticated, timeless look for any image.",
+    exampleInput: "Upload your photo."
   },
   {
     id: "social-media-headline-generator",
@@ -2493,7 +2823,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter topic.", "Get 10+ headlines."],
     faqs: [{ question: "Does it use AI?", answer: "Uses proven marketing formulas." }],
     metaTitle: "Social Media Headline Generator - Viral Copy Tool",
-    metaDescription: "Generate viral social media headlines online for free."
+    metaDescription: "Generate viral social media headlines online for free.",
+    longDescription: "Create catchy, attention-grabbing headlines for your social media posts. Just enter your topic and we'll give you a variety of options designed to drive engagement.",
+    exampleInput: "Productivity Hacks for 2024"
   },
   {
     id: "email-signature-generator-tool",
@@ -2505,7 +2837,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter details.", "Pick template.", "Copy HTML."],
     faqs: [{ question: "Works with Gmail?", answer: "Yes, and Outlook." }],
     metaTitle: "Email Signature Generator - Professional Branding",
-    metaDescription: "Generate HTML email signatures online for free."
+    metaDescription: "Generate HTML email signatures online for free.",
+    longDescription: "Create a professional HTML email signature in seconds. Stand out in every email you send with a clean, branded signature that includes your contact info and social links.",
+    exampleInput: "Jane Smith, Senior Designer"
   },
   {
     id: "text-to-handwriting-tool",
@@ -2517,7 +2851,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter text.", "Select font style.", "Download image."],
     faqs: [{ question: "Can I use it for letters?", answer: "Yes, ideal for personalized messages." }],
     metaTitle: "Text to Handwriting - Digital Calligraphy Tool",
-    metaDescription: "Convert text to handwriting online for free."
+    metaDescription: "Convert text to handwriting online for free.",
+    longDescription: "Convert your digital text into realistic handwriting. It's the perfect way to add a personal, human touch to digital notes, letters, and invitations.",
+    exampleInput: "Dear Friend, wishing you the best..."
   },
   {
     id: "lorem-ipsum-generator-html",
@@ -2529,7 +2865,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Select paragraphs.", "Choose tags (p, div, li).", "Copy HTML."],
     faqs: [{ question: "What is Lorem Ipsum?", answer: "Standard placeholder text." }],
     metaTitle: "HTML Lorem Ipsum Generator - Web Dev Layout Tool",
-    metaDescription: "Generate HTML placeholder text online for free."
+    metaDescription: "Generate HTML placeholder text online for free.",
+    longDescription: "Quickly generate placeholder text wrapped in clean HTML tags. It's the fastest way for developers to test their website layouts and CSS styles with real-behaving content.",
+    exampleInput: "3 paragraphs with <li> tags"
   },
   {
     id: "barcode-generator-ean",
@@ -2541,7 +2879,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter 12 digits.", "Generate.", "Download."],
     faqs: [{ question: "What is EAN?", answer: "European Article Number." }],
     metaTitle: "EAN-13 Barcode Generator - Retail Tool",
-    metaDescription: "Generate EAN barcodes online for free."
+    metaDescription: "Generate EAN barcodes online for free.",
+    longDescription: "Generate professional EAN-13 barcodes for your retail products. We ensure your codes are perfectly formatted and ready for scanning across your entire supply chain.",
+    exampleInput: "123456789012"
   },
   {
     id: "barcode-generator-upc",
@@ -2553,7 +2893,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Enter 11 digits.", "Generate.", "Download."],
     faqs: [{ question: "What is UPC?", answer: "Universal Product Code (US standard)." }],
     metaTitle: "UPC-A Barcode Generator - Retail Tool",
-    metaDescription: "Generate UPC barcodes online for free."
+    metaDescription: "Generate UPC barcodes online for free.",
+    longDescription: "Create standard UPC-A barcodes for your products in seconds. This tool is essential for retail labeling and ensuring your inventory is ready for modern point-of-sale systems.",
+    exampleInput: "12345678901"
   },
   {
     id: "password-generator-pro",
@@ -2565,7 +2907,9 @@ export const TOOLS: Tool[] = [
     instructions: ["Set length.", "Toggle symbols.", "Generate."],
     faqs: [{ question: "Is it random?", answer: "Uses cryptographically secure random values." }],
     metaTitle: "Advanced Password Generator - Pro Security Tool",
-    metaDescription: "Generate secure passwords online for free."
+    metaDescription: "Generate secure passwords online for free.",
+    longDescription: "Generate ultra-secure passwords with advanced options. You can fully customize the length and complexity to meet the highest security standards for your accounts.",
+    exampleInput: "32 chars, custom symbols"
   },
 ];
 

@@ -1,5 +1,5 @@
 ---
-title: "The Ultimate Guide to HTML Entities Encode: Mastering the Security of the Modern World"
+title: "XSS Prevention: How to Safely Encode HTML Entities for Web Security"
 date: "2026-03-08"
 description: "Master your symbols. Comprehensive guide on why HTML Entity Encoding is vital for global Web Security and i18n, the science of Character scaling, and professional dev secrets."
 category: "Developer Tools"

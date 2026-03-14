@@ -7,6 +7,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/common/CookieConsent";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
+import BackToTop from "@/components/common/BackToTop";
 import React from "react";
 
 const inter = Inter({
@@ -159,6 +160,7 @@ export default function RootLayout({
         </div>
         <Footer />
         <CookieConsent />
+        <BackToTop />
         <Analytics />
       </body>
     </html>

@@ -1,5 +1,5 @@
 ---
-title: "The Ultimate Guide to EAN-13 Barcodes: Everything You Need to Know for Retail and E-commerce"
+title: "Retail Ready: The Ultimate Guide to EAN-13 Global Barcode Standards"
 description: "Master the science of retail identification. This 1500-word guide covers EAN-13 structure, Modulo-10 checksums, and how to generate professional barcodes for Amazon and global retail."
 date: "2026-03-11"
 category: "Developer Tools"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import { Copy, Check, RefreshCw, ShieldCheck } from "lucide-react";
+import { Copy, Check, RefreshCw, ShieldCheck, Download } from "lucide-react";
 import confetti from "canvas-confetti";
 import { cn } from "@/lib/utils";
 
@@ -31,8 +31,8 @@ export default function PasswordGeneratorTool() {
     if (options.symbols) characters += charset.symbols;
 
     if (!characters) {
-        setPassword("Choose at least one option");
-        return;
+      setPassword("Choose at least one option");
+      return;
     }
 
     let result = "";
@@ -54,6 +54,18 @@ export default function PasswordGeneratorTool() {
     setTimeout(() => setIsCopied(false), 2000);
   };
 
+  const downloadPassword = () => {
+    const blob = new Blob([password], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "generated-password.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   const strength = () => {
     let score = 0;
     if (length > 12) score++;
@@ -61,7 +73,7 @@ export default function PasswordGeneratorTool() {
     if (options.uppercase && options.lowercase) score++;
     if (options.numbers) score++;
     if (options.symbols) score++;
-    
+
     if (score < 2) return { text: "Weak", color: "bg-red-500", width: "w-1/3" };
     if (score < 4) return { text: "Medium", color: "bg-yellow-500", width: "w-2/3" };
     return { text: "Strong", color: "bg-green-500", width: "w-full" };
@@ -77,14 +89,23 @@ export default function PasswordGeneratorTool() {
             {password}
           </div>
           <div className="flex gap-2">
-            <button 
+            <button
               onClick={generatePassword}
+              title="Generate New"
               className="p-3 bg-slate-100 text-slate-500 rounded-xl hover:bg-slate-200 transition-all hover:rotate-180 duration-500"
             >
               <RefreshCw className="w-6 h-6" />
             </button>
-            <button 
+            <button
+              onClick={downloadPassword}
+              title="Download as .txt"
+              className="p-3 bg-slate-100 text-slate-500 rounded-xl hover:bg-slate-200 transition-all"
+            >
+              <Download className="w-6 h-6" />
+            </button>
+            <button
               onClick={copyToClipboard}
+              title="Copy to Clipboard"
               className={cn(
                 "p-3 rounded-xl transition-all shadow-lg",
                 isCopied ? "bg-green-600 text-white" : "bg-primary-600 text-white hover:bg-primary-700"
@@ -114,11 +135,11 @@ export default function PasswordGeneratorTool() {
             <span>Password Length</span>
             <span className="text-primary-600 text-lg">{length}</span>
           </div>
-          <input 
-            type="range" 
-            min="6" 
-            max="64" 
-            value={length} 
+          <input
+            type="range"
+            min="6"
+            max="64"
+            value={length}
             onChange={(e) => setLength(parseInt(e.target.value))}
             className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-primary-600"
           />
@@ -133,9 +154,9 @@ export default function PasswordGeneratorTool() {
           ].map((opt) => (
             <label key={opt.id} className="flex items-center justify-between p-4 border border-slate-100 rounded-2xl cursor-pointer hover:bg-slate-50 transition-colors">
               <span className="font-bold text-slate-700">{opt.label}</span>
-              <input 
-                type="checkbox" 
-                checked={options[opt.id as keyof typeof options]} 
+              <input
+                type="checkbox"
+                checked={options[opt.id as keyof typeof options]}
                 onChange={() => setOptions(prev => ({ ...prev, [opt.id]: !prev[opt.id as keyof typeof options] }))}
                 className="w-6 h-6 rounded-lg accent-primary-600 pointer-events-none"
               />

@@ -1,5 +1,5 @@
 ---
-title: "The Ultimate Guide to HTML Minifier: Mastering the Markup of the Modern World"
+title: "lean Markup: Why and How You Should Minify Your Site's HTML"
 date: "2026-03-08"
 description: "Master your search rank. Comprehensive guide on why HTML Minification is vital for global SEO and speed, the science of markup scaling, and professional performance secrets."
 category: "Developer Tools"

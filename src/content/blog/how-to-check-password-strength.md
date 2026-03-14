@@ -1,5 +1,5 @@
 ---
-title: "How to Check Password Strength: The Ultimate Masterclass on Digital Security"
+title: "Beyond 123456: The Science of Password Strength and Security"
 description: "The most comprehensive guide to testing and improving password strength. Explore the technical science of entropy, brute-force resistance, and professional cybersecurity hygiene."
 date: "2024-04-14"
 category: "Security Tools"

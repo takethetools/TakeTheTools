@@ -1,5 +1,5 @@
 ---
-title: "The Ultimate Guide to Resizing Images Online: Precision, Quality, and SEO"
+title: "Scaling Without Distortion: The Science of High-Quality Image Resizing"
 date: "2026-03-08"
 description: "Master the art of image scaling. 2000+ words on aspect ratios, interpolation algorithms, and how to optimize your visuals for any device."
 category: "Image Tools"

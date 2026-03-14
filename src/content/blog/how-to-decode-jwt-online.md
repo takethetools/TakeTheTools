@@ -1,5 +1,5 @@
 ---
-title: "The Ultimate Guide to JWT Decoder: Mastering the Identity of the Modern World"
+title: "Decoding JWT: Inspecting JSON Web Tokens for Modern Authentication"
 date: "2026-03-08"
 description: "Master your API security. Comprehensive guide on why JWT Decoding is vital for global Auth and Identity, the science of claim scaling, and professional security secrets."
 category: "Developer Tools"

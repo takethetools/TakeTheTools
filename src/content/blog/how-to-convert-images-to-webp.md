@@ -1,5 +1,5 @@
 ---
-title: "How to Convert Images to WebP: The Ultimate Masterclass on Modern Web Performance"
+title: "Web Core Vitals: Transforming Your Library into High-Performance WebP"
 description: "The most comprehensive guide to converting images to the WebP format. Explore the technical superiority of WebP, lossy vs. lossless compression, SEO benefits, and professional asset delivery strategies."
 date: "2024-04-03"
 category: "Image Tools"

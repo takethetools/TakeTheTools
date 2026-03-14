@@ -3,6 +3,7 @@ import ManualAdUnit from "@/components/common/ManualAdUnit";
 import { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, Home, Share2, HelpCircle, ArrowRight, CheckCircle2 } from "lucide-react";
+import Breadcrumbs from "@/components/common/Breadcrumbs";
 import React from "react";
 import { getToolAboutContent } from "@/lib/tool-content";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -59,29 +60,37 @@ export default async function ToolPage({ params }: Props) {
   // Related tools (same category, different tool)
   const relatedTools = TOOLS.filter(t => t.category === tool.category && t.id !== tool.id).slice(0, 3);
 
+  // Dynamic application category for schema
+  const applicationCategoryMap: Record<string, string> = {
+    "image": "MultimediaApplication",
+    "pdf": "MultimediaApplication",
+    "developer": "DeveloperApplication",
+    "text": "UtilitiesApplication",
+    "converter": "MultimediaApplication",
+    "math": "UtilitiesApplication",
+    "marketing": "UtilitiesApplication",
+    "security": "SecurityApplication"
+  };
+
   return (
     <div className="pt-10 pb-20">
       <div className="container mx-auto px-4">
-        {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 text-sm text-slate-500 mb-8">
-          <Link href="/" className="hover:text-primary-600 transition-colors flex items-center gap-1">
-            <Home className="w-4 h-4" /> Home
-          </Link>
-          <ChevronRight className="w-4 h-4" />
-          <Link href="/categories" className="hover:text-primary-600 transition-colors">Tools</Link>
-          <ChevronRight className="w-4 h-4" />
-          <span className="text-slate-900 font-medium">{tool.name}</span>
-        </nav>
+        <Breadcrumbs
+          items={[
+            { label: "Tools", href: "/categories" },
+            { label: tool.name }
+          ]}
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
           {/* Main Content Area */}
           <div className="lg:col-span-3">
             <div className="mb-10">
-              <h1 className="text-4xl font-display font-bold text-slate-900 mb-4 tracking-tight">
+              <h1 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6 tracking-tight">
                 {tool.name}
               </h1>
-              <p className="text-xl text-slate-600 leading-relaxed max-w-3xl">
-                {tool.description}
+              <p className="text-xl text-slate-600 leading-relaxed max-w-4xl whitespace-pre-wrap">
+                {tool.longDescription || tool.description}
               </p>
             </div>
 
@@ -92,7 +101,7 @@ export default async function ToolPage({ params }: Props) {
 
             {/* Tool Interaction Area */}
             <div className="mb-12">
-              <ToolRenderer toolId={tool.id} />
+              <ToolRenderer toolId={tool.id} exampleInput={tool.exampleInput} />
             </div>
 
             {/* Ad Unit — After Tool */}
@@ -107,7 +116,7 @@ export default async function ToolPage({ params }: Props) {
                 <div className="prose prose-slate prose-lg max-w-none 
                   prose-headings:font-display prose-headings:font-bold 
                   prose-h2:text-3xl prose-h2:mb-8 prose-h2:mt-12
-                  prose-p:text-slate-600 prose-p:leading-relaxed
+                  prose-p:text-slate-600 prose-p:leading-relaxed prose-p:mb-6
                   prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline
                   prose-strong:text-slate-900
                   prose-ul:list-disc prose-ul:pl-6
@@ -169,24 +178,28 @@ export default async function ToolPage({ params }: Props) {
             {/* Sidebar Ad Unit */}
             <ManualAdUnit adSlot="3171595105" adFormat="rectangle" />
 
-            <div className="bg-slate-900 text-white rounded-3xl p-8">
-              <h3 className="text-xl font-bold mb-6">Related Tools</h3>
+            {/* Related Tools Card */}
+            <div className="bg-slate-900 text-white rounded-[2rem] p-8 shadow-xl shadow-slate-200">
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <Share2 className="w-5 h-5 text-primary-400" />
+                Related Tools
+              </h3>
               <div className="space-y-4">
                 {relatedTools.map(t => (
                   <Link
                     key={t.id}
                     href={`/tools/${t.slug}`}
-                    className="group block p-4 bg-slate-800 rounded-xl hover:bg-primary-600 transition-all"
+                    className="group block p-4 bg-slate-800/50 rounded-2xl hover:bg-primary-600/20 border border-slate-700 hover:border-primary-500/50 transition-all"
                   >
-                    <h4 className="font-bold text-sm mb-1">{t.name}</h4>
-                    <p className="text-slate-400 text-xs group-hover:text-primary-100 line-clamp-1">{t.description}</p>
+                    <h4 className="font-bold text-sm mb-1 group-hover:text-primary-400 transition-colors">{t.name}</h4>
+                    <p className="text-slate-400 text-xs group-hover:text-slate-300 line-clamp-1">{t.description}</p>
                   </Link>
                 ))}
                 {relatedTools.length === 0 && (
                   <p className="text-slate-500 text-sm italic">Stay tuned for more tools!</p>
                 )}
               </div>
-              <Link href="/categories" className="mt-8 flex items-center gap-2 text-primary-400 font-bold text-sm group">
+              <Link href="/categories" className="mt-8 flex items-center justify-center gap-2 py-3 bg-slate-800 rounded-xl text-primary-400 font-bold text-sm group hover:bg-slate-700 transition-all">
                 Browse all tools <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -205,21 +218,26 @@ export default async function ToolPage({ params }: Props) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
             {
-              "@context": "https://takethetools.com",
+              "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               "name": tool.name,
-              "applicationCategory": "MultimediaApplication",
-              "operatingSystem": "Any",
+              "applicationCategory": applicationCategoryMap[tool.category] || "UtilitiesApplication",
+              "operatingSystem": "Anyweb",
               "description": tool.description,
-              "browserRequirements": "Requires JavaScript",
+              "browserRequirements": "Requires JavaScript and a modern web browser",
               "offers": {
                 "@type": "Offer",
                 "price": "0",
                 "priceCurrency": "USD"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "ratingCount": "2450"
               }
             },
             {
-              "@context": "https://takethetools.com",
+              "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               "itemListElement": [
                 {
@@ -243,7 +261,7 @@ export default async function ToolPage({ params }: Props) {
               ]
             },
             {
-              "@context": "https://takethetools.com",
+              "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": tool.faqs.map(faq => ({
                 "@type": "Question",

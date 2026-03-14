@@ -74,10 +74,34 @@ export default function QrCodeGeneratorTool({ initialType = "text" }: QrCodeGene
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-bold text-slate-900 flex items-center gap-2">
-              <QrCode className="w-5 h-5 text-primary-600" />
-              {type.toUpperCase()} Details
-            </h3>
+            <div className="flex justify-between items-center">
+              <h3 className="font-bold text-slate-900 flex items-center gap-2">
+                <QrCode className="w-5 h-5 text-primary-600" />
+                {type.toUpperCase()} Details
+              </h3>
+              <div className="flex gap-4">
+                <button
+                  onClick={() => {
+                    setValue("");
+                    setWifi({ ssid: "", password: "", encryption: "WPA" });
+                    setVcard({ name: "", email: "", phone: "" });
+                  }}
+                  className="text-xs font-bold text-slate-400 hover:text-red-500 transition-colors uppercase tracking-wider"
+                >
+                  Clear
+                </button>
+                <button
+                  onClick={() => {
+                    if (type === "text") setValue("https://takethetools.com");
+                    if (type === "wifi") setWifi({ ssid: "My Awesome Network", password: "securepassword123", encryption: "WPA" });
+                    if (type === "vcard") setVcard({ name: "John Doe", email: "john@example.com", phone: "+1 234 567 890" });
+                  }}
+                  className="text-xs font-bold text-primary-500 hover:text-primary-600 transition-colors uppercase tracking-wider"
+                >
+                  Example
+                </button>
+              </div>
+            </div>
 
             {type === "text" && (
               <textarea

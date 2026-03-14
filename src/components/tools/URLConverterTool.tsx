@@ -1,82 +1,174 @@
 "use client";
 
 import { useState } from "react";
-import { Link, Copy, Check, Zap, ArrowRightLeft } from "lucide-react";
+import { Link, Copy, Check, ArrowRightLeft, AlertCircle, Globe, Download, Trash2 } from "lucide-react";
+import confetti from "canvas-confetti";
 import { cn } from "@/lib/utils";
 
 interface URLConverterToolProps {
-  mode: "encode" | "decode";
+    mode?: "encode" | "decode";
 }
 
-export default function URLConverterTool({ mode }: URLConverterToolProps) {
-  const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
-  const [isCopied, setIsCopied] = useState(false);
+export default function URLConverterTool({ mode: initialMode = "encode" }: URLConverterToolProps) {
+    const [input, setInput] = useState("");
+    const [output, setOutput] = useState("");
+    const [mode, setMode] = useState<"encode" | "decode">(initialMode);
+    const [error, setError] = useState<string | null>(null);
+    const [isCopied, setIsCopied] = useState(false);
 
-  const processUrl = () => {
-    try {
-      if (mode === "encode") {
-        setOutput(encodeURIComponent(input));
-      } else {
-        setOutput(decodeURIComponent(input));
-      }
-    } catch (err) {
-      setOutput("Invalid input for URL decoding.");
-    }
-  };
+    const process = () => {
+        setError(null);
+        try {
+            if (!input.trim()) return;
+            if (mode === "encode") {
+                const encoded = encodeURIComponent(input);
+                setOutput(encoded);
+            } else {
+                const decoded = decodeURIComponent(input);
+                setOutput(decoded);
+            }
+            confetti({
+                particleCount: 50,
+                spread: 60,
+                origin: { y: 0.8 },
+            });
+        } catch (e: unknown) {
+            setError(e instanceof Error ? e.message : "Invalid input for URL conversion");
+            setOutput("");
+        }
+    };
 
-  const copyResult = () => {
-    navigator.clipboard.writeText(output);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
-  };
+    const swap = () => {
+        setMode(mode === "encode" ? "decode" : "encode");
+        setInput(output);
+        setOutput("");
+        setError(null);
+    };
 
-  return (
-    <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-8">
-      <div className="flex items-center gap-3">
-        <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600">
-          <Link className="w-6 h-6" />
-        </div>
-        <div>
-          <h3 className="text-xl font-bold text-slate-900 capitalize">URL {mode}r</h3>
-          <p className="text-sm text-slate-500">Safe {mode}ing for URL parameters</p>
-        </div>
-      </div>
+    const copyToClipboard = () => {
+        if (!output) return;
+        navigator.clipboard.writeText(output);
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+    };
 
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2">Input URL/String</label>
-          <textarea 
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            className="w-full h-32 bg-slate-50 border border-slate-100 rounded-2xl p-6 font-mono text-sm text-slate-600 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
-            placeholder={mode === "encode" ? "Enter text to encode..." : "Enter URL-encoded text..."}
-          />
-        </div>
+    const downloadResult = () => {
+        if (!output) return;
+        const blob = new Blob([output], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = mode === "encode" ? "encoded-url.txt" : "decoded-url.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
 
-        <button 
-          onClick={processUrl}
-          className="w-full py-4 bg-primary-600 text-white rounded-2xl font-bold flex items-center justify-center gap-2"
-        >
-          <ArrowRightLeft className="w-5 h-5" />
-          {mode === "encode" ? "Encode URL" : "Decode URL"}
-        </button>
+    const clear = () => {
+        setInput("");
+        setOutput("");
+        setError(null);
+    };
 
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between px-2">
-               <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Result</label>
-               <button onClick={copyResult} className="text-primary-600 text-xs font-bold flex items-center gap-1 hover:underline">
-                 {isCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                 {isCopied ? "Copied" : "Copy"}
-               </button>
+    return (
+        <div className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                        <h3 className="font-bold text-slate-900 flex items-center gap-2">
+                            <Globe className="w-5 h-5 text-primary-600" />
+                            {mode === "encode" ? "Raw URL/Text" : "Encoded URL"}
+                        </h3>
+                        <div className="flex gap-4">
+                            <button
+                                onClick={() => setInput(mode === "encode" ? "https://takethetools.com/search?q=hello world & special characters!" : "https%3A%2F%2Ftakethetools.com%2Fsearch%3Fq%3Dhello%20world%20%26%20special%20characters%21")}
+                                className="text-xs font-bold text-primary-500 hover:text-primary-600 transition-colors uppercase tracking-wider"
+                            >
+                                Example
+                            </button>
+                            <button onClick={clear} className="text-xs font-bold text-slate-400 hover:text-red-500 transition-colors flex items-center gap-1 uppercase tracking-wider">
+                                <Trash2 className="w-3 h-3" /> Clear
+                            </button>
+                        </div>
+                    </div>
+                    <textarea
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        placeholder={mode === "encode" ? "Enter text or URL to encode..." : "Enter encoded URL to decode..."}
+                        className="w-full h-[300px] p-6 bg-white border border-slate-200 rounded-2xl font-mono text-sm focus:ring-2 focus:ring-primary-500 outline-none shadow-inner"
+                    />
+                </div>
+
+                <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                        <h3 className="font-bold text-slate-900">{mode === "encode" ? "Encoded Result" : "Decoded Result"}</h3>
+                        {output && (
+                            <div className="flex gap-2">
+                                <button
+                                    onClick={downloadResult}
+                                    className="p-1.5 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-all"
+                                    title="Download as .txt"
+                                >
+                                    <Download className="w-4 h-4" />
+                                </button>
+                                <button
+                                    onClick={copyToClipboard}
+                                    className={cn(
+                                        "flex items-center gap-2 px-3 py-1.5 rounded-lg font-bold text-xs transition-all",
+                                        isCopied ? "bg-green-100 text-green-700" : "bg-primary-100 text-primary-600 hover:bg-primary-200"
+                                    )}
+                                >
+                                    {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                                    {isCopied ? "Copied!" : "Copy"}
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                    <div className="relative h-[300px]">
+                        <textarea
+                            readOnly
+                            value={output}
+                            placeholder="Conversion result will appear here..."
+                            className="w-full h-full p-6 bg-slate-900 text-slate-300 border border-slate-800 rounded-2xl font-mono text-sm outline-none shadow-2xl"
+                        />
+                        {error && (
+                            <div className="absolute inset-x-0 top-0 p-4 bg-red-500/10 backdrop-blur-sm border-b border-red-500/20 text-red-400 text-xs flex items-start gap-2 rounded-t-2xl">
+                                <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                                <span>{error}</span>
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
-            <div className="w-full p-6 bg-slate-100 rounded-2xl font-mono text-sm text-slate-700 break-all border border-slate-200">
-               {output}
+
+            <div className="bg-white border border-slate-200 p-6 rounded-3xl flex flex-wrap items-center justify-between gap-6 shadow-sm">
+                <div className="flex items-center gap-4">
+                    <div className="flex bg-slate-100 p-1 rounded-xl">
+                        <button
+                            onClick={() => setMode("encode")}
+                            className={cn("px-4 py-2 rounded-lg text-sm font-bold transition-all", mode === "encode" ? "bg-white text-primary-600 shadow-sm" : "text-slate-500 hover:text-slate-700")}
+                        >
+                            Encode
+                        </button>
+                        <button
+                            onClick={() => setMode("decode")}
+                            className={cn("px-4 py-2 rounded-lg text-sm font-bold transition-all", mode === "decode" ? "bg-white text-primary-600 shadow-sm" : "text-slate-500 hover:text-slate-700")}
+                        >
+                            Decode
+                        </button>
+                    </div>
+                    <button onClick={swap} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200 text-slate-500 transition-colors" title="Swap Input/Output"><ArrowRightLeft className="w-4 h-4" /></button>
+                </div>
+
+                <button
+                    onClick={process}
+                    disabled={!input}
+                    className="px-10 py-3 bg-primary-600 text-white rounded-xl font-bold shadow-lg shadow-primary-500/20 hover:bg-primary-700 transition-all disabled:opacity-50"
+                >
+                    {mode === "encode" ? "Encode URL" : "Decode URL"}
+                </button>
             </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+        </div>
+    );
 }

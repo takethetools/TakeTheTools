@@ -1,5 +1,5 @@
 ---
-title: "How to Convert PDF to Word: The Ultimate Masterclass on Document Engineering"
+title: "Workflow Engineering: Converting Static PDFs into Dynamic Word Docs"
 description: "The most comprehensive guide to converting PDF documents to editable Microsoft Word files. Explore the technical science of structural reflow, OCR, and professional office productivity."
 date: "2024-04-08"
 category: "PDF Tools"

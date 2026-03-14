@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Type, Copy, Check, Zap, RefreshCw, Trash2, List, Scissors, Mail } from "lucide-react";
+import { Type, Copy, Check, Zap, RefreshCw, Trash2, List, Scissors, Mail, Download } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface TextProcessingToolProps {
   mode: "reverse" | "remove-duplicates" | "sort-lines" | "remove-whitespace" | "remove-empty-lines" | "add-prefix-suffix" | "remove-html" | "extract-emails" | "extract-urls";
@@ -39,6 +40,19 @@ export default function TextProcessingTool({ mode, prefix = "", suffix = "" }: T
       const urls = input.match(/(https?:\/\/[^\s]+)/g);
       setOutput(urls ? Array.from(new Set(urls)).join("\n") : "No URLs found");
     }
+  };
+
+  const downloadText = () => {
+    if (!output) return;
+    const blob = new Blob([output], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `processed-${mode}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const copyResult = () => {
@@ -94,11 +108,27 @@ export default function TextProcessingTool({ mode, prefix = "", suffix = "" }: T
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="space-y-2">
-          <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2">Source Text</label>
+          <div className="flex items-center justify-between px-2">
+            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2">Source Text</label>
+            <div className="flex gap-4">
+              <button
+                onClick={() => setInput("Hello World!\nApple\nBanana\nApple\nOrange\n\nVisit: https://takethetools.com\nContact: info@takethetools.com")}
+                className="text-xs font-bold text-primary-500 hover:text-primary-600 transition-colors uppercase tracking-wider"
+              >
+                Example
+              </button>
+              <button
+                onClick={() => setInput("")}
+                className="text-xs font-bold text-slate-400 hover:text-red-500 transition-colors uppercase tracking-wider"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="w-full h-80 bg-slate-50 border border-slate-100 rounded-2xl p-6 font-mono text-sm text-slate-600 focus:outline-none"
+            className="w-full h-80 bg-slate-50 border border-slate-100 rounded-2xl p-6 font-mono text-sm text-slate-600 focus:outline-none shadow-inner"
             placeholder="Enter or paste your text here..."
           />
         </div>
@@ -106,10 +136,15 @@ export default function TextProcessingTool({ mode, prefix = "", suffix = "" }: T
           <div className="flex items-center justify-between px-2">
             <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Result</label>
             {output && (
-              <button onClick={copyResult} className="text-primary-600 text-xs font-bold flex items-center gap-1">
-                {isCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                Copy
-              </button>
+              <div className="flex gap-4">
+                <button onClick={downloadText} className="text-slate-500 hover:text-primary-600 text-xs font-bold flex items-center gap-1 uppercase tracking-wider">
+                  <Download className="w-3 h-3" /> Download
+                </button>
+                <button onClick={copyResult} className="text-primary-600 text-xs font-bold flex items-center gap-1 uppercase tracking-wider">
+                  {isCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                  Copy
+                </button>
+              </div>
             )}
           </div>
           <textarea

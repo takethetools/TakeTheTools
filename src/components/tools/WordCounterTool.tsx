@@ -1,12 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Type } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ToolActionBar from "./shared/ToolActionBar";
 
-export default function WordCounterTool() {
+interface WordCounterToolProps {
+  exampleInput?: string;
+}
+
+export default function WordCounterTool({ exampleInput }: WordCounterToolProps) {
   const [text, setText] = useState("");
   const [isCopied, setIsCopied] = useState(false);
+
+  useEffect(() => {
+    if (exampleInput && !text) {
+      // Auto-load example if provided and input is empty (optional behavior)
+      // For now, we just make it available via the button
+    }
+  }, [exampleInput]);
 
   const stats = {
     words: text.trim() ? text.trim().split(/\s+/).length : 0,
@@ -17,9 +29,29 @@ export default function WordCounterTool() {
   };
 
   const copy = () => {
+    if (!text) return;
     navigator.clipboard.writeText(text);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
+  };
+
+  const download = () => {
+    if (!text) return;
+    const blob = new Blob([text], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "word-count-result.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const loadExample = () => {
+    if (exampleInput) {
+      setText(exampleInput);
+    }
   };
 
   return (
@@ -40,18 +72,17 @@ export default function WordCounterTool() {
       </div>
 
       <div className="space-y-4">
-        <div className="flex justify-between items-center">
-          <h3 className="font-bold text-slate-900 flex items-center gap-2">
-            <Type className="w-5 h-5 text-primary-600" />
-            Your Text
-          </h3>
-          <div className="flex gap-4">
-            <button onClick={() => setText("")} className="text-xs font-bold text-slate-400 hover:text-red-500 transition-colors">Clear</button>
-            <button onClick={copy} className="text-xs font-bold text-primary-500 hover:text-primary-600 transition-colors">
-              {isCopied ? "Copied!" : "Copy Text"}
-            </button>
-          </div>
-        </div>
+        <ToolActionBar
+          title="Your Text Analysis"
+          hasInput={!!text}
+          hasOutput={!!text}
+          isCopied={isCopied}
+          onClear={() => setText("")}
+          onCopy={copy}
+          onDownload={download}
+          onExample={exampleInput ? loadExample : undefined}
+        />
+
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}

@@ -1,11 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { Copy, Check, Trash2, FileJson, AlertCircle, Maximize2, Minimize2, Download } from "lucide-react";
+import { useState, useEffect } from "react";
+import { FileJson, AlertCircle, Maximize2, Minimize2 } from "lucide-react";
 import confetti from "canvas-confetti";
 import { cn } from "@/lib/utils";
+import ToolActionBar from "./shared/ToolActionBar";
 
-export default function JsonFormatterTool() {
+interface JsonFormatterToolProps {
+  exampleInput?: string;
+}
+
+export default function JsonFormatterTool({ exampleInput }: JsonFormatterToolProps) {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -57,7 +62,10 @@ export default function JsonFormatterTool() {
     const a = document.createElement("a");
     a.href = url;
     a.download = "formatted.json";
+    document.body.appendChild(a);
     a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const clear = () => {
@@ -66,68 +74,49 @@ export default function JsonFormatterTool() {
     setError(null);
   };
 
+  const loadExample = () => {
+    if (exampleInput) {
+      setInput(exampleInput);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Input Area */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="font-bold text-slate-900 flex items-center gap-2">
-              <FileJson className="w-5 h-5 text-primary-600" />
-              Input JSON
-            </h3>
-            <button 
-              onClick={clear}
-              className="text-xs font-bold text-slate-400 hover:text-red-500 transition-colors flex items-center gap-1"
-            >
-              <Trash2 className="w-3 h-3" /> Clear
-            </button>
-          </div>
+          <ToolActionBar
+            title="Input JSON Source"
+            hasInput={!!input}
+            onClear={clear}
+            onExample={exampleInput ? loadExample : undefined}
+          />
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder='Paste your JSON here... e.g. {"name": "John", "age": 30}'
-            className="w-full h-[400px] p-6 bg-white border border-slate-200 rounded-2xl font-mono text-sm focus:ring-2 focus:ring-primary-500 outline-none shadow-inner"
+            placeholder='Paste your JSON content here...'
+            className="w-full h-[400px] p-6 bg-white border border-slate-200 rounded-3xl font-mono text-sm focus:ring-4 focus:ring-primary-100 outline-none shadow-inner transition-all"
           />
         </div>
 
         {/* Output Area */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="font-bold text-slate-900">Result</h3>
-            <div className="flex gap-2">
-              {output && (
-                <>
-                  <button 
-                    onClick={downloadJson}
-                    className="p-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-all"
-                    title="Download JSON"
-                  >
-                    <Download className="w-4 h-4" />
-                  </button>
-                  <button 
-                    onClick={copyToClipboard}
-                    className={cn(
-                      "flex items-center gap-2 px-3 py-1.5 rounded-lg font-bold text-xs transition-all",
-                      isCopied ? "bg-green-100 text-green-700" : "bg-primary-100 text-primary-600 hover:bg-primary-200"
-                    )}
-                  >
-                    {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                    {isCopied ? "Copied!" : "Copy Result"}
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
+          <ToolActionBar
+            title="Formatted Result"
+            hasOutput={!!output}
+            isCopied={isCopied}
+            onCopy={copyToClipboard}
+            onDownload={downloadJson}
+          />
           <div className="relative group h-[400px]">
             <textarea
               readOnly
               value={output}
-              placeholder="Formatted JSON will appear here..."
-              className="w-full h-full p-6 bg-slate-900 text-slate-300 border border-slate-800 rounded-2xl font-mono text-sm outline-none shadow-2xl"
+              placeholder="Your formatted JSON will appear here..."
+              className="w-full h-full p-6 bg-slate-900 text-slate-300 border border-slate-800 rounded-3xl font-mono text-sm outline-none shadow-2xl"
             />
             {error && (
-              <div className="absolute inset-x-0 top-0 p-4 bg-red-500/10 backdrop-blur-sm border-b border-red-500/20 text-red-400 text-xs flex items-start gap-2 rounded-t-2xl animate-in slide-in-from-top-2">
+              <div className="absolute inset-x-0 top-0 p-4 bg-red-500/10 backdrop-blur-sm border-b border-red-500/20 text-red-400 text-xs flex items-start gap-2 rounded-t-3xl animate-in slide-in-from-top-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{error}</span>
               </div>
@@ -137,14 +126,14 @@ export default function JsonFormatterTool() {
       </div>
 
       {/* Control Bar */}
-      <div className="bg-white border border-slate-200 p-6 rounded-3xl flex flex-wrap items-center justify-between gap-6 shadow-sm">
+      <div className="bg-white border border-slate-200 p-8 rounded-[2.5rem] flex flex-wrap items-center justify-between gap-6 shadow-sm">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-3">
-            <span className="text-sm font-bold text-slate-500 uppercase tracking-wider">Indent</span>
-            <select 
-              value={indent} 
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Indentation</span>
+            <select
+              value={indent}
               onChange={(e) => setIndent(parseInt(e.target.value))}
-              className="bg-slate-100 border-none rounded-lg px-3 py-1 text-sm font-bold outline-none ring-primary-500 focus:ring-2"
+              className="bg-slate-100 border-none rounded-xl px-4 py-2 text-sm font-bold outline-none ring-primary-500 focus:ring-2 cursor-pointer transition-all"
             >
               <option value={2}>2 Spaces</option>
               <option value={4}>4 Spaces</option>
@@ -154,17 +143,17 @@ export default function JsonFormatterTool() {
         </div>
 
         <div className="flex gap-4 w-full md:w-auto">
-          <button 
+          <button
             onClick={minifyJson}
             disabled={!input}
-            className="flex-grow md:flex-grow-0 px-6 py-3 bg-white border border-slate-200 text-slate-900 rounded-xl font-bold hover:bg-slate-50 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            className="flex-grow md:flex-grow-0 px-8 py-4 bg-white border border-slate-200 text-slate-900 rounded-2xl font-bold hover:bg-slate-50 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
           >
             <Minimize2 className="w-5 h-5" /> Minify
           </button>
-          <button 
+          <button
             onClick={formatJson}
             disabled={!input}
-            className="flex-grow md:flex-grow-0 px-10 py-3 bg-primary-600 text-white rounded-xl font-bold shadow-lg shadow-primary-500/20 hover:bg-primary-700 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            className="flex-grow md:flex-grow-0 px-12 py-4 bg-primary-600 text-white rounded-2xl font-bold shadow-xl shadow-primary-500/20 hover:bg-primary-700 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
           >
             <Maximize2 className="w-5 h-5" /> Format JSON
           </button>

@@ -48,8 +48,8 @@ export default function ImageCropperTool() {
 
     const rotRad = (rotation * Math.PI) / 180;
     const { width: bBoxWidth, height: bBoxHeight } = {
-        width: Math.abs(Math.cos(rotRad) * image.width) + Math.abs(Math.sin(rotRad) * image.height),
-        height: Math.abs(Math.sin(rotRad) * image.width) + Math.abs(Math.cos(rotRad) * image.height),
+      width: Math.abs(Math.cos(rotRad) * image.width) + Math.abs(Math.sin(rotRad) * image.height),
+      height: Math.abs(Math.sin(rotRad) * image.width) + Math.abs(Math.cos(rotRad) * image.height),
     };
 
     canvas.width = bBoxWidth;
@@ -163,7 +163,7 @@ export default function ImageCropperTool() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button 
+              <button
                 onClick={handleDownload}
                 disabled={isProcessing}
                 className="flex-grow flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 text-white rounded-xl font-bold shadow-lg shadow-primary-500/20 hover:bg-primary-700 transition-all disabled:opacity-50"
@@ -171,18 +171,27 @@ export default function ImageCropperTool() {
                 {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <CropIcon className="w-5 h-5" />}
                 {isProcessing ? "Processing..." : "Crop and Download"}
               </button>
-              <button 
-                onClick={() => setRotation(0)}
-                className="px-6 py-4 bg-slate-100 text-slate-600 rounded-xl font-bold hover:bg-slate-200 transition-all flex items-center justify-center gap-2"
-                title="Reset Rotation"
+              <button
+                onClick={async () => {
+                  try {
+                    const response = await fetch("https://picsum.photos/1200/800");
+                    const blob = await response.blob();
+                    const reader = new FileReader();
+                    reader.onload = () => setImage(reader.result as string);
+                    reader.readAsDataURL(blob);
+                  } catch (e) {
+                    console.error("Failed to load example image", e);
+                  }
+                }}
+                className="px-6 py-4 bg-white border border-slate-200 text-primary-600 rounded-xl font-bold hover:bg-primary-50 transition-all flex items-center justify-center gap-2"
               >
-                <RotateCcw className="w-5 h-5" />
+                Example
               </button>
-              <button 
+              <button
                 onClick={clear}
                 className="px-8 py-4 bg-slate-100 text-slate-600 rounded-xl font-bold hover:bg-slate-200 transition-all flex items-center justify-center gap-2"
               >
-                <RefreshCw className="w-5 h-5" /> Start Over
+                <RefreshCw className="w-5 h-5" /> Clear
               </button>
             </div>
           </div>

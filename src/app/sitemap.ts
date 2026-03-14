@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { TOOLS } from "@/lib/tools";
+import { TOOLS, CATEGORIES } from "@/lib/tools";
 import { getSortedPostsData } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -21,10 +21,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  // Categories (Need to extract unique categories)
-  const categories = Array.from(new Set(TOOLS.map((t) => t.category)));
-  const categoryRoutes = categories.map((cat) => ({
-    url: `${baseUrl}/categories/${cat}`,
+  // Categories
+  const categoryRoutes = CATEGORIES.map((cat) => ({
+    url: `${baseUrl}/categories/${cat.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.6,

@@ -1,5 +1,5 @@
 ---
-title: "How to Split PDF Online: The Ultimate Masterclass on Document Deconstruction"
+title: "Granular Control: How to Precisely Split and Organize PDF Pages"
 description: "The most comprehensive guide to splitting large PDF documents into smaller, targeted files. Explore the technical science of page extraction, document surgical-analysis, and professional office productivity."
 date: "2024-04-12"
 category: "PDF Tools"

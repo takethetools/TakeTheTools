@@ -1,5 +1,5 @@
 ---
-title: "The Ultimate Guide to Word Counting: Writing Precision in the Digital Age"
+title: "Drafting Efficiency: The Professional's Way to Count Words and Characters"
 date: "2026-03-08"
 description: "Master your message with our 2000+ words deep dive into word counts, SEO information density, and the science of reading time."
 category: "Text Tools"

@@ -1,5 +1,6 @@
 import { Shield, Zap, Globe, Heart, Rocket, Target, Users, CheckCircle2 } from "lucide-react";
 import { Metadata } from "next";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
 
 export const metadata: Metadata = {
   title: "About Us - TakeThe Tools | Our Mission & Story",
@@ -60,7 +61,7 @@ export default function AboutPage() {
     <div className="pt-32 pb-20">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          
+
           {/* Hero Section */}
           <div className="text-center mb-24">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 rounded-full text-primary-600 font-medium text-sm mb-6 border border-primary-100">
@@ -73,6 +74,9 @@ export default function AboutPage() {
             <p className="text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
               Welcome to TakeThe Tools, your all-in-one destination for high-performance, free, and secure online tools. We're on a mission to simplify the way you work with files and data.
             </p>
+            <div className="mt-12 flex justify-center">
+              <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+            </div>
           </div>
 
           {/* Our Story / Mission */}
@@ -113,6 +117,9 @@ export default function AboutPage() {
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Core Values</h2>
               <p className="text-slate-500 max-w-xl mx-auto">The principles that guide everything we build at TakeThe Tools.</p>
+              <div className="mt-8 flex justify-center">
+                <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+              </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {values.map((v, i) => (
@@ -133,9 +140,9 @@ export default function AboutPage() {
           <div className="bg-slate-900 rounded-[40px] p-12 md:p-20 text-center text-white mb-32 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary-600/20 blur-[100px] -mr-32 -mt-32"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-600/20 blur-[100px] -ml-32 -mb-32"></div>
-            
+
             <h2 className="text-3xl md:text-5xl font-bold mb-12 relative z-10">Trusted by Global Users</h2>
-            
+
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
               <div>
                 <p className="text-4xl md:text-5xl font-bold text-primary-400 mb-2">100+</p>
@@ -162,6 +169,9 @@ export default function AboutPage() {
             <p className="text-slate-600 mb-10 max-w-xl mx-auto italic text-lg">
               "We're constantly evolving and adding new tools based on user feedback. If there's a tool you need, we'll build it for you."
             </p>
+            <div className="mb-12 flex justify-center">
+              <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+            </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="/tools" className="w-full sm:w-auto px-8 py-4 bg-primary-600 text-white rounded-2xl font-bold hover:bg-primary-700 transition-all shadow-lg shadow-primary-200">
                 Explore All Tools

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Zap, Search, ImageIcon, FileText, Code, Type, Video, ArrowRight, Star, Calculator, Target, Shield, LayoutGrid } from "lucide-react";
+import { Zap, Search, ImageIcon, FileText, Code, Type, Video, ArrowRight, Star, Calculator, Target, Shield, LayoutGrid, Clock, HelpCircle } from "lucide-react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 import { CATEGORIES, TOOLS } from "@/lib/tools";
 import React from "react";
@@ -94,14 +94,14 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {popularTools.map((tool) => (
+            {popularTools.slice(0, 8).map((tool) => (
               <Link
                 key={tool.id}
                 href={`/tools/${tool.slug}`}
-                className="block p-6 bg-white rounded-2xl border border-slate-100 hover:shadow-lg transition-all"
+                className="block p-6 bg-white rounded-2xl border border-slate-100 hover:shadow-lg transition-all group"
               >
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 bg-primary-50 rounded-xl text-primary-600">
+                  <div className="p-3 bg-primary-50 rounded-xl text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-colors">
                     <Zap className="w-5 h-5 fill-current" />
                   </div>
                   <h3 className="font-bold text-slate-800">{tool.name}</h3>
@@ -116,11 +116,88 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Bottom Feed Ad */}
+        {/* Mid-Feed Ad */}
         <div className="mt-16 flex justify-center">
           <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
         </div>
       </section>
+
+      {/* Latest Tools Section */}
+      <section className="container mx-auto px-4">
+        <div className="flex justify-between items-end mb-12">
+          <div>
+            <h2 className="text-3xl font-display font-bold text-slate-900 mb-2">Latest additions</h2>
+            <p className="text-slate-500">Newest tools added to our platform recently</p>
+          </div>
+          <div className="flex items-center gap-2 text-primary-600 font-bold">
+            <Clock className="w-5 h-5" /> Updated daily
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {TOOLS.slice(-3).map((tool) => (
+            <Link
+              key={tool.id}
+              href={`/tools/${tool.slug}`}
+              className="group flex gap-6 p-8 bg-white rounded-3xl border border-slate-100 hover:border-primary-200 transition-all"
+            >
+              <div className="w-16 h-16 shrink-0 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors">
+                <Zap className="w-8 h-8" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">{tool.name}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed line-clamp-2">{tool.description}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="bg-slate-900 py-24 text-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-4xl font-display font-bold mb-6">Frequently Asked Questions</h2>
+            <p className="text-slate-400 text-lg">Everything you need to know about TakeTheTools and our free services.</p>
+          </div>
+
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            {[
+              {
+                q: "Are these tools really free?",
+                a: "Yes, 100% free! We believe in providing high-quality digital utilities to everyone without any hidden costs or subscriptions."
+              },
+              {
+                q: "Do you store my files?",
+                a: "No. Most of our tools process your data directly in your browser. For others, files are processed in secure, ephemeral environments and deleted immediately after."
+              },
+              {
+                q: "Is there a limit on usage?",
+                a: "Currently, there are no strict limits on how many times you can use our tools daily. We aim for maximum availability for all users."
+              },
+              {
+                q: "Do I need to create an account?",
+                a: "No registration is required. You can start using any tool on the site instantly."
+              }
+            ].map((faq, i) => (
+              <div key={i} className="group">
+                <div className="flex gap-4 mb-4">
+                  <div className="w-8 h-8 rounded-full bg-primary-600/20 flex items-center justify-center text-primary-400 shrink-0">
+                    <HelpCircle className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-xl font-bold font-display">{faq.q}</h3>
+                </div>
+                <p className="text-slate-400 leading-relaxed pl-12">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final Bottom Ad */}
+      <div className="flex justify-center">
+        <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+      </div>
 
     </div>
   );

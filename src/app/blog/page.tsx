@@ -56,11 +56,25 @@ export default function BlogPage() {
                 href={`/blog/${posts[0].slug}`}
                 className="group grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-primary-100/30 transition-all"
               >
-                <div
-                  className="h-72 lg:h-full bg-slate-100 overflow-hidden flex items-center justify-center"
-                  style={{ backgroundImage: `url(${posts[0].image})`, backgroundSize: "cover", backgroundPosition: "center" }}
-                >
-                  {!posts[0].image && <Tag className="w-16 h-16 text-slate-200 opacity-40" />}
+                {/* Featured Post Cover */}
+                <div className={`h-72 lg:h-full relative overflow-hidden flex items-center justify-center p-8 group-hover:scale-[1.02] transition-transform duration-700`}>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${posts[0].category === 'Image Tools' ? 'from-pink-500 to-rose-600' :
+                    posts[0].category === 'PDF Tools' ? 'from-amber-400 to-orange-600' :
+                      posts[0].category === 'Developer Tools' ? 'from-blue-500 to-indigo-700' :
+                        posts[0].category === 'Text Tools' ? 'from-slate-600 to-slate-800' :
+                          posts[0].category === 'Security & Privacy' ? 'from-red-500 to-red-800' :
+                            posts[0].category === 'Math & Calculators' ? 'from-green-500 to-emerald-700' :
+                              posts[0].category === 'Marketing & Social' ? 'from-orange-400 to-red-600' :
+                                'from-primary-500 to-primary-700'
+                    }`}></div>
+                  <div className="relative z-10 flex flex-col items-center gap-4 text-center">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl border border-white/30 flex items-center justify-center shadow-lg">
+                      <Tag className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-white font-display font-bold text-2xl drop-shadow-md leading-tight max-w-xs">
+                      {posts[0].toolName || posts[0].title.split(':')[0]}
+                    </h3>
+                  </div>
                 </div>
                 <div className="p-10 lg:p-12 flex flex-col justify-center">
                   <div className="flex items-center gap-4 mb-6">
@@ -74,7 +88,7 @@ export default function BlogPage() {
                   <h2 className="text-3xl font-bold text-slate-900 mb-4 group-hover:text-primary-600 transition-colors leading-tight">
                     {posts[0].title}
                   </h2>
-                  <p className="text-slate-500 mb-8 leading-relaxed line-clamp-3">
+                  <p className="text-slate-500 mb-8 leading-relaxed line-clamp-3 whitespace-pre-wrap">
                     {posts[0].description}
                   </p>
                   <span className="text-primary-600 font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
@@ -99,16 +113,25 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group bg-white rounded-3xl border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-primary-100/20 transition-all flex flex-col"
               >
-                {/* Cover Image */}
-                <div
-                  className="h-48 bg-slate-100 overflow-hidden"
-                  style={post.image ? { backgroundImage: `url(${post.image})`, backgroundSize: "cover", backgroundPosition: "center" } : {}}
-                >
-                  {!post.image && (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100 group-hover:from-primary-100 group-hover:to-primary-200 transition-all">
-                      <Tag className="w-12 h-12 text-primary-300" />
+                {/* Cover Interface */}
+                <div className="h-48 relative overflow-hidden flex items-center justify-center p-6 grayscale-[0.5] group-hover:grayscale-0 transition-all duration-500">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${post.category === 'Image Tools' ? 'from-pink-500 to-rose-600' :
+                    post.category === 'PDF Tools' ? 'from-amber-400 to-orange-600' :
+                      post.category === 'Developer Tools' ? 'from-blue-500 to-indigo-700' :
+                        post.category === 'Text Tools' ? 'from-slate-600 to-slate-800' :
+                          post.category === 'Security & Privacy' ? 'from-red-500 to-red-800' :
+                            post.category === 'Math & Calculators' ? 'from-green-500 to-emerald-700' :
+                              post.category === 'Marketing & Social' ? 'from-orange-400 to-red-600' :
+                                'from-primary-500 to-primary-700'
+                    }`}></div>
+                  <div className="relative z-10 flex flex-col items-center gap-3 text-center">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl border border-white/30 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <Tag className="w-6 h-6 text-white" />
                     </div>
-                  )}
+                    <h3 className="text-white font-display font-bold text-lg drop-shadow-md leading-tight line-clamp-1">
+                      {post.toolName || post.title.split(':')[0]}
+                    </h3>
+                  </div>
                 </div>
 
                 <div className="p-8 flex-grow flex flex-col">
@@ -123,7 +146,7 @@ export default function BlogPage() {
                   <h2 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-primary-600 transition-colors line-clamp-2">
                     {post.title}
                   </h2>
-                  <p className="text-slate-500 mb-6 line-clamp-3 flex-grow text-sm leading-relaxed">
+                  <p className="text-slate-500 mb-6 line-clamp-3 flex-grow text-sm leading-relaxed whitespace-pre-wrap">
                     {post.description}
                   </p>
                   <span className="text-primary-600 font-bold flex items-center gap-1 group-hover:gap-2 transition-all text-sm">

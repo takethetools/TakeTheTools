@@ -1,5 +1,5 @@
 ---
-title: "How to Merge PDF Files Online: The Ultimate Masterclass on Document Assembly"
+title: "Document Unification: The Best Way to Merge Multiple PDFs Online"
 description: "The most comprehensive guide to merging multiple PDF documents into a single, cohesive file. Explore the technical science of Xref tables, document concatenation, and professional office productivity."
 date: "2024-04-11"
 category: "PDF Tools"

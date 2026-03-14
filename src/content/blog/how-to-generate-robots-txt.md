@@ -1,5 +1,5 @@
 ---
-title: "The Ultimate Guide to Robots.txt Generator: Mastering the Crawlers of the Modern World"
+title: "Crawler Optimization: Controlling How Search Engines Index Your Site"
 date: "2026-03-08"
 description: "Master your technical SEO. Comprehensive guide on why Robots.txt is vital for global Search and AI, the science of Crawl scaling, and professional dev secrets."
 category: "Developer Tools"

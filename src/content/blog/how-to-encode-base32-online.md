@@ -1,5 +1,5 @@
 ---
-title: "How to Encode Base32 Online: The Ultimate Masterclass on Human-Readable Data"
+title: "Human-Centric Encoding: A Professional's Guide to Base32 Representation"
 description: "The most comprehensive guide to Base32 encoding. Explore the technical science of bit-stream partitioning, TOTP security, and professional restricted-alphabet data management."
 date: "2024-04-16"
 category: "Security Tools"

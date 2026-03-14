@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Container, Server, Copy, Check, Zap, RotateCcw } from "lucide-react";
+import { Container, Server, Copy, Check, Zap, RotateCcw, Download, Trash2, FileCode } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface DevGeneratorToolProps {
@@ -63,6 +63,25 @@ server {
         }
     };
 
+    const downloadResult = () => {
+        if (!result) return;
+        const blob = new Blob([result], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = mode === "docker" ? "Dockerfile" : "nginx.conf";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
+    const clear = () => {
+        setResult(null);
+        if (mode === "docker") setConfig({ runtime: "node", port: "3000" });
+        else setConfig({ domain: "example.com", proxyPass: "http://localhost:3000" });
+    };
+
     const copyResult = () => {
         if (!result) return;
         navigator.clipboard.writeText(result);
@@ -76,8 +95,28 @@ server {
                 <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600">
                     {mode === "docker" ? <Container className="w-6 h-6" /> : <Server className="w-6 h-6" />}
                 </div>
-                <div>
-                    <h3 className="text-xl font-bold text-slate-900 capitalize">{mode} Config Generator</h3>
+                <div className="flex-grow">
+                    <div className="flex justify-between items-center mb-1">
+                        <h3 className="text-xl font-bold text-slate-900 capitalize">{mode} Config Generator</h3>
+                        <div className="flex gap-4">
+                            <button
+                                onClick={() => {
+                                    if (mode === "docker") setConfig({ runtime: "node", port: "8080" });
+                                    else setConfig({ domain: "takethetools.com", proxyPass: "http://localhost:8080" });
+                                    setTimeout(generate, 0); // Trigger generate next tick
+                                }}
+                                className="text-xs font-bold text-primary-500 hover:text-primary-600 transition-colors uppercase tracking-wider"
+                            >
+                                Example
+                            </button>
+                            <button
+                                onClick={clear}
+                                className="text-xs font-bold text-slate-400 hover:text-red-500 transition-colors flex items-center gap-1 uppercase tracking-wider"
+                            >
+                                <Trash2 className="w-3 h-3" /> Clear
+                            </button>
+                        </div>
+                    </div>
                     <p className="text-sm text-slate-500">Generate production-ready configurations</p>
                 </div>
             </div>
@@ -139,11 +178,16 @@ server {
             {result && (
                 <div className="space-y-4">
                     <div className="flex items-center justify-between px-2">
-                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Generated {mode}file</label>
-                        <button onClick={copyResult} className="text-primary-600 text-xs font-bold flex items-center gap-1">
-                            {isCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                            Copy
-                        </button>
+                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Generated {mode === 'docker' ? 'Dockerfile' : 'nginx.conf'}</label>
+                        <div className="flex gap-4">
+                            <button onClick={downloadResult} className="text-slate-500 hover:text-primary-600 text-xs font-bold flex items-center gap-1 uppercase tracking-wider">
+                                <Download className="w-3 h-3" /> Download
+                            </button>
+                            <button onClick={copyResult} className="text-primary-600 text-xs font-bold flex items-center gap-1 uppercase tracking-wider">
+                                {isCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                                {isCopied ? "Copied!" : "Copy"}
+                            </button>
+                        </div>
                     </div>
                     <pre className="p-6 bg-slate-900 rounded-2xl text-blue-100 font-mono text-xs overflow-x-auto whitespace-pre">
                         {result}

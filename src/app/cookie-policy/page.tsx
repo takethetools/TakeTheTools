@@ -1,5 +1,6 @@
 import { Cookie, Shield, Eye, ShieldCheck, Info } from "lucide-react";
 import { Metadata } from "next";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
 
 export const metadata: Metadata = {
     title: "Cookie Policy - TakeThe Tools",
@@ -43,6 +44,9 @@ export default function CookiePolicyPage() {
                     <p className="text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
                         This policy explains how we use cookies and similar technologies to provide a better, more secure experience.
                     </p>
+                    <div className="mt-12 flex justify-center">
+                        <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+                    </div>
                 </div>
 
                 <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 md:p-12 mb-16">
@@ -89,6 +93,9 @@ export default function CookiePolicyPage() {
                 <div className="text-center text-slate-400 text-sm">
                     <p>TakeThe Tools &copy; 2026. All rights reserved.</p>
                     <p className="mt-1">Last updated: March 9, 2026</p>
+                </div>
+                <div className="mt-12 flex justify-center">
+                    <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
                 </div>
             </div>
         </div>

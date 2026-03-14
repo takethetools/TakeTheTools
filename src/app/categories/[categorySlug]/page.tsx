@@ -1,6 +1,7 @@
 import { ToolCategory, CATEGORIES, TOOLS } from "@/lib/tools";
 import Link from "next/link";
 import { ArrowRight, ChevronRight, Home } from "lucide-react";
+import Breadcrumbs from "@/components/common/Breadcrumbs";
 import { Metadata } from "next";
 import React from "react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
@@ -41,16 +42,12 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   return (
     <div className="pt-10 pb-20">
       <div className="container mx-auto px-4">
-        {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 text-sm text-slate-500 mb-8">
-          <Link href="/" className="hover:text-primary-600 transition-colors flex items-center gap-1">
-            <Home className="w-4 h-4" /> Home
-          </Link>
-          <ChevronRight className="w-4 h-4" />
-          <span className="text-slate-900 font-medium">Categories</span>
-          <ChevronRight className="w-4 h-4" />
-          <span className="text-slate-900 font-medium">{category.name}</span>
-        </nav>
+        <Breadcrumbs
+          items={[
+            { label: "Categories", href: "/categories" },
+            { label: category.name }
+          ]}
+        />
 
         <div className="max-w-4xl mb-16">
           <h1 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6 tracking-tight">
@@ -93,22 +90,22 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           )}
         </div>
 
-        {/* Footer Ad */}
-        <div className="mt-16 flex justify-center">
+        {/* Mid Ad */}
+        <div className="mt-16 mb-16 flex justify-center">
           <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
         </div>
 
-
         {/* SEO Content Section */}
-        <div className="mt-24 prose prose-slate max-w-none">
-          <h2 className="text-2xl font-bold mb-6">About {category.name}</h2>
+        <div className="mt-24 prose prose-slate max-w-none bg-slate-50 p-10 rounded-3xl border border-slate-100">
+          <h2 className="text-2xl font-bold mb-6">Master Your Workflow with {category.name}</h2>
           <p className="text-slate-600 mb-4">
-            Our {category.name} collection is designed to provide you with high-performance, easy-to-use solutions for your daily digital tasks.
-            Whether you are a developer, designer, or just looking to quickly edit a file, our tools are optimized for speed and accuracy.
+            Our comprehensive collection of **{category.name}** is meticulously crafted to empower digital professionals, students, and casual users alike. In today's fast-paced digital landscape, having the right tools at your fingertips is essential for efficiency and precision. We provide a robust suite of high-performance, web-based utilities that eliminate the need for cumbersome software installations or expensive subscriptions. Each tool in this category is optimized for speed, security, and ease of use, ensuring that you can complete your tasks in seconds.
+          </p>
+          <p className="text-slate-600 mb-4">
+            From complex data transformations to simple file edits, our platform handles the heavy lifting directly in your browser. This means your data stays private and secure, never leaving your device. We are proud to serve a global community across the United States, United Kingdom, Canada, Australia, and throughout Europe. Our infrastructure is fine-tuned to deliver exceptionally fast response times, regardless of your geographic location, making us the go-to destination for reliable digital tools.
           </p>
           <p className="text-slate-600">
-            We support users globally from the US, UK, Canada, Europe, and Australia, ensuring that our servers are optimized for fast response times regardless of your location.
-            All tools are free to use and do not require any registration or software installation.
+            Whether you are a developer looking to streamline your coding process, a marketer optimizing content for SEO, or an individual simply needing to convert a document, our {category.name} are here to help. Explore our full range of tools today and experience the power of professional-grade utilities, completely free. We are constantly updating our library based on user feedback to ensure we meet the evolving needs of the global tech community.
           </p>
         </div>
       </div>

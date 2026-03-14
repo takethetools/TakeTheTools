@@ -1,5 +1,5 @@
 ---
-title: "How to Decode Base32 Online: The Ultimate Masterclass on Data Restoration"
+title: "Data Reconstruction: Reversing Base32 Back into Original Values"
 description: "The most comprehensive guide to Base32 decoding. Explore the technical science of bit-stream reconstruction, TOTP secret restoration, and professional restricted-alphabet data management."
 date: "2024-04-17"
 category: "Security Tools"

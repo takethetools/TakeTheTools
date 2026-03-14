@@ -1,5 +1,5 @@
 ---
-title: "How to Generate SHA1 Hash: The Ultimate Guide to Secure Hash Algorithm 1"
+title: "Legacy Security: Understanding SHA1 and Its Modern Use Cases"
 description: "Master the art of generating SHA-1 hashes for version control and data identification. Learn the 160-bit architecture, Git integration, and professional software engineering applications."
 date: "2024-03-26"
 category: "Security"

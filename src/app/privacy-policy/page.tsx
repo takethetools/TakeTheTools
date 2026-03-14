@@ -1,5 +1,6 @@
 import { Shield, Lock, Eye, FileText } from "lucide-react";
 import { Metadata } from "next";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
 
 export const metadata: Metadata = {
   title: "Privacy Policy - TakeThe Tools",
@@ -43,6 +44,9 @@ export default function PrivacyPage() {
           <p className="text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
             Your trust is our most valuable asset. Here is how we keep your data safe and private.
           </p>
+          <div className="mt-12 flex justify-center">
+            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
@@ -73,6 +77,9 @@ export default function PrivacyPage() {
             We may update this policy periodically to reflect changes in our practices or for legal reasons. We encourage you to review this page regularly to stay informed about our commitment to your privacy.
           </p>
           <p className="text-slate-400 text-sm mt-12">Last updated: March 9, 2026</p>
+          <div className="mt-8 flex justify-center">
+            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+          </div>
         </div>
       </div>
     </div>

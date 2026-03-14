@@ -345,7 +345,7 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType<any>> = {
     "color-converter": ColorConverterTool,
 };
 
-export default function ToolRenderer({ toolId }: { toolId: string }) {
+export default function ToolRenderer({ toolId, exampleInput }: { toolId: string; exampleInput?: string }) {
     const Component = TOOL_COMPONENTS[toolId] || ComingSoonTool;
-    return <Component />;
+    return <Component exampleInput={exampleInput} />;
 }

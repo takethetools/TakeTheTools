@@ -1,5 +1,5 @@
 ---
-title: "How to Convert Hex to Binary: The Ultimate Masterclass on Base-16 and Base-2 Systems"
+title: "Low-Level Programming: Converting Hex Values Back to Raw Binary Strings"
 description: "The most comprehensive guide to converting hexadecimal (base-16) to binary (base-2). Explore mathematical foundations, direct mapping techniques, hardware implementation, and the truth of the bitstream."
 date: "2024-04-01"
 category: "Converters"

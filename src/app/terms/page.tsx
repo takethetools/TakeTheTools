@@ -1,5 +1,6 @@
 import { Gavel, CheckCircle, Scale, AlertCircle } from "lucide-react";
 import { Metadata } from "next";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
 
 export const metadata: Metadata = {
   title: "Terms of Service - TakeThe Tools",
@@ -43,6 +44,9 @@ export default function TermsPage() {
           <p className="text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
             Please read these terms carefully before using our platform. Your use of the site implies acceptance of these terms.
           </p>
+          <div className="mt-12 flex justify-center">
+            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+          </div>
         </div>
 
         <div className="space-y-6 mb-20">
@@ -83,6 +87,9 @@ export default function TermsPage() {
           <div className="mt-12 pt-8 border-t border-slate-100 flex justify-between items-center text-slate-400 text-sm">
             <p>TakeThe Tools &copy; 2026</p>
             <p>Last modified: March 8, 2026</p>
+          </div>
+          <div className="mt-8 flex justify-center">
+            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
           </div>
         </div>
       </div>

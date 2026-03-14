@@ -1,11 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { Copy, Check, ArrowRightLeft, AlertCircle, FileText } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowRightLeft, AlertCircle, FileText } from "lucide-react";
 import confetti from "canvas-confetti";
 import { cn } from "@/lib/utils";
+import ToolActionBar from "./shared/ToolActionBar";
 
-export default function Base64Tool() {
+interface Base64ToolProps {
+  exampleInput?: string;
+}
+
+export default function Base64Tool({ exampleInput }: Base64ToolProps) {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [mode, setMode] = useState<"encode" | "decode">("encode");
@@ -48,55 +53,68 @@ export default function Base64Tool() {
     setTimeout(() => setIsCopied(false), 2000);
   };
 
+  const downloadResult = () => {
+    if (!output) return;
+    const blob = new Blob([output], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = mode === "encode" ? "encoded-base64.txt" : "decoded-text.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   const clear = () => {
     setInput("");
     setOutput("");
     setError(null);
   };
 
+  const loadExample = () => {
+    if (exampleInput) {
+      // For Base64, we might need to handle encode/decode specific examples
+      // But for simplicity, we use the raw example provided
+      setInput(exampleInput);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="font-bold text-slate-900 flex items-center gap-2">
-              <FileText className="w-5 h-5 text-primary-600" />
-              {mode === "encode" ? "Raw Text" : "Base64 String"}
-            </h3>
-            <button onClick={clear} className="text-xs font-bold text-slate-400 hover:text-red-500 transition-colors">Clear</button>
-          </div>
+          <ToolActionBar
+            title={mode === "encode" ? "Plain Text Source" : "Base64 String Source"}
+            hasInput={!!input}
+            onClear={clear}
+            onExample={exampleInput ? loadExample : undefined}
+          />
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={mode === "encode" ? "Enter text to encode..." : "Enter Base64 to decode..."}
-            className="w-full h-[300px] p-6 bg-white border border-slate-200 rounded-2xl font-mono text-sm focus:ring-2 focus:ring-primary-500 outline-none"
+            placeholder={mode === "encode" ? "Enter text to encode..." : "Enter Base64 string to decode..."}
+            className="w-full h-[300px] p-6 bg-white border border-slate-200 rounded-3xl font-mono text-sm focus:ring-4 focus:ring-primary-100 outline-none transition-all shadow-inner"
           />
         </div>
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="font-bold text-slate-900">{mode === "encode" ? "Base64 Result" : "Text Result"}</h3>
-            {output && (
-              <button 
-                onClick={copyToClipboard}
-                className={cn(
-                  "flex items-center gap-2 px-3 py-1.5 rounded-lg font-bold text-xs transition-all",
-                  isCopied ? "bg-green-100 text-green-700" : "bg-primary-100 text-primary-600 hover:bg-primary-200"
-                )}
-              >
-                {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                {isCopied ? "Copied!" : "Copy"}
-              </button>
-            )}
-          </div>
+          <ToolActionBar
+            title={mode === "encode" ? "Base64 Result" : "Decoded Text Result"}
+            hasOutput={!!output}
+            isCopied={isCopied}
+            onCopy={copyToClipboard}
+            onDownload={downloadResult}
+          />
           <div className="relative h-[300px]">
             <textarea
               readOnly
               value={output}
-              className="w-full h-full p-6 bg-slate-900 text-slate-300 border border-slate-800 rounded-2xl font-mono text-sm outline-none"
+              placeholder="The processed result will appear here..."
+              className="w-full h-full p-6 bg-slate-900 text-slate-300 border border-slate-800 rounded-3xl font-mono text-sm outline-none shadow-2xl"
             />
             {error && (
-              <div className="absolute inset-x-0 top-0 p-4 bg-red-500/10 backdrop-blur-sm border-b border-red-500/20 text-red-400 text-xs flex items-start gap-2 rounded-t-2xl">
+              <div className="absolute inset-x-0 top-0 p-4 bg-red-500/10 backdrop-blur-sm border-b border-red-500/20 text-red-400 text-xs flex items-start gap-2 rounded-t-3xl">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{error}</span>
               </div>
@@ -105,29 +123,35 @@ export default function Base64Tool() {
         </div>
       </div>
 
-      <div className="bg-white border border-slate-200 p-6 rounded-3xl flex flex-wrap items-center justify-between gap-6">
+      <div className="bg-white border border-slate-200 p-8 rounded-[2.5rem] flex flex-wrap items-center justify-between gap-6 shadow-sm">
         <div className="flex items-center gap-4">
-          <div className="flex bg-slate-100 p-1 rounded-xl">
-            <button 
+          <div className="flex bg-slate-100 p-1 rounded-2xl">
+            <button
               onClick={() => setMode("encode")}
-              className={cn("px-4 py-2 rounded-lg text-sm font-bold transition-all", mode === "encode" ? "bg-white text-primary-600 shadow-sm" : "text-slate-500 hover:text-slate-700")}
+              className={cn("px-6 py-2.5 rounded-xl text-sm font-bold transition-all", mode === "encode" ? "bg-white text-primary-600 shadow-md" : "text-slate-500 hover:text-slate-700")}
             >
               Encode
             </button>
-            <button 
+            <button
               onClick={() => setMode("decode")}
-              className={cn("px-4 py-2 rounded-lg text-sm font-bold transition-all", mode === "decode" ? "bg-white text-primary-600 shadow-sm" : "text-slate-500 hover:text-slate-700")}
+              className={cn("px-6 py-2.5 rounded-xl text-sm font-bold transition-all", mode === "decode" ? "bg-white text-primary-600 shadow-md" : "text-slate-500 hover:text-slate-700")}
             >
               Decode
             </button>
           </div>
-          <button onClick={swap} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200 text-slate-500"><ArrowRightLeft className="w-4 h-4" /></button>
+          <button
+            onClick={swap}
+            className="p-3 bg-slate-100 rounded-full hover:bg-slate-200 text-slate-500 hover:text-primary-600 transition-all hover:rotate-180 duration-500"
+            title="Swap input and output"
+          >
+            <ArrowRightLeft className="w-5 h-5" />
+          </button>
         </div>
 
-        <button 
+        <button
           onClick={process}
           disabled={!input}
-          className="px-10 py-3 bg-primary-600 text-white rounded-xl font-bold shadow-lg hover:bg-primary-700 transition-all disabled:opacity-50"
+          className="px-12 py-4 bg-primary-600 text-white rounded-2xl font-bold shadow-xl shadow-primary-500/20 hover:bg-primary-700 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
         >
           {mode === "encode" ? "Encode to Base64" : "Decode Base64"}
         </button>

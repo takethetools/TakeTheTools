@@ -1,6 +1,7 @@
 import { Mail, MessageSquare, Twitter, Github, Send, Phone, Clock, Globe, HeartHandshake, Bug, Lightbulb, Users } from "lucide-react";
 import ContactForm from "@/components/contact/ContactForm";
 import { Metadata } from "next";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
 
 export const metadata: Metadata = {
   title: "Contact Us - TakeThe Tools | Free Online Tools Support",
@@ -65,6 +66,9 @@ export default function ContactPage() {
               Have a question, feedback, or a tool request? We'd love to hear from you.
               Our team typically responds within 24 hours.
             </p>
+            <div className="mt-12 flex justify-center">
+              <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+            </div>
           </div>
 
           {/* Contact Cards */}
@@ -119,6 +123,10 @@ export default function ContactPage() {
 
             {/* Contact Form */}
             <ContactForm />
+          </div>
+
+          <div className="mt-16 flex justify-center">
+            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
           </div>
 
           {/* SEO Section */}

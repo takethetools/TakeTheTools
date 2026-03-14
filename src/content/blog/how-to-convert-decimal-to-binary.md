@@ -1,5 +1,5 @@
 ---
-title: "How to Convert Decimal to Binary: The Ultimate Masterclass on Base-10 and Base-2 Systems"
+title: "Base-10 to Base-2: The Logic of Binary Number Generation"
 description: "The most comprehensive guide to converting decimal (base-10) numbers to binary (base-2). Explore mathematical foundations, recursive division algorithms, hardware implementation, and the future of computation."
 date: "2024-03-31"
 category: "Converters"

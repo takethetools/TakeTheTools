@@ -1,5 +1,5 @@
 ---
-title: "How to Convert JPG to PDF: The Ultimate Masterclass on Digital Archiving"
+title: "Digital Portfolios: Combining JPGs into Professional PDF Documents"
 description: "The most comprehensive guide to converting JPG images to the professional PDF format. Explore the technical science of encapsulation, archival standards, and high-fidelity document management."
 date: "2024-04-10"
 category: "PDF Tools"

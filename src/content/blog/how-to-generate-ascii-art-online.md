@@ -1,5 +1,5 @@
 ---
-title: "The Ultimate Guide to ASCII Art Generator: Mastering the Aesthetic of the Modern World"
+title: "Digital Aesthetics: Creating Modern ASCII Art from Any Text"
 date: "2026-03-08"
 description: "Master your dev branding. Comprehensive guide on why ASCII Art is vital for global Open Source and CLI, the science of Texture scaling, and professional dev secrets."
 category: "Design Tools"

@@ -1,5 +1,5 @@
 ---
-title: "The Ultimate Guide to Online Image Compression: Quality, Speed, and SEO Mastery"
+title: "Optimizing for Velocity: The Professional's Guide to Image Compression"
 date: "2026-03-08"
 description: "Master the art of image optimization. 2000+ words on compression algorithms, perceptual quality settings, and how to boost your site's performance."
 category: "Image Tools"
