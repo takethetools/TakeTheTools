@@ -33,9 +33,15 @@ export default function BlogsAdminPage() {
         try {
             const res = await fetch(`/api/admin/blogs?status=${status}&q=${search}`);
             const data = await res.json();
-            setBlogs(data);
+            if (Array.isArray(data)) {
+                setBlogs(data);
+            } else {
+                console.warn("Expected an array of blogs, but received:", data);
+                setBlogs([]);
+            }
         } catch (err) {
-            console.error(err);
+            console.error("Failed to fetch blogs:", err);
+            setBlogs([]);
         } finally {
             setLoading(false);
         }
@@ -120,7 +126,7 @@ export default function BlogsAdminPage() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-50">
-                                {blogs.map((blog) => (
+                                {Array.isArray(blogs) && blogs.map((blog) => (
                                     <tr key={blog.id} className="hover:bg-slate-50/50 transition-colors group">
                                         <td className="px-8 py-5">
                                             <div className="flex flex-col">
