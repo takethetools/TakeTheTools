@@ -9,6 +9,7 @@ import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/common/CookieConsent";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 import BackToTop from "@/components/common/BackToTop";
+import LayoutWrapper from "@/components/layout/LayoutWrapper";
 import React from "react";
 
 const inter = Inter({
@@ -178,25 +179,40 @@ export default async function RootLayout({
         className={`${inter.variable} ${outfit.variable} antialiased bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans`}
         suppressHydrationWarning
       >
-        <Header />
+        <LayoutWrapper hideOnAdmin>
+          <Header />
+        </LayoutWrapper>
+
         <Script
           id="adsbygoogle-init"
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseId}`}
           strategy="afterInteractive"
           crossOrigin="anonymous"
         />
-        <div className="pt-[80px] md:pt-[104px]">
-          {/* Top Ad Banner — Shows on all pages */}
-          <div className="container mx-auto px-4 py-3 flex justify-center">
-            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
-          </div>
-          <main className="flex-grow">{children}</main>
-          {/* Bottom Ad Banner — Shows on all pages */}
-          <div className="container mx-auto px-4 py-3 flex justify-center">
-            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
-          </div>
-        </div>
-        <Footer />
+
+        <main className="flex-grow">
+          <LayoutWrapper hideOnAdmin>
+            <div className="pt-[80px] md:pt-[104px]">
+              {/* Top Ad Banner — Shows on all pages except admin */}
+              <div className="container mx-auto px-4 py-3 flex justify-center">
+                <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+              </div>
+            </div>
+          </LayoutWrapper>
+
+          {children}
+
+          <LayoutWrapper hideOnAdmin>
+            <div className="container mx-auto px-4 py-3 flex justify-center">
+              <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+            </div>
+          </LayoutWrapper>
+        </main>
+
+        <LayoutWrapper hideOnAdmin>
+          <Footer />
+        </LayoutWrapper>
+
         <CookieConsent />
         <BackToTop />
         <Analytics />
