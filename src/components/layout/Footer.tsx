@@ -8,11 +8,22 @@ import prisma from "@/lib/db";
 export default async function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const [categories, popularTools, config] = await Promise.all([
-    prisma.category.findMany({ take: 8 }),
-    prisma.tool.findMany({ where: { isPopular: true }, take: 4 }),
-    prisma.globalConfig.findFirst()
-  ]);
+  let categories: any[] = [];
+  let popularTools: any[] = [];
+  let config: any = null;
+
+  try {
+    const [catData, toolData, configData] = await Promise.all([
+      prisma.category.findMany({ take: 8 }),
+      prisma.tool.findMany({ where: { isPopular: true }, take: 4 }),
+      prisma.globalConfig.findFirst()
+    ]);
+    categories = catData;
+    popularTools = toolData;
+    config = configData;
+  } catch (error) {
+    console.error("Footer data fetch failed:", error);
+  }
 
   const siteName = config?.siteName || "TakeTheTools";
 
