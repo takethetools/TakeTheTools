@@ -3,29 +3,20 @@ import Image from "next/image";
 import { Github, Twitter, Mail } from "lucide-react";
 import NewsletterForm from "./NewsletterForm";
 import ManualAdUnit from "../common/ManualAdUnit";
-import prisma from "@/lib/db";
+import { CATEGORIES, TOOLS } from "@/lib/tools";
+
+const siteConfig = {
+  siteName: "TakeThe Tools",
+  siteDescription: "Providing high-performance, precision-engineered online tools for developers, designers, and digital professionals. Fast, secure, and always 100% free.",
+  twitterHandle: "takethetools",
+};
 
 export default async function Footer() {
   const currentYear = new Date().getFullYear();
 
-  let categories: any[] = [];
-  let popularTools: any[] = [];
-  let config: any = null;
-
-  try {
-    const [catData, toolData, configData] = await Promise.all([
-      prisma.category.findMany({ take: 8 }),
-      prisma.tool.findMany({ where: { isPopular: true }, take: 4 }),
-      prisma.globalConfig.findFirst()
-    ]);
-    categories = catData;
-    popularTools = toolData;
-    config = configData;
-  } catch (error) {
-    console.error("Footer data fetch failed:", error);
-  }
-
-  const siteName = config?.siteName || "TakeTheTools";
+  const categories = CATEGORIES.slice(0, 8);
+  const popularTools = TOOLS.filter(t => t.isPopular).slice(0, 4);
+  const siteName = siteConfig.siteName;
 
   return (
     <footer className="bg-slate-900 text-slate-300 pt-24 pb-12 border-t border-slate-800 relative overflow-hidden">
@@ -48,10 +39,10 @@ export default async function Footer() {
               />
             </Link>
             <p className="text-slate-400 leading-relaxed max-w-md text-lg">
-              {config?.siteDescription || "Providing high-performance, precision-engineered online tools for developers, designers, and digital professionals. Fast, secure, and always 100% free."}
+              {siteConfig.siteDescription}
             </p>
             <div className="flex gap-4">
-              <a href={config?.twitterHandle ? `https://twitter.com/${config.twitterHandle}` : "https://twitter.com/takethetools"} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter" className="p-3 bg-slate-800/50 border border-slate-700 rounded-xl hover:bg-primary-600 hover:border-primary-500 transition-all text-slate-400 hover:text-white group">
+              <a href={siteConfig.twitterHandle ? `https://twitter.com/${siteConfig.twitterHandle}` : "https://twitter.com/takethetools"} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter" className="p-3 bg-slate-800/50 border border-slate-700 rounded-xl hover:bg-primary-600 hover:border-primary-500 transition-all text-slate-400 hover:text-white group">
                 <Twitter className="w-5 h-5 group-hover:scale-110 transition-transform" />
               </a>
               <a href="https://github.com/takethetools" target="_blank" rel="noopener noreferrer" aria-label="Check our Github" className="p-3 bg-slate-800/50 border border-slate-700 rounded-xl hover:bg-primary-600 hover:border-primary-500 transition-all text-slate-400 hover:text-white group">

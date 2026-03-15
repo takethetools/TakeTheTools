@@ -1,35 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/lib/db";
+import { TOOLS } from "@/lib/tools";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const q = searchParams.get("q") || "";
+  const q = (searchParams.get("q") || "").toLowerCase();
 
   if (q.length < 2) {
     return NextResponse.json([]);
   }
 
   try {
-    const tools = await prisma.tool.findMany({
-      where: {
-        OR: [
-          { name: { contains: q } },
-          { description: { contains: q } },
-          { slug: { contains: q } }
-        ]
-      },
-      take: 6,
-      select: {
-        id: true,
-        name: true,
-        slug: true,
-        description: true,
-        categoryId: true
-      }
-    });
+    const results = TOOLS.filter(tool => 
+      tool.name.toLowerCase().includes(q) || 
+      tool.description.toLowerCase().includes(q) || 
+      tool.slug.toLowerCase().includes(q)
+    ).slice(0, 6).map(tool => ({
+      id: tool.id,
+      name: tool.name,
+      slug: tool.slug,
+      description: tool.description,
+      categoryId: tool.category
+    }));
 
-    return NextResponse.json(tools);
+    return NextResponse.json(results);
   } catch (error) {
+    console.error("Search API error:", error);
     return NextResponse.json({ error: "Search failed" }, { status: 500 });
   }
 }

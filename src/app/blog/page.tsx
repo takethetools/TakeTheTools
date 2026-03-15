@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { getAllPosts } from "@/lib/blog-utils";
 import Link from "next/link";
 import { ChevronRight, Calendar, Tag, Clock } from "lucide-react";
 import React from "react";
@@ -30,11 +30,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export default async function BlogPage() {
-  const posts = await prisma.blog.findMany({
-    where: { isPublished: true },
-    include: { category: true },
-    orderBy: { publishDate: "desc" }
-  });
+  const posts = await getAllPosts();
 
   return (
     <div className="pt-10 pb-20">

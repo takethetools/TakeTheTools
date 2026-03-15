@@ -21,25 +21,18 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
-import prisma from "@/lib/db";
-import { GlobalConfig } from "@prisma/client";
+const siteConfig = {
+  siteName: "TakeThe Tools",
+  siteDescription: "High-performance, free online tools for image conversion, PDF management, developer utilities, and file converters. Fast, secure, and browser-based.",
+  adSenseId: "ca-pub-3148286057781421",
+  twitterHandle: "takethetools",
+};
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  let config = null as GlobalConfig | null;
-  try {
-    config = (await prisma.globalConfig.findFirst()) as GlobalConfig | null;
-  } catch (error) {
-    if (process.env.NODE_ENV !== 'production' ||
-      (!String(error).includes('Unable to open the database file') &&
-        !String(error).includes('PrismaClientKnownRequestError'))) {
-      console.warn("Failed to fetch global config for metadata during build:", error);
-    }
-  }
-
-  const siteName = config?.siteName || "TakeThe Tools";
-  const description = config?.metaDescription || "High-performance, free online tools for image conversion, PDF management, developer utilities, and file converters. Fast, secure, and browser-based.";
+  const siteName = siteConfig.siteName;
+  const description = siteConfig.siteDescription;
 
   return {
     metadataBase: new URL("https://takethetools.com"),
@@ -78,7 +71,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: `${siteName} - All-in-One Online Tools Platform`,
       description,
       images: ["/og-image.png"],
-      creator: config?.twitterHandle ? `@${config.twitterHandle}` : "@takethetools",
+      creator: siteConfig.twitterHandle ? `@${siteConfig.twitterHandle}` : "@takethetools",
     },
     alternates: {
       canonical: "https://takethetools.com",
@@ -95,7 +88,7 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     other: {
-      "google-adsense-account": config?.adSenseId || "ca-pub-3148286057781421",
+      "google-adsense-account": siteConfig.adSenseId,
     },
   };
 }
@@ -105,19 +98,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let config = null as GlobalConfig | null;
-  try {
-    config = (await prisma.globalConfig.findFirst()) as GlobalConfig | null;
-  } catch (error) {
-    if (process.env.NODE_ENV !== 'production' ||
-      (!String(error).includes('Unable to open the database file') &&
-        !String(error).includes('PrismaClientKnownRequestError'))) {
-      console.warn("Failed to fetch global config for layout during build:", error);
-    }
-  }
-
-  const siteName = config?.siteName || "TakeThe Tools";
-  const adSenseId = config?.adSenseId || "ca-pub-3148286057781421";
+  const siteName = siteConfig.siteName;
+  const adSenseId = siteConfig.adSenseId;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -125,7 +107,7 @@ export default async function RootLayout({
     "name": siteName,
     "url": "https://takethetools.com",
     "logo": "https://takethetools.com/logo.webp",
-    "sameAs": config?.twitterHandle ? [`https://twitter.com/${config.twitterHandle}`] : ["https://twitter.com/takethetools"]
+    "sameAs": siteConfig.twitterHandle ? [`https://twitter.com/${siteConfig.twitterHandle}`] : ["https://twitter.com/takethetools"]
   };
 
   return (

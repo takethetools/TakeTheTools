@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { TOOLS, CATEGORIES } from "@/lib/tools";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -20,33 +20,25 @@ interface Props {
 
 export async function generateStaticParams() {
   try {
-    const tools = await prisma.tool.findMany({ select: { slug: true } });
-    return tools.map((tool) => ({
+    return TOOLS.map((tool) => ({
       toolSlug: tool.slug,
     }));
   } catch (error) {
-    if (process.env.NODE_ENV !== 'production' ||
-      (!String(error).includes('Unable to open the database file') &&
-        !String(error).includes('PrismaClientKnownRequestError'))) {
-      console.warn("Failed to generate static params for tools:", error);
-    }
+    console.warn("Failed to generate static params for tools:", error);
     return [];
   }
 }
 
 async function getTool(slug: string) {
-  const tool = await prisma.tool.findUnique({
-    where: { slug },
-    include: { category: true }
-  });
-
+  const tool = TOOLS.find(t => t.slug === slug);
   if (!tool) return null;
 
-  // Parse JSON strings from SQLite
+  const category = CATEGORIES.find(c => c.id === tool.category);
+
   return {
     ...tool,
-    instructions: JSON.parse(tool.instructions as string) as string[],
-    faqs: JSON.parse(tool.faqs as string) as { question: string; answer: string }[],
+    categoryId: tool.category,
+    category: category ? { ...category } : null,
   };
 }
 
@@ -90,13 +82,9 @@ export default async function ToolPage({ params }: Props) {
   const aboutContent = getToolAboutContent(toolSlug);
 
   // Related tools (same category, different tool)
-  const relatedTools = await prisma.tool.findMany({
-    where: {
-      categoryId: tool.categoryId,
-      NOT: { id: tool.id }
-    },
-    take: 3
-  });
+  const relatedTools = TOOLS.filter(t =>
+    t.category === tool.categoryId && t.id !== tool.id
+  ).slice(0, 3);
 
   // Dynamic application category for schema
   const applicationCategoryMap: Record<string, string> = {
@@ -146,7 +134,7 @@ export default async function ToolPage({ params }: Props) {
 
             {/* Tool Interaction Area */}
             <div className="mb-12">
-              <ToolRenderer toolId={tool.componentName || tool.id} exampleInput={tool.exampleInput || ""} />
+              <ToolRenderer toolId={tool.id} exampleInput={tool.exampleInput || ""} />
             </div>
 
             {/* Ad Unit — After Tool */}

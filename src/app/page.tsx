@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { TOOLS, CATEGORIES } from "@/lib/tools";
 import Link from "next/link";
 import { Zap, Search, ImageIcon, FileText, Code, Type, Video, ArrowRight, Star, Calculator, Target, Shield, LayoutGrid, Clock, HelpCircle } from "lucide-react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
@@ -19,28 +19,11 @@ const categoryIcons: Record<string, any> = {
 export const dynamic = "force-dynamic";
 
 async function getHomeData() {
-  try {
-    const [categories, popularTools, latestTools] = await Promise.all([
-      prisma.category.findMany(),
-      prisma.tool.findMany({
-        where: { isPopular: true },
-        take: 8
-      }),
-      prisma.tool.findMany({
-        orderBy: { id: "desc" },
-        take: 3
-      })
-    ]);
+  const categories = CATEGORIES;
+  const popularTools = TOOLS.filter(t => t.isPopular).slice(0, 8);
+  const latestTools = [...TOOLS].reverse().slice(0, 3);
 
-    return { categories, popularTools, latestTools };
-  } catch (error) {
-    if (process.env.NODE_ENV !== 'production' ||
-      (!String(error).includes('Unable to open the database file') &&
-        !String(error).includes('PrismaClientKnownRequestError'))) {
-      console.warn("Failed to fetch home data during build:", error);
-    }
-    return { categories: [], popularTools: [], latestTools: [] };
-  }
+  return { categories, popularTools, latestTools };
 }
 
 export default async function Home() {
@@ -134,7 +117,7 @@ export default async function Home() {
                 </div>
                 <p className="text-slate-500 text-sm mb-4 line-clamp-2">{tool.description}</p>
                 <div className="flex justify-between items-center text-xs">
-                  <span className="px-2 py-1 bg-slate-100 rounded text-slate-600 uppercase font-bold tracking-wider">{tool.categoryId}</span>
+                  <span className="px-2 py-1 bg-slate-100 rounded text-slate-600 uppercase font-bold tracking-wider">{tool.category}</span>
                   <span className="text-primary-600 font-bold">Use Tool →</span>
                 </div>
               </Link>

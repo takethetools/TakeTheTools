@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
-import prisma from "@/lib/db";
+import { TOOLS, CATEGORIES } from "@/lib/tools";
+import { getAllPosts } from "@/lib/blog-utils";
 import { getAllPSEORoutes } from "@/lib/pseo";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -14,26 +15,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   try {
-    // Fetch data from DB
-    const [tools, categories, posts] = await Promise.all([
-      prisma.tool.findMany({ select: { slug: true, updatedAt: true } }),
-      prisma.category.findMany({ select: { slug: true } }),
-      prisma.blog.findMany({
-        where: { isPublished: true },
-        select: { slug: true, publishDate: true, updatedAt: true }
-      })
-    ]);
+    const posts = await getAllPosts();
 
     // Tool pages
-    const toolRoutes = tools.map((tool) => ({
+    const toolRoutes = TOOLS.map((tool) => ({
       url: `${baseUrl}/tools/${tool.slug}`,
-      lastModified: tool.updatedAt,
+      lastModified: new Date(), // Using new Date() as static tools don't have updatedAt
       changeFrequency: "weekly" as const,
       priority: 0.9,
     }));
 
     // Categories
-    const categoryRoutes = categories.map((cat) => ({
+    const categoryRoutes = CATEGORIES.map((cat) => ({
       url: `${baseUrl}/categories/${cat.slug}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
@@ -51,18 +44,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Blog posts
     const blogRoutes = posts.map((post) => ({
       url: `${baseUrl}/blog/${post.slug}`,
-      lastModified: post.updatedAt,
+      lastModified: new Date(post.publishDate),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     }));
 
     return [...routes, ...toolRoutes, ...categoryRoutes, ...pseoRoutes, ...blogRoutes];
   } catch (error) {
-    if (process.env.NODE_ENV !== 'production' || 
-        (!String(error).includes('Unable to open the database file') && 
-         !String(error).includes('PrismaClientKnownRequestError'))) {
-      console.warn("Failed to generate extended sitemap during build:", error);
-    }
+    console.warn("Failed to generate extended sitemap during build:", error);
     return routes;
   }
 }

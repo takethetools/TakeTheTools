@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { CATEGORIES, TOOLS } from "@/lib/tools";
 import Link from "next/link";
 import { ArrowRight, ChevronRight, Home } from "lucide-react";
 import Breadcrumbs from "@/components/common/Breadcrumbs";
@@ -12,7 +12,7 @@ export const dynamicParams = true;
 
 export async function generateMetadata({ params }: { params: Promise<{ categorySlug: string }> }): Promise<Metadata> {
   const { categorySlug } = await params;
-  const category = await prisma.category.findUnique({ where: { slug: categorySlug } });
+  const category = CATEGORIES.find(c => c.slug === categorySlug);
   if (!category) return { title: "Category Not Found" };
 
   const title = generateCategoryMetaTitle(category.name);
@@ -36,34 +36,24 @@ export async function generateMetadata({ params }: { params: Promise<{ categoryS
 
 export async function generateStaticParams() {
   try {
-    const categories = await prisma.category.findMany({ select: { slug: true } });
-    return categories.map((category) => ({
+    return CATEGORIES.map((category) => ({
       categorySlug: category.slug,
     }));
   } catch (error) {
-    if (process.env.NODE_ENV !== 'production' ||
-      (!String(error).includes('Unable to open the database file') &&
-        !String(error).includes('PrismaClientKnownRequestError'))) {
-      console.warn("Failed to generate static params for categories:", error);
-    }
+    console.warn("Failed to generate static params for categories:", error);
     return [];
   }
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ categorySlug: string }> }) {
   const { categorySlug } = await params;
-  const category = await prisma.category.findUnique({
-    where: { slug: categorySlug },
-    include: {
-      tools: true
-    }
-  });
+  const category = CATEGORIES.find(c => c.slug === categorySlug);
 
   if (!category) {
     return <div className="container mx-auto px-4 py-32 text-center">Category not found</div>;
   }
 
-  const categoryTools = category.tools;
+  const categoryTools = TOOLS.filter(t => t.category === category.id);
 
   return (
     <div className="pt-10 pb-20">

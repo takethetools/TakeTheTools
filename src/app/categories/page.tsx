@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { CATEGORIES, TOOLS } from "@/lib/tools";
 import Link from "next/link";
 import { ArrowRight, Box, Image as ImageIcon, FileText, Code, Type, LayoutGrid, Calculator, Target, Shield } from "lucide-react";
 import { Metadata } from "next";
@@ -27,19 +27,13 @@ const ICON_MAP: Record<string, any> = {
 };
 
 export default async function CategoriesPage() {
-  const [categories, popularTools] = await Promise.all([
-    prisma.category.findMany({
-      include: {
-        _count: {
-          select: { tools: true }
-        }
-      }
-    }),
-    prisma.tool.findMany({
-      where: { isPopular: true },
-      take: 4
-    })
-  ]);
+  const categories = CATEGORIES.map(cat => ({
+    ...cat,
+    _count: {
+      tools: TOOLS.filter(t => t.category === cat.id).length
+    }
+  }));
+  const popularTools = TOOLS.filter(t => t.isPopular).slice(0, 4);
 
   return (
     <div className="pt-10 pb-20">

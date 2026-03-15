@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { getPostBySlug, getAllPosts } from "@/lib/blog-utils";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -12,29 +12,18 @@ export const dynamicParams = true;
 
 export async function generateStaticParams() {
   try {
-    const posts = await prisma.blog.findMany({
-      where: { isPublished: true },
-      select: { slug: true }
-    });
+    const posts = await getAllPosts();
     return posts.map((post) => ({
       slug: post.slug,
     }));
   } catch (error) {
-    // Silence expected database errors during production build
-    if (process.env.NODE_ENV !== 'production' ||
-      (!String(error).includes('Unable to open the database file') &&
-        !String(error).includes('PrismaClientKnownRequestError'))) {
-      console.warn("Failed to generate static params for blog:", error);
-    }
+    console.warn("Failed to generate static params for blog:", error);
     return [];
   }
 }
 
 async function getPost(slug: string) {
-  return await prisma.blog.findUnique({
-    where: { slug },
-    include: { category: true }
-  });
+  return await getPostBySlug(slug);
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
