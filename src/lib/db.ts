@@ -4,7 +4,7 @@ const prismaClientSingleton = () => {
   if (process.env.NODE_ENV === "production" && !process.env.DATABASE_URL) {
     console.warn("DATABASE_URL is not set. Using fallback for build.");
     // Force set the env if it's missing during build to prevent core crash
-    process.env.DATABASE_URL = "file:./prisma/dev.db";
+    process.env.DATABASE_URL = "file:./dev.db";
   }
   return new PrismaClient();
 };

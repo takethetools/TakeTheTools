@@ -41,7 +41,9 @@ export async function generateStaticParams() {
       categorySlug: category.slug,
     }));
   } catch (error) {
-    console.error("Failed to generate static params for categories:", error);
+    if (process.env.NODE_ENV !== 'production' || !String(error).includes('Unable to open the database file')) {
+      console.warn("Failed to generate static params for categories:", error);
+    }
     return [];
   }
 }

@@ -20,7 +20,10 @@ export async function generateStaticParams() {
       slug: post.slug,
     }));
   } catch (error) {
-    console.error("Failed to generate static params for blog:", error);
+    // Only log error in development or if it's not a connection error during build
+    if (process.env.NODE_ENV !== 'production' || !String(error).includes('Unable to open the database file')) {
+      console.warn("Failed to generate static params for blog:", error);
+    }
     return [];
   }
 }

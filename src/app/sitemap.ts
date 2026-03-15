@@ -58,7 +58,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [...routes, ...toolRoutes, ...categoryRoutes, ...pseoRoutes, ...blogRoutes];
   } catch (error) {
-    console.error("Failed to generate extended sitemap during build:", error);
+    if (process.env.NODE_ENV !== 'production' || !String(error).includes('Unable to open the database file')) {
+      console.warn("Failed to generate extended sitemap during build:", error);
+    }
     return routes;
   }
 }
