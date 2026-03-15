@@ -19,10 +19,15 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const tools = await prisma.tool.findMany({ select: { slug: true } });
-  return tools.map((tool) => ({
-    toolSlug: tool.slug,
-  }));
+  try {
+    const tools = await prisma.tool.findMany({ select: { slug: true } });
+    return tools.map((tool) => ({
+      toolSlug: tool.slug,
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params for tools:", error);
+    return [];
+  }
 }
 
 async function getTool(slug: string) {

@@ -11,13 +11,18 @@ export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const posts = await prisma.blog.findMany({
-    where: { isPublished: true },
-    select: { slug: true }
-  });
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  try {
+    const posts = await prisma.blog.findMany({
+      where: { isPublished: true },
+      select: { slug: true }
+    });
+    return posts.map((post) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params for blog:", error);
+    return [];
+  }
 }
 
 async function getPost(slug: string) {

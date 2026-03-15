@@ -35,10 +35,15 @@ export async function generateMetadata({ params }: { params: Promise<{ categoryS
 }
 
 export async function generateStaticParams() {
-  const categories = await prisma.category.findMany({ select: { slug: true } });
-  return categories.map((category) => ({
-    categorySlug: category.slug,
-  }));
+  try {
+    const categories = await prisma.category.findMany({ select: { slug: true } });
+    return categories.map((category) => ({
+      categorySlug: category.slug,
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params for categories:", error);
+    return [];
+  }
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ categorySlug: string }> }) {
