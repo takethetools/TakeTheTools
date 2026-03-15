@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 const ICON_MAP: Record<string, any> = {
   image: ImageIcon,
@@ -81,7 +81,7 @@ export default async function CategoriesPage() {
                   </div>
 
                   <p className="text-slate-500 leading-relaxed mb-8">
-                    {category.description}
+                    {category.shortDescription}
                   </p>
 
                   <div className="flex items-center gap-2 text-primary-600 font-bold group-hover:gap-3 transition-all">

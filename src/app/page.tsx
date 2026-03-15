@@ -16,7 +16,7 @@ const categoryIcons: Record<string, any> = {
   security: Shield,
 };
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 async function getHomeData() {
   const categories = CATEGORIES;
@@ -78,7 +78,7 @@ export default async function Home() {
                   <Icon className="w-7 h-7" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-2">{cat.name}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed mb-4">{cat.description}</p>
+                <p className="text-slate-500 text-sm leading-relaxed mb-4">{cat.shortDescription}</p>
                 <span className="text-primary-600 font-bold text-sm inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all">
                   Open Category <ArrowRight className="w-4 h-4" />
                 </span>

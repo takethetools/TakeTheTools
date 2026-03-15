@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Type, Copy, Check, Zap, RefreshCw, Trash2, List, Scissors, Mail, Download } from "lucide-react";
+import { Type, Copy, Check, Zap, RefreshCw, Trash2, List, Scissors, Mail, Download, ArrowDownUp, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface TextProcessingToolProps {
-  mode: "reverse" | "remove-duplicates" | "sort-lines" | "remove-whitespace" | "remove-empty-lines" | "add-prefix-suffix" | "remove-html" | "extract-emails" | "extract-urls";
+  mode: "reverse" | "remove-duplicates" | "sort-lines" | "remove-whitespace" | "remove-empty-lines" | "add-prefix-suffix" | "remove-html" | "extract-emails" | "extract-urls" | "remove-line-breaks" | "add-line-numbers" | "reverse-lines" | "extract-phone-numbers" | "extract-zip-codes";
   prefix?: string;
   suffix?: string;
 }
@@ -39,6 +39,18 @@ export default function TextProcessingTool({ mode, prefix = "", suffix = "" }: T
     } else if (mode === "extract-urls") {
       const urls = input.match(/(https?:\/\/[^\s]+)/g);
       setOutput(urls ? Array.from(new Set(urls)).join("\n") : "No URLs found");
+    } else if (mode === "remove-line-breaks") {
+      setOutput(input.replace(/\n|\r/g, " ").replace(/\s\s+/g, " ").trim());
+    } else if (mode === "add-line-numbers") {
+      setOutput(input.split("\n").map((line, i) => `${i + 1}. ${line}`).join("\n"));
+    } else if (mode === "reverse-lines") {
+      setOutput(input.split("\n").reverse().join("\n"));
+    } else if (mode === "extract-phone-numbers") {
+      const phones = input.match(/(\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}/g);
+      setOutput(phones ? Array.from(new Set(phones)).join("\n") : "No phone numbers found");
+    } else if (mode === "extract-zip-codes") {
+      const zips = input.match(/\b\d{5}(-\d{4})?\b|[A-Z]{1,2}\d[A-Z\d]? \d[A-Z]{2}/gi);
+      setOutput(zips ? Array.from(new Set(zips)).join("\n") : "No ZIP/Postal codes found");
     }
   };
 
@@ -70,7 +82,12 @@ export default function TextProcessingTool({ mode, prefix = "", suffix = "" }: T
     "add-prefix-suffix": "Add Prefix/Suffix to Lines",
     "remove-html": "Remove HTML Tags",
     "extract-emails": "Extract Emails",
-    "extract-urls": "Extract URLs"
+    "extract-urls": "Extract URLs",
+    "remove-line-breaks": "Remove Line Breaks",
+    "add-line-numbers": "Add Line Numbers",
+    "reverse-lines": "Reverse Line Order",
+    "extract-phone-numbers": "Extract Phone Numbers",
+    "extract-zip-codes": "Extract ZIP Codes"
   };
 
   const icons: Record<string, React.ReactNode> = {
@@ -82,7 +99,12 @@ export default function TextProcessingTool({ mode, prefix = "", suffix = "" }: T
     "add-prefix-suffix": <Type className="w-6 h-6" />,
     "remove-html": <Scissors className="w-6 h-6" />,
     "extract-emails": <Mail className="w-6 h-6" />,
-    "extract-urls": <RefreshCw className="w-6 h-6" />
+    "extract-urls": <RefreshCw className="w-6 h-6" />,
+    "remove-line-breaks": <Type className="w-6 h-6" />,
+    "add-line-numbers": <List className="w-6 h-6" />,
+    "reverse-lines": <ArrowDownUp className="w-6 h-6" />,
+    "extract-phone-numbers": <Phone className="w-6 h-6" />,
+    "extract-zip-codes": <MapPin className="w-6 h-6" />
   };
 
   return (

@@ -16,54 +16,62 @@ export interface Tool {
   exampleInput?: string;
 }
 
-export const CATEGORIES: { id: ToolCategory; name: string; slug: string; description: string }[] = [
+export const CATEGORIES: { id: ToolCategory; name: string; slug: string; description: string; shortDescription: string }[] = [
   { 
     id: "image", 
     name: "Image Tools", 
     slug: "image-tools",
-    description: "Convert, compress, and edit images effortlessly."
+    description: "Empower your creative projects with our comprehensive suite of high-performance Image Tools. In the visual-first digital world, optimizing your graphics is non-negotiable. Our platform provides elite-level utilities for converting, compressing, and editing images with clinical precision. Whether you need to transform WebP to PNG, shrink file sizes without losing a single pixel of quality, or crop photos for social media perfect aspect ratios, we have you covered. Our toolset supports all major formats including JPG, PNG, WebP, SVG, and even specialized formats like HEIC and TIFF. Every operation happens instantly in your browser, ensuring your private data never touches our servers. Designed for photographers, web designers, and content creators, these tools deliver professional results in seconds. From simple rotations to complex format conversions and bulk processing, our Image Tools are the fastest, most reliable way to manage your visual assets online, completely free of charge.",
+    shortDescription: "High-performance tools to convert, compress, and edit images instantly in your browser."
   },
   { 
     id: "pdf", 
     name: "PDF Tools", 
     slug: "pdf-tools",
-    description: "Merge, split, and convert PDF documents in seconds."
+    description: "Streamline your document management with our professional-grade PDF Tools. Managing PDFs shouldn't be a chore, yet many tools are slow or require expensive subscriptions. Our platform changes that by offering a robust collection of utilities that allow you to merge, split, and convert PDF documents with unprecedented ease. Need to combine multiple reports into one? Merge them in seconds. Want to extract specific pages from a large contract? Our split tool handles it perfectly. We also offer advanced features like password protection, watermarking, and converting PDFs to editable Word or image formats. Each tool is optimized for performance and security, processing files locally whenever possible. Whether you're a student organizing study materials, a legal professional handling sensitive contracts, or a business owner managing invoices, our PDF suite provides the precision and reliability you need to maintain a smooth, paperless workflow without any software installation.",
+    shortDescription: "Professional-grade utilities to merge, split, and convert PDF documents with ease."
   },
   { 
     id: "developer", 
     name: "Developer Tools", 
     slug: "developer-tools",
-    description: "Formatters, validators, and encoders for web developers."
+    description: "Accelerate your development workflow with our suite of high-precision Developer Tools. We understand that time is the most valuable asset for a coder, which is why we've built the ultimate toolkit for formatting, validating, and debugging. Our platform features advanced JSON formatters, JWT decoders, and regex testers that provide instant feedback directly in your browser. Clean up messy SQL queries, minify CSS for production, or encode/decode Base64 strings without switching contexts. We also provide specialized generators for robots.txt, sitemaps, and crontab schedules to handle the repetitive tasks of web management. With support for modern languages and data structures like TypeScript, XML, and YAML, our tools are tailored for the demands of full-stack development. Every utility is designed to be lightweight, secure, and keyboard-friendly, allowing you to focus on building great software while we handle the data manipulation and structural verification required for clean, bug-free code.",
+    shortDescription: "High-precision tools for formatting, validating, and debugging code in real-time."
   },
   { 
     id: "text", 
     name: "Text Tools", 
     slug: "text-tools",
-    description: "Generators and analyzers to help you work with text."
+    description: "Master your content creation and data analysis with our versatile Text Tools. Words are the foundation of the web, and our utilities are built to help you shape them with ease. From simple word counters and case converters to complex sentiment analyzers and frequency checkers, we provide everything needed to refine your copy. Our suite includes innovative generators like Lorem Ipsum for placeholders, Insta Bio fonts for social style, and slug generators for SEO-friendly URLs. Clean up messy text by removing duplicate lines, stripping whitespace, or extracting specific data points like emails and URLs instantly. Whether you're a copywriter aiming for the perfect character count, a researcher analyzing large datasets, or a social media manager looking to stand out, our Text Tools offer the precision and variety required to handle any text-based task. Experience the power of professional text processing with tools that are as intuitive as they are powerful, all accessible for free in one place.",
+    shortDescription: "Versatile utilities to refine copy, count words, and analyze data effortlessly."
   },
   { 
     id: "converter", 
     name: "File Converters", 
     slug: "file-converter-tools",
-    description: "Convert audio and video files between popular formats."
+    description: "Bridge the gap between formats with our high-speed File Converters. Compatibility should never be a barrier to your productivity. Our platform offers a wide range of conversion utilities designed to handle audio, video, and data files with zero friction. Convert MP4 videos to MP3 audio, transform WebM to standard formats, or move between specialized data structures like CSV, JSON, and XML. We prioritize maintaining the integrity of your original files, ensuring high-quality output every time. Each converter is built with a focus on speed, allowing you to process large files in your browser without the lag often associated with cloud-based converters. For developers, marketers, and everyday users, our file conversion suite provides the flexibility needed to work across different software ecosystems and devices. No more searching for niche software or paying for one-time conversions—our platform delivers professional-grade file transformation tailored for the modern digital professional.",
+    shortDescription: "High-speed conversion utilities for audio, video, and complex data structures."
   },
   { 
     id: "math", 
     name: "Math & Calculators", 
     slug: "math-calculators",
-    description: "Calculators and converters for math, science, and daily use."
+    description: "Solve complex problems instantly with our suite of precision Math & Calculators. Whether you're handling financial planning, scientific analysis, or daily conversions, our tools provide accurate results you can trust. From advanced BMI and age calculators to specialized loan and mortgage assessment tools, we've built a library that caters to both personal and professional needs. For students and engineers, our math utilities include GCD/LCM calculators, area of circle solvers, and prime factorization tools. We also feature a robust unit converter that handles everything from length and weight to complex digital storage and data transfer rates. Every calculator is designed with a clean, interactive interface that provides immediate results as you type. We combine mathematical accuracy with a user-friendly design to ensure that even the most complex equations are easy to navigate, making TakeTheTools the definitive destination for high-performance online calculations.",
+    shortDescription: "Precision calculators and unit converters for financial, scientific, and daily tasks."
   },
   { 
     id: "marketing", 
     name: "Marketing & Social", 
     slug: "marketing-tools",
-    description: "Tools for content creators, SEO experts, and social media."
+    description: "Elevate your brand's digital presence with our strategic Marketing & Social Tools. In the competitive landscape of online content, having an edge is essential. Our platform provides specialized utilities to help you optimize for SEO, engage on social media, and manage your marketing data. Build perfect tracking links with our UTM builder, generate high-converting headlines, or find the ideal hashtags for your next viral post. We also offer tools for technical SEO like meta tag generators, OG previewers, and sitemap builders that ensure your site is always crawl-ready. For data-driven marketers, our phone and ZIP code extractors make lead management a breeze. Whether you're an SEO expert, a small business owner, or a social media influencer, our tools are designed to save you time and improve your reach. We provide professional-grade marketing utilities that empower you to make data-backed decisions and grow your online authority without the high cost of enterprise software.",
+    shortDescription: "Strategic utilities to enhance your SEO, social media, and marketing performance."
   },
   { 
     id: "security", 
     name: "Security & Privacy", 
     slug: "security-privacy",
-    description: "Encryption, password safety, and private data tools."
+    description: "Protect your digital life with our robust Security & Privacy Tools. In an era of increasing cyber threats, maintaining your online safety is paramount. Our platform offers a collection of high-security utilities designed to safeguard your sensitive data and communications. Generate ultra-secure, random passwords that are impossible to crack, or check the strength of your current credentials with our advanced analyzer. We also provide professional-grade encryption tools for AES and SHA hashing, ensuring that your messages and files remain private. Every security tool on our platform runs entirely on your local machine—your passwords, keys, and decrypted text never leave your browser, providing a level of privacy that cloud-based security tools simply cannot match. From developers securing API keys to individuals protecting personal accounts, our security suite provides the peace of mind and technical power needed to stay safe in a complex digital world, 100% free and private.",
+    shortDescription: "Robust encryption, password, and privacy tools that run safely in your browser."
   },
 ];
 
@@ -88,7 +96,8 @@ export const TOOLS: Tool[] = [
     ],
     metaTitle: "WebP to PNG Converter - Free Online High-Quality Conversion",
     metaDescription: "Convert WebP images to PNG online instantly. High-quality, free, and secure conversion for US, UK, Canada, Europe.",
-    longDescription: "Convert WebP images to PNG files quickly and easily. This tool preserves high quality and transparency, making it perfect for designers and developers who need standard image formats."
+    longDescription: "Convert WebP images to PNG files quickly and easily. This tool preserves high quality and transparency, making it perfect for designers and developers who need standard image formats.",
+    exampleInput: "Select a .webp file to convert."
   },
   {
     id: "png-to-jpg-converter",
@@ -107,7 +116,8 @@ export const TOOLS: Tool[] = [
     ],
     metaTitle: "PNG to JPG Converter - Free & Fast Image Conversion",
     metaDescription: "Quickly convert PNG files to JPG format online. No software installation required. Secure and fast.",
-    longDescription: "Change your PNG images into JPG files in seconds. It's a great way to reduce file sizes for faster website loading when you don't need transparent backgrounds."
+    longDescription: "Change your PNG images into JPG files in seconds. It's a great way to reduce file sizes for faster website loading when you don't need transparent backgrounds.",
+    exampleInput: "Select a .png file to convert."
   },
   {
     id: "image-compressor",
@@ -127,7 +137,8 @@ export const TOOLS: Tool[] = [
     ],
     metaTitle: "Image Compressor - Reduce Image File Size Online Free",
     metaDescription: "Compress images online instantly. Fast, secure, and preserves quality. Best for US, UK, Canada.",
-    longDescription: "Shrink your images without losing quality. This tool makes photo files smaller so they're easier to share, upload, and save on storage space."
+    longDescription: "Shrink your images without losing quality. This tool makes photo files smaller so they're easier to share, upload, and save on storage space.",
+    exampleInput: "Upload a large image (JPG, PNG) to compress."
   },
   {
     id: "image-resizer",
@@ -146,7 +157,8 @@ export const TOOLS: Tool[] = [
     ],
     metaTitle: "Image Resizer - Resize Images Online for Free",
     metaDescription: "Change image dimensions instantly. Resize PNG, JPG, and WebP for social media or web design.",
-    longDescription: "Resize your images to any width or height you need. We maintain the original proportions so your photos never look stretched or blurry."
+    longDescription: "Resize your images to any width or height you need. We maintain the original proportions so your photos never look stretched or blurry.",
+    exampleInput: "Upload an image and set target dimensions (e.g., 800x600)."
   },
   {
     id: "image-cropper",
@@ -165,7 +177,8 @@ export const TOOLS: Tool[] = [
     ],
     metaTitle: "Image Cropper - Crop Photos Online to Specific Ratios",
     metaDescription: "The easiest way to crop images online. Fast, secure, and supports all major aspect ratios.",
-    longDescription: "Easily trim your images and pick the perfect focus. Use our presets for social media or draw your own crop area to get exactly what you need."
+    longDescription: "Easily trim your images and pick the perfect focus. Use our presets for social media or draw your own crop area to get exactly what you need.",
+    exampleInput: "Upload an image to start cropping."
   },
   {
     id: "image-to-webp",
@@ -184,7 +197,8 @@ export const TOOLS: Tool[] = [
     ],
     metaTitle: "Image to WebP Converter - Optimize Images for Web",
     metaDescription: "Convert PNG and JPG to WebP online for free. Reduce file size while maintaining high quality.",
-    longDescription: "Turn your PNG or JPG images into modern WebP files. It's the best way to keep your images looking sharp while making them much smaller for the web."
+    longDescription: "Turn your PNG or JPG images into modern WebP files. It's the best way to keep your images looking sharp while making them much smaller for the web.",
+    exampleInput: "Upload multiple JPG/PNG images for bulk conversion."
   },
   {
     id: "jpg-to-webp",
@@ -355,7 +369,8 @@ export const TOOLS: Tool[] = [
     ],
     metaTitle: "Merge PDF - Combine PDF Files Online Free",
     metaDescription: "The easiest way to merge PDF documents. Combine files into one instantly and securely.",
-    longDescription: "Join multiple PDF files into one clean document. It's perfect for organizing reports, receipts, or project files. Your files stay safe because everything happens right in your browser."
+    longDescription: "Join multiple PDF files into one clean document. It's perfect for organizing reports, receipts, or project files. Your files stay safe because everything happens right in your browser.",
+    exampleInput: "Upload two or more PDF files to merge."
   },
   {
     id: "split-pdf",
@@ -374,7 +389,8 @@ export const TOOLS: Tool[] = [
     ],
     metaTitle: "Split PDF - Extract Pages from PDF Online",
     metaDescription: "Fast and secure tool to split PDF files. Extract any page or range instantly.",
-    longDescription: "Take apart your PDF and save just the pages you need. You can extract single pages or split a large file into smaller, easier-to-read parts."
+    longDescription: "Take apart your PDF and save just the pages you need. You can extract single pages or split a large file into smaller, easier-to-read parts.",
+    exampleInput: "Upload a PDF and select pages (e.g., 1, 3-5)."
   },
   {
     id: "jpg-to-pdf",
@@ -393,7 +409,8 @@ export const TOOLS: Tool[] = [
     ],
     metaTitle: "JPG to PDF - Convert Images to PDF Online Free",
     metaDescription: "Easily convert JPG, PNG, and other images to PDF online. Fast, secure, and no installation needed.",
-    longDescription: "Turn your JPG or PNG photos into a high-quality PDF document. It's a great way to combine pictures into a single file for sharing or printing."
+    longDescription: "Turn your JPG or PNG photos into a high-quality PDF document. It's a great way to combine pictures into a single file for sharing or printing.",
+    exampleInput: "Upload images to create a multi-page PDF."
   },
   {
     id: "pdf-to-jpg",
@@ -1976,32 +1993,6 @@ export const TOOLS: Tool[] = [
     longDescription: "Update the title, author, and keywords hidden inside your PDF. It's a great way to keep your professional documents organized and easier to find in search results.",
   },
   {
-    id: "hex-to-rgb-converter",
-    name: "Hex to RGB Converter",
-    slug: "hex-to-rgb-converter",
-    description: "Convert HEX color codes to RGB and RGBA.",
-    category: "developer",
-    iconName: "Palette",
-    instructions: ["Enter HEX code.", "Copy RGB result."],
-    faqs: [{ question: "Does it handle shorthand?", answer: "Yes, e.g., #fff works." }],
-    metaTitle: "Hex to RGB Converter - Web Design Tool",
-    metaDescription: "Convert Hex to RGB online for free.",
-    longDescription: "Convert web color codes (HEX) into RGB or RGBA values. It's an essential tool for designers and developers who need the perfect color format for their CSS styles."
-  },
-  {
-    id: "rgb-to-hex-converter",
-    name: "RGB to Hex Converter",
-    slug: "rgb-to-hex-converter",
-    description: "Convert RGB color values to HEX format.",
-    category: "developer",
-    iconName: "Palette",
-    instructions: ["Enter R, G, B values.", "Copy HEX result."],
-    faqs: [{ question: "Is the # included?", answer: "Yes." }],
-    metaTitle: "RGB to Hex Converter - Web Design Tool",
-    metaDescription: "Convert RGB to Hex online for free.",
-    longDescription: "Turn RGB color values into standard HEX codes for the web. This tool makes it easy to grab the exact color code you need for your next website project."
-  },
-  {
     id: "css-gradient-generator",
     name: "CSS Gradient Generator",
     slug: "css-gradient-generator",
@@ -2042,34 +2033,6 @@ export const TOOLS: Tool[] = [
     metaDescription: "Convert text to NATO phonetic online for free.",
     longDescription: "Translate any text into the standard NATO phonetic alphabet (Alpha, Bravo, Charlie...). It's the best way to communicate spells or codes clearly over the phone or radio.",
     exampleInput: "TAKETHETOOLS"
-  },
-  {
-    id: "text-to-octal-converter",
-    name: "Text to Octal Converter",
-    slug: "text-to-octal-converter",
-    description: "Convert plain text to octal (base-8) values.",
-    category: "text",
-    iconName: "Binary",
-    instructions: ["Enter text.", "Get octal sequence."],
-    faqs: [{ question: "What encoding?", answer: "UTF-8." }],
-    metaTitle: "Text to Octal Converter - Online Text Tool",
-    metaDescription: "Convert text to octal online for free.",
-    longDescription: "Convert your text into Octal (base-8) values. It's a useful tool for students and developers working with legacy systems or exploring how data is stored in different formats.",
-    exampleInput: "Hello World"
-  },
-  {
-    id: "octal-to-text-converter",
-    name: "Octal to Text Converter",
-    slug: "octal-to-text-converter",
-    description: "Decode octal values back into readable text.",
-    category: "text",
-    iconName: "Binary",
-    instructions: ["Enter octal.", "Get text."],
-    faqs: [{ question: "Is it reversible?", answer: "Yes." }],
-    metaTitle: "Octal to Text Converter - Online Text Tool",
-    metaDescription: "Convert octal to text online for free.",
-    longDescription: "Decode Octal values back into readable English text instantly. This is a must-have for anyone auditing old logs or studying the basics of early computer data.",
-    exampleInput: "110 145 154 154 157"
   },
   {
     id: "add-prefix-suffix-to-lines",
@@ -2128,34 +2091,6 @@ export const TOOLS: Tool[] = [
     exampleInput: "Upload your MP4 video clip."
   },
   {
-    id: "fraction-to-decimal-converter",
-    name: "Fraction to Decimal",
-    slug: "fraction-to-decimal",
-    description: "Convert fractions (e.g., 1/2) to decimal values (0.5).",
-    category: "math",
-    iconName: "Calculator",
-    instructions: ["Enter numerator.", "Enter denominator.", "Get decimal."],
-    faqs: [{ question: "Does it handle mixed numbers?", answer: "Yes." }],
-    metaTitle: "Fraction to Decimal Converter - Math Tool Online",
-    metaDescription: "Convert fractions to decimals online for free.",
-    longDescription: "Convert simple or mixed fractions into their decimal equivalents in seconds. It's perfect for recipes, homework, or any project where you need a more readable number.",
-    exampleInput: "3/4"
-  },
-  {
-    id: "decimal-to-fraction-converter",
-    name: "Decimal to Fraction",
-    slug: "decimal-to-fraction",
-    description: "Convert decimals back into simplified fractions.",
-    category: "math",
-    iconName: "Calculator",
-    instructions: ["Enter decimal.", "Get fraction."],
-    faqs: [{ question: "Is it simplified?", answer: "Yes, we reduce it to lowest terms." }],
-    metaTitle: "Decimal to Fraction Converter - Math Tool Online",
-    metaDescription: "Convert decimals to fractions online for free.",
-    longDescription: "Turn decimal numbers back into clean, simplified fractions. We'll find the lowest terms for you, so your results are always easy to understand and use.",
-    exampleInput: "0.875"
-  },
-  {
     id: "compound-interest-calculator",
     name: "Compound Interest Calculator",
     slug: "compound-interest-calculator",
@@ -2211,385 +2146,9 @@ export const TOOLS: Tool[] = [
     longDescription: "Find out exactly how much you're saving during a sale. We'll show you the final price after the discount and tax, so you can shop smarter and stick to your budget.",
     exampleInput: "25% off $149.99"
   },
-  {
-    id: "keyword-density-checker-tool",
-    name: "Keyword Density Checker",
-    slug: "keyword-density-checker",
-    description: "Analyze how often keywords appear in your content for SEO.",
-    category: "marketing",
-    iconName: "Search",
-    instructions: ["Paste text or URL.", "Analyze density."],
-    faqs: [{ question: "Is it accurate?", answer: "Yes, it counts 1, 2, and 3-word phrases." }],
-    metaTitle: "Keyword Density Checker - SEO Content Tool",
-    metaDescription: "Analyze keyword usage online for free.",
-    longDescription: "Check how often specific words appear in your writing. This tool helps you optimize your content for SEO by making sure your main keywords are used just the right amount."
-  },
-  {
-    id: "redirect-checker-tool",
-    name: "Redirect Checker",
-    slug: "redirect-checker",
-    description: "Trace the full path of any URL redirect (301, 302).",
-    category: "marketing",
-    iconName: "ArrowRight",
-    instructions: ["Enter URL.", "Trace path."],
-    faqs: [{ question: "Does it show status codes?", answer: "Yes, for every step." }],
-    metaTitle: "Redirect Checker - Trace URL Hops Online",
-    metaDescription: "Check redirect chains online for free.",
-    longDescription: "Trace exactly where a URL goes. Whether it's a short link or a full redirect, we'll show you every step of the path and the final destination."
-  },
   // New Batch 3: Specialized Converters & SEO Boosters
   {
-    id: "angle-converter-tool",
-    name: "Angle Converter",
-    slug: "angle-converter",
-    description: "Convert between degrees, radians, and gradians.",
-    category: "math",
-    iconName: "Compass",
-    instructions: ["Enter angle.", "Select units.", "Convert."],
-    faqs: [{ question: "What is a radian?", answer: "The standard unit of angular measure." }],
-    metaTitle: "Angle Converter - Degrees to Radians Online",
-    metaDescription: "Convert angles online for free.",
-    longDescription: "Swap between degrees, radians, and more instantly. It's a vital tool for anyone working on math, physics, or game development projects.",
-    exampleInput: "180 degrees"
-  },
-  {
-    id: "area-converter-tool",
-    name: "Area Converter",
-    slug: "area-converter",
-    description: "Convert units of area (sq meters, acres, hectares).",
-    category: "math",
-    iconName: "Maximize",
-    instructions: ["Enter area.", "Select units.", "Convert."],
-    faqs: [{ question: "How big is an acre?", answer: "43,560 square feet." }],
-    metaTitle: "Area Converter - Acres to Square Meters",
-    metaDescription: "Convert area units online for free.",
-    longDescription: "Convert any measurement of area, from square feet to hectares. It's the easiest way to compare land sizes and surface areas across different units.",
-    exampleInput: "5 hectares"
-  },
-  {
-    id: "byte-converter-tool",
-    name: "Byte Converter",
-    slug: "byte-converter",
-    description: "Convert between bytes, KB, MB, GB, and TB.",
-    category: "converter",
-    iconName: "Database",
-    instructions: ["Enter value.", "Select unit.", "Convert."],
-    faqs: [{ question: "Is it 1000 or 1024?", answer: "We use 1024 for binary units." }],
-    metaTitle: "Byte Converter - MB to GB Online",
-    metaDescription: "Convert digital storage units online for free.",
-    longDescription: "Easily switch between MB, GB, TB, and more. This tool helps you understand exactly how much digital space your files and databases are using.",
-    exampleInput: "2048 MB"
-  },
-  {
-    id: "energy-converter-tool",
-    name: "Energy Converter",
-    slug: "energy-converter",
-    description: "Convert between Joules, Calories, and kWh.",
-    category: "math",
-    iconName: "Zap",
-    instructions: ["Enter energy.", "Select units.", "Convert."],
-    faqs: [{ question: "1 Calorie is how many Joules?", answer: "4.184 Joules." }],
-    metaTitle: "Energy Converter - Joules to Calories Online",
-    metaDescription: "Convert energy units online for free.",
-    longDescription: "Convert between Calories, Joules, and more in a snap. It's the perfect way to understand energy use in everything from electronics to nutrition.",
-    exampleInput: "5000 Joules"
-  },
-  {
-    id: "force-converter-tool",
-    name: "Force Converter",
-    slug: "force-converter",
-    description: "Convert units of force (Newtons, Dynes, Pound-force).",
-    category: "math",
-    iconName: "Zap",
-    instructions: ["Enter force.", "Select units.", "Convert."],
-    faqs: [{ question: "What is a Newton?", answer: "SI unit of force." }],
-    metaTitle: "Force Converter - Newtons to Pound-force",
-    metaDescription: "Convert force units online for free.",
-    longDescription: "Translate force measurements between Newtons and other units instantly. This is a must-have for engineers and students working on physics and structural projects.",
-    exampleInput: "100 Newtons"
-  },
-  {
-    id: "fuel-consumption-converter-tool",
-    name: "Fuel Consumption Converter",
-    slug: "fuel-consumption-converter",
-    description: "Convert between MPG and Liters per 100km.",
-    category: "converter",
-    iconName: "Fuel",
-    instructions: ["Enter consumption.", "Select units.", "Convert."],
-    faqs: [{ question: "What is L/100km?", answer: "Metric efficiency unit." }],
-    metaTitle: "Fuel Consumption Converter - MPG to L/100km",
-    metaDescription: "Convert fuel efficiency online for free.",
-    longDescription: "See how much gas your car is really using. Convert between MPG and L/100km instantly to compare vehicle efficiency and plan your travel costs.",
-    exampleInput: "30 MPG"
-  },
-  {
-    id: "length-converter-tool",
-    name: "Length Converter",
-    slug: "length-converter",
-    description: "Convert between meters, feet, inches, and miles.",
-    category: "math",
-    iconName: "Ruler",
-    instructions: ["Enter length.", "Select units.", "Convert."],
-    faqs: [{ question: "1 mile is how many km?", answer: "1.609 km." }],
-    metaTitle: "Length Converter - Metric to Imperial Online",
-    metaDescription: "Convert length units online for free.",
-    longDescription: "Convert between meters, feet, inches, and miles in a flash. It's the perfect tool for DIY projects, travel planning, or any time you need to switch measurement systems.",
-    exampleInput: "150 centimeters"
-  },
-  {
-    id: "power-converter-tool",
-    name: "Power Converter",
-    slug: "power-converter",
-    description: "Convert between Watts, Horsepower, and BTUs.",
-    category: "math",
-    iconName: "Zap",
-    instructions: ["Enter power.", "Select units.", "Convert."],
-    faqs: [{ question: "1 HP is how many Watts?", answer: "745.7 Watts." }],
-    metaTitle: "Power Converter - Watts to Horsepower Online",
-    metaDescription: "Convert power units online for free.",
-    longDescription: "Easily switch between Watts, Horsepower, and BTUs. This tool helps you understand and compare power output for cars, appliances, and industrial equipment.",
-    exampleInput: "250 Horsepower"
-  },
-  {
-    id: "pressure-converter-tool",
-    name: "Pressure Converter",
-    slug: "pressure-converter",
-    description: "Convert between PSI, Bar, and Pascal.",
-    category: "math",
-    iconName: "Zap",
-    instructions: ["Enter pressure.", "Select units.", "Convert."],
-    faqs: [{ question: "What is 1 bar in PSI?", answer: "14.5038 PSI." }],
-    metaTitle: "Pressure Converter - PSI to Bar Online",
-    metaDescription: "Convert pressure units online for free.",
-    longDescription: "Convert pressure measurements between PSI, Bar, and more instantly. It's a vital tool for mechanics, scuba divers, and anyone working with pressurized systems.",
-    exampleInput: "32 PSI"
-  },
-  {
-    id: "speed-converter-tool",
-    name: "Speed Converter",
-    slug: "speed-converter",
-    description: "Convert between km/h, mph, and mach.",
-    category: "math",
-    iconName: "Gauge",
-    instructions: ["Enter speed.", "Select units.", "Convert."],
-    faqs: [{ question: "What is Mach 1?", answer: "The speed of sound." }],
-    metaTitle: "Speed Converter - km/h to mph Online",
-    metaDescription: "Convert speed units online for free.",
-    longDescription: "Swap between km/h, mph, and even the speed of sound (Mach). It's the fastest way to understand velocity whether you're driving, flying, or studying physics.",
-    exampleInput: "120 km/h"
-  },
-  {
-    id: "temperature-converter-tool",
-    name: "Temperature Converter",
-    slug: "temperature-converter",
-    description: "Convert between Celsius, Fahrenheit, and Kelvin.",
-    category: "math",
-    iconName: "Thermometer",
-    instructions: ["Enter temp.", "Select units.", "Convert."],
-    faqs: [{ question: "Absolute zero?", answer: "-273.15 °C." }],
-    metaTitle: "Temperature Converter - Celsius to Fahrenheit",
-    metaDescription: "Convert temperature online for free.",
-    longDescription: "Instantly convert between Celsius, Fahrenheit, and Kelvin. It's the easiest way to check world weather or get exact readings for your science experiments.",
-    exampleInput: "98.6 Fahrenheit"
-  },
-  {
-    id: "time-converter-tool",
-    name: "Time Converter",
-    slug: "time-converter",
-    description: "Convert between seconds, minutes, hours, and days.",
-    category: "math",
-    iconName: "Clock",
-    instructions: ["Enter time.", "Select units.", "Convert."],
-    faqs: [{ question: "Seconds in a day?", answer: "86,400." }],
-    metaTitle: "Time Converter - Hours to Seconds Online",
-    metaDescription: "Convert time units online for free.",
-    longDescription: "Convert between seconds, minutes, hours, and days in a snap. It's the best way to track durations, plan project timelines, or see how much time has passed.",
-    exampleInput: "3.5 days"
-  },
-  {
-    id: "torque-converter-tool",
-    name: "Torque Converter",
-    slug: "torque-converter",
-    description: "Convert between Newton-meters and Pound-feet.",
-    category: "math",
-    iconName: "Settings",
-    instructions: ["Enter torque.", "Select units.", "Convert."],
-    faqs: [{ question: "What is torque?", answer: "Rotational force." }],
-    metaTitle: "Torque Converter - Nm to lb-ft Online",
-    metaDescription: "Convert torque units online for free.",
-    longDescription: "Convert torque measurements between Newton-meters and Pound-feet. This is a must-have tool for mechanics and engineers who need exact force specs for machinery and cars.",
-    exampleInput: "450 Newton-meters"
-  },
-  {
-    id: "volume-converter-tool",
-    name: "Volume Converter",
-    slug: "volume-converter",
-    description: "Convert between liters, gallons, and cubic meters.",
-    category: "math",
-    iconName: "Box",
-    instructions: ["Enter volume.", "Select units.", "Convert."],
-    faqs: [{ question: "1 gallon is how many liters?", answer: "3.785 liters (US)." }],
-    metaTitle: "Volume Converter - Liters to Gallons Online",
-    metaDescription: "Convert volume units online for free.",
-    longDescription: "Easily switch between liters, gallons, and cubic meters. It's perfect for scaling recipes, measuring pool capacity, or handling industrial volume calculations.",
-    exampleInput: "15 Gallons (US)"
-  },
-  {
-    id: "weight-converter-tool",
-    name: "Weight Converter",
-    slug: "weight-converter",
-    description: "Convert between kilograms, pounds, and ounces.",
-    category: "math",
-    iconName: "Scale",
-    instructions: ["Enter weight.", "Select units.", "Convert."],
-    faqs: [{ question: "1 kg is how many lbs?", answer: "2.20462 lbs." }],
-    metaTitle: "Weight Converter - kg to lbs Online",
-    metaDescription: "Convert weight units online for free.",
-    longDescription: "Convert between kilograms, pounds, and ounces instantly. This tool helps you check luggage limits, track your fitness progress, or get exact weights for shipping.",
-    exampleInput: "185 Pounds"
-  },
-  {
-    id: "data-transfer-rate-converter-tool",
-    name: "Data Transfer Rate Converter",
-    slug: "data-transfer-rate-converter",
-    description: "Convert between Mbps, MBps, and Gbps.",
-    category: "converter",
-    iconName: "Zap",
-    instructions: ["Enter rate.", "Select units.", "Convert."],
-    faqs: [{ question: "Mbps vs MBps?", answer: "Mbps is bits, MBps is bytes (8x more)." }],
-    metaTitle: "Data Transfer Rate Converter - Mbps to MBps",
-    metaDescription: "Convert data rates online for free.",
-    longDescription: "Understand your internet speed by converting between Mbps and MBps. It's the best way to see exactly how fast your downloads and uploads really are.",
-    exampleInput: "100 Mbps"
-  },
-  {
-    id: "digital-storage-converter-tool",
-    name: "Digital Storage Converter",
-    slug: "digital-storage-converter",
-    description: "Convert between bits, bytes, KB, MB, GB, TB.",
-    category: "converter",
-    iconName: "Database",
-    instructions: ["Enter size.", "Select units.", "Convert."],
-    faqs: [{ question: "How many bits in a byte?", answer: "8." }],
-    metaTitle: "Digital Storage Converter - MB to GB online",
-    metaDescription: "Convert storage units online for free.",
-    longDescription: "Instantly see how much space your data takes up. Convert between bytes, Gigabytes, and Terabytes to manage your storage and database growth with ease.",
-    exampleInput: "500 GB"
-  },
-  {
-    id: "binary-to-hex-tool",
-    name: "Binary to Hex Converter",
-    slug: "binary-to-hex",
-    description: "Convert binary bits to hexadecimal code.",
-    category: "developer",
-    iconName: "Binary",
-    instructions: ["Enter binary.", "Convert."],
-    faqs: [{ question: "What is hex?", answer: "Base-16 number system." }],
-    metaTitle: "Binary to Hex Converter - Developer Tool",
-    metaDescription: "Convert binary to hex online for free.",
-    longDescription: "Turn raw binary code into compact Hexadecimal. It's a must-have tool for developers and students who need to read and understand computer memory addresses clearly.",
-    exampleInput: "01001000 01100101 01101100 01101100 01101111"
-  },
-  {
-    id: "hex-to-binary-tool",
-    name: "Hex to Binary Converter",
-    slug: "hex-to-binary",
-    description: "Convert hexadecimal code to binary bits.",
-    category: "developer",
-    iconName: "Binary",
-    instructions: ["Enter hex.", "Convert."],
-    faqs: [{ question: "Is it reversible?", answer: "Yes." }],
-    metaTitle: "Hex to Binary Converter - Developer Tool",
-    metaDescription: "Convert hex to binary online for free.",
-    longDescription: "Convert Hexadecimal codes back into binary bits. This utility helps developers see the exact patterns behind their code, making it easier to debug and optimize.",
-    exampleInput: "48 65 6c 6c 6f"
-  },
-  {
-    id: "binary-to-octal-tool",
-    name: "Binary to Octal Converter",
-    slug: "binary-to-octal",
-    description: "Convert binary bits to octal values.",
-    category: "developer",
-    iconName: "Binary",
-    instructions: ["Enter binary.", "Convert."],
-    faqs: [{ question: "What is octal?", answer: "Base-8 number system." }],
-    metaTitle: "Binary to Octal Converter - Developer Tool",
-    metaDescription: "Convert binary to octal online for free.",
-    longDescription: "Easily translate binary bits into Octal (base-8). This tool is perfect for computer science students and developers working with legacy systems and file permissions.",
-    exampleInput: "110101101"
-  },
-  {
-    id: "octal-to-binary-tool",
-    name: "Octal to Binary Converter",
-    slug: "octal-to-binary",
-    description: "Convert octal values back to binary bits.",
-    category: "developer",
-    iconName: "Binary",
-    instructions: ["Enter octal.", "Convert."],
-    faqs: [{ question: "Is it reversible?", answer: "Yes." }],
-    metaTitle: "Octal to Binary Converter - Developer Tool",
-    metaDescription: "Convert octal to binary online for free.",
-    longDescription: "Turn Octal values back into full binary bitstreams. It's an essential resource for anyone auditing Unix permissions or working with older data formats.",
-    exampleInput: "755"
-  },
-  {
-    id: "hex-to-text-tool",
-    name: "Hex to Text Converter",
-    slug: "hex-to-text",
-    description: "Decode hexadecimal characters to plain text.",
-    category: "developer",
-    iconName: "FileCode",
-    instructions: ["Enter hex.", "Convert."],
-    faqs: [{ question: "What encoding?", answer: "UTF-8." }],
-    metaTitle: "Hex to Text Converter - Developer Tool",
-    metaDescription: "Convert hex to text online for free.",
-    longDescription: "Turn Hexadecimal code back into readable English text. Use this tool to recover information from data dumps, logs, and network packets instantly.",
-    exampleInput: "54 61 6b 65 54 68 65 54 6f 6f 6c 73"
-  },
-  {
-    id: "text-to-hex-tool",
-    name: "Text to Hex Converter",
-    slug: "text-to-hex",
-    description: "Encode plain text into hexadecimal strings.",
-    category: "developer",
-    iconName: "FileCode",
-    instructions: ["Enter text.", "Convert."],
-    faqs: [{ question: "Why use hex?", answer: "For debugging or data representation." }],
-    metaTitle: "Text to Hex Converter - Developer Tool",
-    metaDescription: "Convert text to hex online for free.",
-    longDescription: "Convert your text into compact Hexadecimal strings. It's the perfect way to represent your data for debugging, web protocols, and technical audits.",
-    exampleInput: "TakeTheTools"
-  },
-  {
-    id: "binary-to-decimal-tool",
-    name: "Binary to Decimal Converter",
-    slug: "binary-to-decimal",
-    description: "Convert binary bits to decimal numbers.",
-    category: "math",
-    iconName: "Calculator",
-    instructions: ["Enter binary.", "Convert."],
-    faqs: [{ question: "Example?", answer: "1010 in binary is 10 in decimal." }],
-    metaTitle: "Binary to Decimal Converter - Math Tool",
-    metaDescription: "Convert binary to decimal online for free.",
-    longDescription: "Instantly turn binary code into standard decimal numbers. It's the easiest way to understand raw bitstreams and machine language data.",
-    exampleInput: "11010101"
-  },
-  {
-    id: "decimal-to-binary-tool",
-    name: "Decimal to Binary Converter",
-    slug: "decimal-to-binary",
-    description: "Convert decimal numbers to binary bits.",
-    category: "math",
-    iconName: "Calculator",
-    instructions: ["Enter decimal.", "Convert."],
-    faqs: [{ question: "Is it reversible?", answer: "Yes." }],
-    metaTitle: "Decimal to Binary Converter - Math Tool",
-    metaDescription: "Convert decimal to binary online for free.",
-    longDescription: "Convert standard numbers into binary bits. Perfect for anyone studying digital logic, configuring networks, or exploring how computers store information.",
-    exampleInput: "255"
-  },
-  {
-    id: "html-entities-encode-tool",
+    id: "html-entities-encode",
     name: "HTML Entities Encoder",
     slug: "html-entities-encode",
     description: "Convert special characters to HTML entities.",
@@ -2603,7 +2162,7 @@ export const TOOLS: Tool[] = [
     exampleInput: "<div>Some & text</div>"
   },
   {
-    id: "html-entities-decode-tool",
+    id: "html-entities-decode",
     name: "HTML Entities Decoder",
     slug: "html-entities-decode",
     description: "Convert HTML entities back to normal characters.",
@@ -2617,7 +2176,7 @@ export const TOOLS: Tool[] = [
     exampleInput: "&lt;div&gt;Some &amp; text&lt;/div&gt;"
   },
   {
-    id: "markdown-to-html-tool",
+    id: "markdown-to-html",
     name: "Markdown to HTML Converter",
     slug: "markdown-to-html",
     description: "Convert Markdown syntax to clean HTML markup.",
@@ -2631,7 +2190,7 @@ export const TOOLS: Tool[] = [
     exampleInput: "# Hello World\nThis is **bold** text."
   },
   {
-    id: "html-to-markdown-tool",
+    id: "html-to-markdown",
     name: "HTML to Markdown Converter",
     slug: "html-to-markdown",
     description: "Convert HTML markup back to Markdown syntax.",
@@ -2645,7 +2204,7 @@ export const TOOLS: Tool[] = [
     exampleInput: "<h1>Hello World</h1><p>This is <b>bold</b> text.</p>"
   },
   {
-    id: "ascii-to-text-tool",
+    id: "ascii-to-text",
     name: "ASCII to Text Converter",
     slug: "ascii-to-text",
     description: "Convert ASCII decimal codes back to text.",
@@ -2659,7 +2218,7 @@ export const TOOLS: Tool[] = [
     exampleInput: "72 101 108 108 111"
   },
   {
-    id: "text-to-ascii-tool",
+    id: "text-to-ascii",
     name: "Text to ASCII Converter",
     slug: "text-to-ascii",
     description: "Convert plain text to ASCII decimal codes.",
@@ -2699,91 +2258,6 @@ export const TOOLS: Tool[] = [
     metaDescription: "Generate SHA-512 hashes online for free.",
     longDescription: "Create the strongest 512-bit signatures for your most sensitive data. This professional tool gives you military-grade protection to keep your information secure and private.",
     exampleInput: "Top Secret Document Hash"
-  },
-  // Final Batch to 200+
-  {
-    id: "case-converter-title",
-    name: "Title Case Converter",
-    slug: "title-case-converter",
-    description: "Convert text to Title Case (Capitalize Every Word).",
-    category: "text",
-    iconName: "Type",
-    instructions: ["Enter text.", "Convert."],
-    faqs: [{ question: "What is title case?", answer: "Capitalizing the first letter of each word." }],
-    metaTitle: "Title Case Converter - Capitalize Text Online",
-    metaDescription: "Convert text to title case online for free.",
-    longDescription: "Instantly capitalize every word in your headlines and document titles. It's the easiest way to make your blog posts and reports look professional and consistent.",
-    exampleInput: "the quick brown fox jumps over the lazy dog"
-  },
-  {
-    id: "case-converter-camel",
-    name: "camelCase Converter",
-    slug: "camel-case-converter",
-    description: "Convert text to camelCase for programming.",
-    category: "developer",
-    iconName: "FileCode",
-    instructions: ["Enter text.", "Convert."],
-    faqs: [{ question: "Where is it used?", answer: "In JavaScript and Java variables." }],
-    metaTitle: "camelCase Converter - Coding Utility Online",
-    metaDescription: "Convert text to camelCase online for free.",
-    longDescription: "Turn any phrase into camelCase, the standard format for coding variables. It's a must-have tool for developers who want to keep their code clean and professional.",
-    exampleInput: "user profile data"
-  },
-  {
-    id: "case-converter-snake",
-    name: "snake_case Converter",
-    slug: "snake-case-converter",
-    description: "Convert text to snake_case for Python or DB naming.",
-    category: "developer",
-    iconName: "FileCode",
-    instructions: ["Enter text.", "Convert."],
-    faqs: [{ question: "What is snake_case?", answer: "Words separated by underscores." }],
-    metaTitle: "snake_case Converter - Python & SQL Utility",
-    metaDescription: "Convert text to snake_case online for free.",
-    longDescription: "Convert your text into snake_case, the perfect format for naming database columns and Python variables. It ensures your code follows clear, professional standards.",
-    exampleInput: "User Profile Data"
-  },
-  {
-    id: "case-converter-kebab",
-    name: "kebab-case Converter",
-    slug: "kebab-case-converter",
-    description: "Convert text to kebab-case for URL slugs or CSS classes.",
-    category: "developer",
-    iconName: "FileCode",
-    instructions: ["Enter text.", "Convert."],
-    faqs: [{ question: "Why kebab-case?", answer: "Ideal for SEO-friendly URLs." }],
-    metaTitle: "kebab-case Converter - URL Slug Utility",
-    metaDescription: "Convert text to kebab-case online for free.",
-    longDescription: "Generate clean kebab-case slugs for your website links and CSS classes. It's the best way to create links that are both human-readable and search-engine friendly.",
-    exampleInput: "How to Build a Modern Web App"
-  },
-  {
-    id: "qr-code-wifi",
-    name: "WiFi QR Code Generator",
-    slug: "wifi-qr-code-generator",
-    description: "Generate QR codes to share your WiFi network easily.",
-    category: "marketing",
-    iconName: "Wifi",
-    instructions: ["Enter SSID.", "Enter Password.", "Download QR."],
-    faqs: [{ question: "Is it secure?", answer: "Yes, data stays in the QR code." }],
-    metaTitle: "WiFi QR Code Generator - Share WiFi Password",
-    metaDescription: "Generate WiFi QR codes online for free.",
-    longDescription: "Create a QR code that lets your guests join your WiFi network instantly. Just enter your network name and password to make sharing your internet easier than ever.",
-    exampleInput: "SSID: Home_Network, Pass: guest123"
-  },
-  {
-    id: "qr-code-vcard",
-    name: "vCard QR Code Generator",
-    slug: "vcard-qr-code-generator",
-    description: "Create digital business card QR codes.",
-    category: "marketing",
-    iconName: "Contact",
-    instructions: ["Enter contact info.", "Generate QR.", "Download."],
-    faqs: [{ question: "What is a vCard?", answer: "A standard for electronic business cards." }],
-    metaTitle: "vCard QR Code Generator - Digital Business Card",
-    metaDescription: "Create vCard QR codes online for free.",
-    longDescription: "Turn your contact info into a digital business card QR code. It's the most modern way to share your details and let people save your contact info with a single scan.",
-    exampleInput: "John Doe, john@example.com"
   },
   {
     id: "image-filter-vintage",
@@ -2910,6 +2384,174 @@ export const TOOLS: Tool[] = [
     metaDescription: "Generate secure passwords online for free.",
     longDescription: "Generate ultra-secure passwords with advanced options. You can fully customize the length and complexity to meet the highest security standards for your accounts.",
     exampleInput: "32 chars, custom symbols"
+  },
+  {
+    id: "json-to-typescript-interface",
+    name: "JSON to TypeScript Interface",
+    slug: "json-to-typescript",
+    description: "Convert JSON objects into TypeScript interface definitions instantly.",
+    category: "developer",
+    iconName: "Code",
+    instructions: ["Paste JSON.", "Click Convert.", "Copy TS Interface."],
+    faqs: [{ question: "Does it handle nested objects?", answer: "Yes, it generates nested interfaces." }],
+    metaTitle: "JSON to TypeScript - Online Interface Generator",
+    metaDescription: "Convert JSON to TypeScript interfaces online for free.",
+    longDescription: "Turn your JSON data into clean, typed TypeScript interfaces. This tool is a lifesaver for developers building typed APIs and frontend models.",
+    exampleInput: '{"id": 1, "name": "John"}'
+  },
+  {
+    id: "remove-line-breaks",
+    name: "Remove Line Breaks",
+    slug: "remove-line-breaks",
+    description: "Clean up text by removing unnecessary line breaks and newlines.",
+    category: "text",
+    iconName: "Type",
+    instructions: ["Paste text.", "Click Remove.", "Copy result."],
+    faqs: [{ question: "Does it remove spaces?", answer: "You can choose to replace breaks with spaces or nothing." }],
+    metaTitle: "Remove Line Breaks - Online Text Cleaner",
+    metaDescription: "Remove all newlines and line breaks from text online for free.",
+    longDescription: "Quickly strip out all line breaks from your text. Perfect for cleaning up copied PDF text or preparing data for single-line inputs.",
+    exampleInput: "Line one\nLine two"
+  },
+  {
+    id: "add-line-numbers-to-text",
+    name: "Add Line Numbers",
+    slug: "add-line-numbers",
+    description: "Automatically add sequential line numbers to your text.",
+    category: "text",
+    iconName: "List",
+    instructions: ["Paste text.", "Select format.", "Copy numbered text."],
+    faqs: [{ question: "Can I start from 0?", answer: "Yes, starting index is customizable." }],
+    metaTitle: "Add Line Numbers - Online Text Tool",
+    metaDescription: "Add numbers to each line of your text online for free.",
+    longDescription: "Give your text or code clear line numbers. This tool is great for making your documents easier to reference or preparing scripts for review.",
+    exampleInput: "First item\nSecond item"
+  },
+  {
+    id: "reverse-line-order",
+    name: "Reverse Line Order",
+    slug: "reverse-lines",
+    description: "Flip your list or text upside down by reversing the order of lines.",
+    category: "text",
+    iconName: "ArrowDownUp",
+    instructions: ["Paste lines.", "Click Reverse.", "Copy result."],
+    faqs: [{ question: "Does it sort alphabetically?", answer: "No, it only flips the current order." }],
+    metaTitle: "Reverse Line Order - Online List Flipper",
+    metaDescription: "Reverse the order of lines in your text online for free.",
+    longDescription: "Instantly flip your lists or logs upside down. It's the simplest way to see the most recent items at the top or change the flow of your data.",
+    exampleInput: "A\nB\nC"
+  },
+  {
+    id: "extract-phone-numbers",
+    name: "Extract Phone Numbers",
+    slug: "extract-phone-numbers",
+    description: "Find and extract all phone numbers from a block of text.",
+    category: "marketing",
+    iconName: "Phone",
+    instructions: ["Paste text.", "View found numbers.", "Copy selected."],
+    faqs: [{ question: "Does it support international?", answer: "Yes, it detects most standard formats." }],
+    metaTitle: "Extract Phone Numbers - Lead Gen Tool",
+    metaDescription: "Extract phone numbers from text online for free.",
+    longDescription: "Search through large amounts of text to find phone numbers. This tool is essential for sales teams and researchers cleaning up contact lists.",
+    exampleInput: "Call us at +1-555-0199 or 555-0100"
+  },
+  {
+    id: "extract-zip-codes",
+    name: "Extract ZIP Codes",
+    slug: "extract-zip-codes",
+    description: "Find and extract all ZIP/Postal codes from text.",
+    category: "marketing",
+    iconName: "MapPin",
+    instructions: ["Paste text.", "Click Extract.", "Copy codes."],
+    faqs: [{ question: "Does it work for UK postcodes?", answer: "Yes, it supports US ZIP and UK Postcodes." }],
+    metaTitle: "Extract ZIP Codes - Location Data Tool",
+    metaDescription: "Extract ZIP and postal codes from text online for free.",
+    longDescription: "Pull all zip codes out of any document or address list. It's a great way to group your data by location or verify delivery areas.",
+    exampleInput: "New York, NY 10001; London, SW1A 1AA"
+  },
+  {
+    id: "csv-to-xml-converter",
+    name: "CSV to XML Converter",
+    slug: "csv-to-xml",
+    description: "Convert CSV data into structured XML format.",
+    category: "developer",
+    iconName: "FileCode",
+    instructions: ["Upload CSV.", "Set root tag.", "Download XML."],
+    faqs: [{ question: "Is it customizable?", answer: "Yes, you can define your own XML tags." }],
+    metaTitle: "CSV to XML Converter - Online Data Tool",
+    metaDescription: "Convert CSV to XML online for free.",
+    longDescription: "Turn your spreadsheets into structured XML feeds. This tool makes it easy to migrate data between old systems and modern web applications.",
+    exampleInput: "id,name\n1,John"
+  },
+  {
+    id: "xml-to-csv-converter",
+    name: "XML to CSV Converter",
+    slug: "xml-to-csv",
+    description: "Convert XML data back into flat CSV format.",
+    category: "developer",
+    iconName: "FileSpreadsheet",
+    instructions: ["Upload XML.", "Map fields.", "Download CSV."],
+    faqs: [{ question: "Can it flatten JSON?", answer: "It treats XML like nested objects and flattens them." }],
+    metaTitle: "XML to CSV Converter - Online Data Tool",
+    metaDescription: "Convert XML to CSV online for free.",
+    longDescription: "Convert complex XML files into easy-to-use CSV logs. Perfect for importing web data into Excel or Google Sheets for analysis.",
+    exampleInput: "<users><user><id>1</id><name>John</name></user></users>"
+  },
+  {
+    id: "markdown-to-pdf-converter",
+    name: "Markdown to PDF Converter",
+    slug: "markdown-to-pdf",
+    description: "Convert Markdown documents to professional PDF files.",
+    category: "pdf",
+    iconName: "FileText",
+    instructions: ["Paste Markdown.", "Preview.", "Download PDF."],
+    faqs: [{ question: "Supports GFM?", answer: "Yes, including tables and code blocks." }],
+    metaTitle: "Markdown to PDF Converter - Free Online Tool",
+    metaDescription: "Convert Markdown to PDF online for free.",
+    longDescription: "Turn your MD files into polished PDF documents. It's the best way for developers to create professional documentation and reports from plain text.",
+    exampleInput: "# Hello World\nMy documentation..."
+  },
+  {
+    id: "excel-to-json-converter",
+    name: "Excel to JSON Converter",
+    slug: "excel-to-json",
+    description: "Convert Excel (.xlsx) files to JSON data structure.",
+    category: "developer",
+    iconName: "FileJson",
+    instructions: ["Upload .xlsx.", "Choose sheet.", "Copy JSON."],
+    faqs: [{ question: "Safe for large files?", answer: "Yes, processed locally." }],
+    metaTitle: "Excel to JSON Converter - Online Data Tool",
+    metaDescription: "Convert Excel to JSON online for free.",
+    longDescription: "Turn your Excel spreadsheets into usable JSON arrays. It's the fastest way to feed your website or app with real data from a spreadsheet.",
+    exampleInput: "Upload your .xlsx file."
+  },
+  {
+    id: "word-to-markdown-converter",
+    name: "Word to Markdown Converter",
+    slug: "word-to-markdown",
+    description: "Convert Word documents (.docx) to clean Markdown text.",
+    category: "text",
+    iconName: "FileText",
+    instructions: ["Upload .docx.", "Convert.", "Copy Markdown."],
+    faqs: [{ question: "Preserves formatting?", answer: "Yes, bolds, italics, and headers." }],
+    metaTitle: "Word to Markdown Converter - Online Writing Tool",
+    metaDescription: "Convert Word to Markdown online for free.",
+    longDescription: "Convert your Word docs into clean, web-ready Markdown. Perfect for bloggers and developers moving content from Google Docs or Word to GitHub.",
+    exampleInput: "Upload your .docx file."
+  },
+  {
+    id: "string-length-calculator",
+    name: "String Length Calculator",
+    slug: "string-length",
+    description: "Count the number of characters, words, and lines in a string.",
+    category: "text",
+    iconName: "Hash",
+    instructions: ["Paste text.", "See count instantly."],
+    faqs: [{ question: "Does it count spaces?", answer: "Yes, and it shows count with/without spaces." }],
+    metaTitle: "String Length Calculator - Online Counter",
+    metaDescription: "Count text characters and words online for free.",
+    longDescription: "Measure your text with precision. This tool gives you the exact count of characters, words, and bytes, ensuring your content fits everywhere perfectly.",
+    exampleInput: "How long is this string?"
   },
 ];
 

@@ -28,7 +28,7 @@ const siteConfig = {
   twitterHandle: "takethetools",
 };
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteName = siteConfig.siteName;
@@ -132,6 +132,14 @@ export default async function RootLayout({
           as="image"
           type="image/webp"
         />
+        <Script
+          id="google-funding-choices"
+          src="https://fundingchoicesmessages.google.com/i/pub-3148286057781421?ers=1"
+          strategy="afterInteractive"
+        />
+        <Script id="google-fc-present" strategy="afterInteractive">
+          {`(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();`}
+        </Script>
         <Script
           id="google-consent-mode"
           strategy="beforeInteractive"

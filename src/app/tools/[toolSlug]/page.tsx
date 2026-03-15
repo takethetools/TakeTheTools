@@ -2,7 +2,7 @@ import { TOOLS, CATEGORIES } from "@/lib/tools";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 import { Metadata } from "next";
 import Link from "next/link";
-import { ChevronRight, Home, Share2, HelpCircle, ArrowRight, CheckCircle2 } from "lucide-react";
+import { ChevronRight, Home, Share2, HelpCircle, ArrowRight, CheckCircle2, Zap } from "lucide-react";
 import Breadcrumbs from "@/components/common/Breadcrumbs";
 import React from "react";
 import { getToolAboutContent } from "@/lib/tool-content";
@@ -11,7 +11,7 @@ import ToolRenderer from "@/components/tools/ToolRenderer";
 import { generateToolMetaTitle, generateToolMetaDescription, SITE_URL } from "@/lib/seo";
 import { getSoftwareApplicationSchema, getBreadcrumbSchema, getFAQSchema } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 export const dynamicParams = true;
 
 interface Props {
@@ -186,6 +186,31 @@ export default async function ToolPage({ params }: Props) {
                 ))}
               </div>
             </div>
+
+            {/* Example Usage Section */}
+            {tool.exampleInput && (
+              <div className="mb-16">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                  <Zap className="w-6 h-6 text-primary-600" />
+                  Example Usage
+                </h2>
+                <div className="p-8 bg-slate-900 rounded-[2rem] border border-slate-800 shadow-xl overflow-hidden relative group">
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <Zap className="w-32 h-32 text-white" />
+                  </div>
+                  <div className="relative z-10">
+                    <p className="text-slate-400 text-sm font-bold uppercase tracking-widest mb-4">Sample Input / Output</p>
+                    <pre className="bg-slate-800/50 p-6 rounded-xl text-primary-300 font-mono text-sm border border-slate-700 shadow-inner overflow-x-auto">
+                      {tool.exampleInput}
+                    </pre>
+                    <p className="mt-6 text-slate-400 text-sm leading-relaxed">
+                      Simply paste your data as shown in the example above to see how our {tool.name.toLowerCase()} works.
+                      Our platform ensures high-speed processing with complete accuracy, tailored for professional use cases.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
 
 
             {/* FAQ Section */}

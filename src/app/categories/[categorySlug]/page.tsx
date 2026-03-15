@@ -7,7 +7,7 @@ import React from "react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 import { generateCategoryMetaTitle, generateCategoryMetaDescription, SITE_URL, getBreadcrumbSchema } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 export const dynamicParams = true;
 
 export async function generateMetadata({ params }: { params: Promise<{ categorySlug: string }> }): Promise<Metadata> {

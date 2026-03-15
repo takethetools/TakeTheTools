@@ -41,7 +41,10 @@ export default function GenericMockTool({ name, sourceType, targetType }: Generi
                     <FileText className="w-6 h-6" />
                 </div>
                 <div>
-                    <h3 className="text-xl font-bold text-slate-900">{name}</h3>
+                    <div className="flex items-center gap-2 mb-1">
+                        <h3 className="text-xl font-bold text-slate-900">{name}</h3>
+                        <span className="px-2 py-0.5 bg-primary-100 text-primary-700 text-[10px] font-bold uppercase rounded-full tracking-wider">Beta</span>
+                    </div>
                     <p className="text-sm text-slate-500">Convert {sourceType} to {targetType} instantly</p>
                 </div>
             </div>
