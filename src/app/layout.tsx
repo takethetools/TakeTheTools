@@ -137,9 +137,10 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <script
-          async
+        <Script
+          id="adsense-init"
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseId}`}
+          strategy="afterInteractive"
           crossOrigin="anonymous"
         />
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />

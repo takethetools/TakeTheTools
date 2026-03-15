@@ -23,15 +23,22 @@ export default function ManualAdUnit({
     useEffect(() => {
         if (pushed.current) return;
 
-        try {
-            (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-            (window as any).adsbygoogle.push({});
-            pushed.current = true;
-        } catch (err) {
-            if (process.env.NODE_ENV === 'development') {
-                // Keep console clean on localhost
+        const checkWidthAndPush = () => {
+            if (adRef.current && adRef.current.offsetWidth > 0) {
+                try {
+                    (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+                    (window as any).adsbygoogle.push({});
+                    pushed.current = true;
+                } catch (err) {
+                    console.error("AdSense Error:", err);
+                }
+            } else {
+                // Try again in 100ms if width is not yet available
+                setTimeout(checkWidthAndPush, 100);
             }
-        }
+        };
+
+        checkWidthAndPush();
     }, []);
 
     return (
