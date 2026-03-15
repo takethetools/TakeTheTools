@@ -25,7 +25,9 @@ export async function generateStaticParams() {
       toolSlug: tool.slug,
     }));
   } catch (error) {
-    if (process.env.NODE_ENV !== 'production' || !String(error).includes('Unable to open the database file')) {
+    if (process.env.NODE_ENV !== 'production' ||
+      (!String(error).includes('Unable to open the database file') &&
+        !String(error).includes('PrismaClientKnownRequestError'))) {
       console.warn("Failed to generate static params for tools:", error);
     }
     return [];

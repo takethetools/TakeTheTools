@@ -34,7 +34,11 @@ async function getHomeData() {
 
     return { categories, popularTools, latestTools };
   } catch (error) {
-    console.error("Failed to fetch home data during build:", error);
+    if (process.env.NODE_ENV !== 'production' ||
+      (!String(error).includes('Unable to open the database file') &&
+        !String(error).includes('PrismaClientKnownRequestError'))) {
+      console.warn("Failed to fetch home data during build:", error);
+    }
     return { categories: [], popularTools: [], latestTools: [] };
   }
 }

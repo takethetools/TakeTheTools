@@ -20,8 +20,10 @@ export async function generateStaticParams() {
       slug: post.slug,
     }));
   } catch (error) {
-    // Only log error in development or if it's not a connection error during build
-    if (process.env.NODE_ENV !== 'production' || !String(error).includes('Unable to open the database file')) {
+    // Silence expected database errors during production build
+    if (process.env.NODE_ENV !== 'production' ||
+      (!String(error).includes('Unable to open the database file') &&
+        !String(error).includes('PrismaClientKnownRequestError'))) {
       console.warn("Failed to generate static params for blog:", error);
     }
     return [];

@@ -58,7 +58,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [...routes, ...toolRoutes, ...categoryRoutes, ...pseoRoutes, ...blogRoutes];
   } catch (error) {
-    if (process.env.NODE_ENV !== 'production' || !String(error).includes('Unable to open the database file')) {
+    if (process.env.NODE_ENV !== 'production' || 
+        (!String(error).includes('Unable to open the database file') && 
+         !String(error).includes('PrismaClientKnownRequestError'))) {
       console.warn("Failed to generate extended sitemap during build:", error);
     }
     return routes;

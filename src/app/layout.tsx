@@ -30,7 +30,11 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     config = await prisma.globalConfig.findFirst();
   } catch (error) {
-    console.warn("Failed to fetch global config for metadata during build.");
+    if (process.env.NODE_ENV !== 'production' ||
+      (!String(error).includes('Unable to open the database file') &&
+        !String(error).includes('PrismaClientKnownRequestError'))) {
+      console.warn("Failed to fetch global config for metadata during build:", error);
+    }
   }
 
   const siteName = config?.siteName || "TakeThe Tools";
@@ -104,7 +108,11 @@ export default async function RootLayout({
   try {
     config = await prisma.globalConfig.findFirst();
   } catch (error) {
-    console.warn("Failed to fetch global config for layout during build.");
+    if (process.env.NODE_ENV !== 'production' ||
+      (!String(error).includes('Unable to open the database file') &&
+        !String(error).includes('PrismaClientKnownRequestError'))) {
+      console.warn("Failed to fetch global config for layout during build:", error);
+    }
   }
 
   const siteName = config?.siteName || "TakeThe Tools";
