@@ -26,22 +26,6 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // Admin route protection
-  if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
-    const session = request.cookies.get('admin_session')?.value;
-    if (!session) {
-      return NextResponse.redirect(new URL('/admin/login', request.url));
-    }
-
-    try {
-      const secret = new TextEncoder().encode(process.env.JWT_SECRET || "default_secret_key_change_me");
-      const { jwtVerify } = await import('jose');
-      await jwtVerify(session, secret);
-    } catch (error) {
-      return NextResponse.redirect(new URL('/admin/login', request.url));
-    }
-  }
-
   // Continue to the next handler if no block matches
   return NextResponse.next();
 }
