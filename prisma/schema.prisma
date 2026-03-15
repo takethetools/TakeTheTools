@@ -1,13 +1,77 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  tools       Tool[]
+  blogs       Blog[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Tool {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  description     String
+  longDescription String?
+  category        Category @relation(fields: [categoryId], references: [id])
+  categoryId      String
+  metaTitle       String?
+  metaDescription String?
+  iconName        String?
+  isPopular       Boolean  @default(false)
+  instructions    String   // Store as JSON string or plain text
+  faqs            String   // Store as JSON string
+  exampleInput    String?
+  componentName   String?  // Reference to the React component
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Blog {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  category        Category @relation(fields: [categoryId], references: [id])
+  categoryId      String
+  metaTitle       String?
+  metaDescription String?
+  featuredImage   String?
+  content         String   // Rich text content
+  isPublished     Boolean  @default(false)
+  publishDate     DateTime @default(now())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model AdPlacement {
+  id         String   @id @default(cuid())
+  location   String   @unique // homepage, tool, blog, sidebar, header, footer
+  adSlot     String?
+  adFormat   String?  @default("auto")
+  customHtml String?
+  isEnabled  Boolean  @default(true)
+  updatedAt  DateTime @updatedAt
+}
+
+model GlobalConfig {
+  id             String @id @default("default")
+  siteName       String @default("TakeTheTools")
+  siteDescription String?
+  metaTitle      String?
+  metaDescription String?
+  ogImage        String?
+  analyticsId    String?
+  twitterHandle  String?
+  adSenseId      String? @default("ca-pub-3148286057781421")
 }

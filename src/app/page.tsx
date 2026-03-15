@@ -1,8 +1,9 @@
+import prisma from "@/lib/db";
 import Link from "next/link";
 import { Zap, Search, ImageIcon, FileText, Code, Type, Video, ArrowRight, Star, Calculator, Target, Shield, LayoutGrid, Clock, HelpCircle } from "lucide-react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
-import { CATEGORIES, TOOLS } from "@/lib/tools";
 import React from "react";
+import HomeSearch from "@/components/home/HomeSearch";
 
 const categoryIcons: Record<string, any> = {
   image: ImageIcon,
@@ -15,10 +16,26 @@ const categoryIcons: Record<string, any> = {
   security: Shield,
 };
 
-import HomeSearch from "@/components/home/HomeSearch";
+export const dynamic = "force-dynamic";
 
-export default function Home() {
-  const popularTools = TOOLS.filter(t => t.isPopular);
+async function getHomeData() {
+  const [categories, popularTools, latestTools] = await Promise.all([
+    prisma.category.findMany(),
+    prisma.tool.findMany({
+      where: { isPopular: true },
+      take: 8
+    }),
+    prisma.tool.findMany({
+      orderBy: { id: "desc" },
+      take: 3
+    })
+  ]);
+
+  return { categories, popularTools, latestTools };
+}
+
+export default async function Home() {
+  const { categories, popularTools, latestTools } = await getHomeData();
 
   return (
     <div className="flex flex-col gap-20 pb-20 pt-10">
@@ -57,8 +74,8 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-          {CATEGORIES.map((cat) => {
-            const Icon = categoryIcons[cat.id] || LayoutGrid;
+          {categories.map((cat) => {
+            const Icon = categoryIcons[cat.slug] || categoryIcons[cat.id] || LayoutGrid;
             return (
               <Link
                 key={cat.id}
@@ -94,7 +111,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {popularTools.slice(0, 8).map((tool) => (
+            {popularTools.map((tool) => (
               <Link
                 key={tool.id}
                 href={`/tools/${tool.slug}`}
@@ -108,7 +125,7 @@ export default function Home() {
                 </div>
                 <p className="text-slate-500 text-sm mb-4 line-clamp-2">{tool.description}</p>
                 <div className="flex justify-between items-center text-xs">
-                  <span className="px-2 py-1 bg-slate-100 rounded text-slate-600 uppercase font-bold tracking-wider">{tool.category}</span>
+                  <span className="px-2 py-1 bg-slate-100 rounded text-slate-600 uppercase font-bold tracking-wider">{tool.categoryId}</span>
                   <span className="text-primary-600 font-bold">Use Tool →</span>
                 </div>
               </Link>
@@ -135,7 +152,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {TOOLS.slice(-3).map((tool) => (
+          {latestTools.map((tool) => (
             <Link
               key={tool.id}
               href={`/tools/${tool.slug}`}

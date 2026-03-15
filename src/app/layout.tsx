@@ -21,83 +21,91 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://takethetools.com"),
-  title: {
-    default: "TakeThe Tools - All-in-One Online Tools Platform",
-    template: "%s | TakeThe Tools",
-  },
-  description: "High-performance, free online tools for image conversion, PDF management, developer utilities, and file converters. Fast, secure, and browser-based.",
-  keywords: ["online tools", "webp to png", "pdf merge", "image compressor", "json formatter", "file converter", "developer tools"],
-  authors: [{ name: "TakeThe Tools Team" }],
-  creator: "TakeThe Tools",
-  publisher: "TakeThe Tools",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  openGraph: {
-    title: "TakeThe Tools - All-in-One Online Tools Platform",
-    description: "Free online tools for image conversion, PDF editing, developer utilities, and file converters.",
-    url: "https://takethetools.com",
-    siteName: "TakeThe Tools",
-    images: [
-      {
-        url: "/og-image.png", // Ensure this exists or I should generate it
-        width: 1200,
-        height: 630,
-        alt: "TakeThe Tools - Free Online Tools",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "TakeThe Tools - All-in-One Online Tools Platform",
-    description: "Free online tools for image conversion, PDF editing, developer utilities, and file converters.",
-    images: ["/og-image.png"],
-    creator: "@takethetools",
-  },
-  alternates: {
-    canonical: "https://takethetools.com",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+import prisma from "@/lib/db";
+
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const config = await prisma.globalConfig.findFirst();
+  const siteName = config?.siteName || "TakeThe Tools";
+  const description = config?.metaDescription || "High-performance, free online tools for image conversion, PDF management, developer utilities, and file converters. Fast, secure, and browser-based.";
+
+  return {
+    metadataBase: new URL("https://takethetools.com"),
+    title: {
+      default: `${siteName} - All-in-One Online Tools Platform`,
+      template: `%s | ${siteName}`,
+    },
+    description,
+    keywords: ["online tools", "webp to png", "pdf merge", "image compressor", "json formatter", "file converter", "developer tools"],
+    authors: [{ name: `${siteName} Team` }],
+    creator: siteName,
+    publisher: siteName,
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    openGraph: {
+      title: `${siteName} - All-in-One Online Tools Platform`,
+      description,
+      url: "https://takethetools.com",
+      siteName: siteName,
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: `${siteName} - Free Online Tools`,
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${siteName} - All-in-One Online Tools Platform`,
+      description,
+      images: ["/og-image.png"],
+      creator: config?.twitterHandle ? `@${config.twitterHandle}` : "@takethetools",
+    },
+    alternates: {
+      canonical: "https://takethetools.com",
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
-  verification: {
-    google: "R5hXPJ6P5ccuvameesuglIvAJ0PGxB-g2LFxLzEr5vw",
-  },
-  other: {
-    "google-adsense-account": "ca-pub-2006415668111484",
-  },
-};
+    other: {
+      "google-adsense-account": config?.adSenseId || "ca-pub-3148286057781421",
+    },
+  };
+}
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "TakeThe Tools",
-  "url": "https://takethetools.com",
-  "logo": "https://takethetools.com/logo.webp",
-  "sameAs": [
-    "https://twitter.com/takethetools"
-  ]
-};
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const config = await prisma.globalConfig.findFirst();
+  const siteName = config?.siteName || "TakeThe Tools";
+  const adSenseId = config?.adSenseId || "ca-pub-3148286057781421";
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": siteName,
+    "url": "https://takethetools.com",
+    "logo": "https://takethetools.com/logo.webp",
+    "sameAs": config?.twitterHandle ? [`https://twitter.com/${config.twitterHandle}`] : ["https://twitter.com/takethetools"]
+  };
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
@@ -153,19 +161,19 @@ export default function RootLayout({
         <Header />
         <Script
           id="adsbygoogle-init"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2006415668111484"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseId}`}
           strategy="afterInteractive"
           crossOrigin="anonymous"
         />
         <div className="pt-[80px] md:pt-[104px]">
           {/* Top Ad Banner — Shows on all pages */}
           <div className="container mx-auto px-4 py-3 flex justify-center">
-            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
           </div>
           <main className="flex-grow">{children}</main>
           {/* Bottom Ad Banner — Shows on all pages */}
           <div className="container mx-auto px-4 py-3 flex justify-center">
-            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
           </div>
         </div>
         <Footer />

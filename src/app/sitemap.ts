@@ -1,9 +1,8 @@
 import { MetadataRoute } from "next";
-import { TOOLS, CATEGORIES } from "@/lib/tools";
-import { getSortedPostsData } from "@/lib/blog";
+import prisma from "@/lib/db";
 import { getAllPSEORoutes } from "@/lib/pseo";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://takethetools.com";
 
   // Core pages
@@ -14,16 +13,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 1.0,
   }));
 
+  // Fetch data from DB
+  const [tools, categories, posts] = await Promise.all([
+    prisma.tool.findMany({ select: { slug: true, updatedAt: true } }),
+    prisma.category.findMany({ select: { slug: true } }),
+    prisma.blog.findMany({
+      where: { isPublished: true },
+      select: { slug: true, publishDate: true, updatedAt: true }
+    })
+  ]);
+
   // Tool pages
-  const toolRoutes = TOOLS.map((tool) => ({
+  const toolRoutes = tools.map((tool) => ({
     url: `${baseUrl}/tools/${tool.slug}`,
-    lastModified: new Date(),
+    lastModified: tool.updatedAt,
     changeFrequency: "weekly" as const,
     priority: 0.9,
   }));
 
   // Categories
-  const categoryRoutes = CATEGORIES.map((cat) => ({
+  const categoryRoutes = categories.map((cat) => ({
     url: `${baseUrl}/categories/${cat.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
@@ -39,9 +48,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Blog posts
-  const blogRoutes = getSortedPostsData().map((post) => ({
+  const blogRoutes = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
+    lastModified: post.updatedAt,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));

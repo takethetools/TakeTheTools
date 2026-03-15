@@ -1,5 +1,5 @@
+import prisma from "@/lib/db";
 import Link from "next/link";
-import { CATEGORIES, TOOLS } from "@/lib/tools";
 import { ArrowRight, Box, Image as ImageIcon, FileText, Code, Type, LayoutGrid, Calculator, Target, Shield } from "lucide-react";
 import { Metadata } from "next";
 import React from "react";
@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const dynamic = "force-dynamic";
+
 const ICON_MAP: Record<string, any> = {
   image: ImageIcon,
   pdf: FileText,
@@ -24,7 +26,21 @@ const ICON_MAP: Record<string, any> = {
   security: Shield,
 };
 
-export default function CategoriesPage() {
+export default async function CategoriesPage() {
+  const [categories, popularTools] = await Promise.all([
+    prisma.category.findMany({
+      include: {
+        _count: {
+          select: { tools: true }
+        }
+      }
+    }),
+    prisma.tool.findMany({
+      where: { isPopular: true },
+      take: 4
+    })
+  ]);
+
   return (
     <div className="pt-10 pb-20">
       <div className="container mx-auto px-4">
@@ -44,9 +60,9 @@ export default function CategoriesPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {CATEGORIES.map((category) => {
-            const Icon = ICON_MAP[category.id] || LayoutGrid;
-            const toolCount = TOOLS.filter(t => t.category === category.id).length;
+          {categories.map((category) => {
+            const Icon = ICON_MAP[category.slug] || ICON_MAP[category.id] || LayoutGrid;
+            const toolCount = category._count.tools;
 
             return (
               <Link
@@ -102,7 +118,7 @@ export default function CategoriesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {TOOLS.filter(t => t.isPopular).slice(0, 4).map((tool) => (
+            {popularTools.map((tool) => (
               <Link
                 key={tool.id}
                 href={`/tools/${tool.slug}`}

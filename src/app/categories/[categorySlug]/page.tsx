@@ -1,20 +1,22 @@
-import { ToolCategory, CATEGORIES, TOOLS } from "@/lib/tools";
+import prisma from "@/lib/db";
 import Link from "next/link";
 import { ArrowRight, ChevronRight, Home } from "lucide-react";
 import Breadcrumbs from "@/components/common/Breadcrumbs";
 import { Metadata } from "next";
 import React from "react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
-
 import { generateCategoryMetaTitle, generateCategoryMetaDescription, SITE_URL, getBreadcrumbSchema } from "@/lib/seo";
+
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: { params: Promise<{ categorySlug: string }> }): Promise<Metadata> {
   const { categorySlug } = await params;
-  const category = CATEGORIES.find(c => c.slug === categorySlug);
+  const category = await prisma.category.findUnique({ where: { slug: categorySlug } });
   if (!category) return { title: "Category Not Found" };
 
   const title = generateCategoryMetaTitle(category.name);
-  const description = generateCategoryMetaDescription(category.description);
+  const description = generateCategoryMetaDescription(category.description || "");
 
   return {
     title,
@@ -32,24 +34,27 @@ export async function generateMetadata({ params }: { params: Promise<{ categoryS
   };
 }
 
-export const dynamic = "force-static";
-export const dynamicParams = false;
-
 export async function generateStaticParams() {
-  return CATEGORIES.map((category) => ({
+  const categories = await prisma.category.findMany({ select: { slug: true } });
+  return categories.map((category) => ({
     categorySlug: category.slug,
   }));
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ categorySlug: string }> }) {
   const { categorySlug } = await params;
-  const category = CATEGORIES.find(c => c.slug === categorySlug);
+  const category = await prisma.category.findUnique({
+    where: { slug: categorySlug },
+    include: {
+      tools: true
+    }
+  });
 
   if (!category) {
     return <div className="container mx-auto px-4 py-32 text-center">Category not found</div>;
   }
 
-  const categoryTools = TOOLS.filter(t => t.category === category.id);
+  const categoryTools = category.tools;
 
   return (
     <div className="pt-10 pb-20">

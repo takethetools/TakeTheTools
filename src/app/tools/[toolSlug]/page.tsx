@@ -1,4 +1,4 @@
-import { getToolBySlug, TOOLS } from "@/lib/tools";
+import prisma from "@/lib/db";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -8,30 +8,46 @@ import React from "react";
 import { getToolAboutContent } from "@/lib/tool-content";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import ToolRenderer from "@/components/tools/ToolRenderer";
+import { generateToolMetaTitle, generateToolMetaDescription, SITE_URL } from "@/lib/seo";
+import { getSoftwareApplicationSchema, getBreadcrumbSchema, getFAQSchema } from "@/lib/seo";
 
-export const dynamic = "force-static";
-export const dynamicParams = false;
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
 
 interface Props {
   params: Promise<{ toolSlug: string }>;
 }
 
-
 export async function generateStaticParams() {
-  return TOOLS.map((tool) => ({
+  const tools = await prisma.tool.findMany({ select: { slug: true } });
+  return tools.map((tool) => ({
     toolSlug: tool.slug,
   }));
 }
 
-import { generateToolMetaTitle, generateToolMetaDescription, SITE_URL } from "@/lib/seo";
+async function getTool(slug: string) {
+  const tool = await prisma.tool.findUnique({
+    where: { slug },
+    include: { category: true }
+  });
+
+  if (!tool) return null;
+
+  // Parse JSON strings from SQLite
+  return {
+    ...tool,
+    instructions: JSON.parse(tool.instructions as string) as string[],
+    faqs: JSON.parse(tool.faqs as string) as { question: string; answer: string }[],
+  };
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { toolSlug } = await params;
-  const tool = getToolBySlug(toolSlug);
+  const tool = await getTool(toolSlug);
   if (!tool) return { title: "Tool Not Found" };
 
-  const title = generateToolMetaTitle(tool.name);
-  const description = generateToolMetaDescription(tool);
+  const title = tool.metaTitle || generateToolMetaTitle(tool.name);
+  const description = tool.metaDescription || generateToolMetaDescription(tool as any);
 
   return {
     title,
@@ -54,11 +70,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-import { getSoftwareApplicationSchema, getBreadcrumbSchema, getFAQSchema } from "@/lib/seo";
-
 export default async function ToolPage({ params }: Props) {
   const { toolSlug } = await params;
-  const tool = getToolBySlug(toolSlug);
+  const tool = await getTool(toolSlug);
 
   if (!tool) {
     return <div className="container mx-auto px-4 py-32 text-center">Tool not found</div>;
@@ -67,7 +81,13 @@ export default async function ToolPage({ params }: Props) {
   const aboutContent = getToolAboutContent(toolSlug);
 
   // Related tools (same category, different tool)
-  const relatedTools = TOOLS.filter(t => t.category === tool.category && t.id !== tool.id).slice(0, 3);
+  const relatedTools = await prisma.tool.findMany({
+    where: {
+      categoryId: tool.categoryId,
+      NOT: { id: tool.id }
+    },
+    take: 3
+  });
 
   // Dynamic application category for schema
   const applicationCategoryMap: Record<string, string> = {
@@ -117,7 +137,7 @@ export default async function ToolPage({ params }: Props) {
 
             {/* Tool Interaction Area */}
             <div className="mb-12">
-              <ToolRenderer toolId={tool.id} exampleInput={tool.exampleInput} />
+              <ToolRenderer toolId={tool.componentName || tool.id} exampleInput={tool.exampleInput || ""} />
             </div>
 
             {/* Ad Unit — After Tool */}
@@ -159,7 +179,7 @@ export default async function ToolPage({ params }: Props) {
                 <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {tool.instructions.map((step, index) => (
+                {(tool.instructions as string[]).map((step, index) => (
                   <div key={index} className="p-6 bg-slate-50 rounded-2xl border border-slate-100 relative">
                     <span className="absolute -top-4 -left-4 w-10 h-10 bg-white border-4 border-slate-50 rounded-full flex items-center justify-center font-bold text-primary-600 shadow-sm">
                       {index + 1}
@@ -178,7 +198,7 @@ export default async function ToolPage({ params }: Props) {
                 Frequently Asked Questions
               </h2>
               <div className="space-y-4">
-                {tool.faqs.map((faq, index) => (
+                {(tool.faqs as any[]).map((faq, index) => (
                   <div key={index} className="bg-white border border-slate-100 rounded-2xl p-6">
                     <h3 className="font-bold text-slate-900 mb-3">{faq.question}</h3>
                     <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
@@ -233,13 +253,13 @@ export default async function ToolPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
-            getSoftwareApplicationSchema(tool, applicationCategoryMap),
+            getSoftwareApplicationSchema(tool as any, applicationCategoryMap),
             getBreadcrumbSchema([
               { name: "Home", item: SITE_URL },
               { name: "Tools", item: `${SITE_URL}/categories` },
               { name: tool.name, item: `${SITE_URL}/tools/${toolSlug}` }
             ]),
-            getFAQSchema(tool.faqs)
+            getFAQSchema(tool.faqs as any)
           ])
         }}
       />

@@ -5,26 +5,33 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search, Menu, X, Zap, ArrowRight, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TOOLS, Tool } from "@/lib/tools";
 import { cn } from "@/lib/utils";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<Tool[]>([]);
+  const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   useEffect(() => {
-    if (searchQuery.trim().length > 1) {
-      const filtered = TOOLS.filter(tool =>
-        tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tool.description.toLowerCase().includes(searchQuery.toLowerCase())
-      ).slice(0, 6);
-      setSearchResults(filtered);
-    } else {
-      setSearchResults([]);
-    }
+    const performSearch = async () => {
+      if (searchQuery.trim().length > 1) {
+        try {
+          const res = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
+          const data = await res.json();
+          setSearchResults(data);
+        } catch (err) {
+          console.error("Search failed", err);
+          setSearchResults([]);
+        }
+      } else {
+        setSearchResults([]);
+      }
+    };
+
+    const debounce = setTimeout(performSearch, 300);
+    return () => clearTimeout(debounce);
   }, [searchQuery]);
 
   useEffect(() => {

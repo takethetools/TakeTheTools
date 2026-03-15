@@ -39,7 +39,7 @@ export default function ManualAdUnit({
             ref={adRef}
             className={`adsbygoogle ${className}`}
             style={style || { display: "block" }}
-            data-ad-client="ca-pub-2006415668111484"
+            data-ad-client="ca-pub-3148286057781421"
             data-ad-slot={adSlot}
             data-ad-format={adFormat}
             data-full-width-responsive={fullWidthResponsive ? "true" : "false"}

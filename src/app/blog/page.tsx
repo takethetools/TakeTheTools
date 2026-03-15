@@ -1,5 +1,5 @@
+import prisma from "@/lib/db";
 import Link from "next/link";
-import { getSortedPostsData } from "@/lib/blog";
 import { ChevronRight, Calendar, Tag, Clock } from "lucide-react";
 import React from "react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
@@ -17,6 +17,8 @@ export const metadata = {
   },
 };
 
+export const dynamic = "force-dynamic";
+
 const CATEGORY_COLORS: Record<string, string> = {
   "Image Tools": "bg-pink-100 text-pink-600",
   "PDF Tools": "bg-amber-100 text-amber-600",
@@ -27,8 +29,12 @@ const CATEGORY_COLORS: Record<string, string> = {
   "Marketing & Social": "bg-orange-100 text-orange-600",
 };
 
-export default function BlogPage() {
-  const posts = getSortedPostsData();
+export default async function BlogPage() {
+  const posts = await prisma.blog.findMany({
+    where: { isPublished: true },
+    include: { category: true },
+    orderBy: { publishDate: "desc" }
+  });
 
   return (
     <div className="pt-10 pb-20">
@@ -58,13 +64,13 @@ export default function BlogPage() {
               >
                 {/* Featured Post Cover */}
                 <div className={`h-72 lg:h-full relative overflow-hidden flex items-center justify-center p-8 group-hover:scale-[1.02] transition-transform duration-700`}>
-                  <div className={`absolute inset-0 bg-gradient-to-br ${posts[0].category === 'Image Tools' ? 'from-pink-500 to-rose-600' :
-                    posts[0].category === 'PDF Tools' ? 'from-amber-400 to-orange-600' :
-                      posts[0].category === 'Developer Tools' ? 'from-blue-500 to-indigo-700' :
-                        posts[0].category === 'Text Tools' ? 'from-slate-600 to-slate-800' :
-                          posts[0].category === 'Security & Privacy' ? 'from-red-500 to-red-800' :
-                            posts[0].category === 'Math & Calculators' ? 'from-green-500 to-emerald-700' :
-                              posts[0].category === 'Marketing & Social' ? 'from-orange-400 to-red-600' :
+                  <div className={`absolute inset-0 bg-gradient-to-br ${posts[0].category.name === 'Image Tools' ? 'from-pink-500 to-rose-600' :
+                    posts[0].category.name === 'PDF Tools' ? 'from-amber-400 to-orange-600' :
+                      posts[0].category.name === 'Developer Tools' ? 'from-blue-500 to-indigo-700' :
+                        posts[0].category.name === 'Text Tools' ? 'from-slate-600 to-slate-800' :
+                          posts[0].category.name === 'Security & Privacy' ? 'from-red-500 to-red-800' :
+                            posts[0].category.name === 'Math & Calculators' ? 'from-green-500 to-emerald-700' :
+                              posts[0].category.name === 'Marketing & Social' ? 'from-orange-400 to-red-600' :
                                 'from-primary-500 to-primary-700'
                     }`}></div>
                   <div className="relative z-10 flex flex-col items-center gap-4 text-center">
@@ -72,24 +78,24 @@ export default function BlogPage() {
                       <Tag className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-white font-display font-bold text-2xl drop-shadow-md leading-tight max-w-xs">
-                      {posts[0].toolName || posts[0].title.split(':')[0]}
+                      {posts[0].title.split(':')[0]}
                     </h3>
                   </div>
                 </div>
                 <div className="p-10 lg:p-12 flex flex-col justify-center">
                   <div className="flex items-center gap-4 mb-6">
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${CATEGORY_COLORS[posts[0].category] || "bg-primary-50 text-primary-600"}`}>
-                      {posts[0].category}
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${CATEGORY_COLORS[posts[0].category.name] || "bg-primary-50 text-primary-600"}`}>
+                      {posts[0].category.name}
                     </span>
                     <span className="flex items-center gap-1 text-xs text-slate-400 font-bold">
-                      <Calendar className="w-3 h-3" /> {posts[0].date}
+                      <Calendar className="w-3 h-3" /> {new Date(posts[0].publishDate).toLocaleDateString()}
                     </span>
                   </div>
                   <h2 className="text-3xl font-bold text-slate-900 mb-4 group-hover:text-primary-600 transition-colors leading-tight">
                     {posts[0].title}
                   </h2>
                   <p className="text-slate-500 mb-8 leading-relaxed line-clamp-3 whitespace-pre-wrap">
-                    {posts[0].description}
+                    {posts[0].metaDescription || posts[0].title}
                   </p>
                   <span className="text-primary-600 font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
                     Read Article <ChevronRight className="w-4 h-4" />
@@ -115,13 +121,13 @@ export default function BlogPage() {
               >
                 {/* Cover Interface */}
                 <div className="h-48 relative overflow-hidden flex items-center justify-center p-6 grayscale-[0.5] group-hover:grayscale-0 transition-all duration-500">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${post.category === 'Image Tools' ? 'from-pink-500 to-rose-600' :
-                    post.category === 'PDF Tools' ? 'from-amber-400 to-orange-600' :
-                      post.category === 'Developer Tools' ? 'from-blue-500 to-indigo-700' :
-                        post.category === 'Text Tools' ? 'from-slate-600 to-slate-800' :
-                          post.category === 'Security & Privacy' ? 'from-red-500 to-red-800' :
-                            post.category === 'Math & Calculators' ? 'from-green-500 to-emerald-700' :
-                              post.category === 'Marketing & Social' ? 'from-orange-400 to-red-600' :
+                  <div className={`absolute inset-0 bg-gradient-to-br ${post.category.name === 'Image Tools' ? 'from-pink-500 to-rose-600' :
+                    post.category.name === 'PDF Tools' ? 'from-amber-400 to-orange-600' :
+                      post.category.name === 'Developer Tools' ? 'from-blue-500 to-indigo-700' :
+                        post.category.name === 'Text Tools' ? 'from-slate-600 to-slate-800' :
+                          post.category.name === 'Security & Privacy' ? 'from-red-500 to-red-800' :
+                            post.category.name === 'Math & Calculators' ? 'from-green-500 to-emerald-700' :
+                              post.category.name === 'Marketing & Social' ? 'from-orange-400 to-red-600' :
                                 'from-primary-500 to-primary-700'
                     }`}></div>
                   <div className="relative z-10 flex flex-col items-center gap-3 text-center">
@@ -129,25 +135,25 @@ export default function BlogPage() {
                       <Tag className="w-6 h-6 text-white" />
                     </div>
                     <h3 className="text-white font-display font-bold text-lg drop-shadow-md leading-tight line-clamp-1">
-                      {post.toolName || post.title.split(':')[0]}
+                      {post.title.split(':')[0]}
                     </h3>
                   </div>
                 </div>
 
                 <div className="p-8 flex-grow flex flex-col">
                   <div className="flex items-center gap-4 mb-4">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider ${CATEGORY_COLORS[post.category] || "bg-primary-50 text-primary-600"}`}>
-                      {post.category}
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider ${CATEGORY_COLORS[post.category.name] || "bg-primary-50 text-primary-600"}`}>
+                      {post.category.name}
                     </span>
                     <span className="flex items-center gap-1 text-xs text-slate-400 font-bold">
-                      <Calendar className="w-3 h-3" /> {post.date}
+                      <Calendar className="w-3 h-3" /> {new Date(post.publishDate).toLocaleDateString()}
                     </span>
                   </div>
                   <h2 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-primary-600 transition-colors line-clamp-2">
                     {post.title}
                   </h2>
                   <p className="text-slate-500 mb-6 line-clamp-3 flex-grow text-sm leading-relaxed whitespace-pre-wrap">
-                    {post.description}
+                    {post.metaDescription || post.title}
                   </p>
                   <span className="text-primary-600 font-bold flex items-center gap-1 group-hover:gap-2 transition-all text-sm">
                     Read Article <ChevronRight className="w-4 h-4" />

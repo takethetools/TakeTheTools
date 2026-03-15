@@ -3,27 +3,18 @@ import Image from "next/image";
 import { Github, Twitter, Mail } from "lucide-react";
 import NewsletterForm from "./NewsletterForm";
 import ManualAdUnit from "../common/ManualAdUnit";
+import prisma from "@/lib/db";
 
-export default function Footer() {
+export default async function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const categories = [
-    { name: "Image Tools", href: "/categories/image-tools" },
-    { name: "PDF Tools", href: "/categories/pdf-tools" },
-    { name: "Developer Tools", href: "/categories/developer-tools" },
-    { name: "Text Tools", href: "/categories/text-tools" },
-    { name: "File Converters", href: "/categories/file-converter-tools" },
-    { name: "Math & Calculators", href: "/categories/math-calculators" },
-    { name: "Marketing & Social", href: "/categories/marketing-tools" },
-    { name: "Security & Privacy", href: "/categories/security-privacy" },
-  ];
+  const [categories, popularTools, config] = await Promise.all([
+    prisma.category.findMany({ take: 8 }),
+    prisma.tool.findMany({ where: { isPopular: true }, take: 4 }),
+    prisma.globalConfig.findFirst()
+  ]);
 
-  const popularTools = [
-    { name: "WebP to PNG", href: "/tools/webp-to-png-converter" },
-    { name: "Merge PDF", href: "/tools/merge-pdf" },
-    { name: "JSON Formatter", href: "/tools/json-formatter-and-validator" },
-    { name: "Word Counter", href: "/tools/word-counter" },
-  ];
+  const siteName = config?.siteName || "TakeTheTools";
 
   return (
     <footer className="bg-slate-900 text-slate-300 pt-24 pb-12 border-t border-slate-800 relative overflow-hidden">
@@ -39,17 +30,17 @@ export default function Footer() {
             <Link href="/" className="flex items-center gap-2 group">
               <Image
                 src="/logo.webp"
-                alt="TakeThe Tools Logo"
+                alt={`${siteName} Logo`}
                 width={200}
                 height={64}
                 className="h-14 md:h-16 w-auto object-contain brightness-0 invert"
               />
             </Link>
             <p className="text-slate-400 leading-relaxed max-w-md text-lg">
-              Providing high-performance, precision-engineered online tools for developers, designers, and digital professionals. Fast, secure, and always 100% free.
+              {config?.siteDescription || "Providing high-performance, precision-engineered online tools for developers, designers, and digital professionals. Fast, secure, and always 100% free."}
             </p>
             <div className="flex gap-4">
-              <a href="https://twitter.com/takethetools" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter" className="p-3 bg-slate-800/50 border border-slate-700 rounded-xl hover:bg-primary-600 hover:border-primary-500 transition-all text-slate-400 hover:text-white group">
+              <a href={config?.twitterHandle ? `https://twitter.com/${config.twitterHandle}` : "https://twitter.com/takethetools"} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter" className="p-3 bg-slate-800/50 border border-slate-700 rounded-xl hover:bg-primary-600 hover:border-primary-500 transition-all text-slate-400 hover:text-white group">
                 <Twitter className="w-5 h-5 group-hover:scale-110 transition-transform" />
               </a>
               <a href="https://github.com/takethetools" target="_blank" rel="noopener noreferrer" aria-label="Check our Github" className="p-3 bg-slate-800/50 border border-slate-700 rounded-xl hover:bg-primary-600 hover:border-primary-500 transition-all text-slate-400 hover:text-white group">
@@ -65,9 +56,9 @@ export default function Footer() {
           <div className="text-center sm:text-left">
             <h3 className="text-white font-bold mb-8 uppercase tracking-widest text-xs">Tools by Category</h3>
             <ul className="space-y-4">
-              {categories.slice(0, 6).map((cat) => (
-                <li key={cat.name}>
-                  <Link href={cat.href} className="text-slate-400 hover:text-primary-400 transition-colors flex items-center justify-center sm:justify-start gap-2 group">
+              {categories.map((cat) => (
+                <li key={cat.id}>
+                  <Link href={`/categories/${cat.slug}`} className="text-slate-400 hover:text-primary-400 transition-colors flex items-center justify-center sm:justify-start gap-2 group">
                     <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-primary-500 transition-colors"></span>
                     {cat.name}
                   </Link>
@@ -108,13 +99,13 @@ export default function Footer() {
         {/* Ad Space */}
         <div className="py-12 border-y border-slate-800/50 flex flex-col items-center gap-4">
           <span className="text-[10px] font-bold text-slate-700 uppercase tracking-[0.3em]">Advertisement</span>
-          <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+          <ManualAdUnit adSlot="3171595105" adFormat="auto" />
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-sm text-center md:text-left">
-            <p className="text-slate-500">© {currentYear} <span className="text-slate-300 font-bold">TakeTheTools</span>. All rights reserved.</p>
+            <p className="text-slate-500">© {currentYear} <span className="text-slate-300 font-bold">{siteName}</span>. All rights reserved.</p>
             <div className="flex items-center gap-4 text-slate-600">
               <span className="hidden md:block w-1 h-1 rounded-full bg-slate-800"></span>
               <span>Handcrafted with <span className="text-red-500/50">❤️</span> for the Web</span>
