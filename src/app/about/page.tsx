@@ -75,7 +75,7 @@ export default function AboutPage() {
               Welcome to TakeThe Tools, your all-in-one destination for high-performance, free, and secure online tools. We're on a mission to simplify the way you work with files and data.
             </p>
             <div className="mt-12 flex justify-center">
-              <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+              <ManualAdUnit adSlot="2317951509" adFormat="auto" />
             </div>
           </div>
 
@@ -118,7 +118,7 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Core Values</h2>
               <p className="text-slate-500 max-w-xl mx-auto">The principles that guide everything we build at TakeThe Tools.</p>
               <div className="mt-8 flex justify-center">
-                <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+                <ManualAdUnit adSlot="2317951509" adFormat="horizontal" />
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -170,7 +170,7 @@ export default function AboutPage() {
               "We're constantly evolving and adding new tools based on user feedback. If there's a tool you need, we'll build it for you."
             </p>
             <div className="mb-12 flex justify-center">
-              <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+              <ManualAdUnit adSlot="2317951509" adFormat="auto" />
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="/tools" className="w-full sm:w-auto px-8 py-4 bg-primary-600 text-white rounded-2xl font-bold hover:bg-primary-700 transition-all shadow-lg shadow-primary-200">

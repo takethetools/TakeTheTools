@@ -67,7 +67,7 @@ export default function ContactPage() {
               Our team typically responds within 24 hours.
             </p>
             <div className="mt-12 flex justify-center">
-              <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+              <ManualAdUnit adSlot="2317951509" adFormat="auto" />
             </div>
           </div>
 
@@ -126,7 +126,7 @@ export default function ContactPage() {
           </div>
 
           <div className="mt-16 flex justify-center">
-            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+            <ManualAdUnit adSlot="2317951509" adFormat="horizontal" />
           </div>
 
           {/* SEO Section */}

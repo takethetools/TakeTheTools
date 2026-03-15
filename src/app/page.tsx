@@ -49,7 +49,7 @@ export default async function Home() {
 
         {/* Hero Ad */}
         <div className="mt-12 max-w-4xl mx-auto flex justify-center">
-          <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+          <ManualAdUnit adSlot="2317951509" adFormat="horizontal" />
         </div>
       </section>
 
@@ -89,7 +89,7 @@ export default async function Home() {
 
         {/* Mid-Page Ad */}
         <div className="mt-16 flex justify-center">
-          <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+          <ManualAdUnit adSlot="2317951509" adFormat="auto" />
         </div>
       </section>
 
@@ -127,7 +127,7 @@ export default async function Home() {
 
         {/* Mid-Feed Ad */}
         <div className="mt-16 flex justify-center">
-          <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+          <ManualAdUnit adSlot="2317951509" adFormat="horizontal" />
         </div>
       </section>
 
@@ -205,7 +205,7 @@ export default async function Home() {
 
       {/* Final Bottom Ad */}
       <div className="flex justify-center">
-        <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+        <ManualAdUnit adSlot="2317951509" adFormat="auto" />
       </div>
 
     </div>

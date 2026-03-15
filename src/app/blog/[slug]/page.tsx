@@ -101,7 +101,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 </h1>
 
                 <div className="mt-8 flex justify-center">
-                  <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+                  <ManualAdUnit adSlot="2317951509" adFormat="auto" />
                 </div>
               </header>
 
@@ -207,8 +207,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
           {/* Sidebar Area */}
           <div className="lg:col-span-1 space-y-8">
-            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
-            <ManualAdUnit adSlot="3171595105" adFormat="rectangle" />
+            <ManualAdUnit adSlot="2317951509" adFormat="auto" />
+            <ManualAdUnit adSlot="2317951509" adFormat="rectangle" />
           </div>
         </div>
       </div>

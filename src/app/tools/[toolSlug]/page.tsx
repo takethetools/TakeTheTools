@@ -129,7 +129,7 @@ export default async function ToolPage({ params }: Props) {
 
             {/* Ad Unit — Inline Top */}
             <div className="flex justify-center mb-8">
-              <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+              <ManualAdUnit adSlot="2317951509" adFormat="auto" />
             </div>
 
             {/* Tool Interaction Area */}
@@ -139,7 +139,7 @@ export default async function ToolPage({ params }: Props) {
 
             {/* Ad Unit — After Tool */}
             <div className="flex justify-center mb-12">
-              <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+              <ManualAdUnit adSlot="2317951509" adFormat="horizontal" />
             </div>
 
 
@@ -163,7 +163,7 @@ export default async function ToolPage({ params }: Props) {
 
             {/* Ad Unit — Between Content Sections */}
             <div className="flex justify-center mb-12">
-              <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+              <ManualAdUnit adSlot="2317951509" adFormat="auto" />
             </div>
 
             {/* Instructions Section — Enhanced with Ad */}
@@ -173,7 +173,7 @@ export default async function ToolPage({ params }: Props) {
                 How to use {tool.name}
               </h2>
               <div className="flex justify-center mb-8">
-                <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+                <ManualAdUnit adSlot="2317951509" adFormat="horizontal" />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {(tool.instructions as string[]).map((step, index) => (
@@ -209,7 +209,7 @@ export default async function ToolPage({ params }: Props) {
           <div className="lg:col-span-1 space-y-8">
 
             {/* Sidebar Ad Unit */}
-            <ManualAdUnit adSlot="3171595105" adFormat="rectangle" />
+            <ManualAdUnit adSlot="2317951509" adFormat="rectangle" />
 
             {/* Related Tools Card */}
             <div className="bg-slate-900 text-white rounded-[2rem] p-8 shadow-xl shadow-slate-200">
@@ -239,7 +239,7 @@ export default async function ToolPage({ params }: Props) {
 
             {/* Sticky Sidebar Ad */}
             <div className="sticky top-28">
-              <ManualAdUnit adSlot="3171595105" adFormat="rectangle" />
+              <ManualAdUnit adSlot="2317951509" adFormat="rectangle" />
             </div>
           </div>
         </div>

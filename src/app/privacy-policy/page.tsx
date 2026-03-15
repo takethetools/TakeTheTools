@@ -45,7 +45,7 @@ export default function PrivacyPage() {
             Your trust is our most valuable asset. Here is how we keep your data safe and private.
           </p>
           <div className="mt-12 flex justify-center">
-            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+            <ManualAdUnit adSlot="2317951509" adFormat="auto" />
           </div>
         </div>
 
@@ -78,7 +78,7 @@ export default function PrivacyPage() {
           </p>
           <p className="text-slate-400 text-sm mt-12">Last updated: March 9, 2026</p>
           <div className="mt-8 flex justify-center">
-            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+            <ManualAdUnit adSlot="2317951509" adFormat="horizontal" />
           </div>
         </div>
       </div>

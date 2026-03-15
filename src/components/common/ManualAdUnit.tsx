@@ -11,7 +11,7 @@ interface ManualAdUnitProps {
 }
 
 export default function ManualAdUnit({
-    adSlot = "3171595105",
+    adSlot = "2317951509",
     adFormat = "auto",
     fullWidthResponsive = true,
     className = "",

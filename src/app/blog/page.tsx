@@ -48,7 +48,7 @@ export default async function BlogPage() {
 
           {/* Top Ad */}
           <div className="mb-12 flex justify-center">
-            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+            <ManualAdUnit adSlot="2317951509" adFormat="horizontal" />
           </div>
 
           {/* Featured Post */}
@@ -103,7 +103,7 @@ export default async function BlogPage() {
 
           {/* Mid Ad */}
           <div className="mb-16 flex justify-center">
-            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+            <ManualAdUnit adSlot="2317951509" adFormat="auto" />
           </div>
 
 
@@ -169,7 +169,7 @@ export default async function BlogPage() {
 
         {/* Bottom Ad */}
         <div className="mt-20 max-w-6xl mx-auto flex justify-center">
-          <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+          <ManualAdUnit adSlot="2317951509" adFormat="horizontal" />
         </div>
       </div>
     </div>

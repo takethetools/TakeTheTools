@@ -76,7 +76,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
         {/* Header Ad */}
         <div className="mb-12 flex justify-center">
-          <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+          <ManualAdUnit adSlot="2317951509" adFormat="auto" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -108,7 +108,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
         {/* Mid Ad */}
         <div className="mt-16 mb-16 flex justify-center">
-          <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+          <ManualAdUnit adSlot="2317951509" adFormat="horizontal" />
         </div>
 
         {/* SEO Content Section */}

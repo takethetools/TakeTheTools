@@ -101,7 +101,7 @@ export default async function Footer() {
         {/* Ad Space */}
         <div className="py-12 border-y border-slate-800/50 flex flex-col items-center gap-4">
           <span className="text-[10px] font-bold text-slate-700 uppercase tracking-[0.3em]">Advertisement</span>
-          <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+          <ManualAdUnit adSlot="2317951509" adFormat="auto" />
         </div>
 
         {/* Bottom Bar */}

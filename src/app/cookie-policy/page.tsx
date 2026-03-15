@@ -45,7 +45,7 @@ export default function CookiePolicyPage() {
                         This policy explains how we use cookies and similar technologies to provide a better, more secure experience.
                     </p>
                     <div className="mt-12 flex justify-center">
-                        <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+                        <ManualAdUnit adSlot="2317951509" adFormat="auto" />
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@ export default function CookiePolicyPage() {
                     <p className="mt-1">Last updated: March 9, 2026</p>
                 </div>
                 <div className="mt-12 flex justify-center">
-                    <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+                    <ManualAdUnit adSlot="2317951509" adFormat="horizontal" />
                 </div>
             </div>
         </div>

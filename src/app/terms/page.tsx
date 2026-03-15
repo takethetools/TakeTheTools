@@ -45,7 +45,7 @@ export default function TermsPage() {
             Please read these terms carefully before using our platform. Your use of the site implies acceptance of these terms.
           </p>
           <div className="mt-12 flex justify-center">
-            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+            <ManualAdUnit adSlot="2317951509" adFormat="auto" />
           </div>
         </div>
 
@@ -89,7 +89,7 @@ export default function TermsPage() {
             <p>Last modified: March 8, 2026</p>
           </div>
           <div className="mt-8 flex justify-center">
-            <ManualAdUnit adSlot="3171595105" adFormat="horizontal" />
+            <ManualAdUnit adSlot="2317951509" adFormat="horizontal" />
           </div>
         </div>
       </div>

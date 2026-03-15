@@ -101,7 +101,7 @@ export default async function PSEOPage({ params }: Props) {
                         </div>
 
                         <div className="flex justify-center mb-8">
-                            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+                            <ManualAdUnit adSlot="2317951509" adFormat="auto" />
                         </div>
 
                         <div className="mb-12">

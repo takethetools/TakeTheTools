@@ -175,14 +175,14 @@ export default async function RootLayout({
           <div className="pt-[80px] md:pt-[104px]">
             {/* Top Ad Banner */}
             <div className="container mx-auto px-4 py-3 flex justify-center">
-              <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+              <ManualAdUnit adSlot="2317951509" adFormat="auto" />
             </div>
           </div>
 
           {children}
 
           <div className="container mx-auto px-4 py-3 flex justify-center">
-            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+            <ManualAdUnit adSlot="2317951509" adFormat="auto" />
           </div>
         </main>
 
