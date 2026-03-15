@@ -33,7 +33,8 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(tools);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch tools" }, { status: 500 });
+    console.error("Database error in tools GET:", error);
+    return NextResponse.json({ error: "Database connection failed while fetching tools" }, { status: 500 });
   }
 }
 

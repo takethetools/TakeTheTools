@@ -36,7 +36,8 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(blogs);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch blogs" }, { status: 500 });
+    console.error("Database error in blogs GET:", error);
+    return NextResponse.json({ error: "Database connection failed while fetching blogs" }, { status: 500 });
   }
 }
 

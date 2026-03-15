@@ -33,9 +33,15 @@ export default function CategoriesAdminPage() {
         try {
             const res = await fetch("/api/admin/categories");
             const data = await res.json();
-            setCategories(data);
+            if (Array.isArray(data)) {
+                setCategories(data);
+            } else {
+                console.warn("Expected an array of categories, but received:", data);
+                setCategories([]);
+            }
         } catch (err) {
-            console.error(err);
+            console.error("Failed to fetch categories:", err);
+            setCategories([]);
         } finally {
             setLoading(false);
         }
@@ -191,7 +197,7 @@ export default function CategoriesAdminPage() {
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {categories.map((cat) => (
+                            {Array.isArray(categories) && categories.map((cat) => (
                                 <div key={cat.id} className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow group relative">
                                     <div className="flex items-start justify-between mb-4">
                                         <div className="p-3 bg-primary-50 text-primary-600 rounded-2xl">

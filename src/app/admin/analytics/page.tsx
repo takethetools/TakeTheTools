@@ -13,24 +13,34 @@ import {
 import { clsx } from "clsx";
 
 async function getAnalyticsData() {
-    const [toolsCount, blogsCount, categories, recentPubs] = await Promise.all([
-        prisma.tool.count(),
-        prisma.blog.count(),
-        prisma.category.findMany({
-            include: {
-                _count: {
-                    select: { tools: true, blogs: true }
+    try {
+        const [toolsCount, blogsCount, categories, recentPubs] = await Promise.all([
+            prisma.tool.count(),
+            prisma.blog.count(),
+            prisma.category.findMany({
+                include: {
+                    _count: {
+                        select: { tools: true, blogs: true }
+                    }
                 }
-            }
-        }),
-        prisma.blog.findMany({
-            take: 5,
-            orderBy: { publishDate: "desc" },
-            include: { category: true }
-        })
-    ]);
+            }),
+            prisma.blog.findMany({
+                take: 5,
+                orderBy: { publishDate: "desc" },
+                include: { category: true }
+            })
+        ]);
 
-    return { toolsCount, blogsCount, categories, recentPubs };
+        return { toolsCount, blogsCount, categories, recentPubs };
+    } catch (error) {
+        console.error("Failed to fetch analytics data:", error);
+        return {
+            toolsCount: 0,
+            blogsCount: 0,
+            categories: [],
+            recentPubs: []
+        };
+    }
 }
 
 export default async function AnalyticsPage() {

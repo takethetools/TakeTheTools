@@ -12,7 +12,8 @@ export async function GET() {
     });
     return NextResponse.json(categories);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch categories" }, { status: 500 });
+    console.error("Database error in categories GET:", error);
+    return NextResponse.json({ error: "Database connection failed while fetching categories" }, { status: 500 });
   }
 }
 

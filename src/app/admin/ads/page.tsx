@@ -26,9 +26,15 @@ export default function AdsAdminPage() {
         try {
             const res = await fetch("/api/admin/config?type=ads");
             const data = await res.json();
-            setAds(data);
+            if (Array.isArray(data)) {
+                setAds(data);
+            } else {
+                console.warn("Expected an array of ads, but received:", data);
+                setAds([]);
+            }
         } catch (err) {
-            console.error(err);
+            console.error("Failed to fetch ads:", err);
+            setAds([]);
         } finally {
             setLoading(false);
         }
@@ -90,7 +96,7 @@ export default function AdsAdminPage() {
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {ads.map((ad) => (
+                {Array.isArray(ads) && ads.map((ad) => (
                     <div key={ad.id} className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm space-y-6 group">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3">

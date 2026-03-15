@@ -10,22 +10,33 @@ import {
 import Link from "next/link";
 
 async function getStats() {
-    const [toolsCount, blogsCount, categoriesCount, recentBlogs, recentTools] = await Promise.all([
-        prisma.tool.count(),
-        prisma.blog.count(),
-        prisma.category.count(),
-        prisma.blog.findMany({
-            take: 5,
-            orderBy: { createdAt: 'desc' },
-            include: { category: true }
-        }),
-        prisma.tool.findMany({
-            take: 5,
-            orderBy: { createdAt: 'desc' }
-        })
-    ]);
+    try {
+        const [toolsCount, blogsCount, categoriesCount, recentBlogs, recentTools] = await Promise.all([
+            prisma.tool.count(),
+            prisma.blog.count(),
+            prisma.category.count(),
+            prisma.blog.findMany({
+                take: 5,
+                orderBy: { createdAt: 'desc' },
+                include: { category: true }
+            }),
+            prisma.tool.findMany({
+                take: 5,
+                orderBy: { createdAt: 'desc' }
+            })
+        ]);
 
-    return { toolsCount, blogsCount, categoriesCount, recentBlogs, recentTools };
+        return { toolsCount, blogsCount, categoriesCount, recentBlogs, recentTools };
+    } catch (error) {
+        console.error("Failed to fetch admin dashboard stats:", error);
+        return {
+            toolsCount: 0,
+            blogsCount: 0,
+            categoriesCount: 0,
+            recentBlogs: [],
+            recentTools: []
+        };
+    }
 }
 
 export default async function AdminDashboardPage() {
