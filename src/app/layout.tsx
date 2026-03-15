@@ -28,9 +28,9 @@ import { GlobalConfig } from "@prisma/client";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  let config: GlobalConfig | null = null;
+  let config = null as GlobalConfig | null;
   try {
-    config = await prisma.globalConfig.findFirst();
+    config = (await prisma.globalConfig.findFirst()) as GlobalConfig | null;
   } catch (error) {
     if (process.env.NODE_ENV !== 'production' ||
       (!String(error).includes('Unable to open the database file') &&
@@ -106,9 +106,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let config: GlobalConfig | null = null;
+  let config = null as GlobalConfig | null;
   try {
-    config = await prisma.globalConfig.findFirst();
+    config = (await prisma.globalConfig.findFirst()) as GlobalConfig | null;
   } catch (error) {
     if (process.env.NODE_ENV !== 'production' ||
       (!String(error).includes('Unable to open the database file') &&
@@ -128,9 +128,15 @@ export default async function RootLayout({
     "logo": "https://takethetools.com/logo.webp",
     "sameAs": config?.twitterHandle ? [`https://twitter.com/${config.twitterHandle}`] : ["https://twitter.com/takethetools"]
   };
+
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <script
+          id="ld-json"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseId}`}
@@ -143,10 +149,6 @@ export default async function RootLayout({
           href="/logo.webp"
           as="image"
           type="image/webp"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <Script
           id="google-consent-mode"
@@ -185,32 +187,24 @@ export default async function RootLayout({
         className={`${inter.variable} ${outfit.variable} antialiased bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans`}
         suppressHydrationWarning
       >
-        <LayoutWrapper hideOnAdmin>
-          <Header />
-        </LayoutWrapper>
+        <Header />
 
         <main className="flex-grow">
-          <LayoutWrapper hideOnAdmin>
-            <div className="pt-[80px] md:pt-[104px]">
-              {/* Top Ad Banner — Shows on all pages except admin */}
-              <div className="container mx-auto px-4 py-3 flex justify-center">
-                <ManualAdUnit adSlot="3171595105" adFormat="auto" />
-              </div>
-            </div>
-          </LayoutWrapper>
-
-          {children}
-
-          <LayoutWrapper hideOnAdmin>
+          <div className="pt-[80px] md:pt-[104px]">
+            {/* Top Ad Banner */}
             <div className="container mx-auto px-4 py-3 flex justify-center">
               <ManualAdUnit adSlot="3171595105" adFormat="auto" />
             </div>
-          </LayoutWrapper>
+          </div>
+
+          {children}
+
+          <div className="container mx-auto px-4 py-3 flex justify-center">
+            <ManualAdUnit adSlot="3171595105" adFormat="auto" />
+          </div>
         </main>
 
-        <LayoutWrapper hideOnAdmin>
-          <Footer />
-        </LayoutWrapper>
+        <Footer />
 
         <CookieConsent />
         <BackToTop />

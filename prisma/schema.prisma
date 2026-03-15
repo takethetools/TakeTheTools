@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:../dev.db"
 }
 
 model Category {
@@ -12,10 +12,10 @@ model Category {
   name        String
   slug        String   @unique
   description String?
-  tools       Tool[]
-  blogs       Blog[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  blogs       Blog[]
+  tools       Tool[]
 }
 
 model Tool {
@@ -24,54 +24,53 @@ model Tool {
   slug            String   @unique
   description     String
   longDescription String?
-  category        Category @relation(fields: [categoryId], references: [id])
   categoryId      String
   metaTitle       String?
   metaDescription String?
   iconName        String?
   isPopular       Boolean  @default(false)
-  instructions    String   // Store as JSON string or plain text
-  faqs            String   // Store as JSON string
+  instructions    String
+  faqs            String
   exampleInput    String?
-  componentName   String?  // Reference to the React component
+  componentName   String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  category        Category @relation(fields: [categoryId], references: [id])
 }
 
 model Blog {
   id              String   @id @default(cuid())
   title           String
   slug            String   @unique
-  category        Category @relation(fields: [categoryId], references: [id])
   categoryId      String
   metaTitle       String?
   metaDescription String?
   featuredImage   String?
-  content         String   // Rich text content
+  content         String
   isPublished     Boolean  @default(false)
   publishDate     DateTime @default(now())
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  category        Category @relation(fields: [categoryId], references: [id])
 }
 
 model AdPlacement {
   id         String   @id @default(cuid())
-  location   String   @unique // homepage, tool, blog, sidebar, header, footer
+  location   String   @unique
   adSlot     String?
-  adFormat   String?  @default("auto")
   customHtml String?
   isEnabled  Boolean  @default(true)
   updatedAt  DateTime @updatedAt
 }
 
 model GlobalConfig {
-  id             String @id @default("default")
-  siteName       String @default("TakeTheTools")
+  id              String  @id @default("default")
+  siteName        String  @default("TakeTheTools")
   siteDescription String?
-  metaTitle      String?
+  metaTitle       String?
   metaDescription String?
-  ogImage        String?
-  analyticsId    String?
-  twitterHandle  String?
-  adSenseId      String? @default("ca-pub-3148286057781421")
+  ogImage         String?
+  analyticsId     String?
+  twitterHandle   String?
+  adSenseId       String?
 }
