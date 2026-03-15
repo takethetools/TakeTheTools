@@ -9,7 +9,6 @@ import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/common/CookieConsent";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 import BackToTop from "@/components/common/BackToTop";
-import LayoutWrapper from "@/components/layout/LayoutWrapper";
 import React from "react";
 
 const inter = Inter({
