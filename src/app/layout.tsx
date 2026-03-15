@@ -131,6 +131,11 @@ export default async function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseId}`}
+          crossOrigin="anonymous"
+        />
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <link
@@ -183,13 +188,6 @@ export default async function RootLayout({
         <LayoutWrapper hideOnAdmin>
           <Header />
         </LayoutWrapper>
-
-        <Script
-          id="adsbygoogle-init"
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseId}`}
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-        />
 
         <main className="flex-grow">
           <LayoutWrapper hideOnAdmin>

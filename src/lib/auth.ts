@@ -2,19 +2,19 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
-const secretKey = new TextEncoder().encode(process.env.JWT_SECRET || "default_secret_key_change_me");
+const getSecret = () => new TextEncoder().encode(process.env.JWT_SECRET || "default_secret_key_change_me");
 
 export async function signToken(payload: { email: string }) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime("24h")
-    .sign(secretKey);
+    .sign(getSecret());
 }
 
 export async function verifyToken(token: string) {
   try {
-    const { payload } = await jwtVerify(token, secretKey);
+    const { payload } = await jwtVerify(token, getSecret());
     return payload as { email: string };
   } catch (error) {
     return null;
