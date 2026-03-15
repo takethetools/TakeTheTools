@@ -23,11 +23,12 @@ const outfit = Outfit({
 });
 
 import prisma from "@/lib/db";
+import { GlobalConfig } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  let config = null;
+  let config: GlobalConfig | null = null;
   try {
     config = await prisma.globalConfig.findFirst();
   } catch (error) {
@@ -105,7 +106,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let config = null;
+  let config: GlobalConfig | null = null;
   try {
     config = await prisma.globalConfig.findFirst();
   } catch (error) {
