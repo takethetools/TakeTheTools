@@ -19,19 +19,24 @@ const categoryIcons: Record<string, any> = {
 export const dynamic = "force-dynamic";
 
 async function getHomeData() {
-  const [categories, popularTools, latestTools] = await Promise.all([
-    prisma.category.findMany(),
-    prisma.tool.findMany({
-      where: { isPopular: true },
-      take: 8
-    }),
-    prisma.tool.findMany({
-      orderBy: { id: "desc" },
-      take: 3
-    })
-  ]);
+  try {
+    const [categories, popularTools, latestTools] = await Promise.all([
+      prisma.category.findMany(),
+      prisma.tool.findMany({
+        where: { isPopular: true },
+        take: 8
+      }),
+      prisma.tool.findMany({
+        orderBy: { id: "desc" },
+        take: 3
+      })
+    ]);
 
-  return { categories, popularTools, latestTools };
+    return { categories, popularTools, latestTools };
+  } catch (error) {
+    console.error("Failed to fetch home data during build:", error);
+    return { categories: [], popularTools: [], latestTools: [] };
+  }
 }
 
 export default async function Home() {

@@ -26,7 +26,13 @@ import prisma from "@/lib/db";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const config = await prisma.globalConfig.findFirst();
+  let config = null;
+  try {
+    config = await prisma.globalConfig.findFirst();
+  } catch (error) {
+    console.warn("Failed to fetch global config for metadata during build.");
+  }
+
   const siteName = config?.siteName || "TakeThe Tools";
   const description = config?.metaDescription || "High-performance, free online tools for image conversion, PDF management, developer utilities, and file converters. Fast, secure, and browser-based.";
 
@@ -94,7 +100,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const config = await prisma.globalConfig.findFirst();
+  let config = null;
+  try {
+    config = await prisma.globalConfig.findFirst();
+  } catch (error) {
+    console.warn("Failed to fetch global config for layout during build.");
+  }
+
   const siteName = config?.siteName || "TakeThe Tools";
   const adSenseId = config?.adSenseId || "ca-pub-3148286057781421";
 
