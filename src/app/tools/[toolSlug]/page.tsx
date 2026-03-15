@@ -23,29 +23,38 @@ export async function generateStaticParams() {
   }));
 }
 
+import { generateToolMetaTitle, generateToolMetaDescription, SITE_URL } from "@/lib/seo";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { toolSlug } = await params;
   const tool = getToolBySlug(toolSlug);
   if (!tool) return { title: "Tool Not Found" };
 
+  const title = generateToolMetaTitle(tool.name);
+  const description = generateToolMetaDescription(tool);
+
   return {
-    title: tool.metaTitle,
-    description: tool.metaDescription,
+    title,
+    description,
     openGraph: {
-      title: tool.metaTitle,
-      description: tool.metaDescription,
+      title,
+      description,
       type: "website",
+      url: `${SITE_URL}/tools/${toolSlug}`,
+      siteName: "TakeTheTools",
     },
     twitter: {
       card: "summary_large_image",
-      title: tool.metaTitle,
-      description: tool.metaDescription,
+      title,
+      description,
     },
     alternates: {
-      canonical: `https://takethetools.com/tools/${toolSlug}`,
+      canonical: `${SITE_URL}/tools/${toolSlug}`,
     },
   };
 }
+
+import { getSoftwareApplicationSchema, getBreadcrumbSchema, getFAQSchema } from "@/lib/seo";
 
 export default async function ToolPage({ params }: Props) {
   const { toolSlug } = await params;
@@ -87,11 +96,18 @@ export default async function ToolPage({ params }: Props) {
           <div className="lg:col-span-3">
             <div className="mb-10">
               <h1 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6 tracking-tight">
-                {tool.name}
+                {tool.name} Online
               </h1>
-              <p className="text-xl text-slate-600 leading-relaxed max-w-4xl whitespace-pre-wrap">
+              <div className="text-xl text-slate-600 leading-relaxed max-w-4xl mb-8">
                 {tool.longDescription || tool.description}
-              </p>
+                {(!tool.longDescription || tool.longDescription.length < 200) && (
+                  <p className="mt-4">
+                    Our free {tool.name.toLowerCase()} tool is designed to provide high-performance results directly in your browser.
+                    Whether you are a developer, designer, or casual user, this utility ensures your tasks are completed with
+                    precision and speed. Explore the features below and optimize your workflow today with TakeTheTools.
+                  </p>
+                )}
+              </div>
             </div>
 
             {/* Ad Unit — Inline Top */}
@@ -217,61 +233,13 @@ export default async function ToolPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
-            {
-              "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              "name": tool.name,
-              "applicationCategory": applicationCategoryMap[tool.category] || "UtilitiesApplication",
-              "operatingSystem": "Anyweb",
-              "description": tool.description,
-              "browserRequirements": "Requires JavaScript and a modern web browser",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "ratingCount": "2450"
-              }
-            },
-            {
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": "Home",
-                  "item": "https://takethetools.com"
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": "Tools",
-                  "item": "https://takethetools.com/categories"
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 3,
-                  "name": tool.name,
-                  "item": `https://takethetools.com/tools/${toolSlug}`
-                }
-              ]
-            },
-            {
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": tool.faqs.map(faq => ({
-                "@type": "Question",
-                "name": faq.question,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": faq.answer
-                }
-              }))
-            }
+            getSoftwareApplicationSchema(tool, applicationCategoryMap),
+            getBreadcrumbSchema([
+              { name: "Home", item: SITE_URL },
+              { name: "Tools", item: `${SITE_URL}/categories` },
+              { name: tool.name, item: `${SITE_URL}/tools/${toolSlug}` }
+            ]),
+            getFAQSchema(tool.faqs)
           ])
         }}
       />

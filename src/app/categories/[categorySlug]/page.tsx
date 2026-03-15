@@ -6,16 +6,28 @@ import { Metadata } from "next";
 import React from "react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 
+import { generateCategoryMetaTitle, generateCategoryMetaDescription, SITE_URL, getBreadcrumbSchema } from "@/lib/seo";
+
 export async function generateMetadata({ params }: { params: Promise<{ categorySlug: string }> }): Promise<Metadata> {
   const { categorySlug } = await params;
   const category = CATEGORIES.find(c => c.slug === categorySlug);
   if (!category) return { title: "Category Not Found" };
 
+  const title = generateCategoryMetaTitle(category.name);
+  const description = generateCategoryMetaDescription(category.description);
+
   return {
-    title: `${category.name} - TakeThe Tools`,
-    description: category.description,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url: `${SITE_URL}/categories/${categorySlug}`,
+      siteName: "TakeTheTools",
+    },
     alternates: {
-      canonical: `https://takethetools.com/categories/${categorySlug}`,
+      canonical: `${SITE_URL}/categories/${categorySlug}`,
     },
   };
 }
@@ -109,6 +121,19 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           </p>
         </div>
       </div>
+      {/* Structured Data (JSON-LD) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            getBreadcrumbSchema([
+              { name: "Home", item: SITE_URL },
+              { name: "Categories", item: `${SITE_URL}/categories` },
+              { name: category.name, item: `${SITE_URL}/categories/${categorySlug}` }
+            ])
+          )
+        }}
+      />
     </div>
   );
 }

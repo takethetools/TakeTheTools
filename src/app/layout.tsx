@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+// Git Sync: 2026-03-14 - UI & Ads Optimization Complete
 import { Inter, Outfit } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next"
@@ -41,6 +42,14 @@ export const metadata: Metadata = {
     description: "Free online tools for image conversion, PDF editing, developer utilities, and file converters.",
     url: "https://takethetools.com",
     siteName: "TakeThe Tools",
+    images: [
+      {
+        url: "/og-image.png", // Ensure this exists or I should generate it
+        width: 1200,
+        height: 630,
+        alt: "TakeThe Tools - Free Online Tools",
+      },
+    ],
     locale: "en_US",
     type: "website",
   },
@@ -48,10 +57,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "TakeThe Tools - All-in-One Online Tools Platform",
     description: "Free online tools for image conversion, PDF editing, developer utilities, and file converters.",
+    images: ["/og-image.png"],
     creator: "@takethetools",
   },
   alternates: {
-    canonical: "/",
+    canonical: "https://takethetools.com",
   },
   robots: {
     index: true,
