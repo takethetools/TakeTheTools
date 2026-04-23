@@ -1,0 +1,268 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@100..900&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  --color-primary-950: #172554;
+}
+
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-2 bg-primary-600 text-white rounded-lg font-medium transition-all hover:bg-primary-700 active:scale-95 shadow-lg shadow-primary-500/20;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-2 bg-white text-slate-900 border border-slate-200 rounded-lg font-medium transition-all hover:bg-slate-50 active:scale-95;
+  }
+}
+
+/* ===== CUSTOM PROSE / TYPOGRAPHY STYLES ===== */
+/* Replaces @tailwindcss/typography since it is not installed */
+
+.prose {
+  color: #475569;
+  max-width: none;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.prose p {
+  margin-top: 0;
+  margin-bottom: 1.4em;
+  color: #475569;
+  line-height: 1.8;
+}
+
+.prose h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 0;
+  margin-bottom: 0.75em;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.prose h2 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.4em;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.prose h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-top: 1.6em;
+  margin-bottom: 0.5em;
+  line-height: 1.4;
+}
+
+.prose h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #334155;
+  margin-top: 1.4em;
+  margin-bottom: 0.4em;
+}
+
+.prose h5,
+.prose h6 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #334155;
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+}
+
+.prose strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.prose em {
+  font-style: italic;
+  color: #334155;
+}
+
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.75em;
+  margin-top: 0.75em;
+  margin-bottom: 1.2em;
+}
+
+.prose ol {
+  list-style-type: decimal;
+  padding-left: 1.75em;
+  margin-top: 0.75em;
+  margin-bottom: 1.2em;
+}
+
+.prose li {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  color: #475569;
+  line-height: 1.7;
+  padding-left: 0.25em;
+}
+
+.prose li::marker {
+  color: #3b82f6;
+  font-weight: 700;
+}
+
+.prose a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.prose a:hover {
+  text-decoration: underline;
+}
+
+.prose code {
+  background: #f1f5f9;
+  color: #7c3aed;
+  padding: 0.15em 0.45em;
+  border-radius: 5px;
+  font-size: 0.875em;
+  font-weight: 600;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+}
+
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+
+.prose pre {
+  background: #0f172a;
+  color: #94a3b8;
+  padding: 1.5em;
+  border-radius: 1rem;
+  overflow-x: auto;
+  margin-top: 1.2em;
+  margin-bottom: 1.5em;
+  font-size: 0.875em;
+  line-height: 1.7;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+}
+
+.prose pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+.prose blockquote {
+  border-left: 4px solid #3b82f6;
+  padding-left: 1.25em;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1.2em;
+  margin-bottom: 1.5em;
+  font-style: italic;
+  color: #64748b;
+  background: #f8fafc;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  padding-right: 1em;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.prose hr {
+  border: none;
+  border-top: 2px solid #e2e8f0;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.2em;
+  margin-bottom: 1.5em;
+  font-size: 0.95em;
+}
+
+.prose th {
+  background: #f8fafc;
+  font-weight: 700;
+  color: #1e293b;
+  text-align: left;
+  padding: 0.65em 1em;
+  border: 1px solid #e2e8f0;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.prose td {
+  padding: 0.65em 1em;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  vertical-align: top;
+}
+
+.prose tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.prose img {
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  max-width: 100%;
+}
+
+/* Heading anchor styles */
+.prose h2 a,
+.prose h3 a,
+.prose h4 a {
+  color: inherit;
+  font-weight: inherit;
+}
+
+/* Nested lists */
+.prose ul ul,
+.prose ol ol,
+.prose ul ol,
+.prose ol ul {
+  margin-top: 0.35em;
+  margin-bottom: 0.35em;
+}
