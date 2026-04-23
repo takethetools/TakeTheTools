@@ -21,16 +21,16 @@ export const AD_SLOTS = {
   HEADER_BANNER: "2317951509",        // Replace with your Header Banner slot ID
 
   // Auto ads between content sections
-  IN_CONTENT_AUTO: "2317951509",      // Replace with your In-Content slot ID
+  IN_CONTENT_AUTO: "1525640166",      // Replace with your In-Content slot ID
 
   // Rectangle ads for sidebar
-  SIDEBAR_RECTANGLE: "2317951509",    // Replace with your Rectangle slot ID
+  SIDEBAR_RECTANGLE: "7337416228",    // Replace with your Rectangle slot ID
 
   // Horizontal ads within articles/tool pages
-  IN_ARTICLE_HORIZONTAL: "2317951509", // Replace with your Horizontal slot ID
+  IN_ARTICLE_HORIZONTAL: "1883051203", // Replace with your Horizontal slot ID
 
   // Footer / bottom of page ads
-  FOOTER_AUTO: "2317951509",          // Replace with your Footer slot ID
+  FOOTER_AUTO: "2224478316",          // Replace with your Footer slot ID
 } as const;
 
 export const ADSENSE_CLIENT = "ca-pub-3148286057781421";
