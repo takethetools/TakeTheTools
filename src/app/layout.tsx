@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 // Git Sync: 2026-03-14 - UI & Ads Optimization Complete
 // import { Inter, Outfit } from "next/font/google"; // loaded via CSS
 import Script from "next/script";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -18,7 +18,8 @@ const outfit = { variable: "--font-outfit" };
 
 const siteConfig = {
   siteName: "TakeTheTools",
-  siteDescription: "High-performance, free online tools for image conversion, PDF management, developer utilities, and file converters. Fast, secure, and browser-based.",
+  siteDescription:
+    "High-performance, free online tools for image conversion, PDF management, developer utilities, and file converters. Fast, secure, and browser-based.",
   adSenseId: "ca-pub-3148286057781421",
   twitterHandle: "takethetools",
 };
@@ -36,7 +37,15 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${siteName}`,
     },
     description,
-    keywords: ["online tools", "webp to png", "pdf merge", "image compressor", "json formatter", "file converter", "developer tools"],
+    keywords: [
+      "online tools",
+      "webp to png",
+      "pdf merge",
+      "image compressor",
+      "json formatter",
+      "file converter",
+      "developer tools",
+    ],
     authors: [{ name: `${siteName} Team` }],
     creator: siteName,
     publisher: siteName,
@@ -66,7 +75,9 @@ export async function generateMetadata(): Promise<Metadata> {
       title: `${siteName} - All-in-One Online Tools Platform`,
       description,
       images: ["/og-image.png"],
-      creator: siteConfig.twitterHandle ? `@${siteConfig.twitterHandle}` : "@takethetools",
+      creator: siteConfig.twitterHandle
+        ? `@${siteConfig.twitterHandle}`
+        : "@takethetools",
     },
     robots: {
       index: true,
@@ -97,26 +108,29 @@ export default async function RootLayout({
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": siteName,
-      "url": "https://takethetools.com",
-      "logo": "https://takethetools.com/logo.webp",
-      "sameAs": siteConfig.twitterHandle ? [`https://twitter.com/${siteConfig.twitterHandle}`] : ["https://twitter.com/takethetools"]
+      name: siteName,
+      url: "https://takethetools.com",
+      logo: "https://takethetools.com/logo.webp",
+      sameAs: siteConfig.twitterHandle
+        ? [`https://twitter.com/${siteConfig.twitterHandle}`]
+        : ["https://twitter.com/takethetools"],
     },
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": siteName,
-      "url": "https://takethetools.com",
-      "description": siteConfig.siteDescription,
-      "potentialAction": {
+      name: siteName,
+      url: "https://takethetools.com",
+      description: siteConfig.siteDescription,
+      potentialAction: {
         "@type": "SearchAction",
-        "target": {
+        target: {
           "@type": "EntryPoint",
-          "urlTemplate": "https://takethetools.com/api/search?q={search_term_string}"
+          urlTemplate:
+            "https://takethetools.com/api/search?q={search_term_string}",
         },
-        "query-input": "required name=search_term_string"
-      }
-    }
+        "query-input": "required name=search_term_string",
+      },
+    },
   ];
 
   return (
@@ -135,12 +149,7 @@ export default async function RootLayout({
         />
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-        <link
-          rel="preload"
-          href="/logo.webp"
-          as="image"
-          type="image/webp"
-        />
+        <link rel="preload" href="/logo.webp" as="image" type="image/webp" />
         <Script
           id="google-funding-choices"
           src="https://fundingchoicesmessages.google.com/i/pub-3148286057781421?ers=1"
@@ -149,10 +158,7 @@ export default async function RootLayout({
         <Script id="google-fc-present" strategy="afterInteractive">
           {`(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();`}
         </Script>
-        <Script
-          id="google-consent-mode"
-          strategy="beforeInteractive"
-        >
+        <Script id="google-consent-mode" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -179,6 +185,20 @@ export default async function RootLayout({
                 console.error("Error parsing consent", e);
               }
             }
+          `}
+        </Script>
+        <Script
+          id="google-analytics"
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-NWRHEQGRZW"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics-config" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-NWRHEQGRZW');
           `}
         </Script>
       </head>
