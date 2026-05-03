@@ -1,8 +1,5 @@
 import { TOOLS, CATEGORIES } from "@/lib/tools";
-<<<<<<< HEAD
 import { notFound } from "next/navigation";
-=======
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -15,10 +12,7 @@ import ToolRenderer from "@/components/tools/ToolRenderer";
 import { generateToolMetaTitle, generateToolMetaDescription, SITE_URL } from "@/lib/seo";
 import { AD_SLOTS } from "@/lib/ad-slots";
 import { getSoftwareApplicationSchema, getBreadcrumbSchema, getFAQSchema, getHowToSchema } from "@/lib/seo";
-<<<<<<< HEAD
 import { getResourcesByCategory } from "@/lib/external-resources";
-=======
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -89,11 +83,7 @@ export default async function ToolPage({ params }: Props) {
   const tool = await getTool(toolSlug);
 
   if (!tool) {
-<<<<<<< HEAD
     notFound();
-=======
-    return <div className="container mx-auto px-4 py-32 text-center">Tool not found</div>;
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
   }
 
   const aboutContent = getToolAboutContent(toolSlug);
@@ -237,7 +227,6 @@ export default async function ToolPage({ params }: Props) {
                 ))}
               </div>
             </div>
-<<<<<<< HEAD
 
             {/* External Resources / Backlinks Section */}
             <div className="mb-16 bg-slate-50 rounded-3xl p-8 border border-slate-100">
@@ -271,8 +260,6 @@ export default async function ToolPage({ params }: Props) {
                 <strong>Disclaimer:</strong> External links are provided for informational purposes; TakeTheTools is not responsible for the content of external sites.
               </div>
             </div>
-=======
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
           </div>
 
           {/* Sidebar Area */}

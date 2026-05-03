@@ -1,8 +1,5 @@
 "use client";
-<<<<<<< HEAD
 import FileUpload from "./FileUpload";
-=======
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 
 import { useState, useCallback } from "react";
 import { FileUp, Zap, Copy, Check, Download, Table } from "lucide-react";
@@ -43,14 +40,8 @@ export default function ExcelToJsonTool() {
     if (file) processFile(file);
   };
 
-<<<<<<< HEAD
   const onFilesSelected = (files: File[]) => {
     if (files.length > 0) processFile(files[0]);
-=======
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) processFile(file);
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
   };
 
   const copy = () => {
@@ -87,11 +78,7 @@ export default function ExcelToJsonTool() {
         className={`border-2 border-dashed rounded-3xl p-12 text-center transition-all cursor-pointer ${isDragging ? "border-primary-400 bg-primary-50" : "border-slate-200 hover:border-primary-300 hover:bg-slate-50"}`}
         onClick={() => document.getElementById("excel-input")?.click()}
       >
-<<<<<<< HEAD
         <input id="excel-input" type="file" accept=".xlsx,.xls,.csv" className="hidden" onChange={(e) => e.target.files && processFile(e.target.files[0])} />
-=======
-        <input id="excel-input" type="file" accept=".xlsx,.xls,.csv" className="hidden" onChange={handleFileInput} />
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
         <FileUp className="w-10 h-10 text-slate-400 mx-auto mb-4" />
         <p className="font-bold text-slate-700">Drop Excel file here or click to upload</p>
         <p className="text-sm text-slate-400 mt-2">Supports .xlsx, .xls, .csv</p>

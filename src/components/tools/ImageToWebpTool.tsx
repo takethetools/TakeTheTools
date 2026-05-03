@@ -1,17 +1,10 @@
 "use client";
-<<<<<<< HEAD
 import FileUpload from "./FileUpload";
 
 import { useState } from "react";
 import { Upload, Download, FileImage, Check, ArrowRight, Loader2, Zap, FolderArchive } from "lucide-react";
 import { cn } from "@/lib/utils";
 import JSZip from "jszip";
-=======
-
-import { useState } from "react";
-import { Upload, Download, FileImage, Check, ArrowRight, Loader2, Zap } from "lucide-react";
-import { cn } from "@/lib/utils";
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 
 interface ImageToWebpToolProps {
   sourceFormat?: "JPG" | "PNG" | "ANY";
@@ -21,17 +14,9 @@ export default function ImageToWebpTool({ sourceFormat = "ANY" }: ImageToWebpToo
   const [files, setFiles] = useState<{ file: File; converted?: string; status: "pending" | "converting" | "done" }[]>([]);
   const [quality, setQuality] = useState(80);
 
-<<<<<<< HEAD
   const onFilesSelected = (selectedFiles: File[]) => {
     const newFiles = selectedFiles.map(f => ({ file: f, status: "pending" as const }));
     setFiles(prev => [...prev, ...newFiles]);
-=======
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const newFiles = Array.from(e.target.files).map(f => ({ file: f, status: "pending" as const }));
-      setFiles([...files, ...newFiles]);
-    }
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
   };
 
   const convertToWebp = async (index: number) => {
@@ -76,7 +61,6 @@ export default function ImageToWebpTool({ sourceFormat = "ANY" }: ImageToWebpToo
     });
   };
 
-<<<<<<< HEAD
   const downloadAll = async () => {
     const zip = new JSZip();
     const doneFiles = files.filter(f => f.status === "done" && f.converted);
@@ -113,8 +97,6 @@ export default function ImageToWebpTool({ sourceFormat = "ANY" }: ImageToWebpToo
 
   const onDragEnd = () => setDraggedIndex(null);
 
-=======
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
   return (
     <div className="space-y-8">
       <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-8">
@@ -145,7 +127,6 @@ export default function ImageToWebpTool({ sourceFormat = "ANY" }: ImageToWebpToo
 
         <div className="grid grid-cols-1 gap-4">
           {files.map((item, i) => (
-<<<<<<< HEAD
             <div 
               key={i} 
               draggable
@@ -157,9 +138,6 @@ export default function ImageToWebpTool({ sourceFormat = "ANY" }: ImageToWebpToo
                 draggedIndex === i ? "opacity-40 border-primary-500 border-dashed bg-primary-50" : "hover:border-primary-200"
               )}
             >
-=======
-            <div key={i} className="flex items-center justify-between p-4 bg-slate-50 border border-slate-100 rounded-2xl group hover:border-primary-200 transition-all">
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
               <div className="flex items-center gap-4 overflow-hidden">
                 <div className="w-12 h-12 bg-white rounded-xl border border-slate-100 flex items-center justify-center text-slate-400 shrink-0">
                   <FileImage className="w-6 h-6" />
@@ -173,11 +151,7 @@ export default function ImageToWebpTool({ sourceFormat = "ANY" }: ImageToWebpToo
               <div className="flex items-center gap-3">
                 {item.status === "pending" && (
                   <button 
-<<<<<<< HEAD
                     onClick={(e) => { e.stopPropagation(); convertToWebp(i); }}
-=======
-                    onClick={() => convertToWebp(i)}
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
                     className="p-3 bg-white text-primary-600 rounded-xl hover:bg-primary-50 transition-colors border border-slate-100 font-bold text-sm"
                   >
                     Convert
@@ -198,20 +172,7 @@ export default function ImageToWebpTool({ sourceFormat = "ANY" }: ImageToWebpToo
             </div>
           ))}
 
-<<<<<<< HEAD
           <FileUpload onFilesSelected={onFilesSelected} accept={{ "image/*": [] }} />
-=======
-          <label className="border-2 border-dashed border-slate-200 rounded-3xl p-12 flex flex-col items-center justify-center gap-4 cursor-pointer hover:border-primary-300 hover:bg-primary-50/30 transition-all">
-            <input type="file" multiple accept="image/*" onChange={handleFileChange} className="hidden" />
-            <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-slate-400">
-              <Upload className="w-8 h-8" />
-            </div>
-            <div className="text-center">
-              <p className="font-bold text-slate-900">Add {sourceFormat !== "ANY" ? sourceFormat : "Images"}</p>
-              <p className="text-sm text-slate-500">Drag and drop or click to upload</p>
-            </div>
-          </label>
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
         </div>
 
         {files.some(f => f.status === "pending") && (
@@ -223,7 +184,6 @@ export default function ImageToWebpTool({ sourceFormat = "ANY" }: ImageToWebpToo
             Convert All to WebP
           </button>
         )}
-<<<<<<< HEAD
 
         {files.some(f => f.status === "done") && (
           <button 
@@ -234,8 +194,6 @@ export default function ImageToWebpTool({ sourceFormat = "ANY" }: ImageToWebpToo
             Download All as ZIP
           </button>
         )}
-=======
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
       </div>
     </div>
   );

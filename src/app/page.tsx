@@ -47,11 +47,7 @@ export default async function Home() {
           Tools for Every <span className="text-primary-600">Digital Task</span>
         </h1>
         <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-<<<<<<< HEAD
           High-performance, secure, and privacy-first tools for image conversion, PDF editing, development, and more. Free for everyone, everywhere — no sign-up required.
-=======
-          High-performance, secure, and SEO-optimized tools for image conversion, PDF editing, development, and more. Free for everyone, everywhere.
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
         </p>
 
         {/* Home Search Component */}
@@ -63,7 +59,6 @@ export default async function Home() {
         </div>
       </section>
 
-<<<<<<< HEAD
       {/* Trust Stats Bar */}
       <section className="container mx-auto px-4 -mt-10">
         <div className="max-w-5xl mx-auto bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-100/50 p-8">
@@ -88,8 +83,6 @@ export default async function Home() {
         </div>
       </section>
 
-=======
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
       {/* Categories Grid */}
       <section className="container mx-auto px-4">
         <div className="flex justify-between items-end mb-10">
@@ -224,7 +217,6 @@ export default async function Home() {
               {
                 q: "Do I need to create an account?",
                 a: "No registration is required. You can start using any tool on the site instantly."
-<<<<<<< HEAD
               },
               {
                 q: "Which browsers are supported?",
@@ -233,8 +225,6 @@ export default async function Home() {
               {
                 q: "Can I use these tools for commercial work?",
                 a: "Yes. TakeTheTools is free for personal and commercial use with no restrictions. Use any tool as part of your professional workflow without limits."
-=======
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
               }
             ].map((faq, i) => (
               <div key={i} className="group">

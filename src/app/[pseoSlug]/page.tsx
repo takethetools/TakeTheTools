@@ -188,11 +188,7 @@ export default async function PSEOPage({ params }: Props) {
                             { name: "Home", item: SITE_URL },
                             { name: "Tools", item: `${SITE_URL}/categories` },
                             { name: tool.name, item: `${SITE_URL}/tools/${tool.slug}` },
-<<<<<<< HEAD
                             { name: h1, item: `${SITE_URL}/${pseoSlug}` }
-=======
-                            { name: h1, item: `${SITE_URL}/tools/${context.tool.slug}` }
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
                         ]),
                         getFAQSchema(tool.faqs)
                     ])

@@ -78,10 +78,7 @@ export default async function Footer() {
               <li><Link href="/about" className="text-slate-400 hover:text-primary-400 transition-colors">About Mission</Link></li>
               <li><Link href="/contact" className="text-slate-400 hover:text-primary-400 transition-colors">Support Center</Link></li>
               <li><Link href="/privacy-policy" className="text-slate-400 hover:text-primary-400 transition-colors">Privacy Policy</Link></li>
-<<<<<<< HEAD
 
-=======
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
               <li><Link href="/terms" className="text-slate-400 hover:text-primary-400 transition-colors">Terms of Service</Link></li>
               <li><Link href="/cookie-policy" className="text-slate-400 hover:text-primary-400 transition-colors">Cookie Policy</Link></li>
             </ul>

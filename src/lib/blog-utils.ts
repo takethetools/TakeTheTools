@@ -34,7 +34,6 @@ const categoryMapping: Record<string, string> = {
 
 function getCategoryFromFilename(filename: string) {
   const lowercase = filename.toLowerCase();
-<<<<<<< HEAD
 
   // Image tools — check before converter to avoid conflicts
   if (
@@ -116,17 +115,6 @@ function getCategoryFromFilename(filename: string) {
     lowercase.includes('age-') || lowercase.includes('date-diff') ||
     lowercase.includes('scientific')
   ) return { name: "Math & Calculators", slug: "math-calculators" };
-
-=======
-  if (lowercase.includes('image')) return { name: "Image Tools", slug: "image-tools" };
-  if (lowercase.includes('pdf')) return { name: "PDF Tools", slug: "pdf-tools" };
-  if (lowercase.includes('json') || lowercase.includes('formatter') || lowercase.includes('format') || lowercase.includes('developer') || lowercase.includes('curl') || lowercase.includes('regex') || lowercase.includes('binary') || lowercase.includes('hex') || lowercase.includes('base64')) return { name: "Developer Tools", slug: "developer-tools" };
-  if (lowercase.includes('word') || lowercase.includes('text') || lowercase.includes('case')) return { name: "Text Tools", slug: "text-tools" };
-  if (lowercase.includes('calculate') || lowercase.includes('math') || lowercase.includes('percentage') || lowercase.includes('bmi') || lowercase.includes('average') || lowercase.includes('convert-')) return { name: "Math & Calculators", slug: "math-calculators" };
-  if (lowercase.includes('seo') || lowercase.includes('marketing') || lowercase.includes('link') || lowercase.includes('slug')) return { name: "Marketing & Social", slug: "marketing-tools" };
-  if (lowercase.includes('password') || lowercase.includes('secure') || lowercase.includes('encrypt') || lowercase.includes('decrypt') || lowercase.includes('aes')) return { name: "Security & Privacy", slug: "security-privacy" };
-  
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
   return { name: "General Tools", slug: "general-tools" };
 }
 

@@ -7,26 +7,15 @@ export function generateToolMetaTitle(toolName: string): string {
 }
 
 export function generateToolMetaDescription(tool: Tool): string {
-<<<<<<< HEAD
   if (tool.metaDescription && tool.metaDescription.length >= 100 && tool.metaDescription.length <= 165) {
-=======
-  if (tool.metaDescription && tool.metaDescription.length >= 140 && tool.metaDescription.length <= 165) {
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     return tool.metaDescription;
   }
 
   const base = tool.description || `Use our free ${tool.name} online. Fast, secure, and easy to use.`;
-<<<<<<< HEAD
   const suffix = ` Free, no sign-up required. Works on all devices instantly.`;
   
   let description = base;
   if (description.length < 120) {
-=======
-  const suffix = " Perfect for developers, designers, and digital professionals who need reliable results in seconds.";
-  
-  let description = base;
-  if (description.length < 140) {
->>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     description += suffix;
   }
   
