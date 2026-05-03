@@ -1,7 +1,12 @@
 "use client";
 
+<<<<<<< HEAD
 import { useState, useMemo } from "react";
 import { Type, Clock, Mic, BarChart3, ListOrdered } from "lucide-react";
+=======
+import { useState, useEffect } from "react";
+import { Type } from "lucide-react";
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 import { cn } from "@/lib/utils";
 import ToolActionBar from "./shared/ToolActionBar";
 
@@ -13,6 +18,7 @@ export default function WordCounterTool({ exampleInput }: WordCounterToolProps) 
   const [text, setText] = useState("");
   const [isCopied, setIsCopied] = useState(false);
 
+<<<<<<< HEAD
   const stats = useMemo(() => {
     const trimmed = text.trim();
     const words = trimmed ? trimmed.split(/\s+/).length : 0;
@@ -48,6 +54,22 @@ export default function WordCounterTool({ exampleInput }: WordCounterToolProps) 
       density
     };
   }, [text]);
+=======
+  useEffect(() => {
+    if (exampleInput && !text) {
+      // Auto-load example if provided and input is empty (optional behavior)
+      // For now, we just make it available via the button
+    }
+  }, [exampleInput]);
+
+  const stats = {
+    words: text.trim() ? text.trim().split(/\s+/).length : 0,
+    chars: text.length,
+    charsNoSpaces: text.replace(/\s/g, "").length,
+    lines: text.trim() ? text.split(/\r\n|\r|\n/).length : 0,
+    readingTime: Math.ceil((text.trim() ? text.trim().split(/\s+/).length : 0) / 200), // 200 wpm
+  };
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 
   const copy = () => {
     if (!text) return;
@@ -62,12 +84,27 @@ export default function WordCounterTool({ exampleInput }: WordCounterToolProps) 
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
+<<<<<<< HEAD
     a.download = "text-analysis.txt";
     a.click();
+=======
+    a.download = "word-count-result.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const loadExample = () => {
+    if (exampleInput) {
+      setText(exampleInput);
+    }
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
   };
 
   return (
     <div className="space-y-8">
+<<<<<<< HEAD
       {/* Top Stats Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {[
@@ -84,10 +121,24 @@ export default function WordCounterTool({ exampleInput }: WordCounterToolProps) 
             </div>
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{stat.label}</p>
             <p className={cn("text-xl font-black", stat.color)}>{stat.value}</p>
+=======
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        {[
+          { label: "Words", value: stats.words, color: "text-blue-600" },
+          { label: "Characters", value: stats.chars, color: "text-purple-600" },
+          { label: "No Spaces", value: stats.charsNoSpaces, color: "text-indigo-600" },
+          { label: "Lines", value: stats.lines, color: "text-slate-600" },
+          { label: "Read Time", value: `${stats.readingTime}m`, color: "text-green-600" },
+        ].map((stat) => (
+          <div key={stat.label} className="bg-white border border-slate-100 p-4 rounded-2xl shadow-sm text-center">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">{stat.label}</p>
+            <p className={cn("text-2xl font-display font-bold", stat.color)}>{stat.value}</p>
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
           </div>
         ))}
       </div>
 
+<<<<<<< HEAD
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-4">
           <ToolActionBar
@@ -151,9 +202,32 @@ export default function WordCounterTool({ exampleInput }: WordCounterToolProps) 
              </p>
           </div>
         </div>
+=======
+      <div className="space-y-4">
+        <ToolActionBar
+          title="Your Text Analysis"
+          hasInput={!!text}
+          hasOutput={!!text}
+          isCopied={isCopied}
+          onClear={() => setText("")}
+          onCopy={copy}
+          onDownload={download}
+          onExample={exampleInput ? loadExample : undefined}
+        />
+
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Type or paste your text here to count words and characters..."
+          className="w-full h-64 p-8 bg-white border border-slate-200 rounded-3xl text-lg focus:ring-4 focus:ring-primary-100 outline-none transition-all shadow-inner"
+        />
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
       </div>
     </div>
   );
 }
+<<<<<<< HEAD
 
 import { Zap } from "lucide-react";
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9

@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import { notFound } from "next/navigation";
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 import { CATEGORIES, TOOLS } from "@/lib/tools";
 import Link from "next/link";
 import { ArrowRight, ChevronRight, Home } from "lucide-react";
@@ -51,7 +54,11 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   const category = CATEGORIES.find(c => c.slug === categorySlug);
 
   if (!category) {
+<<<<<<< HEAD
     notFound();
+=======
+    return <div className="container mx-auto px-4 py-32 text-center">Category not found</div>;
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
   }
 
   const categoryTools = TOOLS.filter(t => t.category === category.id);

@@ -1,10 +1,16 @@
 "use client";
 
+<<<<<<< HEAD
 import FileUpload from "./FileUpload";
 import { useState } from "react";
 import { Upload, Download, FileImage, Check, ArrowRight, Loader2, ArrowRightLeft, FolderArchive } from "lucide-react";
 import { cn } from "@/lib/utils";
 import JSZip from "jszip";
+=======
+import { useState } from "react";
+import { Upload, Download, FileImage, Check, ArrowRight, Loader2, ArrowRightLeft } from "lucide-react";
+import { cn } from "@/lib/utils";
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 
 interface BulkImageConverterToolProps {
   sourceFormat?: string;
@@ -14,9 +20,17 @@ interface BulkImageConverterToolProps {
 export default function BulkImageConverterTool({ sourceFormat = "ANY", targetFormat }: BulkImageConverterToolProps) {
   const [files, setFiles] = useState<{ file: File; converted?: string; status: "pending" | "converting" | "done" }[]>([]);
 
+<<<<<<< HEAD
   const onFilesSelected = (selectedFiles: File[]) => {
     const newFiles = selectedFiles.map(f => ({ file: f, status: "pending" as const }));
     setFiles(prev => [...prev, ...newFiles]);
+=======
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const newFiles = Array.from(e.target.files).map(f => ({ file: f, status: "pending" as const }));
+      setFiles([...files, ...newFiles]);
+    }
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
   };
 
   const convertFile = async (index: number) => {
@@ -63,6 +77,7 @@ export default function BulkImageConverterTool({ sourceFormat = "ANY", targetFor
     });
   };
 
+<<<<<<< HEAD
   const downloadAll = async () => {
     const zip = new JSZip();
     const doneFiles = files.filter(f => f.status === "done" && f.converted);
@@ -99,6 +114,8 @@ export default function BulkImageConverterTool({ sourceFormat = "ANY", targetFor
 
   const onDragEnd = () => setDraggedIndex(null);
 
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
   return (
     <div className="space-y-8">
       <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-8">
@@ -114,6 +131,7 @@ export default function BulkImageConverterTool({ sourceFormat = "ANY", targetFor
 
         <div className="grid grid-cols-1 gap-4">
           {files.map((item, i) => (
+<<<<<<< HEAD
             <div 
               key={i} 
               draggable
@@ -125,6 +143,9 @@ export default function BulkImageConverterTool({ sourceFormat = "ANY", targetFor
                 draggedIndex === i ? "opacity-40 border-primary-500 border-dashed bg-primary-50" : "hover:border-primary-200"
               )}
             >
+=======
+            <div key={i} className="flex items-center justify-between p-4 bg-slate-50 border border-slate-100 rounded-2xl">
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
               <div className="flex items-center gap-4 overflow-hidden">
                 <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-slate-400 shrink-0">
                   <FileImage className="w-5 h-5" />
@@ -136,7 +157,11 @@ export default function BulkImageConverterTool({ sourceFormat = "ANY", targetFor
 
               <div className="flex items-center gap-3">
                 {item.status === "pending" && (
+<<<<<<< HEAD
                   <button onClick={(e) => { e.stopPropagation(); convertFile(i); }} className="text-xs font-bold text-primary-600 bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-primary-50">Convert</button>
+=======
+                  <button onClick={() => convertFile(i)} className="text-xs font-bold text-primary-600 bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-primary-50">Convert</button>
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
                 )}
                 {item.status === "converting" && <Loader2 className="w-5 h-5 text-primary-600 animate-spin" />}
                 {item.status === "done" && (
@@ -148,18 +173,32 @@ export default function BulkImageConverterTool({ sourceFormat = "ANY", targetFor
             </div>
           ))}
 
+<<<<<<< HEAD
           <FileUpload onFilesSelected={onFilesSelected} accept={{ "image/*": [] }} />
+=======
+          <label className="border-2 border-dashed border-slate-200 rounded-3xl p-10 flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-slate-50 transition-colors">
+            <input type="file" multiple onChange={handleFileChange} className="hidden" />
+            <Upload className="w-8 h-8 text-slate-300" />
+            <div className="text-center">
+              <p className="font-bold text-slate-700">Add Files</p>
+              <p className="text-xs text-slate-400">Target: {targetFormat}</p>
+            </div>
+          </label>
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
         </div>
 
         {files.some(f => f.status === "pending") && (
           <button onClick={convertAll} className="w-full py-3.5 bg-primary-600 text-white rounded-2xl font-bold shadow-lg shadow-primary-500/20">Convert All</button>
         )}
+<<<<<<< HEAD
 
         {files.some(f => f.status === "done") && (
           <button onClick={downloadAll} className="w-full py-3.5 bg-slate-900 text-white rounded-2xl font-bold flex items-center justify-center gap-2">
             <FolderArchive className="w-5 h-5" /> Download All as ZIP
           </button>
         )}
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
       </div>
     </div>
   );

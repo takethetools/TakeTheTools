@@ -17,26 +17,40 @@ base32-decoder
 base32-encoder
 base32-encoder-decoder
 base64-encoder-and-decoder
+<<<<<<< HEAD
 bcrypt-generator
 binary-calculator
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 binary-to-text
 blur-image
 bmi-calculator
 bmp-to-jpg
+<<<<<<< HEAD
 caesar-cipher
 camel-case-converter
 case-converter
 color-converter
 color-palette-generator
+=======
+camel-case-converter
+case-converter
+color-converter
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 compound-interest-calculator
 crontab-generator
 css-box-shadow-generator
 css-formatter
 css-gradient-generator
+<<<<<<< HEAD
 css-minifier
 csv-to-json
 csv-to-xml
 csv-to-xml-converter
+=======
+csv-to-json
+csv-to-xml
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 curl-to-fetch
 date-difference
 date-difference-calculator
@@ -48,10 +62,14 @@ discount-calculator
 dockerfile-generator
 ean-barcode-generator
 email-signature-generator
+<<<<<<< HEAD
 email-signature-generator-tool
 email-subject-line-tester
 excel-to-json
 excel-to-json-converter
+=======
+excel-to-json
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 exif-data-remover
 extract-emails-from-text
 extract-phone-numbers
@@ -67,23 +85,32 @@ grayscale-image
 hashtag-generator
 heic-to-jpg
 hex-to-decimal
+<<<<<<< HEAD
 hmac-generator
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 hsl-to-rgb
 html-entities-decode
 html-entities-encode
 html-entity-converter
 html-formatter
 html-lorem-ipsum-generator
+<<<<<<< HEAD
 html-minifier
 html-table-generator
 html-to-markdown
 html-to-pdf-converter
 html-to-text
 http-status-checker
+=======
+html-to-markdown
+html-to-pdf-converter
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 ico-to-png
 image-color-picker
 image-compressor
 image-cropper
+<<<<<<< HEAD
 image-metadata-viewer
 image-resizer
 image-to-avif
@@ -91,6 +118,12 @@ image-to-base64
 image-to-bmp-converter
 image-to-pdf
 image-to-pdf-converter
+=======
+image-resizer
+image-to-avif
+image-to-bmp-converter
+image-to-pdf
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 image-to-svg
 image-to-tiff-converter
 image-to-webp
@@ -101,6 +134,7 @@ javascript-formatter
 jpg-to-pdf
 jpg-to-webp
 js-formatter
+<<<<<<< HEAD
 json-beautifier
 json-formatter-and-validator
 json-minifier
@@ -108,18 +142,29 @@ json-to-csv
 json-to-typescript
 json-to-typescript-interface
 json-to-xml
+=======
+json-formatter-and-validator
+json-to-csv
+json-to-typescript
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 json-to-yaml
 jwt-decoder
 kebab-case-converter
 keyword-density-checker
 length-converter
+<<<<<<< HEAD
 link-shortener
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 loan-calculator
 lorem-ipsum-generator
 markdown-previewer
 markdown-to-html
 markdown-to-pdf
+<<<<<<< HEAD
 markdown-to-pdf-converter
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 matrix-calculator
 md5-hash-generator
 merge-pdf
@@ -135,19 +180,28 @@ password-generator-pro
 password-protect-pdf
 password-strength-checker
 pdf-compressor
+<<<<<<< HEAD
 pdf-form-filler
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 pdf-metadata-editor
 pdf-page-numbering
 pdf-to-html-converter
 pdf-to-image
 pdf-to-jpg
+<<<<<<< HEAD
 pdf-to-ppt
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 pdf-to-pptx
 pdf-to-text
 pdf-to-word
 pdf-to-xlsx
 percentage-calculator
+<<<<<<< HEAD
 photo-enhancer
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 png-to-jpg-converter
 png-to-webp
 power-converter
@@ -156,7 +210,10 @@ prime-factorization
 qr-code-generator
 quadratic-equation-solver
 random-number-generator
+<<<<<<< HEAD
 readability-score-checker
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 redirect-checker
 regex-tester
 remove-duplicate-lines
@@ -167,13 +224,19 @@ remove-whitespace
 reverse-lines
 rgb-to-hsl
 robots-txt-generator
+<<<<<<< HEAD
 roman-numeral-converter
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 rotate-image
 rotate-pdf
 rotate-pdf-pages
 round-image-corners
+<<<<<<< HEAD
 rsa-key-generator
 scientific-calculator
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 secure-password-hash
 sentiment-analysis
 sepia-image-filter
@@ -183,11 +246,17 @@ sha-512-hash-generator
 sharpen-image
 simple-interest-calculator
 sitemap-generator
+<<<<<<< HEAD
 sitemap-generator-xml
 slug-generator
 snake-case-converter
 social-media-headline-generator
 social-media-image-resizer
+=======
+slug-generator
+snake-case-converter
+social-media-headline-generator
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 social-media-resizer
 speed-converter
 split-pdf
@@ -195,7 +264,10 @@ sql-formatter
 ssl-checker
 statistics-calculator
 string-length
+<<<<<<< HEAD
 string-length-calculator
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 svg-to-png
 temperature-converter
 text-reverser
@@ -203,15 +275,23 @@ text-to-ascii
 text-to-handwriting
 text-to-leetspeak
 text-to-nato-phonetic
+<<<<<<< HEAD
 text-to-qr-code
 text-to-rot13
 text-to-speech
 text-to-unicode
+=======
+text-to-rot13
+text-to-speech
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 tiff-to-png
 time-converter
 tip-calculator
 title-case-converter
+<<<<<<< HEAD
 toml-to-json
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 twitter-character-counter
 unit-converter
 unix-timestamp
@@ -226,11 +306,15 @@ uuid-generator
 video-converter
 vintage-image-filter
 volume-converter
+<<<<<<< HEAD
 watermark-image
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 watermark-pdf
 wav-to-mp3-converter
 webm-to-mp4-converter
 webp-to-jpg-converter
+<<<<<<< HEAD
 webp-to-jpg-converter-free
 webp-to-png-converter
 weight-converter
@@ -247,3 +331,15 @@ xml-to-csv-converter
 xml-to-json
 yaml-to-json
 yaml-to-toml
+=======
+webp-to-png-converter
+weight-converter
+whois-lookup
+word-counter
+word-frequency-counter
+word-to-markdown
+xml-formatter
+xml-to-csv
+xml-to-json
+yaml-to-json
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9

@@ -1,8 +1,12 @@
 "use client";
 
 import { useState } from "react";
+<<<<<<< HEAD
 import { Download, Type, FileText, Loader2, Check } from "lucide-react";
 import FileUpload from "./FileUpload";
+=======
+import { Upload, Download, Type, FileText, Loader2, Check } from "lucide-react";
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 
 export default function WatermarkPDFTool() {
@@ -11,8 +15,14 @@ export default function WatermarkPDFTool() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isDone, setIsDone] = useState(false);
 
+<<<<<<< HEAD
   const onFilesSelected = (files: File[]) => {
     if (files.length > 0) setFile(files[0]);
+=======
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const uploadedFile = e.target.files?.[0];
+    if (uploadedFile) setFile(uploadedFile);
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
   };
 
   const addWatermark = async () => {
@@ -65,7 +75,15 @@ export default function WatermarkPDFTool() {
        </div>
 
        {!file ? (
+<<<<<<< HEAD
          <FileUpload onFilesSelected={onFilesSelected} accept={{ "application/pdf": [".pdf"] }} multiple={false} />
+=======
+         <label className="border-2 border-dashed border-slate-200 rounded-3xl p-12 flex flex-col items-center justify-center gap-4 cursor-pointer hover:bg-slate-50 transition-colors">
+           <input type="file" accept="application/pdf" onChange={handleUpload} className="hidden" />
+           <Upload className="w-8 h-8 text-slate-300" />
+           <p className="font-bold text-slate-700">Select PDF File</p>
+         </label>
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
        ) : (
          <div className="space-y-6 max-w-sm mx-auto">
             <div className="p-4 bg-slate-50 border border-slate-100 rounded-2xl flex items-center gap-3">

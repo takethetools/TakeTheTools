@@ -20,7 +20,10 @@ export default function ImageCompressorTool() {
   const [files, setFiles] = useState<ProcessedFile[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [quality, setQuality] = useState(0.6);
+<<<<<<< HEAD
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 
   const onFilesSelected = (newFiles: File[]) => {
     const processed: ProcessedFile[] = newFiles.map(f => ({
@@ -202,6 +205,7 @@ export default function ImageCompressorTool() {
           {/* List */}
           <div className="max-h-[400px] overflow-y-auto">
             {files.map((f, i) => (
+<<<<<<< HEAD
               <div 
                 key={i} 
                 draggable
@@ -224,6 +228,11 @@ export default function ImageCompressorTool() {
               >
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 group-hover:bg-white transition-colors">
+=======
+              <div key={i} className="px-8 py-5 border-b border-slate-50 flex items-center justify-between group hover:bg-slate-50/50 transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400">
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
                     <FileIcon className="w-6 h-6" />
                   </div>
                   <div>
@@ -251,17 +260,24 @@ export default function ImageCompressorTool() {
                       href={f.resultUrl}
                       download={`${f.file.name.replace(/\.[^/.]+$/, "")}_compressed.${f.file.type.split("/")[1] || "jpg"}`}
                       className="p-2 bg-primary-100 text-primary-600 rounded-lg hover:bg-primary-600 hover:text-white transition-all shadow-sm"
+<<<<<<< HEAD
                       onClick={(e) => e.stopPropagation()}
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
                     >
                       <Download className="w-4 h-4" />
                     </a>
                   )}
 
                   {f.status === "idle" && (
+<<<<<<< HEAD
                     <button 
                       onClick={(e) => { e.stopPropagation(); removeFile(i); }} 
                       className="p-2 text-slate-300 hover:text-red-500 transition-colors"
                     >
+=======
+                    <button onClick={() => removeFile(i)} className="p-2 text-slate-300 hover:text-red-500 transition-colors">
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
                       <X className="w-5 h-5" />
                     </button>
                   )}

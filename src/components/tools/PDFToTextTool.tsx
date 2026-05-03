@@ -1,5 +1,8 @@
 "use client";
+<<<<<<< HEAD
 import FileUpload from "./FileUpload";
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 
 import { useState } from "react";
 import { Upload, Download, FileText, Loader2, Copy, Check, X } from "lucide-react";
@@ -13,8 +16,13 @@ export default function PDFToTextTool() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
 
+<<<<<<< HEAD
   const onFilesSelected = async (selectedFiles: File[]) => {
     const uploadedFile = selectedFiles[0];
+=======
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const uploadedFile = e.target.files?.[0];
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     if (uploadedFile) {
       setFile(uploadedFile);
       setIsProcessing(true);
@@ -58,7 +66,15 @@ export default function PDFToTextTool() {
   return (
     <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-8">
       {!file ? (
+<<<<<<< HEAD
         <FileUpload onFilesSelected={onFilesSelected} accept={{ "application/pdf": [".pdf"] }} multiple={false} />
+=======
+        <label className="border-2 border-dashed border-slate-200 rounded-3xl p-20 flex flex-col items-center justify-center gap-4 cursor-pointer hover:bg-slate-50 transition-colors">
+          <input type="file" accept="application/pdf" onChange={handleUpload} className="hidden" />
+          <Upload className="w-12 h-12 text-slate-300" />
+          <p className="font-bold text-slate-700">Upload PDF to extract text</p>
+        </label>
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
       ) : (
         <div className="space-y-6">
           <div className="flex items-center justify-between">

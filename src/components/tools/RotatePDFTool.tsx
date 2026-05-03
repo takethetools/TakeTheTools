@@ -1,8 +1,12 @@
 "use client";
 
 import { useState, useRef } from "react";
+<<<<<<< HEAD
 import { Download, RotateCw, FileText, Loader2, Check, RefreshCw } from "lucide-react";
 import FileUpload from "./FileUpload";
+=======
+import { Upload, Download, RotateCw, FileText, Loader2, Check, RefreshCw } from "lucide-react";
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 import { PDFDocument, degrees } from "pdf-lib";
 import * as pdfjsLib from "pdfjs-dist";
 
@@ -15,8 +19,13 @@ export default function RotatePDFTool() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isDone, setIsDone] = useState(false);
 
+<<<<<<< HEAD
   const onFilesSelected = async (files: File[]) => {
     const uploadedFile = files[0];
+=======
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const uploadedFile = e.target.files?.[0];
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     if (uploadedFile) {
       setFile(uploadedFile);
       setIsProcessing(true);
@@ -87,7 +96,18 @@ export default function RotatePDFTool() {
   return (
     <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-8">
       {!file ? (
+<<<<<<< HEAD
         <FileUpload onFilesSelected={onFilesSelected} accept={{ "application/pdf": [".pdf"] }} multiple={false} />
+=======
+        <label className="border-2 border-dashed border-slate-200 rounded-3xl p-20 flex flex-col items-center justify-center gap-4 cursor-pointer hover:bg-slate-50 transition-colors">
+          <input type="file" accept="application/pdf" onChange={handleUpload} className="hidden" />
+          <Upload className="w-12 h-12 text-slate-300" />
+          <div className="text-center">
+            <p className="font-bold text-slate-700">Upload PDF to rotate pages</p>
+            <p className="text-sm text-slate-400">All processing is done in your browser</p>
+          </div>
+        </label>
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
       ) : (
         <div className="space-y-8">
           <div className="flex items-center justify-between sticky top-0 bg-white/80 backdrop-blur-md py-4 z-10 border-b border-slate-100">

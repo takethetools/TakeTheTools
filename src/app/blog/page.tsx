@@ -28,7 +28,10 @@ const CATEGORY_COLORS: Record<string, string> = {
   "Security & Privacy": "bg-red-100 text-red-600",
   "Math & Calculators": "bg-green-100 text-green-600",
   "Marketing & Social": "bg-orange-100 text-orange-600",
+<<<<<<< HEAD
   "General Tools": "bg-violet-100 text-violet-600",
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 };
 
 export default async function BlogPage() {

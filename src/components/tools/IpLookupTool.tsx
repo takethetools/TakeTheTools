@@ -1,13 +1,19 @@
 "use client";
 
+<<<<<<< HEAD
 import { useState, useEffect, useMemo } from "react";
 import { Globe, Zap, Search, Info, Shield, MapPin, Clock, DollarSign, Navigation2, Network, Fingerprint, Sparkles, RefreshCw } from "lucide-react";
 import { cn } from "@/lib/utils";
+=======
+import { useState } from "react";
+import { Globe, Zap, Search, Info, Shield, MapPin } from "lucide-react";
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 
 export default function IpLookupTool() {
   const [ip, setIp] = useState("");
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+<<<<<<< HEAD
   const [isMounting, setIsMounting] = useState(true);
 
   const lookup = async (targetIp: string = ip) => {
@@ -165,19 +171,95 @@ export default function IpLookupTool() {
                 <p className="text-sm font-bold leading-relaxed">This node is currently routing through {result.org}. High-speed connection detected.</p>
              </div>
           </div>
+=======
+
+  const lookup = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`https://ipapi.co/${ip}/json/`);
+      const data = await res.json();
+      setResult(data);
+    } catch (err) {
+      setResult({ error: "Could not fetch IP data. Please check the IP address." });
+    }
+    setLoading(false);
+  };
+
+  return (
+    <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-8">
+      <div className="flex items-center gap-3">
+        <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600">
+          <Globe className="w-6 h-6" />
+        </div>
+        <div>
+          <h3 className="text-xl font-bold text-slate-900">IP Lookup</h3>
+          <p className="text-sm text-slate-500">Find geolocation and network info for any IP</p>
+        </div>
+      </div>
+
+      <div className="flex gap-4">
+        <input 
+          type="text" 
+          value={ip}
+          onChange={(e) => setIp(e.target.value)}
+          placeholder="Enter IP address (e.g. 8.8.8.8)"
+          className="flex-grow p-4 bg-slate-50 border border-slate-100 rounded-2xl font-mono"
+        />
+        <button 
+          onClick={lookup}
+          disabled={loading}
+          className="px-8 py-4 bg-primary-600 text-white rounded-2xl font-bold flex items-center gap-2 disabled:opacity-50"
+        >
+          {loading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Search className="w-5 h-5" />}
+          Lookup
+        </button>
+      </div>
+
+      {result && !result.error && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+           <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
+              <div className="flex items-center gap-2 text-primary-600">
+                 <MapPin className="w-4 h-4" />
+                 <span className="text-xs font-bold uppercase tracking-widest">Location</span>
+              </div>
+              <div className="space-y-1">
+                 <p className="text-2xl font-bold text-slate-900">{result.city}, {result.region}</p>
+                 <p className="text-sm text-slate-500">{result.country_name} ({result.country_code})</p>
+              </div>
+           </div>
+
+           <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
+              <div className="flex items-center gap-2 text-primary-600">
+                 <Shield className="w-4 h-4" />
+                 <span className="text-xs font-bold uppercase tracking-widest">Network</span>
+              </div>
+              <div className="space-y-1">
+                 <p className="text-lg font-bold text-slate-900">{result.org || "Unknown ISP"}</p>
+                 <p className="text-sm text-slate-500">ASN: {result.asn}</p>
+              </div>
+           </div>
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
         </div>
       )}
 
       {result?.error && (
+<<<<<<< HEAD
         <div className="max-w-2xl mx-auto p-12 bg-red-50 border-2 border-dashed border-red-200 rounded-[3rem] text-center space-y-4">
            <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-red-600 mx-auto">
               <Info className="w-8 h-8" />
            </div>
            <p className="text-lg font-black text-red-900 uppercase tracking-tight">Intelligence Blocked</p>
            <p className="text-sm text-red-600 font-medium">{result.error}</p>
+=======
+        <div className="p-4 bg-red-50 text-red-600 rounded-2xl text-sm font-medium border border-red-100">
+           {result.error}
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
         </div>
       )}
     </div>
   );
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9

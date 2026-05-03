@@ -39,6 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     keywords: [
       "online tools",
+<<<<<<< HEAD
       "free online tools",
       "webp to png converter",
       "image compressor online",
@@ -50,6 +51,14 @@ export async function generateMetadata(): Promise<Metadata> {
       "image converter free",
       "pdf tools free",
       "text tools online",
+=======
+      "webp to png",
+      "pdf merge",
+      "image compressor",
+      "json formatter",
+      "file converter",
+      "developer tools",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     ],
     authors: [{ name: `${siteName} Team` }],
     creator: siteName,
@@ -116,6 +125,7 @@ export default async function RootLayout({
       name: siteName,
       url: "https://takethetools.com",
       logo: "https://takethetools.com/logo.webp",
+<<<<<<< HEAD
       contactPoint: {
         "@type": "ContactPoint",
         email: "takethetools7@gmail.com",
@@ -125,6 +135,11 @@ export default async function RootLayout({
         "https://twitter.com/takethetools",
         "https://github.com/takethetools"
       ],
+=======
+      sameAs: siteConfig.twitterHandle
+        ? [`https://twitter.com/${siteConfig.twitterHandle}`]
+        : ["https://twitter.com/takethetools"],
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     },
     {
       "@context": "https://schema.org",

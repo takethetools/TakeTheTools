@@ -31,6 +31,7 @@ export default function MergePdfTool() {
     setResultUrl(null);
   };
 
+<<<<<<< HEAD
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
 
   const onDragStart = (index: number) => {
@@ -51,6 +52,15 @@ export default function MergePdfTool() {
 
   const onDragEnd = () => {
     setDraggedIndex(null);
+=======
+  const moveFile = (index: number, direction: "up" | "down") => {
+    const newFiles = [...files];
+    const newIndex = direction === "up" ? index - 1 : index + 1;
+    if (newIndex >= 0 && newIndex < newFiles.length) {
+      [newFiles[index], newFiles[newIndex]] = [newFiles[newIndex], newFiles[index]];
+      setFiles(newFiles);
+    }
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
   };
 
   const mergePdfs = async () => {
@@ -104,7 +114,11 @@ export default function MergePdfTool() {
           <div className="px-8 py-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
             <div>
               <h3 className="font-bold text-slate-900">PDF Queue ({files.length} files)</h3>
+<<<<<<< HEAD
               <p className="text-sm text-slate-500">Drag to reorder files for the merged document</p>
+=======
+              <p className="text-sm text-slate-500">Arrange files in the order you want them merged</p>
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
             </div>
             <button onClick={reset} className="p-2 hover:bg-slate-200 rounded-lg text-slate-500 transition-colors">
               <RefreshCw className="w-5 h-5" />
@@ -112,6 +126,7 @@ export default function MergePdfTool() {
           </div>
 
           {/* List */}
+<<<<<<< HEAD
           <div className="max-h-[400px] overflow-y-auto p-2 space-y-2">
             {files.map((f, i) => (
               <div 
@@ -135,6 +150,34 @@ export default function MergePdfTool() {
                   <div>
                     <p className="text-sm font-bold text-slate-900 truncate max-w-[200px]">{f.file.name}</p>
                     <p className="text-xs text-slate-400">{(f.file.size / 1024).toFixed(1)} KB • Page Order: {i+1}</p>
+=======
+          <div className="max-h-[400px] overflow-y-auto">
+            {files.map((f, i) => (
+              <div key={f.id} className="px-8 py-4 border-b border-slate-50 flex items-center justify-between group hover:bg-slate-50/50 transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="flex flex-col gap-1">
+                    <button
+                      onClick={() => moveFile(i, "up")}
+                      disabled={i === 0}
+                      className="p-1 hover:bg-slate-200 rounded disabled:opacity-30"
+                    >
+                      <ArrowUp className="w-3 h-3" />
+                    </button>
+                    <button
+                      onClick={() => moveFile(i, "down")}
+                      disabled={i === files.length - 1}
+                      className="p-1 hover:bg-slate-200 rounded disabled:opacity-30"
+                    >
+                      <ArrowDown className="w-3 h-3" />
+                    </button>
+                  </div>
+                  <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-500">
+                    <FileIcon className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-900 truncate max-w-[200px]">{f.file.name}</p>
+                    <p className="text-xs text-slate-400">{(f.file.size / 1024).toFixed(1)} KB</p>
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
                   </div>
                 </div>
 

@@ -859,7 +859,11 @@ export const TOOLS: Tool[] = [
     name: "QR Code Generator",
     slug: "qr-code-generator",
     description: "Create custom QR codes for URLs, text, and more for free.",
+<<<<<<< HEAD
     category: "marketing",
+=======
+    category: "text",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "QrCode",
     instructions: [
       "Enter the text or URL for your QR code.",
@@ -879,7 +883,11 @@ export const TOOLS: Tool[] = [
     name: "Password Generator",
     slug: "password-generator",
     description: "Generate strong, secure, and random passwords for your accounts.",
+<<<<<<< HEAD
     category: "security",
+=======
+    category: "text",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "Lock",
     instructions: [
       "Select desired password length.",
@@ -978,7 +986,11 @@ export const TOOLS: Tool[] = [
     name: "Number System Converter",
     slug: "number-system-converter",
     description: "Convert numbers between Binary, Decimal, Hex, and Octal.",
+<<<<<<< HEAD
     category: "developer",
+=======
+    category: "text",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "Binary",
     instructions: [
       "Enter a number.",
@@ -1243,7 +1255,11 @@ export const TOOLS: Tool[] = [
     name: "Base32 Encoder",
     slug: "base32-encoder",
     description: "Encode text to Base32 format.",
+<<<<<<< HEAD
     category: "developer",
+=======
+    category: "security",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "ArrowRightLeft",
     instructions: ["Enter text.", "Encode."],
     faqs: [{ question: "Why Base32?", answer: "Human-readable and URL-safe." }],
@@ -1255,7 +1271,11 @@ export const TOOLS: Tool[] = [
     name: "Base32 Decoder",
     slug: "base32-decoder",
     description: "Decode Base32 strings back to normal text.",
+<<<<<<< HEAD
     category: "developer",
+=======
+    category: "security",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "ArrowRightLeft",
     instructions: ["Enter cipher.", "Decode."],
     faqs: [{ question: "Is it reversible?", answer: "Yes." }],
@@ -1428,7 +1448,11 @@ export const TOOLS: Tool[] = [
     name: "Unit Converter",
     slug: "unit-converter",
     description: "Convert between various units like length, weight, temperature, and volume.",
+<<<<<<< HEAD
     category: "math",
+=======
+    category: "converter",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "Scale",
     instructions: [
       "Select a conversion category.",
@@ -1448,7 +1472,11 @@ export const TOOLS: Tool[] = [
     name: "Color Converter",
     slug: "color-converter",
     description: "Convert colors between HEX, RGB, HSL, and CMYK formats.",
+<<<<<<< HEAD
     category: "developer",
+=======
+    category: "converter",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "Palette",
     instructions: [
       "Enter a color value or use the picker.",
@@ -2530,7 +2558,11 @@ export const TOOLS: Tool[] = [
     name: "Word to Markdown Converter",
     slug: "word-to-markdown",
     description: "Convert Word documents (.docx) to clean Markdown text.",
+<<<<<<< HEAD
     category: "developer",
+=======
+    category: "text",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "FileText",
     instructions: ["Upload .docx.", "Convert.", "Copy Markdown."],
     faqs: [{ question: "Preserves formatting?", answer: "Yes, bolds, italics, and headers." }],
@@ -2558,7 +2590,11 @@ export const TOOLS: Tool[] = [
     name: "Sentiment Analysis",
     slug: "sentiment-analysis",
     description: "Analyze the emotional tone of text — positive, negative, or neutral.",
+<<<<<<< HEAD
     category: "marketing",
+=======
+    category: "text",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "MessageSquare",
     isPopular: false,
     instructions: [
@@ -2938,7 +2974,11 @@ export const TOOLS: Tool[] = [
     name: "Text to QR Code",
     slug: "text-to-qr-code",
     description: "Convert any text, URL, or message into a scannable QR code.",
+<<<<<<< HEAD
     category: "marketing",
+=======
+    category: "text",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "QrCode",
     isPopular: false,
     instructions: ["Type or paste any text or URL.", "The QR code generates automatically.", "Download as PNG."],
@@ -2956,7 +2996,11 @@ export const TOOLS: Tool[] = [
     name: "Word to PDF Converter",
     slug: "word-to-pdf",
     description: "Convert Microsoft Word documents (.docx) to PDF online for free.",
+<<<<<<< HEAD
     category: "pdf",
+=======
+    category: "text",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "FileText",
     isPopular: true,
     instructions: ["Upload your .docx Word file.", "Wait for conversion to complete.", "Download the PDF file."],
@@ -2974,7 +3018,11 @@ export const TOOLS: Tool[] = [
     name: "Text to Unicode Converter",
     slug: "text-to-unicode",
     description: "Convert text to Unicode code points and decode Unicode back to text.",
+<<<<<<< HEAD
     category: "developer",
+=======
+    category: "text",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "FileCode",
     isPopular: false,
     instructions: ["Enter text to convert to Unicode.", "Or enter Unicode code points to decode.", "Copy the result."],
@@ -2992,7 +3040,11 @@ export const TOOLS: Tool[] = [
     name: "HTML Table Generator",
     slug: "html-table-generator",
     description: "Create HTML table code visually by filling in rows, columns, and data.",
+<<<<<<< HEAD
     category: "developer",
+=======
+    category: "text",
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
     iconName: "Table",
     isPopular: false,
     instructions: ["Set the number of rows and columns.", "Fill in your data.", "Copy the generated HTML table code."],
@@ -3245,6 +3297,7 @@ export const TOOLS: Tool[] = [
     longDescription: "Fill out PDF forms directly in your browser without Adobe Acrobat or any software installation. Click on any form field, type your response, and download the completed PDF instantly.",
     exampleInput: "Upload a PDF form to fill it out"
   },
+<<<<<<< HEAD
   {
     id: "alphabetical-line-sorter",
     name: "Alphabetical Line Sorter",
@@ -3693,6 +3746,8 @@ export const TOOLS: Tool[] = [
     longDescription: "A powerful Weight Converter tool that runs entirely in your browser.",
     exampleInput: "Example data"
   },
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 ];
 
 export function getToolBySlug(slug: string) {

@@ -1,5 +1,8 @@
 "use client";
+<<<<<<< HEAD
 import FileUpload from "./FileUpload";
+=======
+>>>>>>> d366566fdaff0e02dbc3205770509d5194ddbac9
 
 import { useState, useRef } from "react";
 import { Eye, Copy, Check, Zap, Share2, Globe, Layout, Image as ImageIcon, Upload, X } from "lucide-react";
