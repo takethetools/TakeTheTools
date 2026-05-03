@@ -1,0 +1,127 @@
+"use client";
+import FileUpload from "./FileUpload";
+
+import { useState, useRef, useEffect } from "react";
+import { Palette, Copy, Check, MousePointer2, Image as ImageIcon } from "lucide-react";
+
+export default function ImageColorPickerTool() {
+  const [image, setImage] = useState<string | null>(null);
+  const [color, setColor] = useState("#6366f1");
+  const [isCopied, setIsCopied] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const handleImage = (files: File[]) => {
+    if (files.length > 0) {
+      const url = URL.createObjectURL(files[0]);
+      setImage(url);
+    }
+  };
+
+  useEffect(() => {
+    if (!image || !canvasRef.current) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx?.drawImage(img, 0, 0);
+    };
+    img.src = image;
+  }, [image]);
+
+  const pickColor = (clientX: number, clientY: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const x = (clientX - rect.left) * scaleX;
+    const y = (clientY - rect.top) * scaleY;
+
+    try {
+      const pixel = ctx.getImageData(x, y, 1, 1).data;
+      const hex = "#" + [pixel[0], pixel[1], pixel[2]].map(x => x.toString(16).padStart(2, "0")).join("");
+      setColor(hex);
+    } catch (e) {
+      console.error("Failed to pick color", e);
+    }
+  };
+
+  const copyColor = () => {
+    navigator.clipboard.writeText(color);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
+
+  return (
+    <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-8">
+      <div className="flex items-center gap-3">
+        <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600">
+          <Palette className="w-6 h-6" />
+        </div>
+        <div>
+          <h3 className="text-xl font-bold text-slate-900">Image Color Picker</h3>
+          <p className="text-sm text-slate-500">Extract exact HEX/RGB colors from any image</p>
+        </div>
+      </div>
+
+      {!image ? (
+        <FileUpload onFilesSelected={handleImage} accept={{ "image/*": [] }} />
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="space-y-6">
+            <div className="h-96 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200 relative overflow-hidden group">
+              <canvas 
+                ref={canvasRef}
+                onClick={(e) => pickColor(e.clientX, e.clientY)}
+                onMouseMove={(e) => e.buttons === 1 && pickColor(e.clientX, e.clientY)}
+                onTouchStart={(e) => pickColor(e.touches[0].clientX, e.touches[0].clientY)}
+                onTouchMove={(e) => {
+                  e.preventDefault();
+                  pickColor(e.touches[0].clientX, e.touches[0].clientY);
+                }}
+                className="w-full h-full object-contain cursor-crosshair"
+              />
+              <button 
+                onClick={() => setImage(null)}
+                className="absolute top-4 right-4 bg-white/80 backdrop-blur p-2 rounded-xl text-slate-400 hover:text-red-500 transition-all shadow-sm"
+              >
+                <Palette className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center space-y-8">
+            <div className="flex items-center gap-6">
+              <div 
+                className="w-32 h-32 rounded-3xl border-4 border-white shadow-xl transition-colors duration-200"
+                style={{ backgroundColor: color }}
+              />
+              <div className="space-y-1">
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest font-mono">Picked Color</span>
+                <div className="text-4xl font-black text-slate-900 font-mono">{color.toUpperCase()}</div>
+              </div>
+            </div>
+
+            <button 
+              onClick={copyColor}
+              className="w-full py-5 bg-slate-900 text-white rounded-2xl font-bold flex items-center justify-center gap-2"
+            >
+              {isCopied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+              {isCopied ? "Copied!" : "Copy HEX Code"}
+            </button>
+
+            <div className="p-4 bg-slate-50 rounded-2xl flex items-center gap-3 text-slate-500">
+              <MousePointer2 className="w-4 h-4" />
+              <p className="text-xs font-medium">Click or tap precisely on the image to sample a color.</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

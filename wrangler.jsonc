@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "takethetools",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-09-27",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "routes": [
+    {
+      "pattern": "takethetools.com/*",
+      "zone_name": "takethetools.com"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

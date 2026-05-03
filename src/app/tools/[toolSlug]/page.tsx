@@ -1,0 +1,336 @@
+import { TOOLS, CATEGORIES } from "@/lib/tools";
+import { notFound } from "next/navigation";
+import ManualAdUnit from "@/components/common/ManualAdUnit";
+import { Metadata } from "next";
+import Link from "next/link";
+import { ChevronRight, Home, Share2, HelpCircle, ArrowRight, CheckCircle2, Zap, BookOpen } from "lucide-react";
+import Breadcrumbs from "@/components/common/Breadcrumbs";
+import React from "react";
+import { getToolAboutContent } from "@/lib/tool-content";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import ToolRenderer from "@/components/tools/ToolRenderer";
+import { generateToolMetaTitle, generateToolMetaDescription, SITE_URL } from "@/lib/seo";
+import { AD_SLOTS } from "@/lib/ad-slots";
+import { getSoftwareApplicationSchema, getBreadcrumbSchema, getFAQSchema, getHowToSchema } from "@/lib/seo";
+import { getResourcesByCategory } from "@/lib/external-resources";
+
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+interface Props {
+  params: Promise<{ toolSlug: string }>;
+}
+
+export async function generateStaticParams() {
+  try {
+    return TOOLS.map((tool) => ({
+      toolSlug: tool.slug,
+    }));
+  } catch (error) {
+    console.warn("Failed to generate static params for tools:", error);
+    return [];
+  }
+}
+
+async function getTool(slug: string) {
+  const tool = TOOLS.find(t => t.slug === slug);
+  if (!tool) return null;
+
+  const category = CATEGORIES.find(c => c.id === tool.category);
+
+  return {
+    ...tool,
+    categoryId: tool.category,
+    category: category ? { ...category } : null,
+  };
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { toolSlug } = await params;
+  const tool = await getTool(toolSlug);
+  if (!tool) return { title: "Tool Not Found" };
+
+  const title = tool.metaTitle || generateToolMetaTitle(tool.name);
+  const description = tool.metaDescription || generateToolMetaDescription(tool as any);
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url: `${SITE_URL}/tools/${toolSlug}`,
+      siteName: "TakeTheTools",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: `${SITE_URL}/tools/${toolSlug}`,
+    },
+  };
+}
+
+export default async function ToolPage({ params }: Props) {
+  const { toolSlug } = await params;
+  const tool = await getTool(toolSlug);
+
+  if (!tool) {
+    notFound();
+  }
+
+  const aboutContent = getToolAboutContent(toolSlug);
+
+  // Related tools (same category, different tool)
+  const relatedTools = TOOLS.filter(t =>
+    t.category === tool.categoryId && t.id !== tool.id
+  ).slice(0, 3);
+
+  // Dynamic application category for schema
+  const applicationCategoryMap: Record<string, string> = {
+    "image": "MultimediaApplication",
+    "pdf": "MultimediaApplication",
+    "developer": "DeveloperApplication",
+    "text": "UtilitiesApplication",
+    "converter": "MultimediaApplication",
+    "math": "UtilitiesApplication",
+    "marketing": "UtilitiesApplication",
+    "security": "SecurityApplication"
+  };
+
+  return (
+    <div className="pt-10 pb-20">
+      <div className="container mx-auto px-4">
+        <Breadcrumbs
+          items={[
+            { label: "Tools", href: "/categories" },
+            { label: tool.name }
+          ]}
+        />
+
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+          {/* Main Content Area */}
+          <div className="lg:col-span-3">
+            <div className="mb-10">
+              <h1 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6 tracking-tight">
+                {tool.name} Online
+              </h1>
+              <div className="text-xl text-slate-600 leading-relaxed max-w-4xl mb-8">
+                {tool.longDescription || tool.description}
+                {(!tool.longDescription || tool.longDescription.length < 200) && (
+                  <p className="mt-4">
+                    Our free {tool.name.toLowerCase()} tool is designed to provide high-performance results directly in your browser.
+                    Whether you are a developer, designer, or casual user, this utility ensures your tasks are completed with
+                    precision and speed. Explore the features below and optimize your workflow today with TakeTheTools.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Ad Unit — Inline Top */}
+            <div className="flex justify-center mb-8">
+              <ManualAdUnit adSlot={AD_SLOTS.IN_CONTENT_AUTO} adFormat="auto" />
+            </div>
+
+            {/* Tool Interaction Area */}
+            <div className="mb-12">
+              <ToolRenderer toolId={tool.id} exampleInput={tool.exampleInput || ""} />
+            </div>
+
+            {/* Ad Unit — After Tool */}
+            <div className="flex justify-center mb-12">
+              <ManualAdUnit adSlot={AD_SLOTS.IN_ARTICLE_HORIZONTAL} adFormat="horizontal" />
+            </div>
+
+
+            {/* Extended About Content Section */}
+            {aboutContent && (
+              <div className="mb-16 pt-16 border-t border-slate-100">
+                <div className="prose max-w-none"
+                >
+                  <MDXRemote source={aboutContent} components={{ ManualAdUnit }} />
+                </div>
+              </div>
+            )}
+
+            {/* Ad Unit — Between Content Sections */}
+            <div className="flex justify-center mb-12">
+              <ManualAdUnit adSlot={AD_SLOTS.IN_CONTENT_AUTO} adFormat="auto" />
+            </div>
+
+            {/* Instructions Section — Enhanced with Ad */}
+            <div className="mb-16">
+              <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                <CheckCircle2 className="w-6 h-6 text-primary-600" />
+                How to use {tool.name}
+              </h2>
+              <div className="flex justify-center mb-8">
+                <ManualAdUnit adSlot={AD_SLOTS.IN_ARTICLE_HORIZONTAL} adFormat="horizontal" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {(tool.instructions as string[]).map((step, index) => (
+                  <div key={index} className="p-6 bg-slate-50 rounded-2xl border border-slate-100 relative">
+                    <span className="absolute -top-4 -left-4 w-10 h-10 bg-white border-4 border-slate-50 rounded-full flex items-center justify-center font-bold text-primary-600 shadow-sm">
+                      {index + 1}
+                    </span>
+                    <p className="text-slate-700 font-medium">{step}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Example Usage Section */}
+            {tool.exampleInput && (
+              <div className="mb-16">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                  <Zap className="w-6 h-6 text-primary-600" />
+                  Example Usage
+                </h2>
+                <div className="p-8 bg-slate-900 rounded-[2rem] border border-slate-800 shadow-xl overflow-hidden relative group">
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <Zap className="w-32 h-32 text-white" />
+                  </div>
+                  <div className="relative z-10">
+                    <p className="text-slate-400 text-sm font-bold uppercase tracking-widest mb-4">Sample Input / Output</p>
+                    <pre className="bg-slate-800/50 p-6 rounded-xl text-primary-300 font-mono text-sm border border-slate-700 shadow-inner overflow-x-auto">
+                      {tool.exampleInput}
+                    </pre>
+                    <p className="mt-6 text-slate-400 text-sm leading-relaxed">
+                      Simply paste your data as shown in the example above to see how our {tool.name.toLowerCase()} works.
+                      Our platform ensures high-speed processing with complete accuracy, tailored for professional use cases.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+
+            {/* FAQ Section */}
+            <div className="mb-16">
+              <h2 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-2">
+                <HelpCircle className="w-6 h-6 text-primary-600" />
+                Frequently Asked Questions
+              </h2>
+              <div className="space-y-4">
+                {(tool.faqs as any[]).map((faq, index) => (
+                  <div key={index} className="bg-white border border-slate-100 rounded-2xl p-6">
+                    <h3 className="font-bold text-slate-900 mb-3">{faq.question}</h3>
+                    <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* External Resources / Backlinks Section */}
+            <div className="mb-16 bg-slate-50 rounded-3xl p-8 border border-slate-100">
+              <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                <BookOpen className="w-6 h-6 text-primary-600" />
+                Professional Resources & Documentation
+              </h2>
+              <p className="text-slate-600 mb-8 leading-relaxed">
+                Stay updated with the latest industry standards and technical specifications. Our team recommends these authoritative sources for deepening your understanding of {tool.name.toLowerCase()} and related technologies.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {getResourcesByCategory(tool.categoryId).map((resource, index) => (
+                  <a
+                    key={index}
+                    href={resource.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-5 bg-white border border-slate-100 rounded-2xl hover:border-primary-200 hover:shadow-md transition-all group flex flex-col h-full"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-bold text-slate-900 group-hover:text-primary-600 transition-colors">
+                        {resource.name}
+                      </span>
+                      <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-primary-600 transition-all -rotate-45" />
+                    </div>
+                    <p className="text-xs text-slate-500 leading-relaxed flex-grow">{resource.description}</p>
+                  </a>
+                ))}
+              </div>
+              <div className="mt-8 p-4 bg-primary-50 rounded-xl border border-primary-100 text-xs text-primary-700 italic">
+                <strong>Disclaimer:</strong> External links are provided for informational purposes; TakeTheTools is not responsible for the content of external sites.
+              </div>
+            </div>
+          </div>
+
+          {/* Sidebar Area */}
+          <div className="lg:col-span-1 space-y-8">
+
+            {/* Sidebar Ad Unit */}
+            <ManualAdUnit adSlot={AD_SLOTS.SIDEBAR_RECTANGLE} adFormat="rectangle" />
+
+            {/* Related Tools Card */}
+            <div className="bg-slate-900 text-white rounded-[2rem] p-8 shadow-xl shadow-slate-200">
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <Share2 className="w-5 h-5 text-primary-400" />
+                Related Tools
+              </h3>
+              <div className="space-y-4">
+                {relatedTools.map(t => (
+                  <Link
+                    key={t.id}
+                    href={`/tools/${t.slug}`}
+                    className="group block p-4 bg-slate-800/50 rounded-2xl hover:bg-primary-600/20 border border-slate-700 hover:border-primary-500/50 transition-all"
+                  >
+                    <h4 className="font-bold text-sm mb-1 group-hover:text-primary-400 transition-colors">{t.name}</h4>
+                    <p className="text-slate-400 text-xs group-hover:text-slate-300 line-clamp-1">{t.description}</p>
+                  </Link>
+                ))}
+                {relatedTools.length === 0 && (
+                  <p className="text-slate-500 text-sm italic">Stay tuned for more tools!</p>
+                )}
+              </div>
+              <Link href="/categories" className="mt-8 flex items-center justify-center gap-2 py-3 bg-slate-800 rounded-xl text-primary-400 font-bold text-sm group hover:bg-slate-700 transition-all">
+                Browse all tools <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+
+            {/* Read Our Guide Card */}
+            <Link
+              href={`/blog/how-to-use-${toolSlug}`}
+              className="block bg-gradient-to-br from-primary-600 to-primary-700 text-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:from-primary-700 hover:to-primary-800 transition-all group"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <BookOpen className="w-5 h-5 text-primary-200" />
+                <span className="text-xs font-bold uppercase tracking-widest text-primary-200">Full Guide</span>
+              </div>
+              <h3 className="font-bold text-base mb-1 group-hover:text-white">How to use {tool.name}</h3>
+              <p className="text-primary-200 text-xs leading-relaxed">Step-by-step guide, tips, and use cases →</p>
+            </Link>
+
+            {/* Sticky Sidebar Ad */}
+            <div className="sticky top-28">
+              <ManualAdUnit adSlot={AD_SLOTS.SIDEBAR_RECTANGLE} adFormat="rectangle" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Structured Data (JSON-LD) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            getSoftwareApplicationSchema(tool as any, applicationCategoryMap),
+            getBreadcrumbSchema([
+              { name: "Home", item: SITE_URL },
+              { name: "Tools", item: `${SITE_URL}/categories` },
+              { name: tool.name, item: `${SITE_URL}/tools/${toolSlug}` }
+            ]),
+            getFAQSchema(tool.faqs as any),
+            getHowToSchema(tool as any)
+          ])
+        }}
+      />
+    </div>
+  );
+}
