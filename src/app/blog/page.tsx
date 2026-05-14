@@ -44,7 +44,7 @@ export default async function BlogPage() {
               Our <span className="text-primary-600">Blog</span>
             </h1>
             <p className="text-xl text-slate-600 leading-relaxed">
-              Tips, tutorials, and guides to help you get the most out of our 100+ free online tools.
+              Tips, tutorials, and guides to help you get the most out of our 200+ free online tools.
             </p>
           </div>
 
