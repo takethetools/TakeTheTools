@@ -478,7 +478,8 @@ const HtmlToPdfTool = dynamic(
 );
 
 type ToolComponentProps = { exampleInput?: string };
-const TOOL_COMPONENTS: Record<string, React.ComponentType<ToolComponentProps>> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const TOOL_COMPONENTS: Record<string, React.ComponentType<any>> = {
   "webp-to-png-converter": WebPToPngTool,
   "png-to-jpg-converter": PngToJpgTool,
   "image-compressor": ImageCompressorTool,

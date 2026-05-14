@@ -129,7 +129,7 @@ export default function NetworkLookupTool({ mode }: NetworkLookupToolProps) {
           setResult({
             original: targetUrl,
             final: finalUrl,
-            status: response.status,
+            status: String(response.status),
             redirected: response.redirected || false,
             note: response.redirected
               ? "This URL redirects to another location"

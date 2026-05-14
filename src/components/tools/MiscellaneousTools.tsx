@@ -42,7 +42,8 @@ export default function MiscellaneousTools({ mode }: MiscellaneousToolsProps) {
     };
 
     const copyResult = () => {
-        const text = mode === "nato" ? result : JSON.stringify(result, null, 2);
+        const text = mode === "nato" ? (result as string) : JSON.stringify(result, null, 2);
+        if (!text) return;
         navigator.clipboard.writeText(text);
         setIsCopied(true);
         setTimeout(() => setIsCopied(false), 2000);
@@ -84,7 +85,7 @@ export default function MiscellaneousTools({ mode }: MiscellaneousToolsProps) {
 
                         {mode === "nato" ? (
                             <div className="p-6 bg-slate-900 rounded-2xl text-blue-100 font-mono text-lg break-words">
-                                {result}
+                                {result as string}
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
