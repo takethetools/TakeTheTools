@@ -73,10 +73,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const toolWithCategory = await getTool(toolSlug);
   if (!toolWithCategory) return { title: "Tool Not Found" };
 
-  // Strip category property to match Tool type
-  const { category, categoryId, ...tool } = toolWithCategory;
-  const title = tool.metaTitle || generateToolMetaTitle(tool.name);
-  const description = tool.metaDescription || generateToolMetaDescription(tool);
+  const title = toolWithCategory.metaTitle || generateToolMetaTitle(toolWithCategory.name);
+  const description = toolWithCategory.metaDescription || generateToolMetaDescription({
+    ...toolWithCategory,
+    category: toolWithCategory.categoryId,
+  });
 
   return {
     title,
