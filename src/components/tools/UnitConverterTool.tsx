@@ -1,10 +1,17 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, type ComponentType } from "react";
 import { Scale, RefreshCw, ArrowRightLeft, Search, Copy, Check, Hash, Ruler, Thermometer, Box, Zap, Clock, Database, Waves, Sun, Activity, Fuel } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const CATEGORIES: any = {
+type UnitCategory = {
+  icon: ComponentType<{ className?: string }>;
+  label: string;
+  color: string;
+  units: Record<string, number>;
+};
+
+const CATEGORIES: Record<string, UnitCategory> = {
   length: { icon: Ruler, label: "Length", color: "text-blue-500", units: { meters: 1, kilometers: 0.001, centimeters: 100, millimeters: 1000, inches: 39.3701, feet: 3.28084, yards: 1.09361, miles: 0.000621371 } },
   weight: { icon: Scale, label: "Weight", color: "text-emerald-500", units: { grams: 1, kilograms: 0.001, milligrams: 1000, pounds: 0.00220462, ounces: 0.035274 } },
   temperature: { icon: Thermometer, label: "Temp", color: "text-orange-500", units: { celsius: 1, fahrenheit: 1, kelvin: 1 } },
@@ -67,7 +74,7 @@ export default function UnitConverterTool({ initialCategory = "length" }: UnitCo
          <div className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-6 px-2">Categories</p>
             <div className="space-y-2">
-               {Object.entries(CATEGORIES).map(([id, cat]: [string, any]) => (
+               {Object.entries(CATEGORIES).map(([id, cat]) => (
                  <button
                    key={id}
                    onClick={() => { setCategory(id); setFromUnit(Object.keys(cat.units)[0]); }}

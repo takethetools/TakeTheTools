@@ -477,7 +477,8 @@ const HtmlToPdfTool = dynamic(
   { loading: ToolLoading, ssr: false },
 );
 
-const TOOL_COMPONENTS: Record<string, React.ComponentType<any>> = {
+type ToolComponentProps = { exampleInput?: string };
+const TOOL_COMPONENTS: Record<string, React.ComponentType<ToolComponentProps>> = {
   "webp-to-png-converter": WebPToPngTool,
   "png-to-jpg-converter": PngToJpgTool,
   "image-compressor": ImageCompressorTool,

@@ -16,17 +16,43 @@ import {
     ListChecks
 } from "lucide-react";
 import Link from "next/link";
-import { clsx } from "clsx";
+
+type Category = {
+    id: string;
+    name: string;
+};
+
+type FaqItem = {
+    question: string;
+    answer: string;
+};
+
+type ToolInitialData = {
+    id: string;
+    name?: string;
+    slug?: string;
+    description?: string;
+    longDescription?: string;
+    categoryId?: string;
+    metaTitle?: string;
+    metaDescription?: string;
+    iconName?: string;
+    isPopular?: boolean;
+    instructions?: string;
+    faqs?: string;
+    exampleInput?: string;
+    componentName?: string;
+};
 
 interface ToolFormProps {
-    initialData?: any;
+    initialData?: ToolInitialData;
 }
 
 export default function ToolForm({ initialData }: ToolFormProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [categories, setCategories] = useState<any[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
 
     const [formData, setFormData] = useState({
         name: initialData?.name || "",
@@ -45,21 +71,21 @@ export default function ToolForm({ initialData }: ToolFormProps) {
     });
 
     useEffect(() => {
-        fetchCategories();
-    }, []);
-
-    const fetchCategories = async () => {
-        try {
-            const res = await fetch("/api/admin/categories");
-            const data = await res.json();
-            setCategories(data);
-            if (!formData.categoryId && data.length > 0) {
-                setFormData(prev => ({ ...prev, categoryId: data[0].id }));
+        const fetchCategories = async () => {
+            try {
+                const res = await fetch("/api/admin/categories");
+                const data: Category[] = await res.json();
+                setCategories(data);
+                if (!formData.categoryId && data.length > 0) {
+                    setFormData(prev => ({ ...prev, categoryId: data[0].id }));
+                }
+            } catch {
+                console.error("Failed to fetch categories");
             }
-        } catch (err) {
-            console.error("Failed to fetch categories");
-        }
-    };
+        };
+
+        fetchCategories();
+    }, [formData.categoryId]);
 
     const handleSlugify = () => {
         if (formData.slug) return;
@@ -97,7 +123,7 @@ export default function ToolForm({ initialData }: ToolFormProps) {
         setFormData(prev => ({ ...prev, faqs: newFaqs }));
     };
 
-    const updateFaq = (index: number, field: string, value: string) => {
+    const updateFaq = (index: number, field: keyof FaqItem, value: string) => {
         const newFaqs = [...formData.faqs];
         newFaqs[index] = { ...newFaqs[index], [field]: value };
         setFormData(prev => ({ ...prev, faqs: newFaqs }));
@@ -125,7 +151,7 @@ export default function ToolForm({ initialData }: ToolFormProps) {
             } else {
                 setError(data.error || "Something went wrong");
             }
-        } catch (err) {
+        } catch {
             setError("Failed to save tool");
         } finally {
             setLoading(false);
@@ -290,7 +316,7 @@ export default function ToolForm({ initialData }: ToolFormProps) {
                         </div>
 
                         <div className="space-y-6">
-                            {formData.faqs.map((faq: any, index: number) => (
+                            {formData.faqs.map((faq: FaqItem, index: number) => (
                                 <div key={index} className="p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-4 relative group">
                                     <button
                                         type="button"

@@ -1,17 +1,31 @@
 "use client";
 
 import { useState } from "react";
-import { FileJson, Zap, Copy, Check, Repeat } from "lucide-react";
+import { FileJson, Zap, Copy, Check } from "lucide-react";
 
 interface JsonYamlConverterProps {
   mode: "json-to-yaml" | "yaml-to-json" | "yaml-to-toml" | "toml-to-json";
 }
 
-function jsonToYaml(obj: any, indent = 0): string {
+type JsonValue =
+  | string
+  | number
+  | boolean
+  | null
+  | JsonValue[]
+  | { [key: string]: JsonValue };
+
+type JsonObject = { [key: string]: JsonValue };
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function jsonToYaml(obj: JsonObject, indent = 0): string {
   const spaces = " ".repeat(indent);
   const result: string[] = [];
 
-  function stringifyValue(value: any): string {
+  function stringifyValue(value: unknown): string {
     if (value === null || value === undefined) return "null";
     if (typeof value === "string") {
       if (value.includes(":") || value.includes("#") || value.includes("\n")) {
@@ -32,9 +46,9 @@ function jsonToYaml(obj: any, indent = 0): string {
           `${spaces}  - ${typeof item === "object" ? JSON.stringify(item) : stringifyValue(item)}`,
         );
       });
-    } else if (typeof value === "object" && value !== null) {
+    } else if (isRecord(value)) {
       result.push(`${spaces}${key}:`);
-      result.push(jsonToYaml(value, indent + 2));
+      result.push(jsonToYaml(value as JsonObject, indent + 2));
     } else {
       result.push(`${spaces}${key}: ${stringifyValue(value)}`);
     }
@@ -42,10 +56,10 @@ function jsonToYaml(obj: any, indent = 0): string {
   return result.join("\n");
 }
 
-function yamlToJson(yaml: string): any {
+function yamlToJson(yaml: string): JsonObject {
   const lines = yaml.split("\n").map((l) => l.trimEnd());
-  const obj: any = {};
-  const stack: any[] = [obj];
+  const obj: JsonObject = {};
+  const stack: JsonObject[] = [obj];
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -62,7 +76,7 @@ function yamlToJson(yaml: string): any {
         if (!Array.isArray(current[lastKey])) {
           current[lastKey] = [];
         }
-        (current[lastKey] as any[]).push(arrayItem);
+        (current[lastKey] as JsonValue[]).push(arrayItem);
       }
     } else if (content.includes(":")) {
       const [key, ...valueParts] = content.split(":");
@@ -91,7 +105,7 @@ function yamlToJson(yaml: string): any {
 function yamlToToml(yaml: string): string {
   const obj = yamlToJson(yaml);
 
-  function stringifyToml(obj: any, prefix = ""): string[] {
+  function stringifyToml(obj: JsonObject, prefix = ""): string[] {
     const lines: string[] = [];
 
     for (const [key, value] of Object.entries(obj)) {
@@ -101,7 +115,7 @@ function yamlToToml(yaml: string): string {
         if (value.length > 0 && typeof value[0] === "object") {
           lines.push(`[[${fullKey}]]`);
           value.forEach((item) => {
-            for (const [k, v] of Object.entries(item as any)) {
+            for (const [k, v] of Object.entries(item as JsonObject)) {
               lines.push(`${k} = ${tomlValue(v)}`);
             }
           });
@@ -110,9 +124,9 @@ function yamlToToml(yaml: string): string {
             `${fullKey} = [${value.map((v) => tomlValue(v)).join(", ")}]`,
           );
         }
-      } else if (typeof value === "object" && value !== null) {
+      } else if (isRecord(value)) {
         lines.push(`[${fullKey}]`);
-        lines.push(...stringifyToml(value, fullKey));
+        lines.push(...stringifyToml(value as JsonObject, fullKey));
       } else {
         lines.push(`${fullKey} = ${tomlValue(value)}`);
       }
@@ -120,7 +134,7 @@ function yamlToToml(yaml: string): string {
     return lines;
   }
 
-  function tomlValue(value: any): string {
+  function tomlValue(value: unknown): string {
     if (typeof value === "string") return `"${value.replace(/"/g, '\\"')}"`;
     if (typeof value === "boolean") return value ? "true" : "false";
     if (value === null) return '""';
@@ -132,9 +146,9 @@ function yamlToToml(yaml: string): string {
 
 function tomlToJson(toml: string): string {
   const lines = toml.split("\n");
-  const obj: any = {};
-  let currentSection: any = obj;
-  let currentPath = [];
+  const obj: Record<string, unknown> = {};
+  let currentSection: Record<string, unknown> = obj;
+  let currentPath: string[] = [];
 
   for (const line of lines) {
     const trimmed = line.trim();
@@ -145,16 +159,16 @@ function tomlToJson(toml: string): string {
       currentPath = section.split(".");
       currentSection = obj;
       for (const part of currentPath.slice(0, -1)) {
-        if (!currentSection[part]) currentSection[part] = {};
-        currentSection = currentSection[part];
+        if (!isRecord(currentSection[part])) currentSection[part] = {};
+        currentSection = currentSection[part] as Record<string, unknown>;
       }
       const lastPart = currentPath[currentPath.length - 1];
-      if (!currentSection[lastPart]) currentSection[lastPart] = {};
-      currentSection = currentSection[lastPart];
+      if (!isRecord(currentSection[lastPart])) currentSection[lastPart] = {};
+      currentSection = currentSection[lastPart] as Record<string, unknown>;
     } else if (trimmed.includes("=")) {
       const [key, ...valueParts] = trimmed.split("=");
       const valueStr = valueParts.join("=").trim();
-      let value: any = valueStr;
+      let value: unknown = valueStr;
 
       if (valueStr === "true") value = true;
       else if (valueStr === "false") value = false;

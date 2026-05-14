@@ -127,7 +127,7 @@ export default function MarkdownToPdfTool() {
       </div>
 
       <p className="text-xs text-slate-400 text-center">
-        Click "Download PDF" — your browser's print dialog will open. Select "Save as PDF" to download.
+        Click &quot;Download PDF&quot; - your browser&apos;s print dialog will open. Select &quot;Save as PDF&quot; to download.
       </p>
     </div>
   );

@@ -1,8 +1,6 @@
 "use client";
-import FileUpload from "./FileUpload";
-
 import { useState, useCallback } from "react";
-import { FileUp, Zap, Copy, Check, Download, Table } from "lucide-react";
+import { FileUp, Copy, Check, Download, Table } from "lucide-react";
 
 export default function ExcelToJsonTool() {
   const [isDragging, setIsDragging] = useState(false);
@@ -26,8 +24,9 @@ export default function ExcelToJsonTool() {
       const ws = wb.Sheets[sheetName];
       const json = XLSX.utils.sheet_to_json(ws);
       setOutput(JSON.stringify(json, null, 2));
-    } catch (e: any) {
-      setError("Error reading file: " + (e.message || "Invalid format"));
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "Invalid format";
+      setError("Error reading file: " + message);
     } finally {
       setIsProcessing(false);
     }

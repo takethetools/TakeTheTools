@@ -4,8 +4,9 @@ import { Zap, Search, ImageIcon, FileText, Code, Type, Video, ArrowRight, Star, 
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 import React from "react";
 import HomeSearch from "@/components/home/HomeSearch";
+import type { LucideIcon } from "lucide-react";
 
-const categoryIcons: Record<string, any> = {
+const categoryIcons: Record<string, LucideIcon> = {
   image: ImageIcon,
   pdf: FileText,
   developer: Code,

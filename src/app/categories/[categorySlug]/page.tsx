@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { CATEGORIES, TOOLS } from "@/lib/tools";
 import Link from "next/link";
-import { ArrowRight, ChevronRight, Home } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Breadcrumbs from "@/components/common/Breadcrumbs";
 import { Metadata } from "next";
 import React from "react";
@@ -116,7 +116,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         <div className="mt-24 prose prose-slate max-w-none bg-slate-50 p-10 rounded-3xl border border-slate-100">
           <h2 className="text-2xl font-bold mb-6">Master Your Workflow with {category.name}</h2>
           <p className="text-slate-600 mb-4">
-            Our comprehensive collection of **{category.name}** is meticulously crafted to empower digital professionals, students, and casual users alike. In today's fast-paced digital landscape, having the right tools at your fingertips is essential for efficiency and precision. We provide a robust suite of high-performance, web-based utilities that eliminate the need for cumbersome software installations or expensive subscriptions. Each tool in this category is optimized for speed, security, and ease of use, ensuring that you can complete your tasks in seconds.
+            Our comprehensive collection of <strong>{category.name}</strong> is meticulously crafted to empower digital professionals, students, and casual users alike. In today&apos;s fast-paced digital landscape, having the right tools at your fingertips is essential for efficiency and precision. We provide a robust suite of high-performance, web-based utilities that eliminate the need for cumbersome software installations or expensive subscriptions. Each tool in this category is optimized for speed, security, and ease of use, ensuring that you can complete your tasks in seconds.
           </p>
           <p className="text-slate-600 mb-4">
             From complex data transformations to simple file edits, our platform handles the heavy lifting directly in your browser. This means your data stays private and secure, never leaving your device. We are proud to serve a global community across the United States, United Kingdom, Canada, Australia, and throughout Europe. Our infrastructure is fine-tuned to deliver exceptionally fast response times, regardless of your geographic location, making us the go-to destination for reliable digital tools.

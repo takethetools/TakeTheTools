@@ -116,8 +116,8 @@ export default function MathTool({ mode }: { mode: Mode }) {
         if (isNaN(dec)) { setResult("❌ Enter a decimal number"); return; }
         const str = dec.toString();
         const len = (str.split(".")[1] || "").length;
-        let den = Math.pow(10, len);
-        let num = Math.round(dec * den);
+        const den = Math.pow(10, len);
+        const num = Math.round(dec * den);
         const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b);
         const g = gcd(Math.abs(num), den);
         res = `${dec} = ${num / g}/${den / g}\n\nSimplified: ${num / g}/${den / g}\nAs percentage: ${(dec * 100).toFixed(4)}%`;

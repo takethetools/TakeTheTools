@@ -35,7 +35,7 @@ export default function PercentageCalculatorTool() {
         ].map((m) => (
           <button
             key={m.id}
-            onClick={() => { setMode(m.id as any); setVal1(""); setVal2(""); }}
+            onClick={() => { setMode(m.id as "of" | "proportion" | "change" | "reverse"); setVal1(""); setVal2(""); }}
             className={cn(
               "whitespace-nowrap px-6 py-2.5 rounded-xl text-sm font-bold transition-all",
               mode === m.id ? "bg-white text-primary-600 shadow-md" : "text-slate-500 hover:text-slate-700"

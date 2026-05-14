@@ -2,7 +2,22 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Cookie, X, Settings, ShieldCheck, Info } from "lucide-react";
+import { Cookie, X, Settings, ShieldCheck } from "lucide-react";
+
+declare global {
+    interface Window {
+        gtag?: (
+            command: "consent",
+            action: "update",
+            params: {
+                ad_storage: "granted" | "denied";
+                ad_user_data: "granted" | "denied";
+                ad_personalization: "granted" | "denied";
+                analytics_storage: "granted" | "denied";
+            }
+        ) => void;
+    }
+}
 
 type ConsentType = {
     essential: boolean;
@@ -19,6 +34,17 @@ export default function CookieConsent() {
         marketing: false,
     });
 
+    const updateGoogleConsent = (c: ConsentType) => {
+        if (typeof window !== "undefined" && window.gtag) {
+            window.gtag("consent", "update", {
+                ad_storage: c.marketing ? "granted" : "denied",
+                ad_user_data: c.marketing ? "granted" : "denied",
+                ad_personalization: c.marketing ? "granted" : "denied",
+                analytics_storage: c.analytics ? "granted" : "denied",
+            });
+        }
+    };
+
     useEffect(() => {
         // Best-effort detection for EEA, UK, Switzerland
         // We use timezone as a proxy for client-side detection
@@ -32,8 +58,8 @@ export default function CookieConsent() {
             ];
             try {
                 const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                return eeaTimezones.some(e => tz === e || tz.startsWith('Europe/'));
-            } catch (e) {
+                return eeaTimezones.some((timezone) => tz === timezone || tz.startsWith('Europe/'));
+            } catch {
                 return true; // Default to showing if detection fails
             }
         };
@@ -48,22 +74,11 @@ export default function CookieConsent() {
             try {
                 const parsed = JSON.parse(savedConsent);
                 updateGoogleConsent(parsed);
-            } catch (e) {
-                setIsVisible(true);
+            } catch {
+                setTimeout(() => setIsVisible(true), 0);
             }
         }
     }, []);
-
-    const updateGoogleConsent = (c: ConsentType) => {
-        if (typeof window !== "undefined" && (window as any).gtag) {
-            (window as any).gtag("consent", "update", {
-                ad_storage: c.marketing ? "granted" : "denied",
-                ad_user_data: c.marketing ? "granted" : "denied",
-                ad_personalization: c.marketing ? "granted" : "denied",
-                analytics_storage: c.analytics ? "granted" : "denied",
-            });
-        }
-    };
 
     const saveAndClose = (newConsent: ConsentType) => {
         localStorage.setItem("cookie-consent", JSON.stringify(newConsent));
@@ -106,7 +121,7 @@ export default function CookieConsent() {
                                         Cookie Settings
                                     </h3>
                                     <p className="text-sm text-slate-600 leading-relaxed max-w-2xl">
-                                        We use cookies to enhance your experience, serve personalized ads, and analyze our traffic. By clicking "Consent", you agree to our use of cookies. Read our{" "}
+                                        We use cookies to enhance your experience, serve personalized ads, and analyze our traffic. By clicking &quot;Consent&quot;, you agree to our use of cookies. Read our{" "}
                                         <Link href="/privacy-policy" className="text-primary-600 hover:underline font-medium">Privacy Policy</Link> and{" "}
                                         <Link href="/cookie-policy" className="text-primary-600 hover:underline font-medium">Cookie Policy</Link>.
                                     </p>

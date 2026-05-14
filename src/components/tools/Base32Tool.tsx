@@ -21,7 +21,7 @@ export default function Base32Tool({ mode }: Base32ToolProps) {
     }
     let res = "";
     for (let i = 0; i < bits.length; i += 5) {
-      let chunk = bits.substr(i, 5).padEnd(5, '0');
+      const chunk = bits.substr(i, 5).padEnd(5, '0');
       res += alphabet[parseInt(chunk, 2)];
     }
     return res;
@@ -32,7 +32,7 @@ export default function Base32Tool({ mode }: Base32ToolProps) {
     try {
       let bits = "";
       for (let i = 0; i < s.length; i++) {
-        let val = alphabet.indexOf(s[i].toUpperCase());
+        const val = alphabet.indexOf(s[i].toUpperCase());
         if (val === -1) continue;
         bits += val.toString(2).padStart(5, '0');
       }

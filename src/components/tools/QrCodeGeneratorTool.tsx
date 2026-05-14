@@ -130,7 +130,7 @@ export default function QrCodeGeneratorTool() {
             ].map((tab) => (
               <button 
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)} 
+                onClick={() => setActiveTab(tab.id as "content" | "style")} 
                 className={cn(
                   "flex-1 py-4 flex items-center justify-center gap-2 font-black text-[11px] uppercase tracking-widest transition-all rounded-2xl",
                   activeTab === tab.id 
@@ -353,7 +353,7 @@ export default function QrCodeGeneratorTool() {
                   <div className="flex gap-4">
                      <div className="flex-1 p-3 bg-white/10 rounded-xl border border-white/10 text-center">
                         <p className="text-[8px] font-black text-slate-400 uppercase mb-1">Error Level</p>
-                        <select value={level} onChange={(e) => setLevel(e.target.value as any)} className="bg-transparent text-white text-[10px] font-bold outline-none cursor-pointer">
+                        <select value={level} onChange={(e) => setLevel(e.target.value as "L" | "M" | "Q" | "H")} className="bg-transparent text-white text-[10px] font-bold outline-none cursor-pointer">
                            <option value="L" className="text-slate-900">Low (7%)</option>
                            <option value="M" className="text-slate-900">Med (15%)</option>
                            <option value="Q" className="text-slate-900">Quar (25%)</option>

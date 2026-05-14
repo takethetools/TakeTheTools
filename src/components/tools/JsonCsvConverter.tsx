@@ -8,6 +8,7 @@ interface JsonCsvConverterProps {
 }
 
 export default function JsonCsvConverter({ mode }: JsonCsvConverterProps) {
+  type JsonRow = Record<string, string | number | boolean | null>;
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [isCopied, setIsCopied] = useState(false);
@@ -28,8 +29,8 @@ export default function JsonCsvConverter({ mode }: JsonCsvConverterProps) {
         const headers = lines[0].split(",");
         const result = lines.slice(1).map(line => {
           const values = line.split(",");
-          return headers.reduce((obj: any, header, i) => {
-            let val = values[i]?.replace(/^"|"$/g, "");
+          return headers.reduce<JsonRow>((obj, header, i) => {
+            const val = values[i]?.replace(/^"|"$/g, "");
             obj[header.trim()] = isNaN(Number(val)) ? val : Number(val);
             return obj;
           }, {});

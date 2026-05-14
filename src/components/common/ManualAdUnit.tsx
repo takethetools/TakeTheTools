@@ -3,6 +3,12 @@
 import { useEffect, useRef } from "react";
 import { ADSENSE_CLIENT } from "@/lib/ad-slots";
 
+declare global {
+  interface Window {
+    adsbygoogle?: Array<Record<string, unknown>>;
+  }
+}
+
 interface ManualAdUnitProps {
   adSlot?: string;
   adFormat?: "auto" | "rectangle" | "horizontal" | "vertical" | "fluid";
@@ -27,8 +33,8 @@ export default function ManualAdUnit({
     const checkWidthAndPush = () => {
       if (adRef.current && adRef.current.offsetWidth > 0) {
         try {
-          (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-          (window as any).adsbygoogle.push({});
+          window.adsbygoogle = window.adsbygoogle || [];
+          window.adsbygoogle.push({});
           pushed.current = true;
         } catch (err) {
           console.error("AdSense Error:", err);

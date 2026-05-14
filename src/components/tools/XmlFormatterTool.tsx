@@ -16,8 +16,8 @@ export default function XmlFormatterTool() {
 
     try {
       let formatted = "";
-      let reg = /(>)(<)(\/*)/g;
-      let xml = input.replace(reg, "$1\r\n$2$3");
+      const reg = /(>)(<)(\/*)/g;
+      const xml = input.replace(reg, "$1\r\n$2$3");
       let pad = 0;
       
       xml.split("\r\n").forEach((node) => {

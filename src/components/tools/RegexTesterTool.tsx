@@ -1,39 +1,46 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { Search, Info, Check, Copy, AlertCircle, List } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function RegexTesterTool() {
+  type RegexMatch = {
+    index: number;
+    groups: string[];
+  };
   const [regex, setRegex] = useState("([a-zA-Z0-9._-]+)@([a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)");
   const [flags, setFlags] = useState("g");
   const [testString, setTestString] = useState("Contact us at support@globaltools.io or sales@example.com for more info.");
-  const [matches, setMatches] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
+  const analysis = useMemo(() => {
     try {
-      setError(null);
-      if (!regex) {
-        setMatches([]);
-        return;
-      }
+      if (!regex) return { matches: [] as RegexMatch[], error: null as string | null };
       const re = new RegExp(regex, flags);
-      const m = [];
-      let match;
+      const found: RegexMatch[] = [];
+      let match: RegExpExecArray | null = null;
 
-      if (flags.includes('g')) {
+      if (flags.includes("g")) {
         while ((match = re.exec(testString)) !== null) {
-          m.push(match);
+          found.push({
+            index: match.index,
+            groups: Array.from(match),
+          });
         }
       } else {
         match = re.exec(testString);
-        if (match) m.push(match);
+        if (match) {
+          found.push({
+            index: match.index,
+            groups: Array.from(match),
+          });
+        }
       }
-      setMatches(m);
+      return { matches: found, error: null as string | null };
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : "Invalid Regular Expression");
-      setMatches([]);
+      return {
+        matches: [] as RegexMatch[],
+        error: e instanceof Error ? e.message : "Invalid Regular Expression",
+      };
     }
   }, [regex, flags, testString]);
 
@@ -64,10 +71,10 @@ export default function RegexTesterTool() {
                 placeholder="flags"
               />
             </div>
-            {error && (
+            {analysis.error && (
               <div className="p-3 bg-red-50 text-red-600 rounded-xl text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4" />
-                {error}
+                {analysis.error}
               </div>
             )}
           </div>
@@ -90,24 +97,24 @@ export default function RegexTesterTool() {
           <div className="flex items-center justify-between">
             <div className="font-bold text-slate-900 flex items-center gap-2">
               <Check className="w-5 h-5 text-green-600" />
-              Matches ({matches.length})
+              Matches ({analysis.matches.length})
             </div>
           </div>
 
           <div className="space-y-4 h-[500px] overflow-y-auto pr-2 custom-scrollbar">
-            {matches.map((match, i) => (
+            {analysis.matches.map((match, i) => (
               <div key={i} className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="px-2 py-1 bg-primary-100 text-primary-700 rounded text-[10px] font-bold uppercase">Match {i + 1}</span>
                   <span className="text-[10px] text-slate-400 font-mono">Index: {match.index}</span>
                 </div>
                 <div className="font-mono text-sm bg-white p-3 rounded-lg border border-slate-100 break-all">
-                  {match[0]}
+                  {match.groups[0]}
                 </div>
-                {match.length > 1 && (
+                {match.groups.length > 1 && (
                   <div className="space-y-2">
                     <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Groups</div>
-                    {match.slice(1).map((group: string, gi: number) => (
+                    {match.groups.slice(1).map((group, gi: number) => (
                       <div key={gi} className="flex gap-2 items-start">
                         <span className="text-[10px] bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded font-bold">{gi + 1}</span>
                         <span className="font-mono text-xs text-slate-600 break-all">{group}</span>
@@ -117,7 +124,7 @@ export default function RegexTesterTool() {
                 )}
               </div>
             ))}
-            {matches.length === 0 && !error && (
+            {analysis.matches.length === 0 && !analysis.error && (
               <div className="h-full flex flex-col items-center justify-center text-slate-400 space-y-4">
                 <Info className="w-12 h-12 opacity-20" />
                 <p className="text-sm font-medium">No matches found</p>

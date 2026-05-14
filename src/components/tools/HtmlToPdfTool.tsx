@@ -93,7 +93,7 @@ export default function HtmlToPdfTool() {
       </div>
 
       <p className="text-xs text-slate-400 text-center">
-        Click "Convert to PDF" → browser print dialog opens → choose "Save as PDF"
+        Click &quot;Convert to PDF&quot; -&gt; browser print dialog opens -&gt; choose &quot;Save as PDF&quot;
       </p>
     </div>
   );

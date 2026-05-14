@@ -5,9 +5,16 @@ import { Search, Zap, ArrowRight, X, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
+type SearchResult = {
+    id: string;
+    slug: string;
+    name: string;
+    description: string;
+};
+
 export default function HomeSearch() {
     const [query, setQuery] = useState("");
-    const [results, setResults] = useState<any[]>([]);
+    const [results, setResults] = useState<SearchResult[]>([]);
     const [isFocused, setIsFocused] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 

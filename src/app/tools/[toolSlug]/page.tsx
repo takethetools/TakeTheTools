@@ -1,9 +1,9 @@
-import { TOOLS, CATEGORIES } from "@/lib/tools";
+import { TOOLS, CATEGORIES, type Tool } from "@/lib/tools";
 import { notFound } from "next/navigation";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 import { Metadata } from "next";
 import Link from "next/link";
-import { ChevronRight, Home, Share2, HelpCircle, ArrowRight, CheckCircle2, Zap, BookOpen } from "lucide-react";
+import { Share2, HelpCircle, ArrowRight, CheckCircle2, Zap, BookOpen } from "lucide-react";
 import Breadcrumbs from "@/components/common/Breadcrumbs";
 import React from "react";
 import { getToolAboutContent } from "@/lib/tool-content";
@@ -16,6 +16,13 @@ import { getResourcesByCategory } from "@/lib/external-resources";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
+
+type ToolWithCategory = Tool & {
+  categoryId: Tool["category"];
+  category: (typeof CATEGORIES)[number] | null;
+};
+
+type FAQItem = Tool["faqs"][number];
 
 interface Props {
   params: Promise<{ toolSlug: string }>;
@@ -51,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!tool) return { title: "Tool Not Found" };
 
   const title = tool.metaTitle || generateToolMetaTitle(tool.name);
-  const description = tool.metaDescription || generateToolMetaDescription(tool as any);
+  const description = tool.metaDescription || generateToolMetaDescription(tool);
 
   return {
     title,
@@ -80,7 +87,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ToolPage({ params }: Props) {
   const { toolSlug } = await params;
-  const tool = await getTool(toolSlug);
+  const tool = (await getTool(toolSlug)) as ToolWithCategory | null;
 
   if (!tool) {
     notFound();
@@ -219,7 +226,7 @@ export default async function ToolPage({ params }: Props) {
                 Frequently Asked Questions
               </h2>
               <div className="space-y-4">
-                {(tool.faqs as any[]).map((faq, index) => (
+                {tool.faqs.map((faq: FAQItem, index) => (
                   <div key={index} className="bg-white border border-slate-100 rounded-2xl p-6">
                     <h3 className="font-bold text-slate-900 mb-3">{faq.question}</h3>
                     <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
@@ -320,14 +327,14 @@ export default async function ToolPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
-            getSoftwareApplicationSchema(tool as any, applicationCategoryMap),
+            getSoftwareApplicationSchema(tool, applicationCategoryMap),
             getBreadcrumbSchema([
               { name: "Home", item: SITE_URL },
               { name: "Tools", item: `${SITE_URL}/categories` },
               { name: tool.name, item: `${SITE_URL}/tools/${toolSlug}` }
             ]),
-            getFAQSchema(tool.faqs as any),
-            getHowToSchema(tool as any)
+            getFAQSchema(tool.faqs),
+            getHowToSchema(tool)
           ])
         }}
       />

@@ -23,8 +23,8 @@ export default function NotFound() {
                     </div>
 
                     <p className="text-xl text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-                        Oops! It seems like the page you are looking for has been moved or doesn't exist.
-                        Let's get you back to work with our powerful tools.
+                        Oops! It seems like the page you are looking for has been moved or doesn&apos;t exist.
+                        Let&apos;s get you back to work with our powerful tools.
                     </p>
 
                     {/* Search Box */}

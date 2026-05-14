@@ -1,4 +1,4 @@
-import { getToolBySlug, TOOLS } from "@/lib/tools";
+import { TOOLS } from "@/lib/tools";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ToolRenderer from "@/components/tools/ToolRenderer";
@@ -58,7 +58,7 @@ export default async function PSEOPage({ params }: Props) {
         notFound();
     }
 
-    const { tool, h1, title } = context;
+    const { tool, h1 } = context;
     const toolSlug = tool.slug;
     const aboutContent = getToolAboutContent(toolSlug);
     const relatedTools = TOOLS.filter(t => t.category === tool.category && t.id !== tool.id).slice(0, 3);
@@ -89,7 +89,7 @@ export default async function PSEOPage({ params }: Props) {
                             </h1>
                             <div className="text-xl text-slate-600 leading-relaxed max-w-4xl mb-8">
                                 <p>
-                                    Looking for the <strong>{h1}</strong>? You've come to the right place.
+                                    Looking for the <strong>{h1}</strong>? You&apos;ve come to the right place.
                                     Our professional-grade tool allows you to {tool.description.toLowerCase()} instantly.
                                 </p>
                                 <p className="mt-4">

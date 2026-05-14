@@ -8,6 +8,10 @@ interface TextConversionToolProps {
 }
 
 export default function TextConversionTool({ mode }: TextConversionToolProps) {
+  type JsonPrimitive = string | number | boolean | null;
+  type JsonValue = JsonPrimitive | JsonObject | JsonValue[];
+  type JsonObject = { [key: string]: JsonValue };
+
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
@@ -44,10 +48,10 @@ export default function TextConversionTool({ mode }: TextConversionToolProps) {
   };
 
   const jsonToTypeScript = (jsonStr: string): string => {
-    const obj = JSON.parse(jsonStr);
+    const obj = JSON.parse(jsonStr) as JsonObject;
     const interfaces: string[] = [];
 
-    const getType = (val: any, key: string = ""): string => {
+    const getType = (val: JsonValue, key: string = ""): string => {
       if (val === null) return "null";
       if (Array.isArray(val)) {
         if (val.length === 0) return "any[]";
@@ -93,8 +97,8 @@ export default function TextConversionTool({ mode }: TextConversionToolProps) {
   };
 
   const jsonToXml = (jsonStr: string): string => {
-    const obj = JSON.parse(jsonStr);
-    const toXml = (o: any, tag: string, indent: number = 0): string => {
+    const obj = JSON.parse(jsonStr) as JsonObject;
+    const toXml = (o: JsonValue, tag: string, indent: number = 0): string => {
       const pad = "  ".repeat(indent);
       if (o === null || o === undefined) return `${pad}<${tag}/>\n`;
       if (typeof o !== "object") return `${pad}<${tag}>${String(o)}</${tag}>\n`;
@@ -131,8 +135,9 @@ export default function TextConversionTool({ mode }: TextConversionToolProps) {
       else if (mode === "json-beautifier") result = JSON.stringify(JSON.parse(input), null, 2);
       else if (mode === "json-minifier") result = JSON.stringify(JSON.parse(input));
       setOutput(result);
-    } catch (e: any) {
-      setError("Error: " + (e.message || "Invalid input format"));
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "Invalid input format";
+      setError("Error: " + message);
       setOutput("");
     }
   };

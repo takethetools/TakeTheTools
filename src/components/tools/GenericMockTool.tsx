@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { FileText, AlertCircle, ExternalLink, Upload } from "lucide-react";
+import { AlertCircle, ExternalLink } from "lucide-react";
+import Link from "next/link";
 import FileUpload from "./FileUpload";
 
 interface GenericMockToolProps {
@@ -179,11 +180,11 @@ export default function GenericMockTool({
       {/* Note */}
       <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
         <p className="text-xs text-slate-600">
-          <strong>Note:</strong> We're continuously expanding our tool
-          capabilities. If you'd like this conversion integrated directly,{" "}
-          <a href="/contact" className="text-primary-600 hover:underline">
+          <strong>Note:</strong> We&apos;re continuously expanding our tool
+          capabilities. If you&apos;d like this conversion integrated directly,{" "}
+          <Link href="/contact" className="text-primary-600 hover:underline">
             let us know
-          </a>
+          </Link>
           .
         </p>
       </div>

@@ -9,8 +9,9 @@ interface MiscellaneousToolsProps {
 }
 
 export default function MiscellaneousTools({ mode }: MiscellaneousToolsProps) {
+    type KeywordDensityItem = { word: string; count: number; percent: string };
     const [input, setInput] = useState("");
-    const [result, setResult] = useState<any>(null);
+    const [result, setResult] = useState<string | KeywordDensityItem[] | null>(null);
     const [isCopied, setIsCopied] = useState(false);
 
     const process = () => {
@@ -87,7 +88,7 @@ export default function MiscellaneousTools({ mode }: MiscellaneousToolsProps) {
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {result.map((item: any, i: number) => (
+                                {(result as KeywordDensityItem[]).map((item, i: number) => (
                                     <div key={i} className="flex justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
                                         <span className="font-bold text-slate-700">{item.word}</span>
                                         <span className="text-primary-600 font-bold">{item.count} ({item.percent}%)</span>

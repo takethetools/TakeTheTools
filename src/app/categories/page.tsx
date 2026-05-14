@@ -4,6 +4,7 @@ import { ArrowRight, Box, Image as ImageIcon, FileText, Code, Type, LayoutGrid, 
 import { Metadata } from "next";
 import React from "react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
+import type { LucideIcon } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Tool Categories - TakeTheTools",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-static";
 
-const ICON_MAP: Record<string, any> = {
+const ICON_MAP: Record<string, LucideIcon> = {
   image: ImageIcon,
   pdf: FileText,
   developer: Code,

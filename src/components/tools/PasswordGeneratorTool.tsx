@@ -34,8 +34,9 @@ export default function PasswordGeneratorTool() {
     const saved = localStorage.getItem("ttt_pwd_history");
     if (saved) {
       try {
-        setHistory(JSON.parse(saved));
-      } catch (e) {
+        const parsed = JSON.parse(saved) as string[];
+        setTimeout(() => setHistory(parsed), 0);
+      } catch {
         console.error("Failed to load history");
       }
     }
@@ -99,8 +100,8 @@ export default function PasswordGeneratorTool() {
         symbols: "!@#$%^&*()_+~`|}{[]:;?><,./-=",
       };
 
-      let similar = "il1Lo0O";
-      let ambiguous = "{}[]()\/\\'\"~,;.<>";
+      const similar = "il1Lo0O";
+      const ambiguous = "{}[]()\/\\'\"~,;.<>";
 
       let characters = "";
       if (options.uppercase) characters += charset.uppercase;
@@ -181,7 +182,7 @@ export default function PasswordGeneratorTool() {
               ].map((m) => (
                 <button
                   key={m.id}
-                  onClick={() => setMode(m.id as any)}
+                  onClick={() => setMode(m.id as "random" | "passphrase")}
                   className={cn(
                     "flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300",
                     mode === m.id 

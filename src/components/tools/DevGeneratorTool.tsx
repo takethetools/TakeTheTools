@@ -8,8 +8,15 @@ interface DevGeneratorToolProps {
     mode: "docker" | "nginx";
 }
 
+type DevConfig = {
+    runtime: "node" | "python";
+    port: string;
+    domain: string;
+    proxyPass: string;
+};
+
 export default function DevGeneratorTool({ mode }: DevGeneratorToolProps) {
-    const [config, setConfig] = useState<any>({
+    const [config, setConfig] = useState<DevConfig>({
         runtime: "node",
         port: "3000",
         domain: "example.com",

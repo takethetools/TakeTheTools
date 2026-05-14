@@ -61,7 +61,7 @@ export default function TextToSpeechTool() {
         
         <div className="p-4 bg-slate-50 rounded-2xl flex items-center gap-3 text-slate-500">
            <Settings className="w-4 h-4" />
-           <p className="text-xs font-medium">Uses your device's native speech synthesis engine.</p>
+           <p className="text-xs font-medium">Uses your device&apos;s native speech synthesis engine.</p>
         </div>
       </div>
     </div>

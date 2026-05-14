@@ -10,13 +10,17 @@ interface JsonFormatterToolProps {
 }
 
 export default function JsonFormatterTool({ exampleInput }: JsonFormatterToolProps) {
+  type JsonPrimitive = string | number | boolean | null;
+  type JsonValue = JsonPrimitive | JsonObject | JsonValue[];
+  type JsonObject = { [key: string]: JsonValue };
+
   const [input, setInput] = useState(exampleInput || '{\n  "status": "success",\n  "data": {\n    "id": 101,\n    "name": "Antigravity Studio",\n    "features": ["Validation", "Formatting", "Minification"]\n  }\n}');
   const [indent, setIndent] = useState(2);
   const [isCopied, setIsCopied] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   const analysis = useMemo<{
-    data: any;
+    data: JsonValue | null;
     formatted: string;
     minified: string;
     depth: number;
@@ -29,7 +33,7 @@ export default function JsonFormatterTool({ exampleInput }: JsonFormatterToolPro
       const parsed = JSON.parse(input);
       
       // Calculate depth
-      const getDepth = (obj: any): number => {
+      const getDepth = (obj: JsonValue): number => {
         if (typeof obj !== 'object' || obj === null) return 0;
         const levels = Object.values(obj).map(v => getDepth(v));
         return 1 + (levels.length ? Math.max(...levels) : 0);
@@ -47,8 +51,9 @@ export default function JsonFormatterTool({ exampleInput }: JsonFormatterToolPro
         keys: Object.keys(parsed).length,
         error: null 
       };
-    } catch (e: any) {
-      return { data: null, formatted: "", minified: "", depth: 0, size: 0, keys: 0, error: e.message };
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "Invalid JSON input";
+      return { data: null, formatted: "", minified: "", depth: 0, size: 0, keys: 0, error: message };
     }
   }, [input, indent]);
 
@@ -71,7 +76,7 @@ export default function JsonFormatterTool({ exampleInput }: JsonFormatterToolPro
 
   const handleFixJson = () => {
     // Basic fix for common JSON errors like trailing commas or single quotes
-    let fixed = input
+    const fixed = input
       .replace(/'/g, '"') // Replace single quotes
       .replace(/,\s*([}\]])/g, '$1') // Remove trailing commas
       .replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":'); // Quote unquoted keys

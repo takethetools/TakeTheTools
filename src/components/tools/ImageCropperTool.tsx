@@ -57,7 +57,7 @@ export default function ImageCropperTool() {
   // Snap crop when aspect ratio changes
   useEffect(() => {
     if (!aspectPreset || !imgEl) return;
-    setCropRect(prev => {
+    setTimeout(() => setCropRect(prev => {
       let { w, h, x, y } = prev;
       const currentAspect = w / h;
       if (currentAspect > aspectPreset) w = h * aspectPreset;
@@ -68,7 +68,7 @@ export default function ImageCropperTool() {
       if (y + h > 1) y = 1 - h;
       
       return { x, y, w, h };
-    });
+    }), 0);
   }, [aspectPreset, imgEl]);
 
   // Redraw canvas whenever image, crop, rotation changes

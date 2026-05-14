@@ -62,7 +62,7 @@ export default function JpgToPdfTool() {
       }
 
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
+      const blob = new Blob([pdfBytes], { type: "application/pdf" });
       setResultUrl(URL.createObjectURL(blob));
       
       confetti({

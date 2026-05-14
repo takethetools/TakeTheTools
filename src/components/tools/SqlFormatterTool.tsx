@@ -13,7 +13,7 @@ export default function SqlFormatterTool() {
     if (!input.trim()) return "";
     
     // Professional-grade regex formatter
-    let sql = input
+    const sql = input
       .replace(/\s+/g, " ")
       .replace(/\s*,\s*/g, ", ")
       .replace(/\s*\(\s*/g, " (")

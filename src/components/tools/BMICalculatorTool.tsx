@@ -15,7 +15,7 @@ export default function BMICalculatorTool() {
     
     if (isNaN(w) || isNaN(h) || h <= 0) return null;
 
-    let bmiValue = unit === "metric" ? w / (h * h) : (w / (h * h)) * 703;
+    const bmiValue = unit === "metric" ? w / (h * h) : (w / (h * h)) * 703;
     
     let status = { label: "Normal", color: "text-green-500", bg: "bg-green-500", advice: "You have a healthy body weight. Maintain a balanced diet and regular exercise." };
     if (bmiValue < 18.5) status = { label: "Underweight", color: "text-blue-500", bg: "bg-blue-500", advice: "You are below the healthy range. Consider consulting a nutritionist for a weight gain plan." };

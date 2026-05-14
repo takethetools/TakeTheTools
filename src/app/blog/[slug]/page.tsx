@@ -7,6 +7,7 @@ import Breadcrumbs from "@/components/common/Breadcrumbs";
 import React from "react";
 import ManualAdUnit from "@/components/common/ManualAdUnit";
 import { AD_SLOTS } from "@/lib/ad-slots";
+import type { Components } from "react-markdown";
 
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
@@ -178,12 +179,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 <MDXRemote
                   source={post.content}
                   components={{
-                    h2: (props: any) => {
+                    h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
                       const id = props.children?.toString().toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");
                       return <h2 id={id} {...props} />;
                     },
                     ManualAdUnit
-                  }}
+                  } as Components}
                 />
               </div>
 

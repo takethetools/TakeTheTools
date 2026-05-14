@@ -23,9 +23,27 @@ interface SSLResult {
   error?: string;
 }
 
+type LookupService = {
+  name: string;
+  url: string;
+};
+
+type LookupResult = {
+  message?: string;
+  domain?: string;
+  status?: string;
+  note?: string;
+  services?: LookupService[];
+  original?: string;
+  final?: string;
+  redirected?: boolean;
+  error?: string;
+  [key: string]: unknown;
+};
+
 export default function NetworkLookupTool({ mode }: NetworkLookupToolProps) {
   const [url, setUrl] = useState("");
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<LookupResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -36,7 +54,7 @@ export default function NetworkLookupTool({ mode }: NetworkLookupToolProps) {
     setResult(null);
 
     try {
-      let domain = url.replace(/^https?:\/\//, "").split("/")[0];
+      const domain = url.replace(/^https?:\/\//, "").split("/")[0];
 
       if (mode === "whois") {
         // WHOIS requires server-side access, show external service links
@@ -79,7 +97,7 @@ export default function NetworkLookupTool({ mode }: NetworkLookupToolProps) {
               },
             ],
           });
-        } catch (e) {
+        } catch {
           setResult({
             domain: domain,
             status: "❌ Unable to Verify",
@@ -117,7 +135,7 @@ export default function NetworkLookupTool({ mode }: NetworkLookupToolProps) {
               ? "This URL redirects to another location"
               : "No redirect detected",
           });
-        } catch (e) {
+        } catch {
           setResult({
             original: url,
             error: "Could not verify redirect. Try using external services.",
@@ -135,7 +153,7 @@ export default function NetworkLookupTool({ mode }: NetworkLookupToolProps) {
           });
         }
       }
-    } catch (e) {
+    } catch {
       setError(
         "Failed to perform lookup. Please check the domain and try again.",
       );
@@ -236,7 +254,7 @@ export default function NetworkLookupTool({ mode }: NetworkLookupToolProps) {
                 Recommended External Services
               </h4>
               <div className="space-y-2">
-                {result.services.map((service: any, idx: number) => (
+                {result.services.map((service: LookupService, idx: number) => (
                   <a
                     key={idx}
                     href={service.url}

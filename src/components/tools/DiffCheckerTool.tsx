@@ -5,16 +5,17 @@ import { Columns2, Copy, Check, Info, ArrowRightLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function DiffCheckerTool() {
+  type DiffLine = { type: "added" | "removed" | "equal"; value: string };
   const [text1, setText1] = useState("");
   const [text2, setText2] = useState("");
-  const [diff, setDiff] = useState<{ type: "added" | "removed" | "equal"; value: string }[]>([]);
+  const [diff, setDiff] = useState<DiffLine[]>([]);
 
   const checkDiff = () => {
     // Very simple line-based diff for demo purposes
     // In production, would use a library like 'diff'
     const lines1 = text1.split("\n");
     const lines2 = text2.split("\n");
-    const result: any[] = [];
+    const result: DiffLine[] = [];
 
     const maxLines = Math.max(lines1.length, lines2.length);
     for (let i = 0; i < maxLines; i++) {

@@ -4,9 +4,26 @@ import { useState, useEffect, useMemo } from "react";
 import { Globe, Zap, Search, Info, Shield, MapPin, Clock, DollarSign, Navigation2, Network, Fingerprint, Sparkles, RefreshCw } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+type IpLookupResult = {
+  error?: string;
+  org?: string;
+  city?: string;
+  region?: string;
+  country_name?: string;
+  country_code?: string;
+  continent_code?: string;
+  asn?: string;
+  version?: string;
+  timezone?: string;
+  currency?: string;
+  latitude?: number | string;
+  longitude?: number | string;
+  postal?: string;
+};
+
 export default function IpLookupTool() {
   const [ip, setIp] = useState("");
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<IpLookupResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [isMounting, setIsMounting] = useState(true);
 
@@ -16,7 +33,7 @@ export default function IpLookupTool() {
       const res = await fetch(`https://ipapi.co/${targetIp}/json/`);
       const data = await res.json();
       setResult(data);
-    } catch (err) {
+    } catch {
       setResult({ error: "Intelligence sync failed. Verify IP structure." });
     }
     setLoading(false);

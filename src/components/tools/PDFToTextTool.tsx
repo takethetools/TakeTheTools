@@ -4,6 +4,7 @@ import FileUpload from "./FileUpload";
 import { useState } from "react";
 import { Upload, Download, FileText, Loader2, Copy, Check, X } from "lucide-react";
 import * as pdfjsLib from "pdfjs-dist";
+import type { TextItem } from "pdfjs-dist/types/src/display/api";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
 
@@ -27,7 +28,7 @@ export default function PDFToTextTool() {
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
           const content = await page.getTextContent();
-          const pageText = content.items.map((item: any) => item.str).join(" ");
+          const pageText = content.items.map((item) => (item as TextItem).str).join(" ");
           fullText += `--- Page ${i} ---\n${pageText}\n\n`;
         }
         

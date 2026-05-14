@@ -1,31 +1,29 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Binary, Copy, Check, ArrowRightLeft, Info } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Copy, Check, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function NumberSystemConverterTool() {
   const [value, setValue] = useState("1010");
   const [base, setBase] = useState<number>(2);
-  const [conversions, setConversions] = useState<{ name: string; value: string; base: number }[]>([]);
   const [isCopied, setIsCopied] = useState<string | null>(null);
 
-  useEffect(() => {
+  const conversions = useMemo(() => {
     try {
       const num = parseInt(value, base);
       if (isNaN(num)) {
-        setConversions([]);
-        return;
+        return [];
       }
 
-      setConversions([
+      return [
         { name: "Binary", value: num.toString(2), base: 2 },
         { name: "Decimal", value: num.toString(10), base: 10 },
         { name: "Hexadecimal", value: num.toString(16).toUpperCase(), base: 16 },
         { name: "Octal", value: num.toString(8), base: 8 },
-      ]);
-    } catch (e) {
-      setConversions([]);
+      ];
+    } catch {
+      return [];
     }
   }, [value, base]);
 

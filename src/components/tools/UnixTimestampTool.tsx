@@ -1,19 +1,25 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Clock, Zap, RefreshCw, Copy, Check, ArrowRightLeft } from "lucide-react";
+import { Clock, Zap, Copy, Check } from "lucide-react";
 
 export default function UnixTimestampTool() {
-  const [currentTimestamp, setCurrentTimestamp] = useState(Math.floor(Date.now() / 1000));
+  const [currentTimestamp, setCurrentTimestamp] = useState(0);
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
+    const kickoff = setTimeout(() => {
+      setCurrentTimestamp(Math.floor(Date.now() / 1000));
+    }, 0);
     const timer = setInterval(() => {
       setCurrentTimestamp(Math.floor(Date.now() / 1000));
     }, 1000);
-    return () => clearInterval(timer);
+    return () => {
+      clearTimeout(kickoff);
+      clearInterval(timer);
+    };
   }, []);
 
   const convertToDate = () => {

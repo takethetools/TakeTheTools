@@ -2,9 +2,30 @@
 import { useState } from "react";
 import { Lock, Search, Loader2, CheckCircle, AlertCircle, Globe } from "lucide-react";
 
+type CertificateEntry = {
+  id: number;
+  issuer_name?: string;
+  not_before?: string;
+  not_after?: string;
+  common_name?: string;
+};
+
+type SSLCheckResult = {
+  domain: string;
+  resolves: boolean;
+  hasCerts: boolean;
+  totalCerts: number;
+  issuer: string;
+  validFrom: string;
+  validTo: string;
+  isExpired: boolean | null;
+  commonName: string;
+  certs: Array<{ id: number; issuer: string; validTo: string; name: string | undefined }>;
+};
+
 export default function SSLCheckerTool() {
   const [domain, setDomain] = useState("");
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<SSLCheckResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -20,7 +41,7 @@ export default function SSLCheckerTool() {
 
       // Try to get SSL info via crt.sh
       const crtRes = await fetch(`https://crt.sh/?q=${d}&output=json`);
-      let certs: any[] = [];
+      let certs: CertificateEntry[] = [];
       if (crtRes.ok) {
         const crtData = await crtRes.json();
         certs = Array.isArray(crtData) ? crtData.slice(0, 5) : [];
@@ -37,7 +58,7 @@ export default function SSLCheckerTool() {
         validTo: latestCert?.not_after ? new Date(latestCert.not_after).toLocaleDateString() : "—",
         isExpired: latestCert?.not_after ? new Date(latestCert.not_after) < new Date() : null,
         commonName: latestCert?.common_name || d,
-        certs: certs.map(c => ({
+        certs: certs.map((c) => ({
           id: c.id,
           issuer: c.issuer_name?.match(/O=([^,]+)/)?.[1]?.trim() || "—",
           validTo: c.not_after ? new Date(c.not_after).toLocaleDateString() : "—",

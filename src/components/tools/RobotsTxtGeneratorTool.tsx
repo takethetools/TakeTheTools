@@ -14,9 +14,14 @@ export default function RobotsTxtGeneratorTool() {
 
   const addRule = () => setRules([...rules, { type: "disallow", path: "" }]);
   const removeRule = (index: number) => setRules(rules.filter((_, i) => i !== index));
-  const updateRule = (index: number, field: string, value: string) => {
+  const updateRule = (index: number, field: "type" | "path", value: string) => {
     const newRules = [...rules];
-    (newRules[index] as any)[field] = value;
+    if (field === "type" && (value === "allow" || value === "disallow")) {
+      newRules[index].type = value;
+    }
+    if (field === "path") {
+      newRules[index].path = value;
+    }
     setRules(newRules);
   };
 

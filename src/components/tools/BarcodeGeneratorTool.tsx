@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { QrCode, Zap, Copy, Check, Download, Trash2, AlertCircle, Settings2, BarChart3 } from "lucide-react";
+import { Download, Trash2, AlertCircle, Settings2, BarChart3 } from "lucide-react";
 import JsBarcode from "jsbarcode";
 import { cn } from "@/lib/utils";
 
@@ -32,7 +32,7 @@ export default function BarcodeGeneratorTool({ defaultFormat = "CODE128" }: Barc
   useEffect(() => {
     if (canvasRef.current) {
       try {
-        setError(null);
+        queueMicrotask(() => setError(null));
         JsBarcode(canvasRef.current, input, {
           format: format,
           lineColor: color,
@@ -44,8 +44,9 @@ export default function BarcodeGeneratorTool({ defaultFormat = "CODE128" }: Barc
             if (!valid) throw new Error(`Invalid data for ${format}`);
           }
         });
-      } catch (err: any) {
-        setError(err.message || "Invalid input for selected format");
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : "Invalid input for selected format";
+        queueMicrotask(() => setError(message));
 
         const ctx = canvasRef.current.getContext("2d");
         if (ctx) ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);

@@ -26,7 +26,14 @@ interface RichTextEditorProps {
     onChange: (content: string) => void;
 }
 
-const MenuButton = ({ onClick, isActive, disabled, children }: any) => (
+type MenuButtonProps = {
+    onClick: () => void;
+    isActive?: boolean;
+    disabled?: boolean;
+    children: React.ReactNode;
+};
+
+const MenuButton = ({ onClick, isActive, disabled, children }: MenuButtonProps) => (
     <button
         type="button"
         onClick={onClick}

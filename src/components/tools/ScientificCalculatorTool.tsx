@@ -52,7 +52,7 @@ export default function ScientificCalculatorTool() {
         .replace(/e/g, "Math.E")
         .replace(/\^/g, "**");
 
-      // eslint-disable-next-line no-eval
+       
       const result = eval(sanitized);
       const formattedResult = Number.isInteger(result) ? result.toString() : result.toFixed(8).replace(/\.?0+$/, "");
       
@@ -84,7 +84,7 @@ export default function ScientificCalculatorTool() {
   };
 
   const insertConstant = (val: string) => {
-    // eslint-disable-next-line no-eval
+     
     const value = eval(val).toString();
     setDisplay(value);
   };

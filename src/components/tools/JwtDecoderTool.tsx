@@ -25,8 +25,9 @@ export default function JwtDecoderTool() {
 
       setHeader(decodedHeader);
       setPayload(decodedPayload);
-    } catch (e: any) {
-      setError(e.message || "Failed to decode JWT");
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "Failed to decode JWT";
+      setError(message);
       setHeader("");
       setPayload("");
     }

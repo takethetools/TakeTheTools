@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Palette, Copy, Check, RefreshCw, Download, Trash2 } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Copy, Check, Download, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function ColorConverterTool() {
   const [color, setColor] = useState("#4f46e5");
-  const [conversions, setConversions] = useState<{ name: string; value: string }[]>([]);
   const [isCopied, setIsCopied] = useState<string | null>(null);
 
   const hexToRgb = (hex: string) => {
@@ -19,7 +18,9 @@ export default function ColorConverterTool() {
   const rgbToHsl = (r: number, g: number, b: number) => {
     r /= 255; g /= 255; b /= 255;
     const max = Math.max(r, g, b), min = Math.min(r, g, b);
-    let h = 0, s = 0, l = (max + min) / 2;
+    let h = 0;
+    let s = 0;
+    const l = (max + min) / 2;
     if (max !== min) {
       const d = max - min;
       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
@@ -33,18 +34,18 @@ export default function ColorConverterTool() {
     return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
   };
 
-  useEffect(() => {
+  const conversions = useMemo(() => {
     if (/^#[0-9A-F]{6}$/i.test(color)) {
       const rgb = hexToRgb(color);
       const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
-
-      setConversions([
+      return [
         { name: "HEX", value: color.toUpperCase() },
         { name: "RGB", value: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})` },
         { name: "HSL", value: `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)` },
         { name: "CSS Variable", value: `--primary: ${hsl.h} ${hsl.s}% ${hsl.l}%;` },
-      ]);
+      ];
     }
+    return [];
   }, [color]);
 
   const copy = (val: string, id: string) => {

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Download, Type, FileText, Loader2, Check } from "lucide-react";
 import FileUpload from "./FileUpload";
-import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
+import { PDFDocument, rgb, StandardFonts, degrees } from "pdf-lib";
 
 export default function WatermarkPDFTool() {
   const [file, setFile] = useState<File | null>(null);
@@ -34,12 +34,12 @@ export default function WatermarkPDFTool() {
           font: font,
           color: rgb(0.7, 0.7, 0.7),
           opacity: 0.4,
-          rotate: { angle: 45, type: "degrees" } as any,
+          rotate: degrees(45),
         });
       });
 
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
+      const blob = new Blob([pdfBytes], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;

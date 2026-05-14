@@ -73,7 +73,7 @@ export default function CookiePolicyPage() {
 
                         <h2 className="text-2xl font-bold text-slate-900 mb-6">Managing Your Preferences</h2>
                         <p className="text-slate-600 mb-6">
-                            You can manage your cookie preferences at any time by clicking the "Cookie Settings" link in our website's footer or through the persistent consent banner that appears on your first visit. You can also control cookies through your browser settings.
+                            You can manage your cookie preferences at any time by clicking the &quot;Cookie Settings&quot; link in our website&apos;s footer or through the persistent consent banner that appears on your first visit. You can also control cookies through your browser settings.
                         </p>
 
                         <div className="bg-primary-50 p-8 rounded-3xl border border-primary-100 flex gap-4">
@@ -83,7 +83,7 @@ export default function CookiePolicyPage() {
                             <div>
                                 <h4 className="font-bold text-slate-900 mb-2">Important for EU/EEA Users</h4>
                                 <p className="text-sm text-slate-600 leading-relaxed">
-                                    In compliance with GDPR, we default all non-essential cookies to 'Denied' until you explicitly provide consent. We also support Google Consent Mode v2 to protect your data while ensuring compatibility with our ad partners.
+                                    In compliance with GDPR, we default all non-essential cookies to &apos;Denied&apos; until you explicitly provide consent. We also support Google Consent Mode v2 to protect your data while ensuring compatibility with our ad partners.
                                 </p>
                             </div>
                         </div>

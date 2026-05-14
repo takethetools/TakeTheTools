@@ -64,7 +64,7 @@ export default function ASCIIArtTool() {
     };
 
     const text = input.toUpperCase();
-    let resultRows = ["", "", "", "", ""];
+    const resultRows = ["", "", "", "", ""];
     
     for (const char of text) {
       const art = charMap[char] || charMap[' '];

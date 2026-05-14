@@ -17,15 +17,33 @@ import {
 import Link from "next/link";
 import { clsx } from "clsx";
 
+type Category = {
+    id: string;
+    name: string;
+};
+
+type BlogInitialData = {
+    id: string;
+    title?: string;
+    slug?: string;
+    categoryId?: string;
+    metaTitle?: string;
+    metaDescription?: string;
+    featuredImage?: string;
+    content?: string;
+    isPublished?: boolean;
+    publishDate?: string | Date;
+};
+
 interface BlogFormProps {
-    initialData?: any;
+    initialData?: BlogInitialData;
 }
 
 export default function BlogForm({ initialData }: BlogFormProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [categories, setCategories] = useState<any[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
 
     const [formData, setFormData] = useState({
         title: initialData?.title || "",
@@ -40,21 +58,21 @@ export default function BlogForm({ initialData }: BlogFormProps) {
     });
 
     useEffect(() => {
-        fetchCategories();
-    }, []);
-
-    const fetchCategories = async () => {
-        try {
-            const res = await fetch("/api/admin/categories");
-            const data = await res.json();
-            setCategories(data);
-            if (!formData.categoryId && data.length > 0) {
-                setFormData(prev => ({ ...prev, categoryId: data[0].id }));
+        const fetchCategories = async () => {
+            try {
+                const res = await fetch("/api/admin/categories");
+                const data: Category[] = await res.json();
+                setCategories(data);
+                if (!formData.categoryId && data.length > 0) {
+                    setFormData(prev => ({ ...prev, categoryId: data[0].id }));
+                }
+            } catch {
+                console.error("Failed to fetch categories");
             }
-        } catch (err) {
-            console.error("Failed to fetch categories");
-        }
-    };
+        };
+
+        fetchCategories();
+    }, [formData.categoryId]);
 
     const handleSlugify = () => {
         const slug = formData.title
@@ -87,7 +105,7 @@ export default function BlogForm({ initialData }: BlogFormProps) {
             } else {
                 setError(data.error || "Something went wrong");
             }
-        } catch (err) {
+        } catch {
             setError("Failed to save blog post");
         } finally {
             setLoading(false);

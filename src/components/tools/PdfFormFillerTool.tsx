@@ -44,7 +44,7 @@ export default function PdfFormFillerTool() {
 
             <div className="p-4 bg-amber-50 border border-amber-100 rounded-2xl flex gap-3">
               <AlertCircle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-amber-700">Filling PDF form fields requires reading the PDF's AcroForm structure. Use one of these free services that support this natively:</p>
+              <p className="text-sm text-amber-700">Filling PDF form fields requires reading the PDF&apos;s AcroForm structure. Use one of these free services that support this natively:</p>
             </div>
 
             <div className="space-y-3">

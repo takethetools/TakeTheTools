@@ -63,7 +63,7 @@ export default function ContactPage() {
               Get in <span className="text-primary-600">Touch</span>
             </h1>
             <p className="text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
-              Have a question, feedback, or a tool request? We'd love to hear from you.
+              Have a question, feedback, or a tool request? We&apos;d love to hear from you.
               Our team typically responds within 24 hours.
             </p>
             <div className="mt-12 flex justify-center">
