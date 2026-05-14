@@ -73,11 +73,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const toolWithCategory = await getTool(toolSlug);
   if (!toolWithCategory) return { title: "Tool Not Found" };
 
-  const title = toolWithCategory.metaTitle || generateToolMetaTitle(toolWithCategory.name);
-  const description = toolWithCategory.metaDescription || generateToolMetaDescription({
-    ...toolWithCategory,
-    category: toolWithCategory.categoryId,
-  });
+  const title =
+    toolWithCategory.metaTitle || generateToolMetaTitle(toolWithCategory.name);
+  const description =
+    toolWithCategory.metaDescription ||
+    generateToolMetaDescription({
+      ...toolWithCategory,
+      category: toolWithCategory.categoryId,
+    });
 
   return {
     title,
@@ -236,7 +239,7 @@ export default async function ToolPage({ params }: Props) {
                   <Zap className="w-6 h-6 text-primary-600" />
                   Example Usage
                 </h2>
-                <div className="p-8 bg-slate-900 rounded-[2rem] border border-slate-800 shadow-xl overflow-hidden relative group">
+                <div className="p-8 bg-slate-900 rounded-4xl border border-slate-800 shadow-xl overflow-hidden relative group">
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                     <Zap className="w-32 h-32 text-white" />
                   </div>
@@ -309,7 +312,7 @@ export default async function ToolPage({ params }: Props) {
                         </span>
                         <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-primary-600 transition-all -rotate-45" />
                       </div>
-                      <p className="text-xs text-slate-500 leading-relaxed flex-grow">
+                      <p className="text-xs text-slate-500 leading-relaxed grow">
                         {resource.description}
                       </p>
                     </a>
@@ -333,7 +336,7 @@ export default async function ToolPage({ params }: Props) {
             />
 
             {/* Related Tools Card */}
-            <div className="bg-slate-900 text-white rounded-[2rem] p-8 shadow-xl shadow-slate-200">
+            <div className="bg-slate-900 text-white rounded-4xl p-8 shadow-xl shadow-slate-200">
               <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                 <Share2 className="w-5 h-5 text-primary-400" />
                 Related Tools
@@ -371,7 +374,7 @@ export default async function ToolPage({ params }: Props) {
             {/* Read Our Guide Card */}
             <Link
               href={`/blog/how-to-use-${toolSlug}`}
-              className="block bg-gradient-to-br from-primary-600 to-primary-700 text-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:from-primary-700 hover:to-primary-800 transition-all group"
+              className="block bg-linear-to-br from-primary-600 to-primary-700 text-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:from-primary-700 hover:to-primary-800 transition-all group"
             >
               <div className="flex items-center gap-2 mb-3">
                 <BookOpen className="w-5 h-5 text-primary-200" />

@@ -158,7 +158,7 @@ export default function JpgToPdfTool() {
                   <a
                     href={resultUrl}
                     download="images-to-pdf.pdf"
-                    className="flex-grow flex items-center justify-center gap-2 px-8 py-4 bg-green-600 text-white rounded-xl font-bold shadow-lg shadow-green-500/20 hover:bg-green-700 transition-all"
+                    className="grow flex items-center justify-center gap-2 px-8 py-4 bg-green-600 text-white rounded-xl font-bold shadow-lg shadow-green-500/20 hover:bg-green-700 transition-all"
                   >
                     <Download className="w-5 h-5" /> Download PDF
                   </a>

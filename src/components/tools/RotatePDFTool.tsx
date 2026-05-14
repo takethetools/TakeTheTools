@@ -112,7 +112,7 @@ export default function RotatePDFTool() {
           <div className="flex items-center justify-between sticky top-0 bg-white/80 backdrop-blur-md py-4 z-10 border-b border-slate-100">
             <div className="flex items-center gap-4">
               <FileText className="w-6 h-6 text-primary-600" />
-              <h3 className="font-bold text-slate-900 truncate max-w-[200px]">
+              <h3 className="font-bold text-slate-900 truncate max-w-50">
                 {file.name}
               </h3>
             </div>
@@ -142,7 +142,7 @@ export default function RotatePDFTool() {
             {pages.map((p) => (
               <div key={p.id} className="group relative space-y-2">
                 <div
-                  className="aspect-[3/4] bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-transform duration-300"
+                  className="aspect-3/4 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-transform duration-300"
                   style={{ transform: `rotate(${p.rotation}deg)` }}
                 >
                   <img

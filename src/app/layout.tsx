@@ -119,11 +119,11 @@ export default async function RootLayout({
       contactPoint: {
         "@type": "ContactPoint",
         email: "takethetools7@gmail.com",
-        contactType: "customer support"
+        contactType: "customer support",
       },
       sameAs: [
         "https://twitter.com/takethetools",
-        "https://github.com/takethetools"
+        "https://github.com/takethetools",
       ],
     },
     {
@@ -219,8 +219,8 @@ export default async function RootLayout({
       >
         <Header />
 
-        <main className="flex-grow">
-          <div className="pt-[80px] md:pt-[104px]">
+        <main className="grow">
+          <div className="pt-20 md:pt-26">
             {/* Top Ad Banner */}
             <div className="container mx-auto px-4 py-3 flex justify-center">
               <ManualAdUnit adSlot={AD_SLOTS.IN_CONTENT_AUTO} adFormat="auto" />
